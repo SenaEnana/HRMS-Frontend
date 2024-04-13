@@ -19,7 +19,7 @@ const Login = () => {
             password: "",
           }}
           onSubmit={(values) => {
-            console.log("login successful");
+            console.log("successful");
             handleLogin(values);
           }}
           validationSchema={signInValidation}
