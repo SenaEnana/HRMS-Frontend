@@ -1,25 +1,130 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import AdminSidebar from "./pages/admin/scenes/global/adminSidebar";
+import Topbar from "./pages/admin/scenes/global/topbar";
+import Login from "./pages/auth/login";
+import AdminDashboard from "./pages/admin/scenes/dashboard/adminDashboard";
+import Team from "./pages/admin/scenes/team";
+import Contacts from "./pages/admin/scenes/contacts/contacts";
+import Invoices from "./pages/admin/scenes/invoices";
+import Form from "./pages/admin/scenes/form";
+import Bar from "./pages/admin/scenes/bar";
+import Pie from "./pages/admin/scenes/pie";
+import Line from "./pages/admin/scenes/line";
+import FAQ from "./pages/admin/scenes/faq";
+import Calendar from "./pages/admin/scenes/calendar/calendar";
+import Geography from "./pages/admin/scenes/geography";
+import { ColorModeContext, useMode } from "./theme";
 
 function App() {
+  const [theme, colorMode] = useMode();
+  const [isAdminSidebar, setIsAdminSidebar] = useState(true);
+  // const username = JSON.parse(localStorage.getItem("username"));
+  // console.log("hello localstorage");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Router>
+            <div className="app">
+              <AdminSidebar isAdminSidebar={isAdminSidebar} />
+              <main className="content">
+                <Topbar setIsAdminSidebar={setIsAdminSidebar} />
+                <Routes>
+                <Route path="/" element={<Login />} />
+                  <Route path="/adminDashboard" element={<AdminDashboard />} />
+                  <Route path="/team" element={<Team />} />
+                  <Route path="/contacts" element={<Contacts />} />
+                  <Route path="/invoices" element={<Invoices />} />
+                  <Route path="/form" element={<Form />} />
+                  <Route path="/bar" element={<Bar />} />
+                  <Route path="/pie" element={<Pie />} />
+                  <Route path="/line" element={<Line />} />
+                  <Route path="/faq" element={<FAQ />} />
+                  <Route path="/calendar" element={<Calendar />} />
+                  <Route path="/geography" element={<Geography />} />
+                </Routes>
+              </main>
+            </div>
+        </Router>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
   );
 }
 
 export default App;
+
+
+
+// import { useState } from "react";
+// import { Routes, Route } from "react-router-dom";
+// import { CssBaseline, ThemeProvider } from "@mui/material";
+// import AdminSidebar from "./pages/admin/scenes/global/adminSidebar";
+// import Topbar from "./pages/admin/scenes/global/topbar";
+// import Login from "./pages/auth/login";
+// import AdminDashboard from "./pages/admin/scenes/dashboard/adminDashboard";
+// import Team from "./pages/admin/scenes/team";
+// import Contacts from "./pages/admin/scenes/contacts/contacts";
+// import Invoices from "./pages/admin/scenes/invoices";
+// import Form from "./pages/admin/scenes/form";
+// import Bar from "./pages/admin/scenes/bar";
+// import Pie from "./pages/admin/scenes/pie";
+// import Line from "./pages/admin/scenes/line";
+// import FAQ from "./pages/admin/scenes/faq";
+// import Calendar from "./pages/admin/scenes/calendar/calendar";
+// import Geography from "./pages/admin/scenes/geography";
+// import { ColorModeContext, useMode } from "./theme";
+
+//  function App() {
+//    const [theme, colorMode] = useMode();
+//    const [isAdminSidebar, setIsAdminSidebar] = useState(true);
+//   const username= localStorage.getItem("username");
+
+//    return (
+//     <ColorModeContext.Provider value={colorMode}>
+//     <ThemeProvider theme={theme}>
+//       <CssBaseline />
+//            {username === "admin" ?
+//       <div className="app">
+//           <AdminSidebar isAdminSidebar={isAdminSidebar} />
+//         <main className="content">
+//           <Topbar setIsAdminSidebar={setIsAdminSidebar} />
+//           <Routes>
+//           <Route path="/adminDashboard" element={<AdminDashboard />} />
+//           <Route path="/team" element={<Team />} />
+//           <Route path="/contacts" element={<Contacts />} />
+//           <Route path="/invoices" element={<Invoices />} />
+//           <Route path="/form" element={<Form />} />
+//           <Route path="/bar" element={<Bar />} />
+//           <Route path="/pie" element={<Pie />} />
+//           <Route path="/line" element={<Line />} />
+//           <Route path="/faq" element={<FAQ />} />
+//           <Route path="/calendar" element={<Calendar />} />
+//           <Route path="/geography" element={<Geography />} /> 
+//           </Routes>
+//         </main>
+//       </div>
+//               : <>
+//             {username === "employee"? 
+//             <div>
+// <h2>hello employee</h2>
+//             </div>:
+//         null
+//             }
+//          </>
+//          }
+//         null
+//       ) : (
+//            <div>
+//            <Route path="/" element={<Login/>}/>
+//             </div>  
+//       )
+//       <CssBaseline />
+//     </ThemeProvider>
+//   </ColorModeContext.Provider>
+//    );
+//  }
+
+//  export default App;
