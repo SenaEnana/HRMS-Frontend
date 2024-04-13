@@ -6,14 +6,14 @@ import Team from "./pages/employee/scenes/team";
 import Contacts from "./pages/employee/scenes/contacts/contacts";
 import Invoices from "./pages/employee/scenes/invoices";
 import Form from "./pages/employee/scenes/form";
-import Bar from "./pages/employee/scenes/bar";
-import Pie from "./pages/employee/scenes/pie";
-import Line from "./pages/employee/scenes/line";
 import FAQ from "./pages/employee/scenes/faq";
 import Calendar from "./pages/employee/scenes/calendar/calendar";
-import Geography from "./pages/employee/scenes/geography";
 import { ColorModeContext, useMode } from "./theme";
 import Sidebar from "./pages/commonPages/sidebar";
+import Complaint from "./pages/employee/scenes/form/complaint/complaint";
+import LeaveRequest from "./pages/employee/scenes/form/leaveRequest/leaveRequest";
+import ResignationRequest from "./pages/employee/scenes/form/resignationRequest/resignationRequest";
+import SupervisorFeedback from "./pages/employee/scenes/form/supervisorFeedback";
 
 function EmployeeRouter() {
     const [theme, colorMode] = useMode();
@@ -25,19 +25,18 @@ function EmployeeRouter() {
               <div className="app">
                   <Sidebar isSidebar={isSidebar} />
                 <main className="content">
-                  {/* <Topbar setIsSidebar={setIsSidebar} /> */}
                   <Routes>
                   <Route path="/employeeDashboard" element={<EmployeeDashboard />} />
                   <Route path="/employeeTeam" element={<Team />} />
                   <Route path="/employeeContacts" element={<Contacts />} />
                   <Route path="/employeeInvoices" element={<Invoices />} />
                   <Route path="/employeeForm" element={<Form />} />
-                  <Route path="/employeeBar" element={<Bar />} />
-                  <Route path="/employeePie" element={<Pie />} />
-                  <Route path="/employeeLine" element={<Line />} />
                   <Route path="/employeeFaq" element={<FAQ />} />
                   <Route path="/employeeCalendar" element={<Calendar />} />
-                  <Route path="/employeeGeography" element={<Geography />} /> 
+                  <Route path="/complaint" element={<Complaint/>}/>
+                  <Route path="/leaveRequest" element={<LeaveRequest/>}/>
+                  <Route path="/resignationRequest" element={<ResignationRequest/>}/>
+                  <Route path="/supervisorFeedback" element={<SupervisorFeedback/>}/>
                   </Routes>
                 </main>
               </div>

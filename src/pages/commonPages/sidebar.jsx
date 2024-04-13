@@ -4,6 +4,9 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import AddCommentOutlinedIcon from "@mui/icons-material/AddCommentOutlined";
+import TimeToLeaveOutlinedIcon from "@mui/icons-material/TimeToLeaveOutlined";
+import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ContactsOutlinedIcon from "@mui/icons-material/ContactsOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
@@ -129,6 +132,44 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
+            {/* Bellow are the sidebar for employee */}
+            <Typography
+              variant="h6"
+              className="text-dark fw-bold"
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Pages
+            </Typography>
+            <Item
+              title="Send Leave Request"
+              to="/leaveRequest"
+              icon={<TimeToLeaveOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Send Resignation Request"
+              to="/resignationRequest"
+              icon={<TimeToLeaveOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Send Complaint"
+              to="/complaint"
+              icon={<AddCommentOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Supervisor Feedback"
+              to="/supervisorFeedback"
+              icon={<FeedbackOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            {/* 
+            Hr Sidebar
             <Typography
               variant="h6"
               className="text-dark fw-bold"
@@ -156,7 +197,7 @@ const Sidebar = () => {
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> 
 
             <Typography
               variant="h6"
@@ -187,6 +228,8 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
+            {/* 
+            this is also some of the admin and the hr and others sidebar
             <Typography
               variant="h6"
               className="text-dark fw-bold"
@@ -221,7 +264,7 @@ const Sidebar = () => {
               icon={<MapOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
           </Box>
         </Menu>
       </ProSidebar>

@@ -54,11 +54,9 @@ const EmployeeDashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="431,225"
-            subtitle="Send Resignation Request"
-            progress="0.50"
-            increase="+21%"
-            icon={<SendIcon className="text-dark fs-3" />}
+            title="431"
+            subtitle="Performance Evaluation Result"
+            icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
         {/* ROW 2 */}
