@@ -123,17 +123,25 @@ const Sidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
+            {/* <Item
               className=""
               title="Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
 
+            <Item
+              className=""
+              title="Dashboard"
+              to="/employeeDashboard"
+              icon={<HomeOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             {/* Bellow are the sidebar for employee */}
-            <Typography
+            {/* <Typography
               variant="h6"
               className="text-dark fw-bold"
               sx={{ m: "15px 0 5px 20px" }}
@@ -167,9 +175,9 @@ const Sidebar = () => {
               icon={<FeedbackOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
-            {/* 
-            Hr Sidebar
+            /> */}
+
+            {/* Hr Sidebar */}
             <Typography
               variant="h6"
               className="text-dark fw-bold"
@@ -197,7 +205,7 @@ const Sidebar = () => {
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> 
+            />
 
             <Typography
               variant="h6"
@@ -228,8 +236,7 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-            {/* 
-            this is also some of the admin and the hr and others sidebar
+            {/* this is also some of the admin and the hr and others sidebar */}
             <Typography
               variant="h6"
               className="text-dark fw-bold"
@@ -264,7 +271,7 @@ const Sidebar = () => {
               icon={<MapOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> */}
+            />
           </Box>
         </Menu>
       </ProSidebar>

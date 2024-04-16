@@ -13,7 +13,6 @@ import Pie from "./pages/admin/scenes/pie";
 import Line from "./pages/admin/scenes/line";
 import FAQ from "./pages/admin/scenes/faq";
 import Calendar from "./pages/admin/scenes/calendar/calendar";
-import Geography from "./pages/admin/scenes/geography";
 import { ColorModeContext, useMode } from "./theme";
 import Sidebar from "./pages/commonPages/sidebar";
 import Topbar from "./pages/commonPages/topbar";
@@ -40,7 +39,6 @@ function AdminRouter() {
                   <Route path="/line" element={<Line />} />
                   <Route path="/faq" element={<FAQ />} />
                   <Route path="/calendar" element={<Calendar />} />
-                  <Route path="/geography" element={<Geography />} /> 
                   </Routes>
                 </main>
               </div>

@@ -1,20 +1,20 @@
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../../../theme";
 import Button from "react-bootstrap/Button";
-import { mockTransactions } from "../../../../data/mockData";
+import { mockTransactions } from "../../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import SendIcon from "@mui/icons-material/Send";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import SwipeLeftAltOutlinedIcon from "@mui/icons-material/SwipeLeftAltOutlined";
+import Header from "../../../components/header";
 //import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import Header from "../../../../components/header";
-import LineChart from "../../../../components/lineChart";
-import BarChart from "../../../../components/barChart";
-import StatBox from "../../../../components/statBox";
-import ProgressCircle from "../../../../components/progressCircle";
+import LineChart from "../../../components/lineChart";
+import BarChart from "../../../components/barChart";
+import StatBox from "../../../components/statBox";
+import ProgressCircle from "../../../components/progressCircle";
+import { tokens } from "../../../theme";
 
-const AdminDashboard = () => {
+const HrDashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -250,7 +250,7 @@ const AdminDashboard = () => {
           backgroundColor={colors.primary[400]}
           p="30px"
         >
-          <Typography variant="h5" fontWeight="600">
+          <Typography variant="h5" fontWeight="600" className="text-dark">
             Campaign
           </Typography>
           <Box
@@ -263,7 +263,9 @@ const AdminDashboard = () => {
             <Typography variant="h5" className="text-dark" sx={{ mt: "15px" }}>
               $48,352 revenue generated
             </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
+            <Typography className="text-dark">
+              Includes extra misc expenditures and costs
+            </Typography>
           </Box>
         </Box>
         <Box
@@ -272,6 +274,7 @@ const AdminDashboard = () => {
           backgroundColor={colors.primary[400]}
         >
           <Typography
+            className="text-dark"
             variant="h5"
             fontWeight="600"
             sx={{ padding: "30px 30px 0 30px" }}
@@ -287,4 +290,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default HrDashboard;

@@ -31,7 +31,7 @@ function LeaveRequest() {
           validationSchema={leaveValidation}
         >
           {(formikValues) => (
-            <form className="form-group rounded border col-4 pe-3 mt-5 bg-light">
+            <form className="form-group rounded border col-5 pe-3 mt-5 bg-light">
               <div className="mt-3">
                 <p className="fs-4 text-dark text-center">Leave Request Form</p>
               </div>
@@ -143,3 +143,36 @@ function LeaveRequest() {
 }
 
 export default LeaveRequest;
+
+//
+
+// const validationSchema = Yup.object().shape({
+//   username: Yup.string().required(),
+// });
+
+// const initialValues = {
+//   username: '',
+// };
+
+// class MyForm extends Component {
+//   render() {
+//     return (
+//       <Formik
+//         initialValues={initialValues}
+//         validationSchema={validationSchema}
+//         onSubmit={this.props.onSubmit}
+//       >
+//         {({ isValid }) => (
+//           <Form autoComplete="off">
+// <FormikTextField
+//   name="username"
+//   label="Username"
+//   margin="normal"
+//   fullWidth
+// />
+//           </Form>
+//         )}
+//       </Formik>
+//     );
+//   }
+// }

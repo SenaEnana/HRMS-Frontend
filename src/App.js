@@ -1,5 +1,6 @@
 import AdminRouter from "./adminRouter";
 import EmployeeRouter from "./employeeRouter";
+import HrRouter from "./hrRouter";
 import Auth from "./pages/auth/auth";
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
   return (
     <div>
       {/* <AdminRouter/> */}
-      <EmployeeRouter/>
+      {/* <EmployeeRouter/> */}
+      <HrRouter/>
       {/* <Auth/> */}
     </div>
   );

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { Formik } from "formik";
 import TextInput from "../../../../../components/textInput";
 import { complaintValidation } from "./schema";
+import { FormikTextField } from "formik-material-fields";
 
 function Complaint() {
   const navigate = useNavigate();
@@ -31,7 +32,7 @@ function Complaint() {
           validationSchema={complaintValidation}
         >
           {(formikValues) => (
-            <form className="form-group rounded border col-4 pe-3 mt-5 bg-light">
+            <form className="form-group rounded border col-5 pe-3 mt-5 bg-light">
               <div className="mt-3">
                 <p className="fs-4 text-dark text-center">Complaint Form</p>
               </div>
@@ -80,7 +81,7 @@ function Complaint() {
                 error={formikValues.errors.complaintEventDate}
                 onChange={formikValues.handleChange}
               />
-              <TextInput
+              {/* <TextInput
                 type="text"
                 name="complaint"
                 label="Complaint"
@@ -88,8 +89,40 @@ function Complaint() {
                 value={formikValues.values.complaint}
                 error={formikValues.errors.complaint}
                 onChange={formikValues.handleChange}
+              /> */}
+
+              <FormikTextField
+                className="form-control text-dark float-start mt-1 p-1 fs-5"
+                name="complaint"
+                label="Complaint"
+                margin="normal"
+                value={formikValues.values.complaint}
+                error={formikValues.errors.complaint}
+                onChange={formikValues.handleChange}
+                fullWidth
               />
-              <TextInput
+              <FormikTextField
+                className="form-control text-dark float-start mt-1 p-1 fs-5"
+                name="specificFacts"
+                label="Specific Facts"
+                margin="normal"
+                value={formikValues.values.specificFacts}
+                error={formikValues.errors.specificFacts}
+                onChange={formikValues.handleChange}
+                fullWidth
+              />
+              <FormikTextField
+                className="form-control text-dark float-start mt-1 p-1 fs-5"
+                name="complaintRemedy"
+                label="Complaint Remedy"
+                margin="normal"
+                value={formikValues.values.complaintRemedy}
+                error={formikValues.errors.complaintRemedy}
+                onChange={formikValues.handleChange}
+                fullWidth
+              />
+
+              {/* <TextInput
                 type="text"
                 name="specificFacts"
                 label="Specific Facts"
@@ -97,7 +130,7 @@ function Complaint() {
                 value={formikValues.values.specificFacts}
                 error={formikValues.errors.specificFacts}
                 onChange={formikValues.handleChange}
-              />
+              /> 
               <TextInput
                 type="text"
                 name="complaintRemedy"
@@ -106,7 +139,7 @@ function Complaint() {
                 value={formikValues.values.complaintRemedy}
                 error={formikValues.errors.complaintRemedy}
                 onChange={formikValues.handleChange}
-              />
+              /> */}
               <TextInput
                 type="date"
                 name="submissionDate"

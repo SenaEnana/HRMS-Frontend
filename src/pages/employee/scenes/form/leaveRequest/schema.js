@@ -11,5 +11,5 @@ export const leaveValidation = Yup.object().shape({
     leaveType:Yup.string().required("this field is required"),
     placeDuringLeave:Yup.string().required("this field is required"),
     phoneNumber:Yup.number().required("this field is required"),
-    email:Yup.string().required("this field is required"),
+    email:Yup.string().email().required("this field is required"),
 });

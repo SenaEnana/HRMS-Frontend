@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import { Formik } from "formik";
 import TextInput from "../../../../../components/textInput";
 import { resignationValidation } from "./schema";
+import { FormikTextField } from "formik-material-fields";
 
 function ResignationRequest() {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ function ResignationRequest() {
           validationSchema={resignationValidation}
         >
           {(formikValues) => (
-            <form className="form-group rounded border col-4 pe-3 mt-5 bg-light">
+            <form className="form-group rounded border col-5 pe-3 mt-5 bg-light">
               <div className="mt-3">
                 <p className="fs-4 text-dark text-center">
                   Resignation Request Form
@@ -95,15 +96,25 @@ function ResignationRequest() {
                 error={formikValues.errors.separationDate}
                 onChange={formikValues.handleChange}
               />
-              <TextInput
-                type="text"
+              <FormikTextField
+                className="form-control text-dark float-start mt-1 p-1 fs-5"
+                name="reason"
+                label="Reason"
+                margin="normal"
+                value={formikValues.values.reason}
+                error={formikValues.errors.reason}
+                onChange={formikValues.handleChange}
+                fullWidth
+              />
+              {/* <TextInput
+                type="textfield"
                 name="reason"
                 label="Reason"
                 placeholder="enter reason of separation"
                 value={formikValues.values.reason}
                 error={formikValues.errors.reason}
                 onChange={formikValues.handleChange}
-              />
+              /> */}
               <TextInput
                 type="text"
                 name="satisfaction"
@@ -122,8 +133,24 @@ function ResignationRequest() {
                 error={formikValues.errors.workRelationship}
                 onChange={formikValues.handleChange}
               />
-              <TextInput
-                type="text"
+              <FormikTextField
+                className="form-control text-dark float-start mt-1 p-1 fs-5"
+                name="recommendation"
+                label="Recommendation"
+                margin="normal"
+                value={formikValues.values.recommendation}
+                error={formikValues.errors.recommendation}
+                onChange={formikValues.handleChange}
+                fullWidth
+              />
+              <FormikTextField
+                name="comments"
+                label="Comments"
+                margin="normal"
+                fullWidth
+              />
+              {/* <TextInput
+                type="textbox"
                 name="recommendation"
                 label="Recommendation"
                 placeholder="enter any recommendation"
@@ -132,14 +159,14 @@ function ResignationRequest() {
                 onChange={formikValues.handleChange}
               />
               <TextInput
-                type="text"
+                type="textbox"
                 name="comments"
                 label="Comments"
                 placeholder="enter any comments"
                 value={formikValues.values.comments}
                 error={formikValues.errors.comments}
                 onChange={formikValues.handleChange}
-              />
+              /> */}
 
               <div className="m-3">
                 <input
