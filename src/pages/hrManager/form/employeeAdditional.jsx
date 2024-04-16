@@ -15,9 +15,13 @@ function EmployeeAdditional() {
   const [branch, setBranch] = useState([
     { values: "chacha", label: "Chacha Branch" },
   ]);
-  const [department, setDepartment] = useState([{ values: "", label: "" }]);
-  const [position, setPosition] = useState([{ values: "", label: "" }]);
-  const [degree, setDegree] = useState([{ values: "", label: "" }]);
+  const [department, setDepartment] = useState([
+    { values: "accounting", label: "Accountant" },
+  ]);
+  const [position, setPosition] = useState([
+    { values: "manager", label: "Manager" },
+  ]);
+  const [degree, setDegree] = useState([{ values: "bsc", label: "Bsc" }]);
 
   function handleForm() {
     navigate("/hrDashboard");
