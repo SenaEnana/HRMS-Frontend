@@ -1,30 +1,39 @@
-import TextInput from "../../../components/textInput";
 import { Box } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Formik } from "formik";
-import DropDown from "../../../components/DropDown";
+import { useState } from "react";
+import TextInput from "../../../../components/textInput";
+import DropDown from "../../../../components/DropDown";
 import { useNavigate } from "react-router-dom";
-import { employeeValidation } from "./schema";
-import useState from "react";
+import { employeeAddValidation } from "./schema";
 
 function EmployeeAdditional() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
 
-  const [grade, setGrade] = useState([{ values: "1", label: "First Grade" }]);
+  const [grade, setGrade] = useState([
+    { values: "1", label: "First Grade" },
+    { values: "2", label: "Second Grade" },
+  ]);
   const [branch, setBranch] = useState([
     { values: "chacha", label: "Chacha Branch" },
+    { values: "tebase", label: "Tebase Branch" },
   ]);
   const [department, setDepartment] = useState([
     { values: "accounting", label: "Accountant" },
+    { values: "finance", label: "Finance" },
   ]);
   const [position, setPosition] = useState([
     { values: "manager", label: "Manager" },
+    { values: "employee", label: "Employee" },
   ]);
-  const [degree, setDegree] = useState([{ values: "bsc", label: "Bsc" }]);
+  const [degree, setDegree] = useState([
+    { values: "bsc", label: "Bsc" },
+    { values: "msc", label: "Msc" },
+  ]);
 
   function handleForm() {
-    navigate("/hrDashboard");
+    navigate("/contactPerson");
   }
   return (
     <div className="row justify-content-center">
@@ -37,9 +46,6 @@ function EmployeeAdditional() {
             department: "",
             salary: "",
             branch: "",
-            experience: "",
-            education: "",
-            contactPerson: "",
             degree: "",
             childName: "",
           }}
@@ -47,7 +53,7 @@ function EmployeeAdditional() {
             console.log("successful");
             handleForm();
           }}
-          validationSchema={employeeValidation}
+          // validationSchema={employeeAddValidation}
         >
           {(formikValues) => (
             <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
@@ -80,33 +86,6 @@ function EmployeeAdditional() {
                   placeholder="enter salary"
                   value={formikValues.values.salary}
                   error={formikValues.errors.salary}
-                  onChange={formikValues.handleChange}
-                />
-                <TextInput
-                  type="text"
-                  name="experience"
-                  label="Experience"
-                  placeholder="enter experience"
-                  value={formikValues.values.experience}
-                  error={formikValues.errors.experience}
-                  onChange={formikValues.handleChange}
-                />
-                <TextInput
-                  type="text"
-                  name="education"
-                  label="Education"
-                  placeholder="enter education"
-                  value={formikValues.values.education}
-                  error={formikValues.errors.education}
-                  onChange={formikValues.handleChange}
-                />
-                <TextInput
-                  type="text"
-                  name="contactPerson"
-                  label="Contact Person"
-                  placeholder="enter contact person"
-                  value={formikValues.values.contactPerson}
-                  error={formikValues.errors.contactPerson}
                   onChange={formikValues.handleChange}
                 />
                 <DropDown
@@ -170,27 +149,21 @@ function EmployeeAdditional() {
                 />
                 <div className="m-3 float-end">
                   <input
-                    className="btn btn-info col-10"
+                    className="btn btn-info col-10 float-end"
                     type="button"
-                    value="submit"
+                    value="next"
                     onClick={formikValues.handleSubmit}
                   />
                 </div>
               </Box>
               <button
-                className="btn btn-outline-success"
+                className="btn btn-outline-success float-end m-3"
                 onClick={() => navigate("/childInformation")}
               >
                 add child
               </button>
-              {/* <button
-                className="btn btn-outline-success"
-                onClick={navigate("/basicInformation")}
-              >
-                back
-              </button> */}
               <p
-                className="text-info"
+                className="text-info fs-5 float-end m-3"
                 onClick={() => navigate("/employeeBasic")}
               >
                 {" "}

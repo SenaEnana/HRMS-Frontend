@@ -1,11 +1,12 @@
-import TextInput from "../../../components/textInput";
+//import TextInput from "../../../../components/textInput";
 import { Box } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Formik } from "formik";
 import { useState } from "react";
-import DropDown from "../../../components/DropDown";
-import { employeeValidation } from "./schema";
 import { useNavigate } from "react-router-dom";
+import TextInput from "../../../../components/textInput";
+import DropDown from "../../../../components/DropDown";
+import { childInfoValidation } from "./schema";
 
 function ChildInformation() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -31,7 +32,7 @@ function ChildInformation() {
             console.log("successful");
             handleSave();
           }}
-          validationSchema={employeeValidation}
+          validationSchema={childInfoValidation}
         >
           {(formikValues) => (
             <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">

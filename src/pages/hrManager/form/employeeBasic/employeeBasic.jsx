@@ -1,11 +1,11 @@
-import TextInput from "../../../components/textInput";
 import { Box } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Formik } from "formik";
 import { useState } from "react";
-import DropDown from "../../../components/DropDown";
-import { employeeValidation } from "./schema";
+import TextInput from "../../../../components/textInput";
+import DropDown from "../../../../components/DropDown";
 import { useNavigate } from "react-router-dom";
+import { employeeBasValidation } from "./schema";
 
 function EmployeeBasic() {
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ function EmployeeBasic() {
             console.log("successful");
             handle();
           }}
-          // validationSchema={employeeValidation}
+          validationSchema={employeeBasValidation}
         >
           {(formikValues) => (
             <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
@@ -185,38 +185,6 @@ function EmployeeBasic() {
                   error={formikValues.errors.phoneNumber}
                   onChange={formikValues.handleChange}
                 />
-                {/* <TextInput
-                  type="date"
-                  name="birthDate"
-                  label="Birthday"
-                  placeholder="enter birthday"
-                  value={formikValues.values.birthDate}
-                  error={formikValues.errors.birthDate}
-                  onChange={formikValues.handleChange}
-                /> */}
-
-                {/* <div className="ml-0">
-                                    <div >
-                                        <p className=" pr-64 mb-3 font-bold text-xl -mt-2"> Childrens information: </p>
-                                        {inputFields.map((field, index) => (
-                                            <div key={field.id} >
-                                                Name :<input type="text" value={field.value}
-                                                    onChange={(event) => handleInputChange(index, event)} required className="w w-80 pl-6 h h-12 rounded-2xl mb-6 mt-6 ml-20" /><br></br>
-                                                DOB :<input type="date" value={field.value}
-                                                    onChange={(event) => handleInputChange(index, event)} required className="w w-80 pl-6 h h-12 rounded-2xl mb-2 ml-24 -mt-8" /><br></br>
-        
-                                                <button onClick={() => handleDeleteField(index)} className="bg bg-red-400 ml-80 rounded-2xl text-xl h-12 mt-0 w-32 -mb-60 ">Delete child</button>
-                                            </div>
-                                        ))}
-        
-                                        <button onClick={handleAddField} className="bg bg-gray-400  rounded-2xl text-xl h-12 mt-4  w-32 ml-80 mb-6">Add child</button>
-        
-        
-                                    </div>
-                                </div>
-        
-                                <Link to="/NextFormTwo">  <button className="bg bg-[#1c4966] text-white  ml-60 rounded-2xl text-xl h-12 w-52 mb-6" type="submit">Next Form</button></Link>
-                            </div> */}
                 <div className="m-3">
                   <input
                     className="btn btn-info col-10 float-end"

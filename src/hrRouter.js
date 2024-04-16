@@ -13,8 +13,12 @@ import { ColorModeContext, useMode } from "./theme";
 import Sidebar from "./pages/commonPages/sidebar";
 import Topbar from "./pages/commonPages/topbar";
 import HrDashboard from "./pages/hrManager/dashboard/hrDashboard";
-import EmployeeBasic from "./pages/hrManager/form/employeeBasic";
-import EmployeeAdditional from "./pages/hrManager/form/employeeAdditional";
+import EmployeeBasic from "./pages/hrManager/form/employeeBasic/employeeBasic";
+import EmployeeAdditional from "./pages/hrManager/form/employeeAdditional/employeeAdditional";
+import ChildInformation from "./pages/hrManager/form/childInformation/childInformation";
+import ContactPerson from "./pages/hrManager/form/contactPerson/contactPerson";
+import Education from "./pages/hrManager/form/education/education";
+import Experience from "./pages/hrManager/form/experience/experience";
 
 function HrRouter() {
   const [theme, colorMode] = useMode();
@@ -37,11 +41,12 @@ function HrRouter() {
               <Route path="/line" element={<Line />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/calendar" element={<Calendar />} />
-              <Route path="/employeeBasic" element={<EmployeeBasic />} />
-              <Route
-                path="/employeeAdditional"
-                element={<EmployeeAdditional />}
-              />
+              <Route path="/employeeBasic" element={<EmployeeBasic/>}/>
+              <Route path="/employeeAdditional" element={<EmployeeAdditional/>}/>
+              <Route path="/childInformation" element={<ChildInformation/>}/>
+              <Route path="/contactPerson" element={<ContactPerson/>}/>
+              <Route path="/education" element={<Education/>}/>
+              <Route path="/experience" element={<Experience/>}/>
             </Routes>
           </main>
         </div>
