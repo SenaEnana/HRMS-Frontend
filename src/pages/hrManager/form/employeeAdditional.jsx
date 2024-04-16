@@ -11,8 +11,10 @@ function EmployeeAdditional() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
 
-  const [grade, setGrade] = useState([{ values: "", label: "" }]);
-  const [branch, setBranch] = useState([{ values: "", label: "" }]);
+  const [grade, setGrade] = useState([{ values: "1", label: "First Grade" }]);
+  const [branch, setBranch] = useState([
+    { values: "chacha", label: "Chacha Branch" },
+  ]);
   const [department, setDepartment] = useState([{ values: "", label: "" }]);
   const [position, setPosition] = useState([{ values: "", label: "" }]);
   const [degree, setDegree] = useState([{ values: "", label: "" }]);

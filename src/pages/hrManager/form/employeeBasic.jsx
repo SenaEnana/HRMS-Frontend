@@ -22,8 +22,9 @@ function EmployeeBasic() {
     { values: "widowed", label: "Widowed" },
   ]);
 
-  function handleNext() {
+  function handle() {
     navigate("/employeeAdditional");
+    console.log("helloooo");
   }
   return (
     <div className="row justify-content-center">
@@ -46,9 +47,9 @@ function EmployeeBasic() {
           }}
           onSubmit={() => {
             console.log("successful");
-            handleNext();
+            handle();
           }}
-          validationSchema={employeeValidation}
+          // validationSchema={employeeValidation}
         >
           {(formikValues) => (
             <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
