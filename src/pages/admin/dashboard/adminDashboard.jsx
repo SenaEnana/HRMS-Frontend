@@ -1,18 +1,18 @@
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../../../theme";
+import { tokens } from "../../../theme";
 import Button from "react-bootstrap/Button";
-import { mockTransactions } from "../../../../data/mockData";
+import { mockTransactions } from "../../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import SendIcon from "@mui/icons-material/Send";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import SwipeLeftAltOutlinedIcon from "@mui/icons-material/SwipeLeftAltOutlined";
 //import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import Header from "../../../../components/header";
-import LineChart from "../../../../components/lineChart";
-import BarChart from "../../../../components/barChart";
-import StatBox from "../../../../components/statBox";
-import ProgressCircle from "../../../../components/progressCircle";
+import Header from "../../../components/header";
+import LineChart from "../../../components/lineChart";
+import BarChart from "../../../components/barChart";
+import StatBox from "../../../components/statBox";
+import ProgressCircle from "../../../components/progressCircle";
 
 const AdminDashboard = () => {
   const theme = useTheme();
