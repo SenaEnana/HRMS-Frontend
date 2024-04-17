@@ -44,6 +44,20 @@ const employees = [
     phoneNumber: "+251912345678",
     houseNumber: "123/A",
   },
+  {
+    id: 4,
+    firstName: "Jeje",
+    lastName: "Kaleb",
+    email: "john.doe@example.com",
+    gender: "Male",
+    motherName: "Jane Doe",
+    region: "Addis Ababa",
+    kebele: "01",
+    wereda: "Kirkos",
+    maritalStatus: "Single",
+    phoneNumber: "+251912345678",
+    houseNumber: "123/A",
+  },
 ];
 
 const EmployeeList = () => {
@@ -71,64 +85,61 @@ const EmployeeList = () => {
           Add new Employee
         </NavLink>
       </div>
-      <div className="rounded-2 border w-100">
-        <table className="table table-hover text-dark">
-          <thead className="p-1">
-            <tr>
-              <th>Id</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Email</th>
-              <th>Gender</th>
-              <th>Mother Name</th>
-              <th>Region</th>
-              <th>Kebele</th>
-              <th>Wereda</th>
-              <th>Marital Status</th>
-              <th>Phone Number</th>
-              <th>House Number</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {employeeData.map((employee) => (
-              <tr key={employee.id}>
-                <td>{employee.id}</td>
-                <td>{employee.firstName}</td>
-                <td>{employee.lastName}</td>
-                <td>{employee.email}</td>
-                <td>{employee.gender}</td>
-                <td>{employee.motherName}</td>
-                <td>{employee.region}</td>
-                <td>{employee.kebele}</td>
-                <td>{employee.wereda}</td>
-                <td>{employee.maritalStatus}</td>
-                <td>{employee.phoneNumber}</td>
-                <td>{employee.houseNumber}</td>
-                <td>
-                  <NavLink to={"/updateEmployee/" + employee.id}>
-                    <button
-                      onClick={() => handleEdit(employee.id)}
-                      className="btn btn-outline-info btn-sm"
-                      type="button"
-                    >
-                      Edit
-                    </button>
-                  </NavLink>
-
+      <table className="table table-hover text-dark w-100">
+        <thead className="p-1">
+          <tr>
+            <th>Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Mother Name</th>
+            <th>Region</th>
+            <th>Kebele</th>
+            <th>Wereda</th>
+            <th>Marital Status</th>
+            <th>Phone Number</th>
+            <th>House Number</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {employeeData.map((employee) => (
+            <tr key={employee.id}>
+              <td>{employee.id}</td>
+              <td>{employee.firstName}</td>
+              <td>{employee.lastName}</td>
+              <td>{employee.email}</td>
+              <td>{employee.gender}</td>
+              <td>{employee.motherName}</td>
+              <td>{employee.region}</td>
+              <td>{employee.kebele}</td>
+              <td>{employee.wereda}</td>
+              <td>{employee.maritalStatus}</td>
+              <td>{employee.phoneNumber}</td>
+              <td>{employee.houseNumber}</td>
+              <td className="d-flex m-1">
+                <NavLink to={"/updateEmployee/" + employee.id}>
                   <button
-                    onClick={() => handleDelete(employee.id)}
-                    className="btn btn-outline-danger ms-1 btn-sm"
+                    onClick={() => handleEdit(employee.id)}
+                    className="btn btn-outline-info btn-sm"
                     type="button"
                   >
-                    Remove
+                    Edit
                   </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                </NavLink>
+                <button
+                  onClick={() => handleDelete(employee.id)}
+                  className="btn btn-outline-danger ms-1 btn-sm"
+                  type="button"
+                >
+                  Remove
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </>
   );
 };
