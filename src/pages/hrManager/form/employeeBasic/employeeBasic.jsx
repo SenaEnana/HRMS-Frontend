@@ -24,7 +24,7 @@ function EmployeeBasic() {
 
   function handle() {
     navigate("/employeeAdditional");
-    console.log("helloooo");
+    console.log("hello");
   }
   return (
     <div className="row justify-content-center">

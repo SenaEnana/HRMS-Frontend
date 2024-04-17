@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { Formik } from "formik";
-import TextInput from "../../../../../components/textInput";
+import TextInput from "../../../../components/textInput";
 import { leaveValidation } from "./schema";
 
 function LeaveRequest() {

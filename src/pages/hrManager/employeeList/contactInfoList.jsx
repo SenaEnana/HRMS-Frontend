@@ -3,64 +3,45 @@ import React, { useState } from "react";
 
 const employees = [
   {
-    id: 1,
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    gender: "Male",
-    motherName: "Jane Doe",
+    name: "John",
     region: "Addis Ababa",
     kebele: "01",
     wereda: "Kirkos",
-    maritalStatus: "Single",
     phoneNumber: "+251912345678",
     houseNumber: "123/A",
+    relationship: "Uncle",
   },
   {
-    id: 2,
-    firstName: "Jane",
-    lastName: "Smith",
-    email: "jane.smith@example.com",
-    gender: "Female",
-    motherName: "Mary Smith",
+    name: "Jane",
     region: "Amhara",
     kebele: "02",
     wereda: "Gondar",
-    maritalStatus: "Married",
     phoneNumber: "+251987654321",
     houseNumber: "456/B",
+    relationship: "Uncle",
   },
   {
-    id: 3,
-    firstName: "John",
+    name: "John",
     lastName: "Doe",
-    email: "john.doe@example.com",
-    gender: "Male",
-    motherName: "Jane Doe",
     region: "Addis Ababa",
     kebele: "01",
     wereda: "Kirkos",
-    maritalStatus: "Single",
     phoneNumber: "+251912345678",
     houseNumber: "123/A",
+    relationship: "Uncle",
   },
   {
-    id: 4,
-    firstName: "Jeje",
-    lastName: "Kaleb",
-    email: "john.doe@example.com",
-    gender: "Male",
-    motherName: "Jane Doe",
+    name: "Jeje",
     region: "Addis Ababa",
     kebele: "01",
     wereda: "Kirkos",
-    maritalStatus: "Single",
     phoneNumber: "+251912345678",
     houseNumber: "123/A",
+    relationship: "Uncle",
   },
 ];
 
-const EmployeeList = () => {
+const ContactInfoList = () => {
   const [employeeData, setEmployeeData] = useState(employees);
 
   const handleDelete = (id) => {
@@ -77,49 +58,33 @@ const EmployeeList = () => {
   return (
     <>
       <div className="d-flex justify-content-between mt-5 text-dark">
-        <h5 className="text-start ms-2">Employee List</h5>
-        <NavLink
-          to={"/employeeBasic"}
-          className="float-end btn btn-info btn-sm mb-2"
-        >
-          Add new Employee
-        </NavLink>
+        <h5 className="text-start ms-2">Employee Contact Person</h5>
       </div>
       <table className="table table-hover text-dark w-100 fs-6">
         <thead className="p-1">
           <tr>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Gender</th>
-            <th>Mother Name</th>
+            <th>Name</th>
             <th>Region</th>
             <th>Kebele</th>
             <th>Wereda</th>
-            <th>Marital Status</th>
             <th>Phone Number</th>
             <th>House Number</th>
+            <th>Relationship</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {employeeData.map((employee) => (
             <tr key={employee.id}>
-              <td>{employee.id}</td>
-              <td>{employee.firstName}</td>
-              <td>{employee.lastName}</td>
-              <td>{employee.email}</td>
-              <td>{employee.gender}</td>
-              <td>{employee.motherName}</td>
+              <td>{employee.name}</td>
               <td>{employee.region}</td>
               <td>{employee.kebele}</td>
               <td>{employee.wereda}</td>
-              <td>{employee.maritalStatus}</td>
+              <td>{employee.relationship}</td>
               <td>{employee.phoneNumber}</td>
               <td>{employee.houseNumber}</td>
               <td className="d-flex m-1">
-                <NavLink to={"/updateEmployee/" + employee.id}>
+                <NavLink to={"/updateContactInfo/" + employee.id}>
                   <button
                     onClick={() => handleEdit(employee.id)}
                     className="btn btn-outline-info btn-sm"
@@ -144,4 +109,4 @@ const EmployeeList = () => {
   );
 };
 
-export default EmployeeList;
+export default ContactInfoList;

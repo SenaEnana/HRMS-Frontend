@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
 import { Formik } from "formik";
-import TextInput from "../../../../../components/textInput";
 import { resignationValidation } from "./schema";
 import { FormikTextField } from "formik-material-fields";
+import TextInput from "../../../../components/textInput";
 
 function ResignationRequest() {
   const navigate = useNavigate();

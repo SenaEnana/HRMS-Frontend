@@ -59,6 +59,16 @@ const Sidebar = () => {
       onClick: () => navigate("/employeeList"),
     },
     {
+      label: "Employee Additional",
+      value: "employeeAdditional",
+      onClick: () => navigate("/employeeAddList"),
+    },
+    {
+      label: "Employee Contact Person",
+      value: "employeeContactPerson",
+      onClick: () => navigate("/employeeContactInfoList"),
+    },
+    {
       label: "Employee Role",
       value: "employeeRole",
       onClick: () => navigate("/team"),
@@ -212,20 +222,6 @@ const Sidebar = () => {
               icon={<PeopleOutlinedIcon />}
               to="/employeeBasic"
             />
-            <Item
-              title="Contacts Information"
-              to="/contacts"
-              icon={<ContactsOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Invoices Balances"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
 
             <Typography
               variant="h6"
@@ -234,28 +230,6 @@ const Sidebar = () => {
             >
               Pages
             </Typography>
-
-            <Item
-              title="Profile Form"
-              to="/form"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Calendar"
-              to="/calendar"
-              icon={<CalendarTodayOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="FAQ Page"
-              to="/faq"
-              icon={<HelpOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
 
             {/* this is also some of the admin and the hr and others sidebar */}
             <Typography
@@ -283,13 +257,6 @@ const Sidebar = () => {
               title="Line Chart"
               to="/line"
               icon={<TimelineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Geography Chart"
-              to="/geography"
-              icon={<MapOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

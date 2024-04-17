@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { Formik } from "formik";
-import TextInput from "../../../../../components/textInput";
+import TextInput from "../../../../components/textInput";
 import { complaintValidation } from "./schema";
 import { FormikTextField } from "formik-material-fields";
 

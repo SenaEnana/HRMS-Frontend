@@ -1,13 +1,13 @@
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../../../theme";
 import Button from "react-bootstrap/Button";
-import { mockTransactions } from "../../../../data/mockData";
 import SendIcon from "@mui/icons-material/Send";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 //import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import Header from "../../../../components/header";
-import StatBox from "../../../../components/statBox";
-import ProgressCircle from "../../../../components/progressCircle";
+import Header from "../../../components/header";
+import StatBox from "../../../components/statBox";
+import { mockTransactions } from "../../../data/mockData";
+import { tokens } from "../../../theme";
+import ProgressCircle from "../../../components/progressCircle";
 
 const EmployeeDashboard = () => {
   const theme = useTheme();
