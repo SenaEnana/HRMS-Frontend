@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import AddCommentOutlinedIcon from "@mui/icons-material/AddCommentOutlined";
@@ -19,10 +19,12 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { tokens } from "../../theme";
+import DropdownMenu from "../../components/dropdownMenu";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
   return (
     <MenuItem
       active={selected === title}
@@ -43,6 +45,25 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const navigate = useNavigate();
+
+  const items = [
+    {
+      label: "Add New Employee",
+      value: "addNewEmployee",
+      onClick: () => navigate("/employeeBasic"),
+    },
+    {
+      label: "Employee List",
+      value: "employeeList",
+      onClick: () => navigate("/employeeList"),
+    },
+    {
+      label: "Employee Role",
+      value: "employeeRole",
+      onClick: () => navigate("/team"),
+    },
+  ];
 
   return (
     <Box
@@ -66,7 +87,6 @@ const Sidebar = () => {
     >
       <ProSidebar collapsed={isCollapsed}>
         <Menu iconShape="square">
-          {/* LOGO AND MENU ICON */}
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
@@ -131,7 +151,7 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             /> */}
-
+            {/* 
             <Item
               className=""
               title="Dashboard"
@@ -139,7 +159,7 @@ const Sidebar = () => {
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             {/* Bellow are the sidebar for employee */}
             {/* <Typography
               variant="h6"
@@ -185,12 +205,12 @@ const Sidebar = () => {
             >
               Data
             </Typography>
-            <Item
-              title="Manage Employee"
-              to="/team"
+
+            <DropdownMenu
+              label="Manage Employee"
+              items={items}
               icon={<PeopleOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+              to="/employeeBasic"
             />
             <Item
               title="Contacts Information"
@@ -214,6 +234,7 @@ const Sidebar = () => {
             >
               Pages
             </Typography>
+
             <Item
               title="Profile Form"
               to="/form"

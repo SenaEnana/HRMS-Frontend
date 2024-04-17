@@ -5,8 +5,6 @@ import EmployeeDashboard from "./pages/employee/scenes/dashboard/employeeDashboa
 import Team from "./pages/employee/scenes/team";
 import Contacts from "./pages/employee/scenes/contacts/contacts";
 import Invoices from "./pages/employee/scenes/invoices";
-import Form from "./pages/employee/scenes/form";
-import FAQ from "./pages/employee/scenes/faq";
 import Calendar from "./pages/employee/scenes/calendar/calendar";
 import { ColorModeContext, useMode } from "./theme";
 import Sidebar from "./pages/commonPages/sidebar";
@@ -30,8 +28,6 @@ function EmployeeRouter() {
                   <Route path="/employeeTeam" element={<Team />} />
                   <Route path="/employeeContacts" element={<Contacts />} />
                   <Route path="/employeeInvoices" element={<Invoices />} />
-                  <Route path="/employeeForm" element={<Form />} />
-                  <Route path="/employeeFaq" element={<FAQ />} />
                   <Route path="/employeeCalendar" element={<Calendar />} />
                   <Route path="/complaint" element={<Complaint/>}/>
                   <Route path="/leaveRequest" element={<LeaveRequest/>}/>

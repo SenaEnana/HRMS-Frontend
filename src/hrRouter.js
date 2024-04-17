@@ -19,6 +19,7 @@ import ChildInformation from "./pages/hrManager/form/childInformation/childInfor
 import ContactPerson from "./pages/hrManager/form/contactPerson/contactPerson";
 import Education from "./pages/hrManager/form/education/education";
 import Experience from "./pages/hrManager/form/experience/experience";
+import EmployeeList from "./pages/hrManager/employeeList/employeeList";
 
 function HrRouter() {
   const [theme, colorMode] = useMode();
@@ -47,6 +48,7 @@ function HrRouter() {
               <Route path="/contactPerson" element={<ContactPerson/>}/>
               <Route path="/education" element={<Education/>}/>
               <Route path="/experience" element={<Experience/>}/>
+              <Route path="/employeeList" element={<EmployeeList/>}/>
             </Routes>
           </main>
         </div>
