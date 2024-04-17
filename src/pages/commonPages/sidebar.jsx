@@ -223,14 +223,6 @@ const Sidebar = () => {
               to="/employeeBasic"
             />
 
-            <Typography
-              variant="h6"
-              className="text-dark fw-bold"
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Pages
-            </Typography>
-
             {/* this is also some of the admin and the hr and others sidebar */}
             <Typography
               variant="h6"
