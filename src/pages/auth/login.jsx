@@ -16,7 +16,7 @@ const Login = () => {
       <div className="row justify-content-center">
         <Formik
           initialValues={{
-            username: "",
+            empId: "",
             password: "",
           }}
           onSubmit={(values) => {
@@ -31,19 +31,19 @@ const Login = () => {
                 <p className="fs-4 text-dark text-center">Login</p>
               </div>
               <TextInput
-                type="username"
-                name="username"
-                label="Username"
-                placeholder="enter your username"
-                value={formikValues.values.username}
-                error={formikValues.errors.username}
+                type="number"
+                name="empId"
+                label="Employee Id"
+                placeholder="enter employee id"
+                value={formikValues.values.empId}
+                error={formikValues.errors.empId}
                 onChange={formikValues.handleChange}
               />
               <TextInput
                 type="password"
                 name="password"
                 label="Password"
-                placeholder="enter your password"
+                placeholder="enter password"
                 value={formikValues.values.password}
                 error={formikValues.errors.password}
                 onChange={formikValues.handleChange}

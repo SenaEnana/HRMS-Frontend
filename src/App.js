@@ -11,7 +11,7 @@ function App() {
   console.log(username);
   return (
 <div>   
-        {isAuth ? (
+        {/* {isAuth ? (
          <div className="col-12 overflow-none bg-white">
           <AdminRouter/>
           <EmployeeRouter/>
@@ -21,12 +21,12 @@ function App() {
             <div className="col-12 ">
                <Auth/>
              </div>  
-       )} 
-
-      {/* <AdminRouter/>
-      <EmployeeRouter/>
+       )}  */}
+{/*        <Auth/>
+      <AdminRouter/>
+      <EmployeeRouter/> */}
       <HrRouter/> 
-       <Auth/> */}
+
     </div>       
   );
 }

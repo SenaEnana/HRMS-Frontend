@@ -8,13 +8,13 @@ const employees = [
     lastName: "Doe",
     email: "john.doe@example.com",
     gender: "Male",
-    motherName: "Jane Doe",
-    region: "Addis Ababa",
-    kebele: "01",
-    wereda: "Kirkos",
-    maritalStatus: "Single",
     phoneNumber: "+251912345678",
-    houseNumber: "123/A",
+    // motherName: "Jane Doe",
+    // region: "Addis Ababa",
+    // kebele: "01",
+    // wereda: "Kirkos",
+    // maritalStatus: "Single",
+    // houseNumber: "123/A",
   },
   {
     id: 2,
@@ -22,13 +22,13 @@ const employees = [
     lastName: "Smith",
     email: "jane.smith@example.com",
     gender: "Female",
-    motherName: "Mary Smith",
-    region: "Amhara",
-    kebele: "02",
-    wereda: "Gondar",
-    maritalStatus: "Married",
     phoneNumber: "+251987654321",
-    houseNumber: "456/B",
+    // motherName: "Mary Smith",
+    // region: "Amhara",
+    // kebele: "02",
+    // wereda: "Gondar",
+    // maritalStatus: "Married",
+    // houseNumber: "456/B",
   },
   {
     id: 3,
@@ -36,13 +36,13 @@ const employees = [
     lastName: "Doe",
     email: "john.doe@example.com",
     gender: "Male",
-    motherName: "Jane Doe",
-    region: "Addis Ababa",
-    kebele: "01",
-    wereda: "Kirkos",
-    maritalStatus: "Single",
     phoneNumber: "+251912345678",
-    houseNumber: "123/A",
+    // motherName: "Jane Doe",
+    // region: "Addis Ababa",
+    // kebele: "01",
+    // wereda: "Kirkos",
+    // maritalStatus: "Single",
+    // houseNumber: "123/A",
   },
   {
     id: 4,
@@ -50,13 +50,13 @@ const employees = [
     lastName: "Kaleb",
     email: "john.doe@example.com",
     gender: "Male",
-    motherName: "Jane Doe",
-    region: "Addis Ababa",
-    kebele: "01",
-    wereda: "Kirkos",
-    maritalStatus: "Single",
     phoneNumber: "+251912345678",
-    houseNumber: "123/A",
+    // motherName: "Jane Doe",
+    // region: "Addis Ababa",
+    // kebele: "01",
+    // wereda: "Kirkos",
+    // maritalStatus: "Single",
+    // houseNumber: "123/A",
   },
 ];
 
@@ -93,14 +93,14 @@ const EmployeeList = () => {
             <th>Last Name</th>
             <th>Email</th>
             <th>Gender</th>
-            <th>Mother Name</th>
-            <th>Region</th>
-            <th>Kebele</th>
-            <th>Wereda</th>
-            <th>Marital Status</th>
             <th>Phone Number</th>
-            <th>House Number</th>
-            <th>Actions</th>
+            {/* <th>Mother Name</th>
+             <th>Region</th>
+            <th>Kebele</th>
+            <th>Wereda</th> 
+            <th>Marital Status</th>
+            <th>House Number</th>*/}
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -111,13 +111,13 @@ const EmployeeList = () => {
               <td>{employee.lastName}</td>
               <td>{employee.email}</td>
               <td>{employee.gender}</td>
-              <td>{employee.motherName}</td>
+              <td>{employee.phoneNumber}</td>
+              {/* <td>{employee.motherName}</td>
               <td>{employee.region}</td>
               <td>{employee.kebele}</td>
               <td>{employee.wereda}</td>
               <td>{employee.maritalStatus}</td>
-              <td>{employee.phoneNumber}</td>
-              <td>{employee.houseNumber}</td>
+              <td>{employee.houseNumber}</td> */}
               <td className="d-flex m-1">
                 <NavLink to={"/updateEmployee/" + employee.id}>
                   <button
@@ -125,7 +125,7 @@ const EmployeeList = () => {
                     className="btn btn-outline-info btn-sm"
                     type="button"
                   >
-                    Edit
+                    Detail
                   </button>
                 </NavLink>
                 <button
