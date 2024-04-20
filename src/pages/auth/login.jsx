@@ -6,9 +6,29 @@ import { useState } from "react";
 
 const Login = () => {
   const navigate = useNavigate();
-  function handleLogin(values) {
-    localStorage.setItem("username", JSON.stringify(values.username));
-    navigate("/adminDashboard");
+  const [error, setError] = useState('');
+
+  async function handleLogin(values) {
+    try {
+      const response = await fetch('https://localhost:7140/Account/Login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(values)
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to login');
+      }
+
+      const token = await response.text(); // Assuming your API returns the token directly
+      localStorage.setItem("token", token);
+      navigate("/adminDashboard");
+    } catch (error) {
+      setError('Invalid username or password');
+      console.error(error);
+    }
   }
 
   return (
@@ -16,7 +36,7 @@ const Login = () => {
       <div className="row justify-content-center">
         <Formik
           initialValues={{
-            empId: "",
+            username: "",
             password: "",
           }}
           onSubmit={(values) => {
@@ -31,12 +51,12 @@ const Login = () => {
                 <p className="fs-4 text-dark text-center">Login</p>
               </div>
               <TextInput
-                type="number"
-                name="empId"
+                type="text"
+                name="username"
                 label="Employee Id"
                 placeholder="enter employee id"
-                value={formikValues.values.empId}
-                error={formikValues.errors.empId}
+                value={formikValues.values.username}
+                error={formikValues.errors.username}
                 onChange={formikValues.handleChange}
               />
               <TextInput
@@ -57,6 +77,7 @@ const Login = () => {
                   onClick={formikValues.handleSubmit}
                 />
               </div>
+              {error && <p>{error}</p>}
             </form>
           )}
         </Formik>

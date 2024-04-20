@@ -22,11 +22,11 @@ function App() {
                <Auth/>
              </div>  
        )}  */}
-{/*        <Auth/>
+       {/* <Auth/>
       <AdminRouter/>
-      <EmployeeRouter/> */}
-      <HrRouter/> 
-
+      <EmployeeRouter/>
+      */}
+  <HrRouter/>  
     </div>       
   );
 }

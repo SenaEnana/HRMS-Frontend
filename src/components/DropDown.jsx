@@ -14,9 +14,9 @@ const DropDown = ({ options, onChange, label, name }) => {
           name={name}
           onChange={(e) => onChange(e.target.value)}
         >
-          {options.map((option, index) => (
-            <option key={index} value={option.value}>
-              {option.label}
+          {options.map((option) => (
+            <option key={option.id} value={option.id}>
+              {option.name || option.gradeName}
             </option>
           ))}
         </select>
@@ -24,5 +24,6 @@ const DropDown = ({ options, onChange, label, name }) => {
     </div>
   );
 };
+
 
 export default DropDown;
