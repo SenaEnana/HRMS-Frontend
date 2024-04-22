@@ -21,8 +21,8 @@ function EmployeeBasic() {
   const [DegreeId, setDegreeId] = useState([{ name: "", id: "" }]);
   const [GradeId, setGradeId] = useState([{ name: "", id: "" }]);
 
-  const [gender, setGender] = useState("female");
-  const [maritalStatus, setMaritalStatus] = useState("single");
+  const [Gender, setGender] = useState("female");
+  const [MaritalStatus, setMaritalStatus] = useState("single");
 
   const handleGenderChange = (value) => setGender(value);
   const handleMaritalStatusChange = (value) => setMaritalStatus(value);
@@ -240,23 +240,25 @@ function EmployeeBasic() {
                 }}
               >
                 <div>
-                  <RadioButton
-                    title="Gender"
-                    options={genderOptions}
-                    value={gender}
-                    onChange={handleGenderChange}
-                  />
-                  <p>Selected Gender: {gender}</p>
+                <RadioButton
+                  title="Gender"
+                  options={genderOptions}
+                  value={formikValues.values.Gender}
+                  onChange={(value) => formikValues.setFieldValue("Gender", value)} 
+                 />
+
+               <p>Selected Gender: {formikValues.values.Gender}</p>
                 </div>
                 <div>
                   <RadioButton
-                    title="Marital Status"
-                    options={maritalStatusOptions}
-                    value={maritalStatus}
-                    onChange={handleMaritalStatusChange}
-                  />
+                  title="Marital Status"
+                  options={maritalStatusOptions}
+                  value={formikValues.values.MaritalStatus}
+                  onChange={(value) => formikValues.setFieldValue("MaritalStatus", value)} 
+                 />
 
-                  <p>Selected Marital Status: {maritalStatus}</p>
+               <p>Selected Marital Status: {formikValues.values.MaritalStatus}</p>
+
                 </div>
                 <TextInput
                   type="text"
@@ -721,8 +723,8 @@ function EmployeeBasic() {
                     onChange={(selectedOption) => {
                       formikValues.setFieldValue(
                         "BranchId",
-                        selectedOption.value
-                      ); // Set the value, not the whole object
+                        selectedOption
+                      ); 
                     }}
                   />
                 ))}
