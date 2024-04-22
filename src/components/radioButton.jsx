@@ -1,23 +1,33 @@
-function RadioButton({ type, name, checked, label, onChange, span ,value}) {
-    return (
-      <div className="col-12 row">
-        <div>
-          <label className="text-dark float-start mt-1 p-1 fs-5">{label}</label>
-        </div>
-        <div>
-          <input
-            type={type}
-            name={name}
-            value={value}
-            checked={checked}
-            onChange={onChange}
-            className="form-control text-dark fw-lighter fs-6 m-1"
-            // className="form-radio h-5 w-5 text-indigo-600"
-          />
-          <span className="ml-2 text-gray-700">{span}</span>
-        </div>
+import React, { useState } from "react";
+
+const RadioButton = ({ title, options, value, onChange }) => {
+  const [selectedValue, setSelectedValue] = useState(value || options[0].value);
+
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
+    onChange && onChange(event.target.value);
+  };
+
+  return (
+    <div className="col-12 row">
+      <div>
+        <h4 className="text-dark float-start m-1 p-1 fs-5">{title}</h4>
       </div>
-    );
-  }
-  
-  export default RadioButton;
+      {options.map((option) => (
+        <label key={option.value} className="text-dark p-1 fs-5 d-flex ms-3">
+          <input
+            type="radio"
+            className="text-dark fs-5 m-1"
+            name={title}
+            value={option.value}
+            checked={selectedValue === option.value}
+            onChange={handleChange}
+          />
+          {option.label}
+        </label>
+      ))}
+    </div>
+  );
+};
+
+export default RadioButton;

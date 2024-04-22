@@ -49,19 +49,34 @@ function UpdateEmployeeBasic() {
         {data.name && !loading && (
           <Formik
             initialValues={{
-              id: data.id,
-              firstName: data.firstName,
-              lastName: data.lastName,
-              email: data.email,
-              profilePhoto: data.profilePhoto,
-              gender: data.gender,
-              motherName: data.motherName,
-              region: data.region,
-              kebele: data.kebele,
-              wereda: data.wereda,
-              phoneNumber: data.phoneNumber,
-              maritalStatus: data.maritalStatus,
-              houseNumber: data.houseNumber,
+              Emp_Id: data.Emp_Id,
+              FirstName: data.FirstName,
+              LastName: data.LastName,
+              Email: data.Email,
+              EmployeePhoto: data.EmployeePhoto,
+              Gender: data.Gender,
+              MotherName: data.MotherName,
+              Region: data.Region,
+              Kebele: data.Kebele,
+              Woreda: data.Woreda,
+              PhoneNo: data.PhoneNo,
+              MaritalStatus: data.MaritalStatus,
+              HouseNo: data.HouseNo,
+              ContactPersonName: data.ContactPersonName,
+              ContactRegion: data.ContactRegion,
+              ContactKebele: data.ContactKebele,
+              ContactWoreda: data.ContactWoreda,
+              ContactPhoneNo: data.ContactPhoneNo,
+              relationship: data.relationship,
+              ContactHouseNo: data.ContactHouseNo,
+              HireDate: data.HireDate,
+              GradeId: data.GradeId,
+              PositionId: data.PositionId,
+              DepartmentId: data.DepartmentId,
+              Salary: data.Salary,
+              BranchId: data.BranchId,
+              Degree: data.Degree,
+              ChildName: data.ChildName,
             }}
             onSubmit={(values) => {
               // updateTeacher(values);
@@ -85,66 +100,66 @@ function UpdateEmployeeBasic() {
                 >
                   <TextInput
                     type="number"
-                    name="id"
-                    label="Employee Id"
-                    value={formikValues.values.id}
-                    error={formikValues.errors.id}
+                    name="Emp_Id"
+                    label="Employee Emp_Id"
+                    value={formikValues.values.Emp_Id}
+                    error={formikValues.errors.Emp_Id}
                     onChange={formikValues.handleChange}
                   />
                   <TextInput
                     type="text"
-                    name="firstName"
+                    name="FirstName"
                     label="First Name"
-                    value={formikValues.values.firstName}
-                    error={formikValues.errors.firstName}
+                    value={formikValues.values.FirstName}
+                    error={formikValues.errors.FirstName}
                     onChange={formikValues.handleChange}
                   />
                   <TextInput
                     type="text"
-                    name="lastName"
+                    name="LastName"
                     label="Last Name"
-                    value={formikValues.values.lastName}
-                    error={formikValues.errors.lastName}
+                    value={formikValues.values.LastName}
+                    error={formikValues.errors.LastName}
                     onChange={formikValues.handleChange}
                   />
                   <TextInput
                     type="text"
-                    name="email"
+                    name="Email"
                     label="Email"
-                    value={formikValues.values.email}
-                    error={formikValues.errors.email}
+                    value={formikValues.values.Email}
+                    error={formikValues.errors.Email}
                     onChange={formikValues.handleChange}
                   />
                   <TextInput
                     type="file"
-                    name="profilePhoto"
+                    name="EmployeePhoto"
                     label="Profile Photo"
-                    value={formikValues.values.profilePhoto}
-                    error={formikValues.errors.profilePhoto}
+                    value={formikValues.values.EmployeePhoto}
+                    error={formikValues.errors.EmployeePhoto}
                     onChange={formikValues.handleChange}
                   />
                   <TextInput
                     type="text"
-                    name="gender"
+                    name="Gender"
                     label="Gender"
-                    value={formikValues.values.gender}
-                    error={formikValues.errors.gender}
+                    value={formikValues.values.Gender}
+                    error={formikValues.errors.Gender}
                     onChange={formikValues.handleChange}
                   />
                   <TextInput
                     type="text"
-                    name="motherName"
+                    name="MotherName"
                     label="Mother Name"
-                    value={formikValues.values.motherName}
-                    error={formikValues.errors.motherName}
+                    value={formikValues.values.MotherName}
+                    error={formikValues.errors.MotherName}
                     onChange={formikValues.handleChange}
                   />
                   <TextInput
                     type="text"
-                    name="region"
+                    name="Region"
                     label="Region"
-                    value={formikValues.values.region}
-                    error={formikValues.errors.region}
+                    value={formikValues.values.Region}
+                    error={formikValues.errors.Region}
                     onChange={formikValues.handleChange}
                   />
                   <TextInput
@@ -157,18 +172,18 @@ function UpdateEmployeeBasic() {
                   />
                   <TextInput
                     type="text"
-                    name="kebele"
+                    name="Kebele"
                     label="Kebele"
-                    value={formikValues.values.kebele}
-                    error={formikValues.errors.kebele}
+                    value={formikValues.values.Kebele}
+                    error={formikValues.errors.Kebele}
                     onChange={formikValues.handleChange}
                   />
                   <TextInput
                     type="number"
-                    name="houseNumber"
+                    name="HouseNo"
                     label="House Number"
-                    value={formikValues.values.houseNumber}
-                    error={formikValues.errors.houseNumber}
+                    value={formikValues.values.HouseNo}
+                    error={formikValues.errors.HouseNo}
                     onChange={formikValues.handleChange}
                   />
                   <TextInput
@@ -247,10 +262,10 @@ export default UpdateEmployeeBasic;
 //         <Formik
 //           initialValues={{
 //             name: data.name,
-//             phoneNo: data.phoneNo,
+//             PhoneNo: data.PhoneNo,
 //             address: data.address,
 //             expert: data.expert,
-//             gender: data.gender,
+//             Gender: data.Gender,
 //             educationLevel: data.educationLevel,
 //             day: data.day,
 //             time: data.time,
@@ -272,10 +287,10 @@ export default UpdateEmployeeBasic;
 //               />
 //               <TextInput
 //                 type="number"
-//                 name="phoneNo"
+//                 name="PhoneNo"
 //                 label="Phone Number"
-//                 value={formikValues.values.phoneNo}
-//                 error={formikValues.errors.phoneNo}
+//                 value={formikValues.values.PhoneNo}
+//                 error={formikValues.errors.PhoneNo}
 //                 onChange={formikValues.handleChange}
 //               />
 //               <TextInput
@@ -296,10 +311,10 @@ export default UpdateEmployeeBasic;
 //               />
 //               <TextInput
 //                 type="text"
-//                 name="gender"
+//                 name="Gender"
 //                 label="Gender"
-//                 value={formikValues.values.gender}
-//                 error={formikValues.errors.gender}
+//                 value={formikValues.values.Gender}
+//                 error={formikValues.errors.Gender}
 //                 onChange={formikValues.handleChange}
 //               />
 
