@@ -12,7 +12,7 @@ export const employeeBasValidation = Yup.object().shape({
     Region:Yup.string().required("this field is required"),
     Kebele:Yup.number().required("this field is required"),
     Woreda:Yup.string().required("this field is required"),
-    HouseNo:Yup.number().required("this field is required"),
+    HouseNo:Yup.string().required("this field is required"),
     MaritalStatus:Yup.string().required("this field is required"),
     // experiance schema
     CompanyName:Yup.string().required("this field is required"),
@@ -33,7 +33,7 @@ export const employeeBasValidation = Yup.object().shape({
     ContactRegion:Yup.string().required("this field is required"),
     ContactKebele:Yup.number().required("this field is required"),
     ContactWoreda:Yup.string().required("this field is required"),
-    ContactHouseNo:Yup.number().required("this field is required"),
+    ContactHouseNo:Yup.string().required("this field is required"),
     Relationship:Yup.string().required("this field is required"),
 // child schema
     Name:Yup.string().required("this field is required"),

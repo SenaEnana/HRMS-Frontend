@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 // import AdminSidebar from "./pages/superAdmin/scenes/global/adminSidebar";
-import AdminDashboard from "./pages/admin/dashboard/adminDashboard";
+import AdminDashboard from "./pages/superAdmin/dashboard/adminDashboard";
 import Team from "./pages/superAdmin/team";
 import Contacts from "./pages/superAdmin/contacts/contacts";
 import Invoices from "./pages/superAdmin/invoices";

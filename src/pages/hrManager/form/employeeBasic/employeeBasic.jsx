@@ -211,12 +211,10 @@ function EmployeeBasic() {
             ContactWoreda: "",
             ContactPhoneNo: "",
             ContactHouseNo: "",
-            // experience information
             ExperiencePosition: "",
             CompanyName: "",
             ExperienceStartDate: "",
             ExperienceEndDate: "",
-            // education information
             Institute: "",
             Degree: "",
           }}
@@ -379,7 +377,7 @@ function EmployeeBasic() {
                   onChange={formikValues.handleChange}
                 />
                 <TextInput
-                  type="number"
+                  type="text"
                   name="HouseNo"
                   label="House Number"
                   placeholder="enter house Number"
@@ -471,7 +469,7 @@ function EmployeeBasic() {
                       // onChange={(event) => handleInputChange(index, event)}
                     />
                     <TextInput
-                      type="number"
+                      type="text"
                       name="ContactHouseNo"
                       label="Contact Person House Number"
                       placeholder="enter contact person house number"
