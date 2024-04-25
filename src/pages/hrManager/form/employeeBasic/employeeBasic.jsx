@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import { employeeBasValidation } from "./schema";
 import { useEffect } from "react";
 import RadioButton from "../../../../components/radioButton";
-// import { formatDate } from "@fullcalendar/core/index.js";
 
 function EmployeeBasic() {
   const navigate = useNavigate();
@@ -87,28 +86,61 @@ function EmployeeBasic() {
     fetchData();
   }, []);
 
-  async function userRegistration(values) {
-    try {
-      const response = await fetch(
-        "https://localhost:7140/Employee/RegisterEmployee",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values),
-        }
-      );
-      console.log(response);
-      if (response.ok) {
-        console.log("successful");
-      } else {
-        console.log("failed");
-      }
-    } catch (error) {
-      console.error("Error registering employee:", error.message);
-    }
-  }
+  //   async function userRegistration(values) {
+  //     const formData = new FormData();
+  //     formData.append("Emp_Id", values.Emp_Id);
+  //     formData.append("FirstName", values.FirstName);
+  //     formData.append("LastName", values.LastName);
+  //     formData.append("Email", values.Email);
+  //     formData.append("EmployeePhoto", values.EmployeePhoto);
+  //     formData.append("Gender", values.Gender);
+  //     formData.append("MaritalStatus", values.MaritalStatus);
+  //     formData.append("MotherName", values.MotherName);
+  //     formData.append("Region", values.Region);
+  //     formData.append("Kebele", values.Kebele);
+  //     formData.append("Woreda", values.Woreda);
+  //     formData.append("PhoneNo", values.PhoneNo);
+  //     formData.append("HouseNo", values.HouseNo);
+  //     formData.append("Name", values.Name);
+  //     formData.append("DateOfBirth", values.DateOfBirth);
+  //     formData.append("HireDate", values.HireDate);
+  //     formData.append("GradeId", values.GradeId);
+  //     formData.append("PositionId", values.PositionId);
+  //     formData.append("DepartmentId", values.DepartmentId);
+  //     formData.append("BranchId", values.BranchId);
+  //     formData.append("DegreeId", values.DegreeId);
+  //     formData.append("ContactPersonName", values.ContactPersonName);
+  //     formData.append("Relationship", values.Relationship);
+  //     formData.append("ContactKebele", values.ContactKebele);
+  //     formData.append("ContactWoreda", values.ContactWoreda);
+  //     formData.append("ContactPhoneNo", values.ContactPhoneNo);
+  //     formData.append("ContactRegion", values.ContactRegion);
+  //     formData.append("ContactHouseNo", values.ContactHouseNo);
+  //     formData.append("ExperiencePosition", values.ExperiencePosition);
+  //     formData.append("CompanyName", values.CompanyName);
+  //     formData.append("ExperienceStartDate", values.ExperienceStartDate);
+  //     formData.append("ExperienceEndDate", values.ExperienceEndDate);
+  //     formData.append("Institute", values.Institute);
+  //     formData.append("Degree", values.Degree);
+
+  //     try {
+  //       let result = await fetch("https://localhost:7140/Employee/RegisterEmployee",
+  //         {
+  //           method: "POST",
+  //           body: formData,
+  //           headers: {}
+  //         });
+  //       if (result.ok) {
+  //         console.log("successful");
+
+  //       } else {
+  //         console.log("failed")
+  //       }
+  //     }
+  //     catch (error) {
+  //     console.error("Error registering employee:", error.message);
+  //   }
+  // }
 
   const handleAddField = () => {
     setInputFields([...inputFields, { value: "" }]);
@@ -152,7 +184,7 @@ function EmployeeBasic() {
             FirstName: "",
             LastName: "",
             Email: "",
-            Roles: "",
+            EmployeePhoto: {},
             Gender: "",
             MotherName: "",
             Region: "",
@@ -161,8 +193,9 @@ function EmployeeBasic() {
             PhoneNo: "",
             MaritalStatus: "",
             HouseNo: "",
-            ChildName: "",
+            Name: "",
             DateOfBirth: "",
+            // below are the additional information i have added maybe i will change it later
             HireDate: "",
             GradeId: "",
             PositionId: "",
@@ -170,6 +203,7 @@ function EmployeeBasic() {
             Salary: "",
             BranchId: "",
             DegreeId: "",
+            // below are the contact person information i have added maybe i will change it later
             ContactPersonName: "",
             Relationship: "",
             ContactRegion: "",
@@ -185,7 +219,7 @@ function EmployeeBasic() {
             Degree: "",
           }}
           onSubmit={(values) => {
-            userRegistration(values);
+            // userRegistration(values);
             console.log(values);
           }}
           // validationSchema={employeeBasValidation}
@@ -205,6 +239,32 @@ function EmployeeBasic() {
                   "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
                 }}
               >
+                <div>
+                  <RadioButton
+                    title="Gender"
+                    options={genderOptions}
+                    value={formikValues.values.Gender}
+                    onChange={(value) =>
+                      formikValues.setFieldValue("Gender", value)
+                    }
+                  />
+
+                  <p>Selected Gender: {formikValues.values.Gender}</p>
+                </div>
+                <div>
+                  <RadioButton
+                    title="Marital Status"
+                    options={maritalStatusOptions}
+                    value={formikValues.values.MaritalStatus}
+                    onChange={(value) =>
+                      formikValues.setFieldValue("MaritalStatus", value)
+                    }
+                  />
+
+                  <p>
+                    Selected Marital Status: {formikValues.values.MaritalStatus}
+                  </p>
+                </div>
                 <TextInput
                   type="text"
                   name="Emp_Id"
@@ -250,15 +310,6 @@ function EmployeeBasic() {
                   error={formikValues.errors.Email}
                   onChange={formikValues.handleChange}
                 />
-                                <TextInput
-                  type="text"
-                  name="Roles"
-                  label="Roles"
-                  placeholder="enter role"
-                  value={formikValues.values.Roles}
-                  error={formikValues.errors.Roles}
-                  onChange={formikValues.handleChange}
-                />
                 {/* <TextInput
                   type="file"
                   name="EmployeePhoto"
@@ -268,7 +319,7 @@ function EmployeeBasic() {
                   error={formikValues.errors.EmployeePhoto}
                   onChange={formikValues.handleChange}
                 /> */}
-                {/* <div className="col-10 row">
+                <div className="col-10 row">
                   <div>
                     <label className="float-start">Image</label>
                   </div>
@@ -286,18 +337,6 @@ function EmployeeBasic() {
                       }
                     />
                   </div>
-                </div> */}
-                <div>
-                  <RadioButton
-                    title="Gender"
-                    options={genderOptions}
-                    value={formikValues.values.Gender}
-                    onChange={(value) =>
-                      formikValues.setFieldValue("Gender", value)
-                    }
-                  />
-
-                  <p>Selected Gender: {formikValues.values.Gender}</p>
                 </div>
                 <TextInput
                   type="text"
@@ -362,21 +401,9 @@ function EmployeeBasic() {
                   error={formikValues.errors.PhoneNo}
                   onChange={formikValues.handleChange}
                 />
-                <div>
-                  <RadioButton
-                    title="Marital Status"
-                    options={maritalStatusOptions}
-                    value={formikValues.values.MaritalStatus}
-                    onChange={(value) =>
-                      formikValues.setFieldValue("MaritalStatus", value)
-                    }
-                  />
-
-                  <p>
-                    Selected Marital Status: {formikValues.values.MaritalStatus}
-                  </p>
-                </div>
               </Box>
+              {/* Below are the code for employee contact person information and i 
+                have added some information maybe i will delete it later */}
 
               <p className="fs-4 text-dark text-center">
                 Contact Person Information
@@ -494,12 +521,12 @@ function EmployeeBasic() {
                   <div key={field.id}>
                     <TextInput
                       type="text"
-                      name="ChildName"
+                      name="Name"
                       label="Child Name"
                       placeholder="enter child name"
                       // value={field.value}
-                      value={formikValues.values.ChildName}
-                      error={formikValues.errors.ChildName}
+                      value={formikValues.values.Name}
+                      error={formikValues.errors.Name}
                       onChange={formikValues.handleChange}
                       // onChange={(event) => handleInputChange(index, event)}
                     />
@@ -530,6 +557,8 @@ function EmployeeBasic() {
                   Add child
                 </button>
               </div>
+              {/* Below are the code for employee education information and i 
+                have added some information maybe i will delete it later */}
               <p className="fs-4 text-dark text-center">
                 Employee Education Information
               </p>
@@ -571,6 +600,8 @@ function EmployeeBasic() {
               >
                 Add education
               </button>
+              {/* Below are the code for employee experience information and i 
+                have added some information maybe i will delete it later */}
               <p className="fs-4 text-dark text-center">
                 Employee Experience Information
               </p>
@@ -632,6 +663,8 @@ function EmployeeBasic() {
               >
                 Add experience
               </button>
+              {/* Below are the code for employee additional information and i 
+                have added some information maybe i will delete it later */}
               <p className="fs-4 text-dark text-center">
                 {" "}
                 Employee Additional information{" "}
@@ -664,70 +697,63 @@ function EmployeeBasic() {
                 />
                 {GradeId.map((grade, gradeName) => (
                   <DropDown
-                    type="number"
                     label="Grade"
                     name="GradeId"
                     options={GradeId}
                     error={formikValues.errors.GradeId}
                     onChange={(selectedOption) => {
-                      const parsedValue = parseInt(selectedOption, 10);
-                      formikValues.setFieldValue("GradeId", parsedValue);
+                      formikValues.setFieldValue("GradeId", selectedOption);
                     }}
                   />
                 ))}
                 {PositionId.map((position, name) => (
                   <DropDown
-                    type="number"
                     label="PositionId"
                     name="PositionId"
                     options={PositionId}
                     value={formikValues.values.PositionId}
                     error={formikValues.errors.PositionId}
                     onChange={(selectedOption) => {
-                      const parsedValue = parseInt(selectedOption, 10);
-                      formikValues.setFieldValue("PositionId", parsedValue);
+                      formikValues.setFieldValue("PositionId", selectedOption);
                     }}
                   />
                 ))}
                 {BranchId.map((branch, name) => (
                   <DropDown
-                    type="number"
                     label="BranchId"
                     name="BranchId"
                     options={BranchId}
                     value={formikValues.values.BranchId}
                     error={formikValues.errors.BranchId}
                     onChange={(selectedOption) => {
-                      const parsedValue = parseInt(selectedOption, 10);
-                      formikValues.setFieldValue("BranchId", parsedValue);
+                      formikValues.setFieldValue("BranchId", selectedOption);
                     }}
                   />
                 ))}
                 {DepartmentId.map((department, name) => (
                   <DropDown
-                    type="number"
                     label="DepartmentId"
                     name="DepartmentId"
                     options={DepartmentId}
                     value={formikValues.values.DepartmentId}
                     error={formikValues.errors.DepartmentId}
                     onChange={(selectedOption) => {
-                      const parsedValue = parseInt(selectedOption, 10);
-                      formikValues.setFieldValue("DepartmentId", parsedValue);
+                      formikValues.setFieldValue(
+                        "DepartmentId",
+                        selectedOption
+                      );
                     }}
                   />
                 ))}
                 {DegreeId.map((degree, name) => (
                   <DropDown
-                    type="number"
                     label="DegreeId"
                     name="DegreeId"
                     options={DegreeId}
                     value={formikValues.values.DegreeId}
                     error={formikValues.errors.DegreeId}
                     onChange={(selectedOption) => {
-                      const parsedValue = parseInt(selectedOption, 10);
-                      formikValues.setFieldValue("DegreeId", parsedValue);
+                      formikValues.setFieldValue("DegreeId", selectedOption);
                     }}
                   />
                 ))}
@@ -738,6 +764,7 @@ function EmployeeBasic() {
                   type="button"
                   value="submit"
                   onClick={formikValues.handleSubmit}
+                  // onSubmit={formikValues.handleSubmit}
                 />
               </div>
             </form>
