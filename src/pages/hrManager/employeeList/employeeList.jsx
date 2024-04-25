@@ -9,15 +9,15 @@ const EmployeeList = () => {
   }, []);
 
   async function deleteOperation(id) {
-    let result = await fetch("http://127.0.0.1:8000/api/deleteTeacher/" + id, {
+    let result = await fetch("https://localhost:7140/Employee/DeleteEmployee/" + id, {
       method: "DELETE",
     });
-
+   console.log(result)
     result = await result.json();
     getData();
   }
   async function getData() {
-    let result = await fetch("http://127.0.0.1:8000/api/listTeachers");
+    let result = await fetch("https://localhost:7140/Employee/ListEmployees"); 
     result = await result.json();
     setData(result);
   }
@@ -45,7 +45,7 @@ const EmployeeList = () => {
         </tr>
         <tbody>
           {data.map((employee) => (
-            <tr key={employee.id}>
+            <tr key={employee.Id}>
               {Object.values(employee).map((item, index) => (
                 <td key={index}>{item}</td>
               ))}
@@ -56,7 +56,7 @@ const EmployeeList = () => {
                   </button>
                 </NavLink>
                 <button
-                  onClick={() => deleteOperation(employee.id)}
+                  onClick={() => console.log(employee.Id)} 
                   className="btn btn-outline-danger ms-1 btn-sm"
                   type="button"
                 >
