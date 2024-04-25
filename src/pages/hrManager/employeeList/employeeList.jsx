@@ -1,78 +1,26 @@
 import { NavLink } from "react-router-dom";
-import React, { useState } from "react";
-
-const employees = [
-  {
-    id: 1,
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    gender: "Male",
-    phoneNumber: "+251912345678",
-    // motherName: "Jane Doe",
-    // region: "Addis Ababa",
-    // kebele: "01",
-    // wereda: "Kirkos",
-    // maritalStatus: "Single",
-    // houseNumber: "123/A",
-  },
-  {
-    id: 2,
-    firstName: "Jane",
-    lastName: "Smith",
-    email: "jane.smith@example.com",
-    gender: "Female",
-    phoneNumber: "+251987654321",
-    // motherName: "Mary Smith",
-    // region: "Amhara",
-    // kebele: "02",
-    // wereda: "Gondar",
-    // maritalStatus: "Married",
-    // houseNumber: "456/B",
-  },
-  {
-    id: 3,
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@example.com",
-    gender: "Male",
-    phoneNumber: "+251912345678",
-    // motherName: "Jane Doe",
-    // region: "Addis Ababa",
-    // kebele: "01",
-    // wereda: "Kirkos",
-    // maritalStatus: "Single",
-    // houseNumber: "123/A",
-  },
-  {
-    id: 4,
-    firstName: "Jeje",
-    lastName: "Kaleb",
-    email: "john.doe@example.com",
-    gender: "Male",
-    phoneNumber: "+251912345678",
-    // motherName: "Jane Doe",
-    // region: "Addis Ababa",
-    // kebele: "01",
-    // wereda: "Kirkos",
-    // maritalStatus: "Single",
-    // houseNumber: "123/A",
-  },
-];
+import React, { useState, useEffect } from "react";
 
 const EmployeeList = () => {
-  const [employeeData, setEmployeeData] = useState(employees);
+  const [data, setData] = useState([]);
 
-  const handleDelete = (id) => {
-    const filteredEmployees = employeeData.filter(
-      (employee) => employee.id !== id
-    );
-    setEmployeeData(filteredEmployees);
-  };
+  useEffect(() => {
+    getData();
+  }, []);
 
-  const handleEdit = (id) => {
-    console.log(`Edit employee with ID: ${id}`);
-  };
+  async function deleteOperation(id) {
+    let result = await fetch("http://127.0.0.1:8000/api/deleteTeacher/" + id, {
+      method: "DELETE",
+    });
+
+    result = await result.json();
+    getData();
+  }
+  async function getData() {
+    let result = await fetch("http://127.0.0.1:8000/api/listTeachers");
+    result = await result.json();
+    setData(result);
+  }
 
   return (
     <>
@@ -86,50 +34,29 @@ const EmployeeList = () => {
         </NavLink>
       </div>
       <table className="table table-hover text-dark w-100 fs-6">
-        <thead className="p-1">
-          <tr>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Gender</th>
-            <th>Phone Number</th>
-            {/* <th>Mother Name</th>
-             <th>Region</th>
-            <th>Kebele</th>
-            <th>Wereda</th> 
-            <th>Marital Status</th>
-            <th>House Number</th>*/}
-            <th></th>
-          </tr>
-        </thead>
+        <tr>
+          <th>Employee Id</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Gender</th>
+          <th>Mother Name</th>
+          <th>Phone Number</th>
+          <th></th>
+        </tr>
         <tbody>
-          {employeeData.map((employee) => (
+          {data.map((employee) => (
             <tr key={employee.id}>
-              <td>{employee.id}</td>
-              <td>{employee.firstName}</td>
-              <td>{employee.lastName}</td>
-              <td>{employee.email}</td>
-              <td>{employee.gender}</td>
-              <td>{employee.phoneNumber}</td>
-              {/* <td>{employee.motherName}</td>
-              <td>{employee.region}</td>
-              <td>{employee.kebele}</td>
-              <td>{employee.wereda}</td>
-              <td>{employee.maritalStatus}</td>
-              <td>{employee.houseNumber}</td> */}
-              <td className="d-flex m-1">
-                <NavLink to={"/updateEmployee/" + employee.id}>
-                  <button
-                    onClick={() => handleEdit(employee.id)}
-                    className="btn btn-outline-info btn-sm"
-                    type="button"
-                  >
-                    Detail
+              {Object.values(employee).map((item, index) => (
+                <td key={index}>{item}</td>
+              ))}
+              <td>
+                <NavLink to={"/updateEmployeeBasic/" + employee.id}>
+                  <button className="btn btn-outline-info btn-sm" type="button">
+                    Edit
                   </button>
                 </NavLink>
                 <button
-                  onClick={() => handleDelete(employee.id)}
+                  onClick={() => deleteOperation(employee.id)}
                   className="btn btn-outline-danger ms-1 btn-sm"
                   type="button"
                 >
@@ -145,3 +72,87 @@ const EmployeeList = () => {
 };
 
 export default EmployeeList;
+
+// import { NavLink } from "react-router-dom";
+// import { useState, useEffect } from "react";
+
+// const Teachers = () => {
+//   const [data, setData] = useState([]);
+
+//   useEffect(() => {
+//     getData();
+//   }, []);
+
+//   async function deleteOperation(id) {
+//     let result = await fetch("http://127.0.0.1:8000/api/deleteTeacher/" + id, {
+//       method: "DELETE",
+//     });
+
+//     result = await result.json();
+//     getData();
+//   }
+//   async function getData() {
+//     let result = await fetch("http://127.0.0.1:8000/api/listTeachers");
+//     result = await result.json();
+//     setData(result);
+//   }
+
+//   return (
+//     <>
+//       <div className="d-flex justify-content-between mt-5">
+//         <h5 className="text-start">List of Teacher</h5>
+//         <NavLink
+//           to={"/createTeacher"}
+//           className="float-end btn btn-primary btn-sm mb-2"
+//         >
+//           Add new teacher
+//         </NavLink>
+//       </div>
+//       <div className="rounded-2 border">
+//         <table className="table table-hover">
+//           <tr>
+//             <th>Id</th>
+//             <th>Name</th>
+//             <th>Phone Number</th>
+//             <th>Address</th>
+//             <th>Gender</th>
+//             <th>Education</th>
+//             <th>Expert</th>
+//             <th>Day</th>
+//             <th>Time</th>
+//             <th>Role</th>
+//             <td></td>
+//           </tr>
+//           <tbody>
+//             {data.map((teacher) => (
+//               <tr key={teacher.id}>
+//                 {Object.values(teacher).map((item, index) => (
+//                   <td key={index}>{item}</td>
+//                 ))}
+//                 <td>
+//                   <NavLink to={"/updateTeacher/" + teacher.id}>
+//                     <button
+//                       className="btn btn-outline-info btn-sm"
+//                       type="button"
+//                     >
+//                       Edit
+//                     </button>
+//                   </NavLink>
+
+//                   <button
+//                     onClick={() => deleteOperation(teacher.id)}
+//                     className="btn btn-outline-danger ms-1 btn-sm"
+//                     type="button"
+//                   >
+//                     Remove
+//                   </button>
+//                 </td>
+//               </tr>
+//             ))}
+//           </tbody>
+//         </table>
+//       </div>
+//     </>
+//   );
+// };
+// export default Teachers;
