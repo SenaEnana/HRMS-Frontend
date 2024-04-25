@@ -1,5 +1,5 @@
 import React from "react";
-const DropDown = ({ options, onChange, label, name }) => {
+const DropDown = ({ options, onChange, label, name ,type}) => {
   return (
     <div className="col-12 row">
       <div>
@@ -9,6 +9,7 @@ const DropDown = ({ options, onChange, label, name }) => {
       </div>
       <div>
         <select
+        type={type}
           className="form-control mb-3"
           id="option"
           name={name}

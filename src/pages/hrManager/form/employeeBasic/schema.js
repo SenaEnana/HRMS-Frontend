@@ -2,6 +2,7 @@ import * as Yup from "yup";
 
 export const employeeBasValidation = Yup.object().shape({
    Emp_Id:Yup.string().required("this field is required"),
+   Roles:Yup.string().required("this field is required"),
     FirstName:Yup.string().required("this field is required"),
     LastName:Yup.string().required("this field is required"),
     Email:Yup.string().email().required("this field is required"),
