@@ -4,13 +4,68 @@ import { Formik } from "formik";
 import TextInput from "../../../components/textInput";
 import { Box } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import DropDown from "../../../components/DropDown";
+import { useNavigate } from "react-router-dom";
 
 function UpdateEmployeeBasic() {
   let { id } = useParams();
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
+  const [BranchId, setBranchId] = useState([{ name: "", id: "" }]);
+  const [DepartmentId, setDepartmentId] = useState([{ name: "", id: "" }]);
+  const [DegreeId, setDegreeId] = useState([{ name: "", id: "" }]);
+  const [GradeId, setGradeId] = useState([{ name: "", id: "" }]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("https://localhost:7140/Branch/GetBranches");
+      const newData = await response.json();
+      setBranchId(newData);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("https://localhost:7140/api/Degree");
+      const newData = await response.json();
+      setDegreeId(newData);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        "https://localhost:7140/Department/GetDepartments"
+      );
+      const newData = await response.json();
+      setDepartmentId(newData);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("https://localhost:7140/Position");
+      const newData = await response.json();
+      setPositionId(newData);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("https://localhost:7140/Grade/GetGrades");
+      const newData = await response.json();
+      setGradeId(newData);
+    };
+    fetchData();
+  }, []);
 
   async function updateEmployees(values) {
     setLoading(true);
@@ -229,7 +284,6 @@ function UpdateEmployeeBasic() {
                     type="text"
                     name="ContactPersonName"
                     label="Contact Person Name"
-                    placeholder="enter contact person name"
                     value={formikValues.values.ContactPersonName}
                     error={formikValues.errors.ContactPersonName}
                     onChange={formikValues.handleChange}
@@ -238,7 +292,6 @@ function UpdateEmployeeBasic() {
                     type="text"
                     name="Relationship"
                     label="Relationship"
-                    placeholder="enter relationship"
                     value={formikValues.values.Relationship}
                     error={formikValues.errors.Relationship}
                     onChange={formikValues.handleChange}
@@ -247,7 +300,6 @@ function UpdateEmployeeBasic() {
                     type="text"
                     name="ContactRegion"
                     label="Contact Person Region"
-                    placeholder="enter contact person region"
                     value={formikValues.values.ContactRegion}
                     error={formikValues.errors.ContactRegion}
                     onChange={formikValues.handleChange}
@@ -255,8 +307,7 @@ function UpdateEmployeeBasic() {
                   <TextInput
                     type="text"
                     name="ContactWoreda"
-                    label="Contact Person Wereda"
-                    placeholder="enter contact person wereda"
+                    label="Contact Person Woreda"
                     value={formikValues.values.ContactWoreda}
                     error={formikValues.errors.ContactWoreda}
                     onChange={formikValues.handleChange}
@@ -265,7 +316,6 @@ function UpdateEmployeeBasic() {
                     type="number"
                     name="ContactKebele"
                     label="Contact Person Kebele"
-                    placeholder="enter contact person kebele"
                     value={formikValues.values.ContactKebele}
                     error={formikValues.errors.ContactKebele}
                     onChange={formikValues.handleChange}
@@ -274,7 +324,6 @@ function UpdateEmployeeBasic() {
                     type="text"
                     name="ContactHouseNo"
                     label="Contact Person House Number"
-                    placeholder="enter contact person house number"
                     value={formikValues.values.ContactHouseNo}
                     error={formikValues.errors.ContactHouseNo}
                     onChange={formikValues.handleChange}
@@ -283,7 +332,6 @@ function UpdateEmployeeBasic() {
                     type="text"
                     name="ContactPhoneNo"
                     label="Contact Person Phone Number"
-                    placeholder="enter contact person phone number"
                     value={formikValues.values.ContactPhoneNo}
                     error={formikValues.errors.ContactPhoneNo}
                     onChange={formikValues.handleChange}
@@ -431,7 +479,7 @@ function UpdateEmployeeBasic() {
                   />
                   <DropDown
                     type="number"
-                    label="BranchId"
+                    label="Branch"
                     name="BranchId"
                     options={BranchId}
                     value={formikValues.values.BranchId}
@@ -443,7 +491,7 @@ function UpdateEmployeeBasic() {
                   />
                   <DropDown
                     type="number"
-                    label="DepartmentId"
+                    label="Department"
                     name="DepartmentId"
                     options={DepartmentId}
                     value={formikValues.values.DepartmentId}
@@ -455,7 +503,7 @@ function UpdateEmployeeBasic() {
                   />
                   <DropDown
                     type="number"
-                    label="DegreeId"
+                    label="Degree"
                     name="DegreeId"
                     options={DegreeId}
                     value={formikValues.values.DegreeId}

@@ -151,7 +151,6 @@ function EmployeeBasic() {
             FirstName: "",
             LastName: "",
             Email: "",
-            EmployeePhoto: {},
             Gender: "",
             MotherName: "",
             Region: "",
@@ -231,32 +230,6 @@ function EmployeeBasic() {
                   "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
                 }}
               >
-                <div>
-                  <RadioButton
-                    title="Gender"
-                    options={genderOptions}
-                    value={formikValues.values.Gender}
-                    onChange={(value) =>
-                      formikValues.setFieldValue("Gender", value)
-                    }
-                  />
-
-                  <p>Selected Gender: {formikValues.values.Gender}</p>
-                </div>
-                <div>
-                  <RadioButton
-                    title="Marital Status"
-                    options={maritalStatusOptions}
-                    value={formikValues.values.MaritalStatus}
-                    onChange={(value) =>
-                      formikValues.setFieldValue("MaritalStatus", value)
-                    }
-                  />
-
-                  <p>
-                    Selected Marital Status: {formikValues.values.MaritalStatus}
-                  </p>
-                </div>
                 <TextInput
                   type="text"
                   name="Emp_Id"
@@ -293,6 +266,19 @@ function EmployeeBasic() {
                   error={formikValues.errors.Email}
                   onChange={formikValues.handleChange}
                 />
+                <div>
+                  <RadioButton
+                    title="Gender"
+                    options={genderOptions}
+                    value={formikValues.values.Gender}
+                    onChange={(value) =>
+                      formikValues.setFieldValue("Gender", value)
+                    }
+                  />
+
+                  <p>Selected Gender: {formikValues.values.Gender}</p>
+                </div>
+
                 <TextInput
                   type="text"
                   name="Roles"
@@ -369,9 +355,21 @@ function EmployeeBasic() {
                   error={formikValues.errors.PhoneNo}
                   onChange={formikValues.handleChange}
                 />
+                <div>
+                  <RadioButton
+                    title="Marital Status"
+                    options={maritalStatusOptions}
+                    value={formikValues.values.MaritalStatus}
+                    onChange={(value) =>
+                      formikValues.setFieldValue("MaritalStatus", value)
+                    }
+                  />
+
+                  <p>
+                    Selected Marital Status: {formikValues.values.MaritalStatus}
+                  </p>
+                </div>
               </Box>
-              {/* Below are the code for employee contact person information and i 
-                have added some information maybe i will delete it later */}
 
               <p className="fs-4 text-dark text-center">
                 Contact Person Information
@@ -553,8 +551,6 @@ function EmployeeBasic() {
                   Add child
                 </button>
               </div>
-              {/* Below are the code for employee education information and i 
-                have added some information maybe i will delete it later */}
               <p className="fs-4 text-dark text-center">
                 Employee Education Information
               </p>
@@ -589,8 +585,6 @@ function EmployeeBasic() {
               >
                 Add education
               </button>
-              {/* Below are the code for employee experience information and i 
-                have added some information maybe i will delete it later */}
               <p className="fs-4 text-dark text-center">
                 Employee Experience Information
               </p>
@@ -692,68 +686,55 @@ function EmployeeBasic() {
                   error={formikValues.errors.Salary}
                   onChange={formikValues.handleChange}
                 />
-                {GradeId.map((grade, gradeName) => (
-                  <DropDown
-                    label="Grade"
-                    name="GradeId"
-                    options={GradeId}
-                    error={formikValues.errors.GradeId}
-                    onChange={(selectedOption) => {
-                      formikValues.setFieldValue("GradeId", selectedOption);
-                    }}
-                  />
-                ))}
-                {PositionId.map((position, name) => (
-                  <DropDown
-                    label="PositionId"
-                    name="PositionId"
-                    options={PositionId}
-                    value={formikValues.values.PositionId}
-                    error={formikValues.errors.PositionId}
-                    onChange={(selectedOption) => {
-                      formikValues.setFieldValue("PositionId", selectedOption);
-                    }}
-                  />
-                ))}
-                {BranchId.map((branch, name) => (
-                  <DropDown
-                    label="BranchId"
-                    name="BranchId"
-                    options={BranchId}
-                    value={formikValues.values.BranchId}
-                    error={formikValues.errors.BranchId}
-                    onChange={(selectedOption) => {
-                      formikValues.setFieldValue("BranchId", selectedOption);
-                    }}
-                  />
-                ))}
-                {DepartmentId.map((department, name) => (
-                  <DropDown
-                    label="DepartmentId"
-                    name="DepartmentId"
-                    options={DepartmentId}
-                    value={formikValues.values.DepartmentId}
-                    error={formikValues.errors.DepartmentId}
-                    onChange={(selectedOption) => {
-                      formikValues.setFieldValue(
-                        "DepartmentId",
-                        selectedOption
-                      );
-                    }}
-                  />
-                ))}
-                {DegreeId.map((degree, name) => (
-                  <DropDown
-                    label="DegreeId"
-                    name="DegreeId"
-                    options={DegreeId}
-                    value={formikValues.values.DegreeId}
-                    error={formikValues.errors.DegreeId}
-                    onChange={(selectedOption) => {
-                      formikValues.setFieldValue("DegreeId", selectedOption);
-                    }}
-                  />
-                ))}
+                <DropDown
+                  label="Grade"
+                  name="GradeId"
+                  options={GradeId}
+                  error={formikValues.errors.GradeId}
+                  onChange={(selectedOption) => {
+                    formikValues.setFieldValue("GradeId", selectedOption);
+                  }}
+                />
+                <DropDown
+                  label="Position"
+                  name="PositionId"
+                  options={PositionId}
+                  value={formikValues.values.PositionId}
+                  error={formikValues.errors.PositionId}
+                  onChange={(selectedOption) => {
+                    formikValues.setFieldValue("PositionId", selectedOption);
+                  }}
+                />
+                <DropDown
+                  label="Branch"
+                  name="BranchId"
+                  options={BranchId}
+                  value={formikValues.values.BranchId}
+                  error={formikValues.errors.BranchId}
+                  onChange={(selectedOption) => {
+                    formikValues.setFieldValue("BranchId", selectedOption);
+                  }}
+                />
+                <DropDown
+                  label="Department"
+                  name="DepartmentId"
+                  options={DepartmentId}
+                  value={formikValues.values.DepartmentId}
+                  error={formikValues.errors.DepartmentId}
+                  onChange={(selectedOption) => {
+                    formikValues.setFieldValue("DepartmentId", selectedOption);
+                  }}
+                />
+                <DropDown
+                  label="Degree"
+                  name="DegreeId"
+                  options={DegreeId}
+                  value={formikValues.values.DegreeId}
+                  error={formikValues.errors.DegreeId}
+                  onChange={(selectedOption) => {
+                    formikValues.setFieldValue("DegreeId", selectedOption);
+                  }}
+                />
               </Box>
               <div className="m-3">
                 <input

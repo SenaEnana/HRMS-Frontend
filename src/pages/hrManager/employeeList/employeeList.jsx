@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import React, { useState, useEffect } from "react";
+import Topbar from "../../commonPages/topbar";
 
 const EmployeeList = () => {
   const [data, setData] = useState([]);
@@ -9,21 +10,25 @@ const EmployeeList = () => {
   }, []);
 
   async function deleteOperation(id) {
-    let result = await fetch("https://localhost:7140/Employee/DeleteEmployee/" + id, {
-      method: "DELETE",
-    });
-   console.log(result)
+    let result = await fetch(
+      "https://localhost:7140/Employee/DeleteEmployee/" + id,
+      {
+        method: "DELETE",
+      }
+    );
+    console.log(result);
     result = await result.json();
     getData();
   }
   async function getData() {
-    let result = await fetch("https://localhost:7140/Employee/ListEmployees"); 
+    let result = await fetch("https://localhost:7140/Employee/ListEmployees");
     result = await result.json();
     setData(result);
   }
 
   return (
     <>
+      <Topbar />
       <div className="d-flex justify-content-between mt-5 text-dark">
         <h5 className="text-start ms-2">Employee List</h5>
         <NavLink
@@ -52,11 +57,11 @@ const EmployeeList = () => {
               <td>
                 <NavLink to={"/updateEmployeeBasic/" + employee.id}>
                   <button className="btn btn-outline-info btn-sm" type="button">
-                    Edit
+                    Detail
                   </button>
                 </NavLink>
                 <button
-                  onClick={() => console.log(employee.Id)} 
+                  onClick={() => console.log(employee.Id)}
                   className="btn btn-outline-danger ms-1 btn-sm"
                   type="button"
                 >

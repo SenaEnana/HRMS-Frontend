@@ -25,7 +25,7 @@ function HrRouter() {
         <div className="app">
           <Sidebar isHrSidebar={isHrSidebar} />
           <main className="content">
-            <Topbar setIsHrSidebar={setIsHrSidebar} />
+            {/* <Topbar setIsHrSidebar={setIsHrSidebar} /> */}
             <Routes>
               <Route path="/hrDashboard" element={<HrDashboard />} />
               <Route path="/team" element={<Team />} />
