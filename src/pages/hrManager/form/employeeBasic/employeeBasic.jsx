@@ -86,61 +86,28 @@ function EmployeeBasic() {
     fetchData();
   }, []);
 
-  //   async function userRegistration(values) {
-  //     const formData = new FormData();
-  //     formData.append("Emp_Id", values.Emp_Id);
-  //     formData.append("FirstName", values.FirstName);
-  //     formData.append("LastName", values.LastName);
-  //     formData.append("Email", values.Email);
-  //     formData.append("EmployeePhoto", values.EmployeePhoto);
-  //     formData.append("Gender", values.Gender);
-  //     formData.append("MaritalStatus", values.MaritalStatus);
-  //     formData.append("MotherName", values.MotherName);
-  //     formData.append("Region", values.Region);
-  //     formData.append("Kebele", values.Kebele);
-  //     formData.append("Woreda", values.Woreda);
-  //     formData.append("PhoneNo", values.PhoneNo);
-  //     formData.append("HouseNo", values.HouseNo);
-  //     formData.append("Name", values.Name);
-  //     formData.append("DateOfBirth", values.DateOfBirth);
-  //     formData.append("HireDate", values.HireDate);
-  //     formData.append("GradeId", values.GradeId);
-  //     formData.append("PositionId", values.PositionId);
-  //     formData.append("DepartmentId", values.DepartmentId);
-  //     formData.append("BranchId", values.BranchId);
-  //     formData.append("DegreeId", values.DegreeId);
-  //     formData.append("ContactPersonName", values.ContactPersonName);
-  //     formData.append("Relationship", values.Relationship);
-  //     formData.append("ContactKebele", values.ContactKebele);
-  //     formData.append("ContactWoreda", values.ContactWoreda);
-  //     formData.append("ContactPhoneNo", values.ContactPhoneNo);
-  //     formData.append("ContactRegion", values.ContactRegion);
-  //     formData.append("ContactHouseNo", values.ContactHouseNo);
-  //     formData.append("ExperiencePosition", values.ExperiencePosition);
-  //     formData.append("CompanyName", values.CompanyName);
-  //     formData.append("ExperienceStartDate", values.ExperienceStartDate);
-  //     formData.append("ExperienceEndDate", values.ExperienceEndDate);
-  //     formData.append("Institute", values.Institute);
-  //     formData.append("Degree", values.Degree);
-
-  //     try {
-  //       let result = await fetch("https://localhost:7140/Employee/RegisterEmployee",
-  //         {
-  //           method: "POST",
-  //           body: formData,
-  //           headers: {}
-  //         });
-  //       if (result.ok) {
-  //         console.log("successful");
-
-  //       } else {
-  //         console.log("failed")
-  //       }
-  //     }
-  //     catch (error) {
-  //     console.error("Error registering employee:", error.message);
-  //   }
-  // }
+  async function userRegistration(values) {
+    try {
+      const response = await fetch(
+        "https://localhost:7140/Employee/CorrectRegisterEmployee",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
+      console.log(response);
+      if (response.ok) {
+        console.log("successful");
+      } else {
+        console.log("failed");
+      }
+    } catch (error) {
+      console.error("Error registering employee:", error.message);
+    }
+  }
 
   const handleAddField = () => {
     setInputFields([...inputFields, { value: "" }]);
@@ -193,9 +160,7 @@ function EmployeeBasic() {
             PhoneNo: "",
             MaritalStatus: "",
             HouseNo: "",
-            Name: "",
-            DateOfBirth: "",
-            // below are the additional information i have added maybe i will change it later
+            ChildInformations: [{ ChildName: "", DateOfBirth: "" }],
             HireDate: "",
             GradeId: "",
             PositionId: "",
@@ -203,26 +168,53 @@ function EmployeeBasic() {
             Salary: "",
             BranchId: "",
             DegreeId: "",
-            // below are the contact person information i have added maybe i will change it later
-            ContactPersonName: "",
-            Relationship: "",
-            ContactRegion: "",
-            ContactKebele: "",
-            ContactWoreda: "",
-            ContactPhoneNo: "",
-            ContactHouseNo: "",
-            ExperiencePosition: "",
-            CompanyName: "",
-            ExperienceStartDate: "",
-            ExperienceEndDate: "",
-            Institute: "",
-            Degree: "",
+            ContactPersons: [
+              {
+                ContactPersonName: "",
+                Relationship: "",
+                ContactRegion: "",
+                ContactKebele: "",
+                ContactWoreda: "",
+                ContactPhoneNo: "",
+                ContactHouseNo: "",
+              },
+            ],
+            Educations: [{ Degree: "", Institute: "" }],
+            Experiences: [
+              {
+                CompanyName: "",
+                ExperiencePosition: "",
+                ExperienceStartDate: "",
+                ExperienceEndDate: "",
+              },
+            ],
           }}
           onSubmit={(values) => {
-            // userRegistration(values);
+            // Ensure that ChildInformations, ContactPersons, Educations, and Experiences are removed if they are empty before submitting
+            values.ChildInformations = values.ChildInformations.filter(
+              (child) => child.ChildName !== "" || child.DateOfBirth !== ""
+            );
+            values.ContactPersons = values.ContactPersons.filter(
+              (contact) =>
+                contact.ContactPersonName !== "" ||
+                contact.Relationship !== "" ||
+                contact.ContactPhoneNo !== ""
+            );
+            values.Educations = values.Educations.filter(
+              (education) =>
+                education.Degree !== "" || education.Institute !== ""
+            );
+            values.Experiences = values.Experiences.filter(
+              (experience) =>
+                experience.CompanyName !== "" ||
+                experience.ExperiencePosition !== "" ||
+                experience.ExperienceStartDate !== "" ||
+                experience.ExperienceEndDate !== ""
+            );
+
+            userRegistration(values);
             console.log(values);
           }}
-          // validationSchema={employeeBasValidation}
         >
           {(formikValues) => (
             <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
@@ -276,15 +268,6 @@ function EmployeeBasic() {
                 />
                 <TextInput
                   type="text"
-                  name="ExperiencePosition"
-                  label="Experience position"
-                  placeholder="enter position name"
-                  value={formikValues.values.ExperiencePosition}
-                  error={formikValues.errors.ExperiencePosition}
-                  onChange={formikValues.handleChange}
-                />
-                <TextInput
-                  type="text"
                   name="FirstName"
                   label="First Name"
                   placeholder="enter first name"
@@ -310,33 +293,27 @@ function EmployeeBasic() {
                   error={formikValues.errors.Email}
                   onChange={formikValues.handleChange}
                 />
-                {/* <TextInput
-                  type="file"
-                  name="EmployeePhoto"
-                  label="Profile Photo"
-                  placeholder="enter profile photo"
-                  value={formikValues.values.EmployeePhoto}
-                  error={formikValues.errors.EmployeePhoto}
+                <TextInput
+                  type="text"
+                  name="Roles"
+                  label="Roles"
+                  placeholder="enter role"
+                  value={formikValues.values.Roles}
+                  error={formikValues.errors.Roles}
                   onChange={formikValues.handleChange}
-                /> */}
-                <div className="col-10 row">
-                  <div>
-                    <label className="float-start">Image</label>
-                  </div>
-                  <div className="form-group">
-                    <input
-                      className="form-control"
-                      id="EmployeePhoto"
-                      name="EmployeePhoto"
-                      type="file"
-                      onChange={(event) =>
-                        formikValues.setFieldValue(
-                          "EmployeePhoto",
-                          event.currentTarget.files[0]
-                        )
-                      }
-                    />
-                  </div>
+                />
+
+                <div>
+                  <RadioButton
+                    title="Gender"
+                    options={genderOptions}
+                    value={formikValues.values.Gender}
+                    onChange={(value) =>
+                      formikValues.setFieldValue("Gender", value)
+                    }
+                  />
+
+                  <p>Selected Gender: {formikValues.values.Gender}</p>
                 </div>
                 <TextInput
                   type="text"
@@ -345,15 +322,6 @@ function EmployeeBasic() {
                   placeholder="enter mother name"
                   value={formikValues.values.MotherName}
                   error={formikValues.errors.MotherName}
-                  onChange={formikValues.handleChange}
-                />
-                <TextInput
-                  type="text"
-                  name="Degree"
-                  label="Degree Name"
-                  placeholder="enter degree name"
-                  value={formikValues.values.Degree}
-                  error={formikValues.errors.Degree}
                   onChange={formikValues.handleChange}
                 />
                 <TextInput
@@ -408,104 +376,130 @@ function EmployeeBasic() {
               <p className="fs-4 text-dark text-center">
                 Contact Person Information
               </p>
-              {inputFields.map((field, index) => (
-                <div key={field.id}>
-                  <Box
-                    display="grid"
-                    gap="30px"
-                    gridTemplateColumns="repeat(2, minmax(0, 1fr))"
-                    sx={{
-                      "& > div": {
-                        gridColumn: isNonMobile ? undefined : "span 4",
-                      },
-                    }}
-                  >
-                    <TextInput
-                      type="text"
-                      name="ContactPersonName"
-                      label="Contact Person Name"
-                      placeholder="enter contact person name"
-                      // value={field.value}
-                      value={formikValues.values.ContactPersonName}
-                      error={formikValues.errors.ContactPersonName}
-                      // onChange={(event) => handleInputChange(index, event)}
-                      onChange={formikValues.handleChange}
-                    />
-                    <TextInput
-                      type="text"
-                      name="Relationship"
-                      label="Relationship"
-                      placeholder="enter relationship"
-                      // value={field.value}
-                      value={formikValues.values.Relationship}
-                      error={formikValues.errors.Relationship}
-                      onChange={formikValues.handleChange}
-                      // onChange={(event) => handleInputChange(index, event)}
-                    />
-                    <TextInput
-                      type="text"
-                      name="ContactRegion"
-                      label="Contact Person Region"
-                      placeholder="enter contact person region"
-                      // value={field.value}
-                      value={formikValues.values.ContactRegion}
-                      error={formikValues.errors.ContactRegion}
-                      onChange={formikValues.handleChange}
-                      // onChange={(event) => handleInputChange(index, event)}
-                    />
-                    <TextInput
-                      type="text"
-                      name="ContactWoreda"
-                      label="Contact Person Wereda"
-                      placeholder="enter contact person wereda"
-                      // value={field.value}
-                      value={formikValues.values.ContactWoreda}
-                      error={formikValues.errors.ContactWoreda}
-                      onChange={formikValues.handleChange}
-                      // onChange={(event) => handleInputChange(index, event)}
-                    />
-                    <TextInput
-                      type="number"
-                      name="ContactKebele"
-                      label="Contact Person Kebele"
-                      placeholder="enter contact person kebele"
-                      // value={field.value}
-                      value={formikValues.values.ContactKebele}
-                      error={formikValues.errors.ContactKebele}
-                      onChange={formikValues.handleChange}
-                      // onChange={(event) => handleInputChange(index, event)}
-                    />
-                    <TextInput
-                      type="text"
-                      name="ContactHouseNo"
-                      label="Contact Person House Number"
-                      placeholder="enter contact person house number"
-                      // value={field.value}
-                      value={formikValues.values.ContactHouseNo}
-                      error={formikValues.errors.ContactHouseNo}
-                      onChange={formikValues.handleChange}
-                      // onChange={(event) => handleInputChange(index, event)}
-                    />
-                    <TextInput
-                      type="text"
-                      name="ContactPhoneNo"
-                      label="Contact Person Phone Number"
-                      placeholder="enter contact person phone number"
-                      // value={field.value}
-                      value={formikValues.values.ContactPhoneNo}
-                      error={formikValues.errors.ContactPhoneNo}
-                      onChange={formikValues.handleChange}
-                      // onChange={(event) => handleInputChange(index, event)}
-                    />
-                  </Box>
-                  <button
-                    onClick={() => handleDeleteField(index)}
-                    className="btn btn-outline-danger btn-small m-1 float-end p-1"
-                  >
-                    Delete contact person
-                  </button>
-                </div>
-              ))}
+              {formikValues.values.ContactPersons.map(
+                (contactPerson, index) => (
+                  <div key={index}>
+                    <Box
+                      display="grid"
+                      gap="30px"
+                      gridTemplateColumns="repeat(2, minmax(0, 1fr))"
+                      sx={{
+                        "& > div": {
+                          gridColumn: isNonMobile ? undefined : "span 4",
+                        },
+                      }}
+                    >
+                      {/* Contact Person TextInput Fields */}
+                      <TextInput
+                        type="text"
+                        name={`ContactPersons[${index}].ContactPersonName`}
+                        label="Contact Person Name"
+                        placeholder="Enter contact person name"
+                        value={
+                          formikValues.values.ContactPersons[index]
+                            .ContactPersonName
+                        }
+                        error={
+                          formikValues.errors.ContactPersons?.[index]
+                            ?.ContactPersonName
+                        }
+                        onChange={formikValues.handleChange}
+                      />
+                      <TextInput
+                        type="text"
+                        name={`ContactPersons[${index}].Relationship`}
+                        label="Relationship"
+                        placeholder="Enter relationship"
+                        value={
+                          formikValues.values.ContactPersons[index].Relationship
+                        }
+                        error={
+                          formikValues.errors.ContactPersons?.[index]
+                            ?.Relationship
+                        }
+                        onChange={formikValues.handleChange}
+                      />
+                      <TextInput
+                        type="text"
+                        name={`ContactPersons[${index}].ContactRegion`}
+                        label="Contact Person Region"
+                        placeholder="Enter contact person region"
+                        value={
+                          formikValues.values.ContactPersons[index]
+                            .ContactRegion
+                        }
+                        error={
+                          formikValues.errors.ContactPersons?.[index]
+                            ?.ContactRegion
+                        }
+                        onChange={formikValues.handleChange}
+                      />
+                      <TextInput
+                        type="text"
+                        name={`ContactPersons[${index}].ContactWoreda`}
+                        label="Contact Person Woreda"
+                        placeholder="Enter contact person wereda"
+                        value={
+                          formikValues.values.ContactPersons[index]
+                            .ContactWoreda
+                        }
+                        error={
+                          formikValues.errors.ContactPersons?.[index]
+                            ?.ContactWoreda
+                        }
+                        onChange={formikValues.handleChange}
+                      />
+                      <TextInput
+                        type="number"
+                        name={`ContactPersons[${index}].ContactKebele`}
+                        label="Contact Person Kebele"
+                        placeholder="Enter contact person kebele"
+                        value={
+                          formikValues.values.ContactPersons[index]
+                            .ContactKebele
+                        }
+                        error={
+                          formikValues.errors.ContactPersons?.[index]
+                            ?.ContactKebele
+                        }
+                        onChange={formikValues.handleChange}
+                      />
+                      <TextInput
+                        type="text"
+                        name={`ContactPersons[${index}].ContactHouseNo`}
+                        label="Contact Person House Number"
+                        placeholder="Enter contact person house number"
+                        value={
+                          formikValues.values.ContactPersons[index]
+                            .ContactHouseNo
+                        }
+                        error={
+                          formikValues.errors.ContactPersons?.[index]
+                            ?.ContactHouseNo
+                        }
+                        onChange={formikValues.handleChange}
+                      />
+                      <TextInput
+                        type="text"
+                        name={`ContactPersons[${index}].ContactPhoneNo`}
+                        label="Contact Person Phone Number"
+                        placeholder="Enter contact person phone number"
+                        value={
+                          formikValues.values.ContactPersons[index]
+                            .ContactPhoneNo
+                        }
+                        error={
+                          formikValues.errors.ContactPersons?.[index]
+                            ?.ContactPhoneNo
+                        }
+                        onChange={formikValues.handleChange}
+                      />
+                    </Box>
+                    {/* Delete Button for Contact Person */}
+                  </div>
+                )
+              )}
+              {/* Add Contact Person Button */}
               <button
                 onClick={handleAddField}
                 className="btn btn-outline-info btn-small m-1 float-end p-1"
@@ -517,39 +511,41 @@ function EmployeeBasic() {
                   {" "}
                   Children information:{" "}
                 </p>
-                {inputFields.map((field, index) => (
-                  <div key={field.id}>
+                {formikValues.values.ChildInformations.map((child, index) => (
+                  <div key={index}>
+                    {/* Child TextInput Fields */}
                     <TextInput
                       type="text"
-                      name="Name"
+                      name={`ChildInformations[${index}].ChildName`}
                       label="Child Name"
-                      placeholder="enter child name"
-                      // value={field.value}
-                      value={formikValues.values.Name}
-                      error={formikValues.errors.Name}
+                      placeholder="Enter child name"
+                      value={
+                        formikValues.values.ChildInformations[index].ChildName
+                      }
+                      error={
+                        formikValues.errors.ChildInformations?.[index]
+                          ?.ChildName
+                      }
                       onChange={formikValues.handleChange}
-                      // onChange={(event) => handleInputChange(index, event)}
                     />
                     <TextInput
                       type="date"
-                      name="DateOfBirth"
+                      name={`ChildInformations[${index}].DateOfBirth`}
                       label="Child Birth Date"
-                      placeholder="enter child birth date"
-                      // value={field.value}
-                      value={formikValues.values.DateOfBirth}
-                      error={formikValues.errors.DateOfBirth}
+                      placeholder="Enter child birth date"
+                      value={
+                        formikValues.values.ChildInformations[index].DateOfBirth
+                      }
+                      error={
+                        formikValues.errors.ChildInformations?.[index]
+                          ?.DateOfBirth
+                      }
                       onChange={formikValues.handleChange}
-                      // onChange={(event) => handleInputChange(index, event)}
                     />
-
-                    <button
-                      onClick={() => handleDeleteField(index)}
-                      className="btn btn-outline-danger btn-small m-1 float-end p-1"
-                    >
-                      Delete child
-                    </button>
+                    {/* Delete Button for Child */}
                   </div>
                 ))}
+                {/* Add Child Button */}
                 <button
                   onClick={handleAddField}
                   className="btn btn-outline-info btn-small m-1 float-end p-1"
@@ -562,38 +558,31 @@ function EmployeeBasic() {
               <p className="fs-4 text-dark text-center">
                 Employee Education Information
               </p>
-              {inputFields.map((field, index) => (
-                <div key={field.id}>
-                  <Box
-                    display="grid"
-                    gap="30px"
-                    gridTemplateColumns="repeat(2, minmax(0, 1fr))"
-                    sx={{
-                      "& > div": {
-                        gridColumn: isNonMobile ? undefined : "span 4",
-                      },
-                    }}
-                  >
-                    <TextInput
-                      type="text"
-                      name="Institute"
-                      label="Institute"
-                      placeholder="enter the Institute"
-                      // value={field.value}
-                      value={formikValues.values.Institute}
-                      error={formikValues.errors.Institute}
-                      // onChange={(event) => handleInputChange(index, event)}
-                      onChange={formikValues.handleChange}
-                    />
-                  </Box>
-                  <button
-                    onClick={() => handleDeleteField(index)}
-                    className="btn btn-outline-danger btn-small m-1 float-end p-1"
-                  >
-                    Delete education
-                  </button>
+              {formikValues.values.Educations.map((education, index) => (
+                <div key={index}>
+                  {/* Education TextInput Fields */}
+                  <TextInput
+                    type="text"
+                    name={`Educations[${index}].Degree`}
+                    label="Degree"
+                    placeholder="Enter degree"
+                    value={formikValues.values.Educations[index].Degree}
+                    error={formikValues.errors.Educations?.[index]?.Degree}
+                    onChange={formikValues.handleChange}
+                  />
+                  <TextInput
+                    type="text"
+                    name={`Educations[${index}].Institute`}
+                    label="Institute"
+                    placeholder="Enter institute"
+                    value={formikValues.values.Educations[index].Institute}
+                    error={formikValues.errors.Educations?.[index]?.Institute}
+                    onChange={formikValues.handleChange}
+                  />
+                  {/* Delete Button for Education */}
                 </div>
               ))}
+              {/* Add Education Button */}
               <button
                 onClick={handleAddField}
                 className="btn btn-outline-info btn-small m-1 float-end p-1"
@@ -605,58 +594,66 @@ function EmployeeBasic() {
               <p className="fs-4 text-dark text-center">
                 Employee Experience Information
               </p>
-              {inputFields.map((field, index) => (
-                <div key={field.id}>
-                  <Box
-                    display="grid"
-                    gap="30px"
-                    gridTemplateColumns="repeat(2, minmax(0, 1fr))"
-                    sx={{
-                      "& > div": {
-                        gridColumn: isNonMobile ? undefined : "span 4",
-                      },
-                    }}
-                  >
-                    <TextInput
-                      type="text"
-                      name="CompanyName"
-                      label="Company Name"
-                      placeholder="enter the name of the company"
-                      // value={field.value}
-                      value={formikValues.values.CompanyName}
-                      error={formikValues.errors.CompanyName}
-                      onChange={formikValues.handleChange}
-                    />
-                    <TextInput
-                      type="date"
-                      name="ExperienceStartDate"
-                      label="Start Date"
-                      placeholder="enter the start date in that company"
-                      // value={field.value}
-                      value={formikValues.values.ExperienceStartDate}
-                      error={formikValues.errors.ExperienceStartDate}
-                      onChange={formikValues.handleChange}
-                    />
-
-                    <TextInput
-                      type="date"
-                      name="ExperienceEndDate"
-                      label="End Date"
-                      placeholder="enter the end date in that company"
-                      // value={field.value}
-                      value={formikValues.values.ExperienceEndDate}
-                      error={formikValues.errors.ExperienceEndDate}
-                      onChange={formikValues.handleChange}
-                    />
-                  </Box>
-                  <button
-                    onClick={() => handleDeleteField(index)}
-                    className="btn btn-outline-danger btn-small m-1 float-end p-1"
-                  >
-                    Delete experience
-                  </button>
+              {formikValues.values.Experiences.map((experience, index) => (
+                <div key={index}>
+                  {/* Experience TextInput Fields */}
+                  <TextInput
+                    type="text"
+                    name={`Experiences[${index}].CompanyName`}
+                    label="Company Name"
+                    placeholder="Enter company name"
+                    value={formikValues.values.Experiences[index].CompanyName}
+                    error={
+                      formikValues.errors.Experiences?.[index]?.CompanyName
+                    }
+                    onChange={formikValues.handleChange}
+                  />
+                  <TextInput
+                    type="text"
+                    name={`Experiences[${index}].ExperiencePosition`}
+                    label="Position"
+                    placeholder="Enter position"
+                    value={
+                      formikValues.values.Experiences[index].ExperiencePosition
+                    }
+                    error={
+                      formikValues.errors.Experiences?.[index]
+                        ?.ExperiencePosition
+                    }
+                    onChange={formikValues.handleChange}
+                  />
+                  <TextInput
+                    type="date"
+                    name={`Experiences[${index}].ExperienceStartDate`}
+                    label="Start Date"
+                    placeholder="Enter start date"
+                    value={
+                      formikValues.values.Experiences[index].ExperienceStartDate
+                    }
+                    error={
+                      formikValues.errors.Experiences?.[index]
+                        ?.ExperienceStartDate
+                    }
+                    onChange={formikValues.handleChange}
+                  />
+                  <TextInput
+                    type="date"
+                    name={`Experiences[${index}].ExperienceEndDate`}
+                    label="End Date"
+                    placeholder="Enter end date"
+                    value={
+                      formikValues.values.Experiences[index].ExperienceEndDate
+                    }
+                    error={
+                      formikValues.errors.Experiences?.[index]
+                        ?.ExperienceEndDate
+                    }
+                    onChange={formikValues.handleChange}
+                  />
+                  {/* Delete Button for Experience */}
                 </div>
               ))}
+              {/* Add Experience Button */}
               <button
                 onClick={handleAddField}
                 className="btn btn-outline-info btn-small m-1 float-end p-1"
