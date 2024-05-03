@@ -26,7 +26,7 @@ function AdminRouter() {
               <div className="app">
                   <Sidebar isAdminSidebar={isAdminSidebar} />
                 <main className="content">
-                  <Topbar setIsAdminSidebar={setIsAdminSidebar} />
+                  {/* <Topbar setIsAdminSidebar={setIsAdminSidebar} /> */}
                   <Routes>
                   <Route path="/adminDashboard" element={<AdminDashboard />} />
                   <Route path="/team" element={<Team />} />

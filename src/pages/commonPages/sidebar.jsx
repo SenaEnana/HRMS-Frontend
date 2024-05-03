@@ -49,7 +49,7 @@ const Sidebar = () => {
       onClick: () => navigate("/employeeList"),
     },
     {
-      label: "Employee Role",
+      label: "Control Account",
       value: "employeeRole",
       onClick: () => navigate("/team"),
     },

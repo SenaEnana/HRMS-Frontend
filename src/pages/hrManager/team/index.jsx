@@ -11,19 +11,18 @@ const Team = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const columns = [
+    { className: "bg-secondary" },
     { field: "id", headerName: "ID" },
     {
-      field: "name",
-      headerName: "Name",
+      field: "fname",
+      headerName: "First Name",
       flex: 1,
       cellClassName: "name-column--cell",
     },
     {
-      field: "age",
-      headerName: "Age",
-      type: "number",
-      headerAlign: "left",
-      align: "left",
+      field: "lname",
+      headerName: "Last Name",
+      flex: 1,
     },
     {
       field: "phone",
@@ -36,8 +35,13 @@ const Team = () => {
       flex: 1,
     },
     {
-      field: "accessLevel",
-      headerName: "Access Level",
+      field: "gender",
+      headerName: "Gender",
+      flex: 1,
+    },
+    {
+      field: "manageAccount",
+      headerName: "Manage Account",
       flex: 1,
       renderCell: ({ row: { access } }) => {
         return (
@@ -46,22 +50,11 @@ const Team = () => {
             m="0 auto"
             p="5px"
             display="flex"
+            className="bg-light"
             justifyContent="center"
-            backgroundColor={
-              access === "admin"
-                ? colors.greenAccent[600]
-                : access === "manager"
-                ? colors.greenAccent[700]
-                : colors.greenAccent[700]
-            }
             borderRadius="4px"
           >
-            {access === "admin" && <AdminPanelSettingsOutlinedIcon />}
-            {access === "manager" && <SecurityOutlinedIcon />}
-            {access === "user" && <LockOpenOutlinedIcon />}
-            <Typography color={colors.grey[100]} sx={{ ml: "5px" }}>
-              {access}
-            </Typography>
+            <Typography sx={{ ml: "5px" }}>{access}</Typography>
           </Box>
         );
       },
@@ -70,7 +63,7 @@ const Team = () => {
 
   return (
     <Box m="20px">
-      <Header title="TEAM" subtitle="Managing the Team Members" />
+      <Header title="TEAM" subtitle="Managing Employee Account" />
       <Box
         m="40px 0 0 0"
         height="75vh"
@@ -100,7 +93,12 @@ const Team = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataTeam} columns={columns} />
+        <DataGrid
+          checkboxSelection
+          rows={mockDataTeam}
+          columns={columns}
+          className="text-dark"
+        />
       </Box>
     </Box>
   );
