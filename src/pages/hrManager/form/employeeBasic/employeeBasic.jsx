@@ -582,7 +582,7 @@ function EmployeeBasic() {
                   error={formikValues.errors.Salary}
                   onChange={formikValues.handleChange}
                 />
-                {GradeId.map((grade, gradeName) => (
+                
                   <DropDown
                     type="number"
                     label="Grade"
@@ -594,8 +594,8 @@ function EmployeeBasic() {
                       formikValues.setFieldValue("GradeId", parsedValue);
                     }}
                   />
-                ))}
-                {PositionId.map((position, name) => (
+                
+                
                   <DropDown
                     type="number"
                     label="PositionId"
@@ -608,8 +608,8 @@ function EmployeeBasic() {
                       formikValues.setFieldValue("PositionId", parsedValue);
                     }}
                   />
-                ))}
-                {BranchId.map((branch, name) => (
+                
+                
                   <DropDown
                     type="number"
                     label="BranchId"
@@ -622,8 +622,8 @@ function EmployeeBasic() {
                       formikValues.setFieldValue("BranchId", parsedValue);
                     }}
                   />
-                ))}
-                {DepartmentId.map((department, name) => (
+                
+                
                   <DropDown
                     type="number"
                     label="DepartmentId"
@@ -636,8 +636,8 @@ function EmployeeBasic() {
                       formikValues.setFieldValue("DepartmentId", parsedValue);
                     }}
                   />
-                ))}
-                {DegreeId.map((degree, name) => (
+                
+                
                   <DropDown
                     type="number"
                     label="DegreeId"
@@ -650,7 +650,7 @@ function EmployeeBasic() {
                       formikValues.setFieldValue("DegreeId", parsedValue);
                     }}
                   />
-                ))}
+                
               </Box>
               <div className="m-3">
                 <input
