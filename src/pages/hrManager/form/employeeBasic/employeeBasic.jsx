@@ -148,7 +148,7 @@ function EmployeeBasic() {
             LastName: "",
             Email: "",
             Gender: "",
-            Roles:"",
+            Roles: "",
             MotherName: "",
             Region: "",
             Kebele: "",
@@ -359,7 +359,6 @@ function EmployeeBasic() {
                   <div key={index}>
                     <Box
                       display="grid"
-                 
                       gridTemplateColumns="repeat(2, minmax(0, 1fr))"
                       sx={{
                         "& > div": {
@@ -532,44 +531,43 @@ function EmployeeBasic() {
                 </button>
               </div>
               <p className=" pr-64 mb-3 font-bold text-xl -mt-2 fs-4 text-dark text-center">
-                  {" "}
-                  Children information:{" "}
-                </p>
-                {formikValues.values.ChildInformations.map((child, index) => (
-                  <div key={index}>
-                    {/* Child TextInput Fields */}
-                    <TextInput
-                      type="text"
-                      name={`ChildInformations[${index}].ChildName`}
-                      label="Child Name"
-                      placeholder="Enter child name"
-                      value={
-                        formikValues.values.ChildInformations[index].ChildName
-                      }
-                      error={
-                        formikValues.errors.ChildInformations?.[index]
-                          ?.ChildName
-                      }
-                      onChange={formikValues.handleChange}
-                    />
-                    <TextInput
-                      type="date"
-                      name={`ChildInformations[${index}].DateOfBirth`}
-                      label="Child Birth Date"
-                      placeholder="Enter child birth date"
-                      value={
-                        formikValues.values.ChildInformations[index].DateOfBirth
-                      }
-                      error={
-                        formikValues.errors.ChildInformations?.[index]
-                          ?.DateOfBirth
-                      }
-                      onChange={formikValues.handleChange}
-                    />
-                    {/* Delete Button for Child */}
-                  </div>
-                ))}
-                 {/* Add Education Button */}
+                {" "}
+                Children information:{" "}
+              </p>
+              {formikValues.values.ChildInformations.map((child, index) => (
+                <div key={index}>
+                  {/* Child TextInput Fields */}
+                  <TextInput
+                    type="text"
+                    name={`ChildInformations[${index}].ChildName`}
+                    label="Child Name"
+                    placeholder="Enter child name"
+                    value={
+                      formikValues.values.ChildInformations[index].ChildName
+                    }
+                    error={
+                      formikValues.errors.ChildInformations?.[index]?.ChildName
+                    }
+                    onChange={formikValues.handleChange}
+                  />
+                  <TextInput
+                    type="date"
+                    name={`ChildInformations[${index}].DateOfBirth`}
+                    label="Child Birth Date"
+                    placeholder="Enter child birth date"
+                    value={
+                      formikValues.values.ChildInformations[index].DateOfBirth
+                    }
+                    error={
+                      formikValues.errors.ChildInformations?.[index]
+                        ?.DateOfBirth
+                    }
+                    onChange={formikValues.handleChange}
+                  />
+                  {/* Delete Button for Child */}
+                </div>
+              ))}
+              {/* Add Education Button */}
               <button
                 onClick={handleAddField}
                 className="btn btn-outline-info btn-small m-1 float-end p-1"
