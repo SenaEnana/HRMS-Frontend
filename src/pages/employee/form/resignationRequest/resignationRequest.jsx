@@ -30,9 +30,27 @@ function ResignationRequest() {
     };
     fetchData();
   }, []);
-  function handleSubmit() {
-    navigate("/employeeDashboard");
-  }
+  const handleSubmit = async (values) => {
+    try {
+      const response = await fetch(
+        "https://localhost:7140/Resignation/RequestResignation",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
+      if (response.ok) {
+        navigate("/employeeDashboard");
+      } else {
+        console.error("Failed to submit resignation request");
+      }
+    } catch (error) {
+      console.error("Error submitting resignation request:", error.message);
+    }
+  };
 
   return (
     <>
@@ -51,11 +69,8 @@ function ResignationRequest() {
             Recommendation: "",
             Comment: "",
           }}
-          onSubmit={() => {
-            console.log("successful");
-            handleSubmit();
-          }}
-          validationSchema={resignationValidation}
+          onSubmit={handleSubmit} // Correct placement of onSubmit prop
+  validationSchema={resignationValidation}
         >
           {(formikValues) => (
             <form className="form-group rounded border col-5 pe-3 mt-5 bg-light">
@@ -83,25 +98,29 @@ function ResignationRequest() {
                 onChange={formikValues.handleChange}
               />
               <DropDown
-                label="Position"
-                name="PositionId"
-                options={PositionId}
-                value={formikValues.values.PositionId}
-                error={formikValues.errors.PositionId}
-                onChange={(selectedOption) => {
-                  formikValues.setFieldValue("PositionId", selectedOption);
-                }}
-              />
-              <DropDown
-                label="Department"
-                name="DepartmentId"
-                options={DepartmentId}
-                value={formikValues.values.DepartmentId}
-                error={formikValues.errors.DepartmentId}
-                onChange={(selectedOption) => {
-                  formikValues.setFieldValue("DepartmentId", selectedOption);
-                }}
-              />
+                    type="number"
+                    label="PositionId"
+                    name="PositionId"
+                    options={PositionId}
+                    value={formikValues.values.PositionId}
+                    error={formikValues.errors.PositionId}
+                    onChange={(selectedOption) => {
+                      const parsedValue = parseInt(selectedOption, 10);
+                      formikValues.setFieldValue("PositionId", parsedValue);
+                    }}
+                  />
+                       <DropDown
+                    type="number"
+                    label="DepartmentId"
+                    name="DepartmentId"
+                    options={DepartmentId}
+                    value={formikValues.values.DepartmentId}
+                    error={formikValues.errors.DepartmentId}
+                    onChange={(selectedOption) => {
+                      const parsedValue = parseInt(selectedOption, 10);
+                      formikValues.setFieldValue("DepartmentId", parsedValue);
+                    }}
+                  />
               <TextInput
                 type="date"
                 name="EmployeeHireDate"
