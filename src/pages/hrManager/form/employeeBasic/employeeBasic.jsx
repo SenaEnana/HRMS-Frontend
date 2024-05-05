@@ -1,12 +1,11 @@
 import { Box } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Formik } from "formik";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TextInput from "../../../../components/textInput";
 import DropDown from "../../../../components/DropDown";
 import { useNavigate } from "react-router-dom";
 import { employeeBasValidation } from "./schema";
-import { useEffect } from "react";
 import RadioButton from "../../../../components/radioButton";
 
 function EmployeeBasic() {
@@ -14,7 +13,6 @@ function EmployeeBasic() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
   const [inputFields, setInputFields] = useState([{ value: "" }]);
-
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
   const [BranchId, setBranchId] = useState([{ name: "", id: "" }]);
   const [DepartmentId, setDepartmentId] = useState([{ name: "", id: "" }]);
@@ -23,7 +21,6 @@ function EmployeeBasic() {
 
   const [Gender, setGender] = useState("female");
   const [MaritalStatus, setMaritalStatus] = useState("single");
-
   const handleGenderChange = (value) => setGender(value);
   const handleMaritalStatusChange = (value) => setMaritalStatus(value);
 
@@ -31,7 +28,6 @@ function EmployeeBasic() {
     { value: "female", label: "Female" },
     { value: "male", label: "Male" },
   ];
-
   const maritalStatusOptions = [
     { value: "single", label: "Single" },
     { value: "married", label: "Married" },
@@ -144,7 +140,7 @@ function EmployeeBasic() {
   };
   return (
     <div className="row justify-content-center">
-      <Box m="20px">
+      <Box className="m-2">
         <Formik
           initialValues={{
             Emp_Id: "",
@@ -152,6 +148,7 @@ function EmployeeBasic() {
             LastName: "",
             Email: "",
             Gender: "",
+            Roles:"",
             MotherName: "",
             Region: "",
             Kebele: "",
@@ -224,7 +221,6 @@ function EmployeeBasic() {
               </div>
               <Box
                 display="grid"
-                gap="20px"
                 gridTemplateColumns="repeat(2, minmax(0, 1fr))"
                 sx={{
                   "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
@@ -275,8 +271,6 @@ function EmployeeBasic() {
                       formikValues.setFieldValue("Gender", value)
                     }
                   />
-
-                  <p>Selected Gender: {formikValues.values.Gender}</p>
                 </div>
 
                 <TextInput
@@ -288,19 +282,6 @@ function EmployeeBasic() {
                   error={formikValues.errors.Roles}
                   onChange={formikValues.handleChange}
                 />
-
-                <div>
-                  <RadioButton
-                    title="Gender"
-                    options={genderOptions}
-                    value={formikValues.values.Gender}
-                    onChange={(value) =>
-                      formikValues.setFieldValue("Gender", value)
-                    }
-                  />
-
-                  <p>Selected Gender: {formikValues.values.Gender}</p>
-                </div>
                 <TextInput
                   type="text"
                   name="MotherName"
@@ -364,10 +345,9 @@ function EmployeeBasic() {
                       formikValues.setFieldValue("MaritalStatus", value)
                     }
                   />
-
-                  <p>
+                  {/* <p>
                     Selected Marital Status: {formikValues.values.MaritalStatus}
-                  </p>
+                  </p> */}
                 </div>
               </Box>
 
@@ -379,7 +359,7 @@ function EmployeeBasic() {
                   <div key={index}>
                     <Box
                       display="grid"
-                      gap="30px"
+                 
                       gridTemplateColumns="repeat(2, minmax(0, 1fr))"
                       sx={{
                         "& > div": {
@@ -551,34 +531,45 @@ function EmployeeBasic() {
                   Add child
                 </button>
               </div>
-              <p className="fs-4 text-dark text-center">
-                Employee Education Information
-              </p>
-              {formikValues.values.Educations.map((education, index) => (
-                <div key={index}>
-                  {/* Education TextInput Fields */}
-                  <TextInput
-                    type="text"
-                    name={`Educations[${index}].Degree`}
-                    label="Degree"
-                    placeholder="Enter degree"
-                    value={formikValues.values.Educations[index].Degree}
-                    error={formikValues.errors.Educations?.[index]?.Degree}
-                    onChange={formikValues.handleChange}
-                  />
-                  <TextInput
-                    type="text"
-                    name={`Educations[${index}].Institute`}
-                    label="Institute"
-                    placeholder="Enter institute"
-                    value={formikValues.values.Educations[index].Institute}
-                    error={formikValues.errors.Educations?.[index]?.Institute}
-                    onChange={formikValues.handleChange}
-                  />
-                  {/* Delete Button for Education */}
-                </div>
-              ))}
-              {/* Add Education Button */}
+              <p className=" pr-64 mb-3 font-bold text-xl -mt-2 fs-4 text-dark text-center">
+                  {" "}
+                  Children information:{" "}
+                </p>
+                {formikValues.values.ChildInformations.map((child, index) => (
+                  <div key={index}>
+                    {/* Child TextInput Fields */}
+                    <TextInput
+                      type="text"
+                      name={`ChildInformations[${index}].ChildName`}
+                      label="Child Name"
+                      placeholder="Enter child name"
+                      value={
+                        formikValues.values.ChildInformations[index].ChildName
+                      }
+                      error={
+                        formikValues.errors.ChildInformations?.[index]
+                          ?.ChildName
+                      }
+                      onChange={formikValues.handleChange}
+                    />
+                    <TextInput
+                      type="date"
+                      name={`ChildInformations[${index}].DateOfBirth`}
+                      label="Child Birth Date"
+                      placeholder="Enter child birth date"
+                      value={
+                        formikValues.values.ChildInformations[index].DateOfBirth
+                      }
+                      error={
+                        formikValues.errors.ChildInformations?.[index]
+                          ?.DateOfBirth
+                      }
+                      onChange={formikValues.handleChange}
+                    />
+                    {/* Delete Button for Child */}
+                  </div>
+                ))}
+                 {/* Add Education Button */}
               <button
                 onClick={handleAddField}
                 className="btn btn-outline-info btn-small m-1 float-end p-1"
@@ -662,7 +653,6 @@ function EmployeeBasic() {
               </p>
               <Box
                 display="grid"
-                gap="20px"
                 gridTemplateColumns="repeat(2, minmax(0, 1fr))"
                 sx={{
                   "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
@@ -742,7 +732,6 @@ function EmployeeBasic() {
                   type="button"
                   value="submit"
                   onClick={formikValues.handleSubmit}
-                  // onSubmit={formikValues.handleSubmit}
                 />
               </div>
             </form>

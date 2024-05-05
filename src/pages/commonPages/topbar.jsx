@@ -37,32 +37,32 @@ const Topbar = () => {
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
       {/* SEARCH BAR */}
-      <Box className="d-flex rounded m-2" backgroundColor={colors.primary[400]}>
+      <Box className="d-flex rounded m-1" backgroundColor={colors.primary[400]}>
         <InputBase
-          className="ps-2 fs-6 d-flex text-dark"
+          className="ps-2 fs-6 m-1 text-dark"
+          placeholder="type employee id"
+          value={input}
+          onChange={(e) => handleChange(e.target.value)}
+        />
+          <InputBase
+          className="ps-2 fs-6 m-1 text-dark"
           placeholder="type name"
           value={input}
           onChange={(e) => handleChange(e.target.value)}
         />
-        <IconButton type="button" className="btn p-1 text-dark">
-          <SearchIcon className="text-info" />
-        </IconButton>
-      </Box>
-      <Box className="d-flex rounded m-2" backgroundColor={colors.primary[400]}>
-        <InputBase
-          className="ps-2 fs-6 d-flex text-dark"
-          placeholder="type department"
-        />{" "}
-        <IconButton type="button" className="btn p-1 text-dark">
-          <SearchIcon className="text-info" />
-        </IconButton>
-      </Box>
-      <Box className="d-flex rounded m-2" backgroundColor={colors.primary[400]}>
-        <InputBase
-          className="ps-2 fs-6 d-flex text-dark"
+          <InputBase
+          className="ps-2 fs-6 m-1 text-dark"
           placeholder="type branch"
+          value={input}
+          onChange={(e) => handleChange(e.target.value)}
         />
-        <IconButton type="button" className="btn p-1 text-dark">
+          <InputBase
+          className="ps-2 fs-6 m-1 text-dark"
+          placeholder="type department"
+          value={input}
+          onChange={(e) => handleChange(e.target.value)}
+        />
+        <IconButton type="button" className="btn p-1">
           <SearchIcon className="text-info" />
         </IconButton>
       </Box>

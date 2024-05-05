@@ -50,18 +50,18 @@ const EmployeeList = () => {
         </tr>
         <tbody>
           {data.map((employee) => (
-            <tr key={employee.Id}>
+            <tr key={employee.emp_Id}>
               {Object.values(employee).map((item, index) => (
                 <td key={index}>{item}</td>
               ))}
               <td>
-                <NavLink to={"/updateEmployeeBasic/" + employee.id}>
+                <NavLink to={"/updateEmployeeBasic/" + employee.emp_Id}>
                   <button className="btn btn-outline-info btn-sm" type="button">
                     Detail
                   </button>
                 </NavLink>
                 <button
-                  onClick={() => console.log(employee.Id)}
+                  onClick={() => deleteOperation(employee.emp_Id)}
                   className="btn btn-outline-danger ms-1 btn-sm"
                   type="button"
                 >

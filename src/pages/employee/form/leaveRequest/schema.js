@@ -1,15 +1,9 @@
 import * as Yup from "yup";
 
 export const leaveValidation = Yup.object().shape({
-    date:Yup.date().required("this field is required"),
-    name:Yup.string().required("this field is required"),
-    idNo:Yup.number().required("this field is required"),
-    department:Yup.string().required("this field is required"),
-    branch:Yup.string().required("this field is required"),
-    jobTitle:Yup.string().required("this field is required"),
-    leaveRequested:Yup.number().required("this field is required"),
-    leaveType:Yup.string().required("this field is required"),
-    placeDuringLeave:Yup.string().required("this field is required"),
-    phoneNumber:Yup.number().required("this field is required"),
-    email:Yup.string().email().required("this field is required"),
+    Emp_Id:Yup.string().required("this field is required"),
+    StartDate:Yup.date().required("this field is required"),
+    EndDate:Yup.date().required("this field is required"),
+    LeaveTypeId:Yup.string().required("this field is required"),
+    Reason:Yup.string().required("this field is required"),
 });

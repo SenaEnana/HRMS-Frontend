@@ -1,15 +1,15 @@
 import * as Yup from "yup";
 
 export const resignationValidation = Yup.object().shape({
-    name:Yup.string().required("this field is required"),
-    department:Yup.string().required("this field is required"),
-    hireDate:Yup.date().required("this field is required"),
-    position:Yup.string().required("this field is required"),
-    dutyStation:Yup.string().required("this field is required"),
-    separationDate:Yup.date().required("this field is required"),
-    reason:Yup.string().required("this field is required"),
-    satisfaction:Yup.string().required("this field is required"),
-    workRelationship:Yup.string().required("this field is required"),
-    recommendation:Yup.string().required("this field is required"),
-    comments:Yup.string().required("this field is required"),
+    Emp_Id:Yup.string().required("this field is required"),
+    FullName:Yup.string().required("this field is required"),
+    DepartmentId:Yup.string().required("this field is required"),
+    PositionId:Yup.string().required("this field is required"),
+    EmployeeHireDate:Yup.date().required("this field is required"),
+    SeparationDate:Yup.date().required("this field is required"),
+    Reason:Yup.string().required("this field is required"),
+    Satisfaction:Yup.string().required("this field is required"),
+    EmployeeRelationship:Yup.string().required("this field is required"),
+    Recommendation:Yup.string().required("this field is required"),
+    Comment:Yup.string().required("this field is required"),
 });

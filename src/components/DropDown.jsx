@@ -1,6 +1,16 @@
 import React from "react";
+import { tokens } from "../theme";
+import {Box, useTheme} from "@mui/material";
 const DropDown = ({ options, onChange, label, name ,type}) => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  
   return (
+    <Box
+    sx={{
+      background: `${colors.blueAccent[900]}`,
+    }}
+  >
     <div className="col-12 row">
       <div>
         <label className="text-dark float-start mt-1 p-1 fs-5" htmlFor="option">
@@ -23,6 +33,7 @@ const DropDown = ({ options, onChange, label, name ,type}) => {
         </select>
       </div>
     </div>
+    </Box>
   );
 };
 
