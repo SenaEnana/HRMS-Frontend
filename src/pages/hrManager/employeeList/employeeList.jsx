@@ -9,20 +9,26 @@ const EmployeeList = () => {
     getData();
   }, []);
 
-  async function deleteOperation(id) {
+  async function deleteOperation(Id) {
     let result = await fetch(
-      "https://localhost:7140/Employee/DeleteEmployee/" + id,
+      `https://localhost:7140/Employee/DeleteEmployee/${Id}`,
       {
         method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
       }
     );
-    console.log(result);
     result = await result.json();
     getData();
   }
+  
+
   async function getData() {
     let result = await fetch("https://localhost:7140/Employee/ListEmployees");
     result = await result.json();
+    console.log(result);
     setData(result);
   }
 
@@ -39,37 +45,44 @@ const EmployeeList = () => {
         </NavLink>
       </div>
       <table className="table table-hover text-dark w-100 fs-6">
-        <tr>
-          <th>Employee Id</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Gender</th>
-          <th>Mother Name</th>
-          <th>Phone Number</th>
-          <th></th>
-        </tr>
+        <thead>
+          <tr>
+            <th>Employee Id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Gender</th>
+            <th>Mother Name</th>
+            <th>Phone Number</th>
+            <th></th>
+          </tr>
+        </thead>
         <tbody>
-          {data.map((employee) => (
-            <tr key={employee.Id}>
-              {Object.values(employee).map((item, index) => (
-                <td key={index}>{item}</td>
-              ))}
-              <td>
-                <NavLink to={"/updateEmployeeBasic/" + employee.id}>
-                  <button className="btn btn-outline-info btn-sm" type="button">
-                    Detail
+          {data.map((employee) => {
+            const employeeId = employee.id; 
+            return (
+              <tr key={employeeId}>
+                {Object.values(employee).map((item, index) => (
+                  <td key={index}>{item}</td>
+                ))}
+                <td>
+                  <NavLink to={"/updateEmployeeBasic/" + employeeId}>
+                    <button className="btn btn-outline-info btn-sm" type="button">
+                      Detail
+                    </button>
+                  </NavLink>
+                  <button
+                    onClick={() => 
+                      deleteOperation(employeeId)
+                    }
+                    className="btn btn-outline-danger ms-1 btn-sm"
+                    type="button"
+                  >
+                    Remove
                   </button>
-                </NavLink>
-                <button
-                  onClick={() => console.log(employee.Id)}
-                  className="btn btn-outline-danger ms-1 btn-sm"
-                  type="button"
-                >
-                  Remove
-                </button>
-              </td>
-            </tr>
-          ))}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </>
