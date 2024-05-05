@@ -20,6 +20,59 @@ const HrDashboard = () => {
   const [approvedLeaveCount, setApprovedLeaveCount] = useState("Loading...");
   const [rejectedLeaveCount, setRejectedLeaveCount] = useState("Loading...");
   const [activeEmployeeCount, setActiveEmployeeCount] = useState("Loading...");
+  const [employeeData, setEmployeeData] = useState([]);
+  const [pendingLeaveRequests, setPendingLeaveRequests] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [inactiveEmployeeCount, setInactiveEmployeeCount] = useState(0);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+  useEffect(() => {
+    const fetchPendingLeaveRequests = async () => {
+      try {
+        const response = await fetch("https://localhost:7140/api/Leave/GetPendingLeaveRequests");
+        const data = await response.json();
+        setPendingLeaveRequests(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching pending leave requests:", error.message);
+        setLoading(false);
+      }
+    };
+
+    fetchPendingLeaveRequests();
+  }, []);
+  useEffect(() => {
+    const fetchInactiveEmployeeCount = async () => {
+      try {
+        const response = await fetch("https://localhost:7140/DashBoard/InactiveCount");
+        const data = await response.json();
+        setInactiveEmployeeCount(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching inactive employee count:", error.message);
+        setLoading(false);
+      }
+    };
+    fetchInactiveEmployeeCount();
+  }, []);
+  useEffect(() => {
+    const fetchEmployeeData = async () => {
+      try {
+        const response = await fetch("https://localhost:7140/DashBoard/TotalEmployeesPerBranch");
+        const data = await response.json();
+        console.log(data)
+        setEmployeeData(data);
+      } catch (error) {
+        console.error("Error fetching employee data:", error.message);
+      }
+    };
+    fetchEmployeeData();
+  }, []);
 
   useEffect(() => {
     const fetchApprovedLeaveCount = async () => {
@@ -47,7 +100,7 @@ const HrDashboard = () => {
     };
     fetchRejectedLeaveCount();
   }, []);
-    useEffect(() => {
+  useEffect(() => {
     const fetchActiveEmployeeCount = async () => {
       try {
         const response = await fetch("https://localhost:7140/DashBoard/ActiveCount");
@@ -123,7 +176,7 @@ const HrDashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title={activeEmployeeCount.toLocaleString()} 
+            title={activeEmployeeCount.toLocaleString()}
             subtitle="Active Employees"
             icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
           />
@@ -136,15 +189,15 @@ const HrDashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
-       {approvedLeaveCount === "Loading..." ? (
-  <p>Fetching approved leave count...</p>
-) : (
-  <StatBox
-    title={approvedLeaveCount.toLocaleString()} 
-    subtitle="Approved Leave Requests"
-    icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
-  />
-)}
+          {approvedLeaveCount === "Loading..." ? (
+            <p>Fetching approved leave count...</p>
+          ) : (
+            <StatBox
+              title={approvedLeaveCount.toLocaleString()}
+              subtitle="Approved Leave Requests"
+              icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
+            />
+          )}
 
         </Box>
         <Box
@@ -156,7 +209,7 @@ const HrDashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title={rejectedLeaveCount.toLocaleString()} 
+            title={rejectedLeaveCount.toLocaleString()}
             subtitle="Rejected Leave Request"
             icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
           />
@@ -177,9 +230,7 @@ const HrDashboard = () => {
             icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
-        {/* ROW 2 */}
         <Box
-          className="rounded"
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
           display="flex"
@@ -195,7 +246,6 @@ const HrDashboard = () => {
           />
         </Box>
         <Box
-          className="rounded"
           gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -213,14 +263,14 @@ const HrDashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Employee Information Generated
+                Total Employees Per Branch
               </Typography>
               <Typography
                 className="text-dark fw-bold"
                 variant="h3"
                 fontWeight="bold"
               >
-                $59,342.32
+
               </Typography>
             </Box>
             <Box>
@@ -230,7 +280,7 @@ const HrDashboard = () => {
             </Box>
           </Box>
           <Box height="250px" m="-20px 0 0 0">
-            <LineChart isDashboard={true} />
+            <LineChart employeeData={employeeData} isDashboard={true} />
           </Box>
         </Box>
         <Box
@@ -241,47 +291,55 @@ const HrDashboard = () => {
         >
           <Box
             display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            borderBottom={`4px solid ${colors.primary[500]}`}
-            colors={colors.grey[100]}
-            p="15px"
+            flexDirection="column" // Ensure each leave request is displayed vertically
           >
-            <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-              Recent Transactions
-            </Typography>
-          </Box>
-          {mockTransactions.map((transaction, i) => (
-            <Box
-              key={`${transaction.txId}-${i}`}
+            <Box // This Box contains the header for the pending leave requests section
               display="flex"
               justifyContent="space-between"
               alignItems="center"
               borderBottom={`4px solid ${colors.primary[500]}`}
+              colors={colors.grey[100]}
               p="15px"
             >
-              <Box>
-                <Typography
-                  className="text-dark fw-bold"
-                  variant="h5"
-                  fontWeight="600"
-                >
-                  {transaction.txId}
-                </Typography>
-                <Typography color={colors.grey[100]}>
-                  {transaction.user}
-                </Typography>
-              </Box>
-              <Box color={colors.grey[100]}>{transaction.date}</Box>
-              <Box
-                className="text-dark fs-5 fw-bold"
-                p="5px 10px"
-                borderRadius="4px"
-              >
-                ${transaction.cost}
-              </Box>
+              <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+                Pending Leave Requests
+              </Typography>
             </Box>
-          ))}
+
+            {/* Display each leave request in a separate Box */}
+            {!loading && pendingLeaveRequests.length > 0 && (
+              pendingLeaveRequests.map((leaveRequest, index) => (
+                <Box
+                  key={index}
+                  borderBottom={`4px solid ${colors.primary[500]}`}
+                  p="15px"
+                >
+                  {/* Render leave request details here */}
+                  <Typography
+                    className="text-dark fw-bold"
+                    variant="h5"
+                    fontWeight="600"
+                  >
+                    {leaveRequest.Id}
+                  </Typography>
+                  <Typography color={colors.grey[100]}>
+                    Reason: {leaveRequest.reason}
+                  </Typography>
+                  <Typography color={colors.grey[100]}>
+                    Start Date: {formatDate(leaveRequest.startDate)}<br/>
+                    End Date: {formatDate(leaveRequest.endDate)}
+                  </Typography>
+                  <Typography
+                    className="text-dark fs-5 fw-bold"
+                    p="5px 10px"
+                    borderRadius="4px"
+                  >
+                    
+                  </Typography>
+                </Box>
+              ))
+            )}
+          </Box>
         </Box>
 
         {/* ROW 3 */}
@@ -320,10 +378,10 @@ const HrDashboard = () => {
             fontWeight="600"
             sx={{ padding: "30px 30px 0 30px" }}
           >
-            Sales Quantity
+            Employee Status
           </Typography>
           <Box height="250px" mt="-20px">
-            <BarChart isDashboard={true} />
+          <BarChart activeEmployeeCount={activeEmployeeCount} inactiveEmployeeCount={inactiveEmployeeCount} />
           </Box>
         </Box>
       </Box>
