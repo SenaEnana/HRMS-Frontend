@@ -24,10 +24,12 @@ function App() {
        )}  */}
        {/* <Auth/> */}
       {/* <AdminRouter/> 
-     */}
-      <EmployeeRouter/>
-  <HrRouter/>  
-    </div>       
+      <EmployeeRouter/>*/}
+     
+  {/* <HrRouter/>  */}
+  <EmployeeRouter/> 
+  {/* <Auth/> */}
+    </div>        
   );
 }
 

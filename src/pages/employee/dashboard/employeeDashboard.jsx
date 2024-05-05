@@ -8,10 +8,38 @@ import StatBox from "../../../components/statBox";
 import { mockTransactions } from "../../../data/mockData";
 import { tokens } from "../../../theme";
 import ProgressCircle from "../../../components/progressCircle";
+import React, { useState, useEffect } from "react";
 
 const EmployeeDashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [leaveBalances, setLeaveBalances] = useState([]);
+
+  useEffect(() => {
+    const fetchLeaveBalance = async () => {
+      try {
+        // Retrieve the token from local storage
+        const token = localStorage.getItem('token');
+        console.log(token)
+        if (!token) {
+          console.error('Token not found in local storage');
+          return;
+        }
+  
+        const response = await fetch("https://localhost:7140/api/Leave/GetMyLeaveBalance", {
+          headers: {
+            'Authorization': `Bearer ${token}`, // Include the token in the headers
+          },
+        });
+        const data = await response.json();
+        setLeaveBalances(data);
+      } catch (error) {
+        console.error("Error fetching leave balance:", error.message);
+      }
+    };
+    fetchLeaveBalance();
+  }, []);
+  
 
   return (
     <Box m="20px">
@@ -31,20 +59,22 @@ const EmployeeDashboard = () => {
         gap="20px"
       >
         {/* ROW 1 */}
+        {leaveBalances.map((balance, index) => (
         <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
+        key={index}
+        className="rounded"
+        backgroundColor={colors.primary[400]}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
         >
           <StatBox
-            title="1200 days"
-            subtitle="Available leave balance"
+            title={`${balance.RemainingLeaveBalance} days`}
+            subtitle={`${balance.LeaveTypeName} leave balance`}
             icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
+          ))}
         <Box
           className="rounded"
           gridColumn="span 3"
