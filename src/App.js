@@ -24,8 +24,8 @@ function App() {
        )}  */}
        {/* <Auth/> */}
       {/* <AdminRouter/> 
-      <EmployeeRouter/>*/}
-     
+     */}
+      <EmployeeRouter/>
   <HrRouter/>  
     </div>       
   );
