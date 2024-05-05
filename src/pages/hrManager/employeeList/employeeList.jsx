@@ -16,14 +16,13 @@ const EmployeeList = () => {
         method: "DELETE",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       }
     );
     result = await result.json();
     getData();
   }
-  
 
   async function getData() {
     let result = await fetch("https://localhost:7140/Employee/ListEmployees");
@@ -58,7 +57,7 @@ const EmployeeList = () => {
         </thead>
         <tbody>
           {data.map((employee) => {
-            const employeeId = employee.id; 
+            const employeeId = employee.id;
             return (
               <tr key={employeeId}>
                 {Object.values(employee).map((item, index) => (
@@ -66,14 +65,15 @@ const EmployeeList = () => {
                 ))}
                 <td>
                   <NavLink to={"/updateEmployeeBasic/" + employeeId}>
-                    <button className="btn btn-outline-info btn-sm" type="button">
+                    <button
+                      className="btn btn-outline-info btn-sm"
+                      type="button"
+                    >
                       Detail
                     </button>
                   </NavLink>
                   <button
-                    onClick={() => 
-                      deleteOperation(employeeId)
-                    }
+                    onClick={() => deleteOperation(employeeId)}
                     className="btn btn-outline-danger ms-1 btn-sm"
                     type="button"
                   >
