@@ -13,11 +13,53 @@ import BarChart from "../../../components/barChart";
 import StatBox from "../../../components/statBox";
 import ProgressCircle from "../../../components/progressCircle";
 import { tokens } from "../../../theme";
-
+import React, { useState, useEffect } from "react";
 const HrDashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [approvedLeaveCount, setApprovedLeaveCount] = useState("Loading...");
+  const [rejectedLeaveCount, setRejectedLeaveCount] = useState("Loading...");
+  const [activeEmployeeCount, setActiveEmployeeCount] = useState("Loading...");
 
+  useEffect(() => {
+    const fetchApprovedLeaveCount = async () => {
+      try {
+        const response = await fetch("https://localhost:7140/DashBoard/CountApprovedLeaveRequests");
+        const data = await response.json();
+        setApprovedLeaveCount(data);
+        console.log(data)
+      } catch (error) {
+        console.error("Error fetching approved leave count:", error.message);
+      }
+    };
+    fetchApprovedLeaveCount();
+  }, []);
+  useEffect(() => {
+    const fetchRejectedLeaveCount = async () => {
+      try {
+        const response = await fetch("https://localhost:7140/DashBoard/CountRejectedLeaveRequests");
+        const data = await response.json();
+        setRejectedLeaveCount(data);
+        console.log(data)
+      } catch (error) {
+        console.error("Error fetching rejected leave count:", error.message);
+      }
+    };
+    fetchRejectedLeaveCount();
+  }, []);
+    useEffect(() => {
+    const fetchActiveEmployeeCount = async () => {
+      try {
+        const response = await fetch("https://localhost:7140/DashBoard/ActiveCount");
+        const data = await response.json();
+        setActiveEmployeeCount(data);
+        console.log(data)
+      } catch (error) {
+        console.error("Error fetching available employee count:", error.message);
+      }
+    };
+    fetchActiveEmployeeCount();
+  }, []);
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -81,10 +123,8 @@ const HrDashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="32,441"
-            subtitle="Available Employees"
-            progress="0.30"
-            increase="+5%"
+            title={activeEmployeeCount.toLocaleString()} 
+            subtitle="Active Employees"
             icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
@@ -96,13 +136,16 @@ const HrDashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <StatBox
-            title="1,325,134"
-            subtitle="Approved Leave Request"
-            progress="0.80"
-            increase="+43%"
-            icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
-          />
+       {approvedLeaveCount === "Loading..." ? (
+  <p>Fetching approved leave count...</p>
+) : (
+  <StatBox
+    title={approvedLeaveCount.toLocaleString()} 
+    subtitle="Approved Leave Requests"
+    icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
+  />
+)}
+
         </Box>
         <Box
           className="rounded"
@@ -113,10 +156,8 @@ const HrDashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="1,325,134"
+            title={rejectedLeaveCount.toLocaleString()} 
             subtitle="Rejected Leave Request"
-            progress="0.80"
-            increase="+43%"
             icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>

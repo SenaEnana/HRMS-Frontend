@@ -147,6 +147,7 @@ function EmployeeBasic() {
             FirstName: "",
             LastName: "",
             Email: "",
+            Roles: "",
             Gender: "",
             Roles: "",
             MotherName: "",
@@ -674,6 +675,75 @@ function EmployeeBasic() {
                   error={formikValues.errors.Salary}
                   onChange={formikValues.handleChange}
                 />
+                
+                  <DropDown
+                    type="number"
+                    label="Grade"
+                    name="GradeId"
+                    options={GradeId}
+                    error={formikValues.errors.GradeId}
+                    onChange={(selectedOption) => {
+                      const parsedValue = parseInt(selectedOption, 10);
+                      formikValues.setFieldValue("GradeId", parsedValue);
+                    }}
+                  />
+                
+                
+                  <DropDown
+                    type="number"
+                    label="PositionId"
+                    name="PositionId"
+                    options={PositionId}
+                    value={formikValues.values.PositionId}
+                    error={formikValues.errors.PositionId}
+                    onChange={(selectedOption) => {
+                      const parsedValue = parseInt(selectedOption, 10);
+                      formikValues.setFieldValue("PositionId", parsedValue);
+                    }}
+                  />
+                
+                
+                  <DropDown
+                    type="number"
+                    label="BranchId"
+                    name="BranchId"
+                    options={BranchId}
+                    value={formikValues.values.BranchId}
+                    error={formikValues.errors.BranchId}
+                    onChange={(selectedOption) => {
+                      const parsedValue = parseInt(selectedOption, 10);
+                      formikValues.setFieldValue("BranchId", parsedValue);
+                    }}
+                  />
+                
+                
+                  <DropDown
+                    type="number"
+                    label="DepartmentId"
+                    name="DepartmentId"
+                    options={DepartmentId}
+                    value={formikValues.values.DepartmentId}
+                    error={formikValues.errors.DepartmentId}
+                    onChange={(selectedOption) => {
+                      const parsedValue = parseInt(selectedOption, 10);
+                      formikValues.setFieldValue("DepartmentId", parsedValue);
+                    }}
+                  />
+                
+                
+                  <DropDown
+                    type="number"
+                    label="DegreeId"
+                    name="DegreeId"
+                    options={DegreeId}
+                    value={formikValues.values.DegreeId}
+                    error={formikValues.errors.DegreeId}
+                    onChange={(selectedOption) => {
+                      const parsedValue = parseInt(selectedOption, 10);
+                      formikValues.setFieldValue("DegreeId", parsedValue);
+                    }}
+                  />
+                
                 <DropDown
                   label="Grade"
                   name="GradeId"
