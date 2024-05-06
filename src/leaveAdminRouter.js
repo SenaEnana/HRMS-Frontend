@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
-import Form from "./pages/leaveAdmin/form/leaveRequestList";
+import LeaveRequestList from "./pages/leaveAdmin/form/leaveRequestList";
 import Bar from "./pages/leaveAdmin/bar";
 import Pie from "./pages/leaveAdmin/pie";
 import Line from "./pages/leaveAdmin/line";
@@ -24,7 +24,7 @@ function LeaveAdminRouter(){
               <Topbar setIsLeaveSidebar={setIsLeaveSidebar} />
               <Routes>
               <Route path="/" element={<LeaveAdminDashboard />} />
-              <Route path="/form" element={<Form />} />
+              <Route path="/leaveRequestList" element={<LeaveRequestList/>} />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />
               <Route path="/line" element={<Line />} />

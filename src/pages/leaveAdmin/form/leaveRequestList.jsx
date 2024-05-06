@@ -6,7 +6,7 @@ function LeaveRequestList(){
   useEffect(() => {
     getData();
   }, []);
-//Below are not correct link for approved and rejected leave request and also the list of the request
+//Below are not correct link for approved and rejected leave request and also the list of the requests
   async function approveOperation(Id) {
     let result = await fetch(
       `https://localhost:7140/Employee/ApproveRequest/${Id}`,
