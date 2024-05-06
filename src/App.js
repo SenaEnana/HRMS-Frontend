@@ -1,6 +1,7 @@
 import AdminRouter from "./adminRouter";
 import EmployeeRouter from "./employeeRouter";
 import HrRouter from "./hrRouter";
+import LeaveAdminRouter from "./leaveAdminRouter";
 import Auth from "./pages/auth/auth";
 import Login from "./pages/auth/login";
 import { useState } from "react";
@@ -26,8 +27,9 @@ function App() {
       {/* <AdminRouter/> 
       <EmployeeRouter/>*/}
      
-  {/* <HrRouter/>  */}
-  <EmployeeRouter/> 
+  {/* <HrRouter/>  
+  <EmployeeRouter/> */}
+  <LeaveAdminRouter/>
   {/* <Auth/> */}
     </div>        
   );
