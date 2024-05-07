@@ -4,11 +4,10 @@ import TextInput from "../../components/textInput";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const username = JSON.parse(localStorage.getItem("username"));
-  const [isAuthenticated, setIsAuthenticated] = useState(false);  
 
   async function handleLogin(values) {
     try {
@@ -24,10 +23,11 @@ const Login = () => {
         throw new Error('Failed to login');
       }
 
-      const token = await response.text(); // Assuming your API returns the token directly
+      const token = await response.text();
       localStorage.setItem("token", token);
-      navigate("/employeeDashboard");
+      navigate("/hrDashboard");
       setIsAuthenticated(true);
+
     } catch (error) {
       setError('Invalid username or password');
       console.error(error);

@@ -9,30 +9,29 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const username = JSON.parse(localStorage.getItem("username"));
-  const [isAuthenticated, setIsAuthenticated] = useState(true);                                                                          
+  const [isAuthenticated, setIsAuthenticated] = useState(false);                                                                          
   
   return (
 <div> 
-{/* <Routes>
-<Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-</Routes> */}
-    {isAuthenticated ?(
-          <EmployeeRouter />):(
-            <Auth setIsAuthenticated={setIsAuthenticated} />
-          )
+
+{isAuthenticated ? <EmployeeRouter/>  :  
+      <Routes>
+        <Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+        </Routes>
         }
-          {/* <AdminRouter/>
-          <HrRouter/>  */}
+
   {/* <HrRouter/>  
   <AdminRouter/> 
    <LeaveAdminRouter/> 
      <EmployeeRouter/>
-  <Auth/>*/}
-
+  <Auth/>
+<HrRouter/>*/} 
     </div>        
   );
 }
+
 export default App;
+
 // function App() {
 //   const role = JSON.parse(localStorage.getItem("role"));
 //   return (

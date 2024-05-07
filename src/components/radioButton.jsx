@@ -12,11 +12,6 @@ const RadioButton = ({ title, options, value, onChange }) => {
   };
 
   return (
-    <Box
-    sx={{
-      background: `${colors.blueAccent[900]}`,
-    }}
-  >
     <div className="col-12 row">
       <div>
         <h4 className="text-dark float-start m-1 p-1 fs-5">{title}</h4>
@@ -35,7 +30,6 @@ const RadioButton = ({ title, options, value, onChange }) => {
         </label>
       ))}
     </div>
-    </Box>
   );
 };
 
