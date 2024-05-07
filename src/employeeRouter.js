@@ -12,13 +12,15 @@ import ResignationRequest from "./pages/employee/form/resignationRequest/resigna
 
 function EmployeeRouter() {
     const [theme, colorMode] = useMode();
-     const [isSidebar, setIsSidebar] = useState(true);
+const isAuth = true;
     return(
             <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
               <CssBaseline />
-              <div className="app">
-                  <Sidebar isSidebar={isSidebar} />
+              <div>
+                {isAuth &&
+                  <Sidebar/>
+                  }
                 <main className="content">
                   <Routes>
                   <Route path="/employeeDashboard" element={<EmployeeDashboard/>} />

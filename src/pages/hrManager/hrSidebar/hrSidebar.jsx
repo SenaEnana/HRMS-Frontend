@@ -3,12 +3,15 @@ import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
 import TimeToLeaveOutlinedIcon from "@mui/icons-material/TimeToLeaveOutlined";
+import AddCommentOutlinedIcon from "@mui/icons-material/AddCommentOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import DropdownMenu from "../../../components/dropdownMenu";
 import { tokens } from "../../../theme";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -30,12 +33,30 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const LeaveSidebar = () => {
+const HrSidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const navigate = useNavigate();
+
+  const items = [
+    {
+      label: "Add New Employee",
+      value: "addNewEmployee",
+      onClick: () => navigate("/employeeBasic"),
+    },
+    {
+      label: "Employee List",
+      value: "employeeList",
+      onClick: () => navigate("/employeeList"),
+    },
+    {
+      label: "Control Account",
+      value: "employeeRole",
+      onClick: () => navigate("/team"),
+    },
+  ];
 
   return (
     <Box
@@ -115,14 +136,50 @@ const LeaveSidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+            <Typography
+              variant="h6"
+              className="text-dark fw-bold"
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Pages
+            </Typography>
             <Item
-              className=""
-              title="Leave Admin Dashboard"
-              to="/"
-              icon={<HomeOutlinedIcon />}
+              title="Branch List"
+              to="/branchList"
+              icon={<TimeToLeaveOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />          
+            />
+            <Item
+              title="Grade List"
+              to="/gradeList"
+              icon={<TimeToLeaveOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Position List"
+              to="/positionList"
+              icon={<AddCommentOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Department List"
+              to="/departmentList"
+              icon={<FeedbackOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Degree List"
+              to="/degreeList"
+              icon={<FeedbackOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            {/* Hr Sidebar */}
             <Typography
               variant="h6"
               className="text-dark fw-bold"
@@ -131,20 +188,11 @@ const LeaveSidebar = () => {
               Data
             </Typography>
 
-             <Item
-              title="Leave Request List"
-              to="/leaveRequestList"
-              icon={<TimeToLeaveOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            
-            <Item
-              title="Leave Type List"
-              to="/leaveTypeList"
-              icon={<TimeToLeaveOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
+            <DropdownMenu
+              label="Manage Employee"
+              items={items}
+              icon={<PeopleOutlinedIcon />}
+              to="/employeeBasic"
             />
             <Typography
               variant="h6"
@@ -181,4 +229,4 @@ const LeaveSidebar = () => {
   );
 };
 
-export default LeaveSidebar;
+export default HrSidebar;

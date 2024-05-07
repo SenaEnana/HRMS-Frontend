@@ -5,51 +5,38 @@ import LeaveAdminRouter from "./leaveAdminRouter";
 import Auth from "./pages/auth/auth";
 import Login from "./pages/auth/login";
 import { useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   const username = JSON.parse(localStorage.getItem("username"));
-  const [isAuth, setAuth] = useState(false);
-  console.log(username);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);                                                                          
+  
   return (
-<div>   
-        {/* {isAuth ? (
-         <div className="col-12 overflow-none bg-white">
-          <AdminRouter/>
-          <EmployeeRouter/>
-          <HrRouter/> 
-      </div>
-       ) : (
-            <div className="col-12 ">
-               <Auth/>
-             </div>  
-       )}  */}
-       {/* <Auth/> */}
-      {/* <AdminRouter/> 
-      <EmployeeRouter/>*/}
-     
+<div> 
+{/* <Routes>
+<Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+</Routes> */}
+    {isAuthenticated ?(
+          <EmployeeRouter />):(
+            <Auth setIsAuthenticated={setIsAuthenticated} />
+          )
+        }
+          {/* <AdminRouter/>
+          <HrRouter/>  */}
   {/* <HrRouter/>  
-  <EmployeeRouter/> */}
-  <LeaveAdminRouter/>
-  {/* <Auth/> */}
+  <AdminRouter/> 
+   <LeaveAdminRouter/> 
+     <EmployeeRouter/>
+  <Auth/>*/}
+
     </div>        
   );
 }
-
 export default App;
-
-// import { useState } from "react";
-// import Sidebar from "./layouts/Sidebar";
-// import Router from "./router";
-// import NavBar from "./layouts/Navbar";
-// import FrontPageRouter from "./frontpagerouter";
-// import StudentSidebar from "./layouts/studentSidebar";
-
 // function App() {
-
 //   const role = JSON.parse(localStorage.getItem("role"));
 //   return (
-    // <div>
-        
+    // <div>   
     //    {isAuth ? (
     //     <div className="col-12 overflow-none bg-white">
     //     <NavBar/>
@@ -78,7 +65,4 @@ export default App;
     //         </div>  
     //   )} 
     // </div> 
-//   );
-// }
-// export default App;
   

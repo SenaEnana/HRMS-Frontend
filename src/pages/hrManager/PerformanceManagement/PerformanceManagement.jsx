@@ -1,6 +1,6 @@
 import { useState } from "react";
-import SideBar from "../../CommonPages/SideBar";
-import Dropdown from "../EIF/Dropdown/Dropdown";
+// import SideBar from "../../CommonPages/SideBar";
+// import Dropdown from "../EIF/Dropdown/Dropdown";
 import { Link } from "react-router-dom";
 
 const PerformanceManagement = () => {
@@ -38,14 +38,14 @@ const PerformanceManagement = () => {
     return (
         <div className="flex">
             <div className="h-screen">
-                <SideBar />
+                {/* <SideBar /> */}
             </div>
             <div className="w w-full h h-full bg bg-gray-200 rounded-3xl lg:ml-96 pl-6 mt-16 mr-16 sm:ml-36 min-[320px]:ml-32 min-[800px]:w-3/4 -mb-64  ">
                 <h1 className="text-2xl font-bold mt-5">Performance Evaluation</h1>
                 <div className="lg:flex mt-8">
                     <div >
                         <p>Dept. /Program area :</p>
-                        <Dropdown />
+                        {/* <Dropdown /> */}
                         <br />
                         <p>Name of the staff:</p>
                         <input type="text" required className="w lg:w-80 sm:w-60 md:w-60  pl-6 h h-12 rounded-2xl  ml-48 -mt-28" />
@@ -57,7 +57,7 @@ const PerformanceManagement = () => {
                     <div className="ml-16">
                         <div className="flex">
                             <p>Job title:</p>
-                            <p className="-ml-40 mt-6"> <Dropdown /></p>
+                            {/* <p className="-ml-40 mt-6"> <Dropdown /></p> */}
                         </div>  <br />
                         <div>
                             <p>Promotion:</p>

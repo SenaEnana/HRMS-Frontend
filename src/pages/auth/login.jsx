@@ -7,6 +7,8 @@ import { useState } from "react";
 const Login = () => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const username = JSON.parse(localStorage.getItem("username"));
+  const [isAuthenticated, setIsAuthenticated] = useState(false);  
 
   async function handleLogin(values) {
     try {
@@ -24,7 +26,8 @@ const Login = () => {
 
       const token = await response.text(); // Assuming your API returns the token directly
       localStorage.setItem("token", token);
-      navigate("/adminDashboard");
+      navigate("/employeeDashboard");
+      setIsAuthenticated(true);
     } catch (error) {
       setError('Invalid username or password');
       console.error(error);
@@ -40,7 +43,6 @@ const Login = () => {
             password: "",
           }}
           onSubmit={(values) => {
-            console.log("successful");
             handleLogin(values);
           }}
           validationSchema={signInValidation}
