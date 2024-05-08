@@ -5,9 +5,13 @@ import { resignationValidation } from "./schema";
 import { FormikTextField } from "formik-material-fields";
 import TextInput from "../../../../components/textInput";
 import DropDown from "../../../../components/DropDown";
+import {Box, useTheme} from "@mui/material";
+import { tokens } from "../../../../theme";
 
 function ResignationRequest() {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
   const [DepartmentId, setDepartmentId] = useState([{ name: "", id: "" }]);
 
@@ -73,7 +77,8 @@ function ResignationRequest() {
   validationSchema={resignationValidation}
         >
           {(formikValues) => (
-            <form className="form-group rounded border col-5 pe-3 mt-5 bg-light">
+
+            <form className="form-group rounded border col-5 pe-3 mt-5">
               <div className="mt-3">
                 <p className="fs-4 text-dark text-center">
                   Resignation Request Form

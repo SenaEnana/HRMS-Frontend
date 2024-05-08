@@ -13,8 +13,7 @@ import ProgressCircle from "../../../components/progressCircle";
 import { tokens } from "../../../theme";
 import React, { useState, useEffect } from "react";
 
-const AdminDashboard = () => {
-  
+const SupervisorDashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [approvedLeaveCount, setApprovedLeaveCount] = useState("Loading...");
@@ -389,4 +388,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default SupervisorDashboard;

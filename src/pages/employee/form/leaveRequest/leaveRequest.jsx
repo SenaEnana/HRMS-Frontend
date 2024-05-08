@@ -1,13 +1,25 @@
 import { useNavigate } from "react-router";
 import { Formik } from "formik";
+import {useState, useEffect} from 'react'
 import TextInput from "../../../../components/textInput";
 import { leaveValidation } from "./schema";
+import DropDown from "../../../../components/DropDown";
 
 function LeaveRequest() {
   const navigate = useNavigate();
   function handleSubmit() {
     navigate("/employeeDashboard");
   }
+  const [LeaveTypeId, setLeaveTypeId] = useState([{ name: "", id: "" }]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("https://localhost:7140/LeaveType/GetLeaveTypes");
+      const newData = await response.json();
+      setLeaveTypeId(newData);
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <div className="row justify-content-center">
@@ -39,6 +51,18 @@ function LeaveRequest() {
                 error={formikValues.errors.Emp_Id}
                 onChange={formikValues.handleChange}
               />
+               <DropDown
+                type="number"
+                label="Leave TypeI d"
+                name="LeaveTypeId"
+                options={LeaveTypeId}
+                value={formikValues.values.LeaveTypeId}
+                error={formikValues.errors.LeaveTypeId}
+                onChange={(selectedOption) => {
+                  const parsedValue = parseInt(selectedOption, 10);
+                  formikValues.setFieldValue("LeaveTypeId", parsedValue);
+                }}
+              />
               <TextInput
                 type="date"
                 name="StartDate"
@@ -48,7 +72,7 @@ function LeaveRequest() {
                 error={formikValues.errors.StartDate}
                 onChange={formikValues.handleChange}
               />
-                            <TextInput
+           <TextInput
                 type="date"
                 name="EndDate"
                 label="End Date"

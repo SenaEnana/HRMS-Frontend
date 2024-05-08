@@ -147,7 +147,6 @@ function EmployeeBasic() {
             FirstName: "",
             LastName: "",
             Email: "",
-            Roles: "",
             Gender: "",
             Roles: "",
             MotherName: "",

@@ -4,9 +4,10 @@ import TextInput from "../../components/textInput";
 import { useNavigate } from "react-router";
 import { useState } from "react";
 
-const Login = () => {
+const Login = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const username = JSON.parse(localStorage.getItem("username"));
 
   async function handleLogin(values) {
     try {
@@ -40,7 +41,6 @@ const Login = () => {
             password: "",
           }}
           onSubmit={(values) => {
-            console.log("successful");
             handleLogin(values);
           }}
           validationSchema={signInValidation}

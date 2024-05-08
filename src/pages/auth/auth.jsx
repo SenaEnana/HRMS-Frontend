@@ -1,13 +1,17 @@
 import { useState } from "react";
 import Login from "./login";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-function Auth({ setAuth }) {
-  const [loginStatus, setLoggedIn] = useState(true);
+function Auth() {
+  // const [loginStatus, setLoggedIn] = useState(true);
   return (
     <>
-      {loginStatus ? (
-        <Login setLoggedIn={setLoggedIn} setAuth={setAuth} />
-      ) : null}
+    <Routes>
+      <Route path="/" element={<Login/>}/>
+    </Routes>
+      {/* {loginStatus ? (
+        <Login />
+      ) : null} */}
     </>
   );
 }

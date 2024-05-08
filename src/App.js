@@ -1,6 +1,7 @@
 import AdminRouter from "./adminRouter";
 import EmployeeRouter from "./employeeRouter";
 import HrRouter from "./hrRouter";
+import LeaveAdminRouter from "./leaveAdminRouter";
 import Auth from "./pages/auth/auth";
 import Login from "./pages/auth/login";
 import { useState ,useEffect} from "react";
@@ -46,11 +47,9 @@ export default App;
 // import StudentSidebar from "./layouts/studentSidebar";
 
 // function App() {
-
 //   const role = JSON.parse(localStorage.getItem("role"));
 //   return (
-    // <div>
-        
+    // <div>   
     //    {isAuth ? (
     //     <div className="col-12 overflow-none bg-white">
     //     <NavBar/>
@@ -79,7 +78,4 @@ export default App;
     //         </div>  
     //   )} 
     // </div> 
-//   );
-// }
-// export default App;
   

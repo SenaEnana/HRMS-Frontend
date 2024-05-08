@@ -1,24 +1,25 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Calendar from "./pages/employee/calendar/calendar";
 import { ColorModeContext, useMode } from "./theme";
-import Sidebar from "./pages/commonPages/sidebar";
 import Complaint from "./pages/employee/form/complaint/complaint";
 import LeaveRequest from "./pages/employee/form/leaveRequest/leaveRequest";
 import EmployeeDashboard from "./pages/employee/dashboard/employeeDashboard";
 import SupervisorFeedback from "./pages/employee/form/supervisorFeedback";
 import ResignationRequest from "./pages/employee/form/resignationRequest/resignationRequest";
+import EmployeeSidebar from "./pages/employee/employeeSidebar/employeeSidebar";
 
 function EmployeeRouter() {
     const [theme, colorMode] = useMode();
-     const [isSidebar, setIsSidebar] = useState(true);
+const isAuth = true;
     return(
             <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
               <CssBaseline />
-              <div className="app">
-                  <Sidebar isSidebar={isSidebar} />
+              <div>
+                {isAuth &&
+                  <EmployeeSidebar/>
+                  }
                 <main className="content">
                   <Routes>
                   <Route path="/employeeDashboard" element={<EmployeeDashboard/>} />
