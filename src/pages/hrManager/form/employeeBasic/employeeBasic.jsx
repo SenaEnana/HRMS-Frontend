@@ -643,8 +643,7 @@ function EmployeeBasic() {
               >
                 Add experience
               </button>
-              {/* Below are the code for employee additional information and i 
-                have added some information maybe i will delete it later */}
+
               <p className="fs-4 text-dark text-center">
                 {" "}
                 Employee Additional information{" "}

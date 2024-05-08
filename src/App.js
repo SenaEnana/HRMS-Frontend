@@ -6,6 +6,7 @@ import Auth from "./pages/auth/auth";
 import Login from "./pages/auth/login";
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SupervisorRouter from "./supervisorRouter";
 
 function App() {
   const username = JSON.parse(localStorage.getItem("username"));
@@ -13,8 +14,8 @@ function App() {
   
   return (
 <div> 
-
-{isAuthenticated ? <EmployeeRouter/>  :  
+<SupervisorRouter/>
+{isAuthenticated ? <HrRouter/>   :  
       <Routes>
         <Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
         </Routes>

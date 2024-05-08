@@ -4,7 +4,6 @@ import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useState } from "react";
 
 function EmployeeInfo({ onNext, formikValues }) {
   const navigate = useNavigate();
@@ -16,7 +15,7 @@ function EmployeeInfo({ onNext, formikValues }) {
   ];
 
   function handleSubmit() {
-    navigate("/contactInformation");
+    navigate("/statusInformation");
   }
   return (
     <div className="row justify-content-center">
@@ -228,7 +227,7 @@ export default EmployeeInfo;
 //     />
 //     {/* Other fields... */}
 //     {/* Previous and Submit buttons */}
-//     <button onClick={onPrev}>Previous</button>
+    // <button onClick={onPrev}>Previous</button>
 //     <button onClick={onSubmit}>Submit</button>
 //   </div>
 // );

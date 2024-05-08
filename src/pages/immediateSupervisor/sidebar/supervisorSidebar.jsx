@@ -33,30 +33,12 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const HrSidebar = () => {
+const SupervisorSidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const navigate = useNavigate();
-
-  const items = [
-    {
-      label: "Add New Employee",
-      value: "addNewEmployee",
-      onClick: () => navigate("/employeeBasic"),
-    },
-    {
-      label: "Employee List",
-      value: "employeeList",
-      onClick: () => navigate("/employeeList"),
-    },
-    {
-      label: "Control Account",
-      value: "employeeRole",
-      onClick: () => navigate("/team"),
-    },
-  ];
 
   return (
     <Box
@@ -135,20 +117,7 @@ const HrSidebar = () => {
             </Box>
           )}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <Typography
-              variant="h6"
-              className="text-dark fw-bold"
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Data
-            </Typography>
 
-            <DropdownMenu
-              label="Manage Employee"
-              items={items}
-              icon={<PeopleOutlinedIcon />}
-              to="/employeeBasic"
-            />
             <Typography
               variant="h6"
               className="text-dark fw-bold"
@@ -157,37 +126,16 @@ const HrSidebar = () => {
               Pages
             </Typography>
             <Item
-              title="Branch List"
-              to="/branchList"
+              title="Complaint List"
+              to="/complaintList"
               icon={<TimeToLeaveOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Grade List"
-              to="/gradeList"
+              title="Send Feedback"
+              to="/sendFeedback"
               icon={<TimeToLeaveOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Position List"
-              to="/positionList"
-              icon={<AddCommentOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Department List"
-              to="/departmentList"
-              icon={<FeedbackOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Degree List"
-              to="/degreeList"
-              icon={<FeedbackOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -226,4 +174,4 @@ const HrSidebar = () => {
   );
 };
 
-export default HrSidebar;
+export default SupervisorSidebar;

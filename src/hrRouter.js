@@ -30,15 +30,17 @@ import DepartmentList from "./pages/hrManager/dropDownData/dropLists/departmentL
 
 function HrRouter() {
   const [theme, colorMode] = useMode();
-  const [isHrSidebar, setIsHrSidebar] = useState(true);
+  const isAuth = true;
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className="app">
-          <HrSidebar isHrSidebar={isHrSidebar} />
+        <div>
+          {/* <HrSidebar isHrSidebar={isHrSidebar} /> */}
+          {isAuth &&
+                  <HrSidebar/>
+                  }
           <main className="content">
-            {/* <Topbar setIsHrSidebar={setIsHrSidebar} /> */}
             <Routes>
               <Route path="/hrDashboard" element={<HrDashboard />} />
               <Route path="/team" element={<Team />} />
