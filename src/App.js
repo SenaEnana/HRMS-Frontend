@@ -24,7 +24,7 @@ function App() {
       console.error("Error:", error);
     }
   }, [navigate]); 
-
+ 
   return (
     <div>
       {isAuth ? (
