@@ -3,37 +3,40 @@ import EmployeeRouter from "./employeeRouter";
 import HrRouter from "./hrRouter";
 import Auth from "./pages/auth/auth";
 import Login from "./pages/auth/login";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
+import { useNavigate } from "react-router-dom"; 
 
 function App() {
-  const username = JSON.parse(localStorage.getItem("username"));
-  const [isAuth, setAuth] = useState(false);
-  console.log(username);
+  const [isAuth, setIsAuth] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    try {
+      const token = sessionStorage.getItem('token');
+      if (token && token.length > 0){
+        setIsAuth(true);
+      } else {
+        setIsAuth(false);
+        navigate("/login"); 
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }, [navigate]); 
+
   return (
-<div>   
-        {/* {isAuth ? (
-         <div className="col-12 overflow-none bg-white">
-          <AdminRouter/>
-          <EmployeeRouter/>
-          <HrRouter/> 
-      </div>
-       ) : (
-            <div className="col-12 ">
-               <Auth/>
-             </div>  
-       )}  */}
-       {/* <Auth/> */}
-      {/* <AdminRouter/> 
-      <EmployeeRouter/>*/}
-     
-  {/* <HrRouter/>  */}
-  <EmployeeRouter/> 
-  {/* <Auth/> */}
-    </div>        
+    <div>
+      {isAuth ? (
+        <EmployeeRouter /> 
+      ) : (
+        <Auth /> 
+      )}
+    </div>
   );
 }
 
 export default App;
+
 
 // import { useState } from "react";
 // import Sidebar from "./layouts/Sidebar";

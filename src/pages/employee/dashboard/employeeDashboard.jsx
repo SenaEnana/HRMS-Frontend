@@ -9,37 +9,73 @@ import { mockTransactions } from "../../../data/mockData";
 import { tokens } from "../../../theme";
 import ProgressCircle from "../../../components/progressCircle";
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
 
 const EmployeeDashboard = () => {
+  const [leaveBalances, setLeaveBalances] = useState([]);
+  const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [leaveBalances, setLeaveBalances] = useState([]);
 
   useEffect(() => {
-    const fetchLeaveBalance = async () => {
-      try {
-        // Retrieve the token from local storage
-        const token = localStorage.getItem('token');
-        console.log(token)
-        if (!token) {
-          console.error('Token not found in local storage');
-          return;
-        }
-  
-        const response = await fetch("https://localhost:7140/api/Leave/GetMyLeaveBalance", {
-          headers: {
-            'Authorization': `Bearer ${token}`, // Include the token in the headers
-          },
-        });
-        const data = await response.json();
-        setLeaveBalances(data);
-      } catch (error) {
-        console.error("Error fetching leave balance:", error.message);
-      }
-    };
     fetchLeaveBalance();
   }, []);
-  
+
+  async function fetchLeaveBalance() {
+    try {
+      const token = sessionStorage.getItem('token');
+      if (!token) {
+        console.error('Token not found in session storage');
+        navigate('/login');
+        return;
+      }
+
+      const isValid = isTokenValid(token);
+      if (!isValid) {
+        console.error('Invalid token');
+        navigate('/login');
+        return;
+      }
+
+      const userId = getUserIdFromToken(token);
+      console.log(userId);
+
+      const url = `https://localhost:7140/api/Leave/GetMyLeaveBalance?userId=${userId}`;
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch leave balance');
+      }
+
+      const data = await response.json();
+      console.log(data)
+      setLeaveBalances(data);
+    } catch (error) {
+      console.error("Error fetching leave balance:", error.message);
+    }
+  }
+
+  function isTokenValid(token) {
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      const expirationTime = decodedToken.exp * 1000;
+      const currentTime = Date.now();
+
+      return currentTime < expirationTime;
+    } catch (error) {
+      console.error('Error decoding or validating token:', error);
+      return false;
+    }
+  }
+
+  function getUserIdFromToken(token) {
+    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    return decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier']; // Assuming 'nameidentifier' is a claim in your token
+  }
 
   return (
     <Box m="20px">
@@ -60,21 +96,25 @@ const EmployeeDashboard = () => {
       >
         {/* ROW 1 */}
         {leaveBalances.map((balance, index) => (
-        <Box
-        key={index}
-        className="rounded"
-        backgroundColor={colors.primary[400]}
-        display="flex"
-        alignItems="center"
-        justifyContent="center"
-        >
-          <StatBox
-            title={`${balance.RemainingLeaveBalance} days`}
-            subtitle={`${balance.LeaveTypeName} leave balance`}
-            icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
-          />
-        </Box>
-          ))}
+          <Box
+            key={index}
+            className="rounded"
+            backgroundColor={colors.primary[400]}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+          >
+            <StatBox
+              title={<>
+                {balance.leaveTypeName}<br />
+                 Allowed Days: {balance.allowedDays}
+              </>}
+
+              subtitle={`${balance.remainingLeaveBalance} days remaining`} // Using remainingLeaveBalance
+              icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
+            />
+          </Box>
+        ))}
         <Box
           className="rounded"
           gridColumn="span 3"

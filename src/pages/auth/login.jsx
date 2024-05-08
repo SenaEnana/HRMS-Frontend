@@ -22,9 +22,9 @@ const Login = () => {
         throw new Error('Failed to login');
       }
 
-      const token = await response.text(); // Assuming your API returns the token directly
-      localStorage.setItem("token", token);
-      navigate("/adminDashboard");
+      const token = await response.text(); 
+      sessionStorage.setItem("token", token);
+      navigate("/employeeDashboard");
     } catch (error) {
       setError('Invalid username or password');
       console.error(error);
