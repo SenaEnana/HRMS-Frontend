@@ -23,11 +23,9 @@ const Login = ({ setIsAuthenticated }) => {
         throw new Error('Failed to login');
       }
 
-      const token = await response.text();
-      localStorage.setItem("token", token);
-      navigate("/hrDashboard");
-      setIsAuthenticated(true);
-
+      const token = await response.text(); 
+      sessionStorage.setItem("token", token);
+      navigate("/supervisorDashboard");
     } catch (error) {
       setError('Invalid username or password');
       console.error(error);

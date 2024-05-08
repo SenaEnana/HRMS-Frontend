@@ -1,37 +1,51 @@
 import AdminRouter from "./adminRouter";
 import EmployeeRouter from "./employeeRouter";
 import HrRouter from "./hrRouter";
+import SupervisorRouter from "./supervisorRouter";
 import LeaveAdminRouter from "./leaveAdminRouter";
 import Auth from "./pages/auth/auth";
 import Login from "./pages/auth/login";
-import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SupervisorRouter from "./supervisorRouter";
+import { useState ,useEffect} from "react";
+import { useNavigate } from "react-router-dom"; 
 
 function App() {
-  const username = JSON.parse(localStorage.getItem("username"));
-  const [isAuthenticated, setIsAuthenticated] = useState(false);                                                                          
-  
-  return (
-<div> 
-<SupervisorRouter/>
-{isAuthenticated ? <HrRouter/>   :  
-      <Routes>
-        <Route path="/" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-        </Routes>
-        }
+  const [isAuth, setIsAuth] = useState(false);
+  const navigate = useNavigate();
 
-  {/* <HrRouter/>  
-  <AdminRouter/> 
-   <LeaveAdminRouter/> 
-     <EmployeeRouter/>
-  <Auth/>
-<HrRouter/>*/} 
-    </div>        
+  useEffect(() => {
+    try {
+      const token = sessionStorage.getItem('token');
+      if (token && token.length > 0){
+        setIsAuth(true);
+      } else {
+        setIsAuth(false);
+        navigate("/login"); 
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }, [navigate]); 
+ 
+  return (
+    <div>
+      {isAuth ? (
+        <SupervisorRouter /> 
+      ) : (
+        <Auth /> 
+      )}
+    </div>
   );
 }
 
 export default App;
+
+
+// import { useState } from "react";
+// import Sidebar from "./layouts/Sidebar";
+// import Router from "./router";
+// import NavBar from "./layouts/Navbar";
+// import FrontPageRouter from "./frontpagerouter";
+// import StudentSidebar from "./layouts/studentSidebar";
 
 // function App() {
 //   const role = JSON.parse(localStorage.getItem("role"));
