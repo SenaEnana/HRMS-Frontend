@@ -1,6 +1,7 @@
 import AdminRouter from "./adminRouter";
 import EmployeeRouter from "./employeeRouter";
 import HrRouter from "./hrRouter";
+import SupervisorRouter from "./supervisorRouter";
 import LeaveAdminRouter from "./leaveAdminRouter";
 import Auth from "./pages/auth/auth";
 import Login from "./pages/auth/login";
@@ -28,7 +29,7 @@ function App() {
   return (
     <div>
       {isAuth ? (
-        <EmployeeRouter /> 
+        <SupervisorRouter /> 
       ) : (
         <Auth /> 
       )}
