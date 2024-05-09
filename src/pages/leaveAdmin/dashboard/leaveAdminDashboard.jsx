@@ -17,11 +17,10 @@ const LeaveAdminDashboard = () => {
   const colors = tokens(theme.palette.mode);
   const [approvedLeaveCount, setApprovedLeaveCount] = useState("Loading...");
   const [rejectedLeaveCount, setRejectedLeaveCount] = useState("Loading...");
-  const [activeEmployeeCount, setActiveEmployeeCount] = useState("Loading...");
-  const [employeeData, setEmployeeData] = useState([]);
-  const [pendingLeaveRequests, setPendingLeaveRequests] = useState([]);
+  const [pendingLeaveCount, setPendingLeaveCount] = useState("Loading...");
+  const [approvedLeaveRequests, setApprovedLeaveRequests] = useState([]);
+  const [allLeaveRequests, setAllLeaveRequests] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [inactiveEmployeeCount, setInactiveEmployeeCount] = useState(0);
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -30,11 +29,11 @@ const LeaveAdminDashboard = () => {
     return `${day}/${month}/${year}`;
   };
   useEffect(() => {
-    const fetchPendingLeaveRequests = async () => {
+    const fetchApprovedLeaveRequests = async () => {
       try {
-        const response = await fetch("https://localhost:7140/api/Leave/GetPendingLeaveRequests");
+        const response = await fetch("https://localhost:7140/api/Leave/GetApprovedLeaveRequests");
         const data = await response.json();
-        setPendingLeaveRequests(data);
+        setApprovedLeaveRequests(data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching pending leave requests:", error.message);
@@ -42,34 +41,22 @@ const LeaveAdminDashboard = () => {
       }
     };
 
-    fetchPendingLeaveRequests();
+    fetchApprovedLeaveRequests();
   }, []);
   useEffect(() => {
-    const fetchInactiveEmployeeCount = async () => {
+    const fetchAllLeaveRequests = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/InactiveCount");
+        const response = await fetch("https://localhost:7140/api/Leave/ListOfLeaveRequests");
         const data = await response.json();
-        setInactiveEmployeeCount(data);
+        setAllLeaveRequests(data);
         setLoading(false);
       } catch (error) {
-        console.error("Error fetching inactive employee count:", error.message);
+        console.error("Error fetching pending leave requests:", error.message);
         setLoading(false);
       }
     };
-    fetchInactiveEmployeeCount();
-  }, []);
-  useEffect(() => {
-    const fetchEmployeeData = async () => {
-      try {
-        const response = await fetch("https://localhost:7140/DashBoard/TotalEmployeesPerBranch");
-        const data = await response.json();
-        console.log(data)
-        setEmployeeData(data);
-      } catch (error) {
-        console.error("Error fetching employee data:", error.message);
-      }
-    };
-    fetchEmployeeData();
+
+    fetchAllLeaveRequests();
   }, []);
 
   useEffect(() => {
@@ -86,6 +73,19 @@ const LeaveAdminDashboard = () => {
     fetchApprovedLeaveCount();
   }, []);
   useEffect(() => {
+    const fetchPendingLeaveCount = async () => {
+      try {
+        const response = await fetch("https://localhost:7140/DashBoard/CountPendingLeaveRequests");
+        const data = await response.json();
+        setPendingLeaveCount(data);
+        console.log(data)
+      } catch (error) {
+        console.error("Error fetching approved leave count:", error.message);
+      }
+    };
+    fetchPendingLeaveCount();
+  }, []);
+  useEffect(() => {
     const fetchRejectedLeaveCount = async () => {
       try {
         const response = await fetch("https://localhost:7140/DashBoard/CountRejectedLeaveRequests");
@@ -98,19 +98,7 @@ const LeaveAdminDashboard = () => {
     };
     fetchRejectedLeaveCount();
   }, []);
-  useEffect(() => {
-    const fetchActiveEmployeeCount = async () => {
-      try {
-        const response = await fetch("https://localhost:7140/DashBoard/ActiveCount");
-        const data = await response.json();
-        setActiveEmployeeCount(data);
-        console.log(data)
-      } catch (error) {
-        console.error("Error fetching available employee count:", error.message);
-      }
-    };
-    fetchActiveEmployeeCount();
-  }, []);
+
   return (
     <Box m="20px">
       {/* HEADER */}
@@ -134,13 +122,16 @@ const LeaveAdminDashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <StatBox
-            title="12,361"
-            subtitle="Pending Leave Request"
-            progress="0.75"
-            increase="+14%"
-            icon={<SendIcon className="text-dark fs-3" />}
-          />
+          {pendingLeaveCount === "Loading..." ? (
+            <p>Fetching pending leave count...</p>
+          ) : (
+            <StatBox
+              title={pendingLeaveCount.toLocaleString()}
+              subtitle="Pending Leave Requests"
+              icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
+            />
+          )}
+
         </Box>
         <Box
           className="rounded"
@@ -150,27 +141,16 @@ const LeaveAdminDashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <StatBox
-            title="431,225"
-            subtitle="Send Resignation Request"
-            progress="0.50"
-            increase="+21%"
-            icon={<SendIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title={activeEmployeeCount.toLocaleString()}
-            subtitle="Active Employees"
-            icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
-          />
+          {rejectedLeaveCount === "Loading..." ? (
+            <p>Fetching rejected leave count...</p>
+          ) : (
+            <StatBox
+              title={rejectedLeaveCount.toLocaleString()}
+              subtitle="Rejected Leave Requests"
+              icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
+            />
+          )}
+
         </Box>
         <Box
           className="rounded"
@@ -192,89 +172,6 @@ const LeaveAdminDashboard = () => {
 
         </Box>
         <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title={rejectedLeaveCount.toLocaleString()}
-            subtitle="Rejected Leave Request"
-            icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="1,325,134"
-            subtitle="Approved Resignation Request"
-            progress="0.80"
-            increase="+43%"
-            icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="1,325,134"
-            subtitle="Rejected Resignation Request"
-            progress="0.80"
-            increase="+43%"
-            icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          gridColumn="span 8"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Box
-            mt="25px"
-            p="0 30px"
-            display="flex "
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Box>
-              <Typography
-                variant="h5"
-                fontWeight="600"
-                color={colors.grey[100]}
-              >
-                Total Employees Per Branch
-              </Typography>
-              <Typography
-                className="text-dark fw-bold"
-                variant="h3"
-                fontWeight="bold"
-              >
-
-              </Typography>
-            </Box>
-            <Box>
-              <IconButton>
-                <DownloadOutlinedIcon className="text-dark fs-3" />
-              </IconButton>
-            </Box>
-          </Box>
-          <Box height="250px" m="-20px 0 0 0">
-            <LineChart employeeData={employeeData} isDashboard={true} />
-          </Box>
-        </Box>
-        <Box
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -282,9 +179,9 @@ const LeaveAdminDashboard = () => {
         >
           <Box
             display="flex"
-            flexDirection="column" // Ensure each leave request is displayed vertically
+            flexDirection="column" 
           >
-            <Box // This Box contains the header for the pending leave requests section
+            <Box 
               display="flex"
               justifyContent="space-between"
               alignItems="center"
@@ -293,13 +190,13 @@ const LeaveAdminDashboard = () => {
               p="15px"
             >
               <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-                Pending Leave Requests
+                Approved Leave Requests
               </Typography>
             </Box>
 
             {/* Display each leave request in a separate Box */}
-            {!loading && pendingLeaveRequests.length > 0 && (
-              pendingLeaveRequests.map((leaveRequest, index) => (
+            {!loading && approvedLeaveRequests.length > 0 && (
+              approvedLeaveRequests.map((leaveRequest, index) => (
                 <Box
                   key={index}
                   borderBottom={`4px solid ${colors.primary[500]}`}
@@ -317,7 +214,7 @@ const LeaveAdminDashboard = () => {
                     Reason: {leaveRequest.reason}
                   </Typography>
                   <Typography color={colors.grey[100]}>
-                    Start Date: {formatDate(leaveRequest.startDate)}<br/>
+                    Start Date: {formatDate(leaveRequest.startDate)}<br />
                     End Date: {formatDate(leaveRequest.endDate)}
                   </Typography>
                   <Typography
@@ -325,7 +222,6 @@ const LeaveAdminDashboard = () => {
                     p="5px 10px"
                     borderRadius="4px"
                   >
-                    
                   </Typography>
                 </Box>
               ))
@@ -333,33 +229,58 @@ const LeaveAdminDashboard = () => {
           </Box>
         </Box>
 
-        {/* ROW 3 */}
+        {/* ROW 2 */}
         <Box
-          gridColumn="span 4"
+          gridColumn="span 8"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+          overflow="auto"
           p="30px"
         >
-          <Typography variant="h5" fontWeight="600" className="text-dark">
-            Campaign
-          </Typography>
           <Box
             display="flex"
-            flexDirection="column"
+            justifyContent="space-between"
             alignItems="center"
-            mt="25px"
+            borderBottom={`4px solid ${colors.primary[500]}`}
+            colors={colors.grey[100]}
+            p="15px"
           >
-            <ProgressCircle size="125" />
-            <Typography variant="h5" className="text-dark" sx={{ mt: "15px" }}>
-              $48,352 revenue generated
-            </Typography>
-            <Typography className="text-dark">
-              Includes extra misc expenditures and costs
+            <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+              All Leave Requests
             </Typography>
           </Box>
+          {allLeaveRequests.map((leaveRequest, i) => (
+            <Box
+              key={`${leaveRequest.id}-${i}`}
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              borderBottom={`4px solid ${colors.primary[500]}`}
+              p="15px"
+            >
+              <Box>
+                <Typography className="text-dark fw-bold" variant="h5" fontWeight="600">
+                  Employee Id: {leaveRequest.employeeId}
+
+                </Typography>
+                <Typography color={colors.grey[100]}>
+                  Employee Name: {leaveRequest.employeeName}<br />
+                  Leave Type:{leaveRequest.leaveTypeName}<br />
+                  Allowed Days: {leaveRequest.allowedDays}<br />
+                  Remaining Days: {leaveRequest.remainingLeaveBalance}<br />
+                </Typography>
+                <Typography color={colors.grey[100]}>
+                  From: {formatDate(leaveRequest.startDate)} - {formatDate(leaveRequest.endDate)}
+                </Typography>
+              </Box>
+              <Box color={colors.grey[100]}>{leaveRequest.status}</Box>
+            </Box>
+          ))}
         </Box>
+
+        {/* ROW 2 */}
         <Box
-          gridColumn="span 4"
+          gridColumn="span 12"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
         >
@@ -372,7 +293,16 @@ const LeaveAdminDashboard = () => {
             Employee Status
           </Typography>
           <Box height="250px" mt="-20px">
-          <BarChart activeEmployeeCount={activeEmployeeCount} inactiveEmployeeCount={inactiveEmployeeCount} />
+          <BarChart 
+          data={[
+            { status: "Pending", count: pendingLeaveCount },
+            { status: "Approved", count: approvedLeaveCount },
+            { status: "Rejected", count: rejectedLeaveCount },
+          ]}
+          xAxisLabel="Leave request Status"
+          yAxisLabel="Number of requests"
+              
+            /> 
           </Box>
         </Box>
       </Box>
@@ -382,270 +312,3 @@ const LeaveAdminDashboard = () => {
 
 export default LeaveAdminDashboard;
 
-
-// const LeaveAdminDashboard = () => {
-//   const theme = useTheme();
-//   const colors = tokens(theme.palette.mode);
-
-//   return (
-//     <Box m="20px">
-//       {/* HEADER */}
-//       <Box display="flex" justifyContent="space-between" alignItems="center">
-//         <Header title="Leave Admin Dashboard" subtitle="Welcome to your dashboard" />
-//       </Box>
-
-//       {/* GRID & CHARTS */}
-//       <Box
-//         display="grid"
-//         gridTemplateColumns="repeat(12, 1fr)"
-//         gridAutoRows="140px"
-//         gap="20px"
-//       >
-//         {/* ROW 1 */}
-//         <Box
-//           className="rounded"
-//           gridColumn="span 3"
-//           backgroundColor={colors.primary[400]}
-//           display="flex"
-//           alignItems="center"
-//           justifyContent="center"
-//         >
-//           <StatBox
-//             title="12,361"
-//             subtitle="Pending Leave Requests"
-//             progress="0.75"
-//             increase="+14%"
-//             icon={<SendIcon className="text-dark fs-3" />}
-//           />
-//         </Box>
-//         <Box
-//           className="rounded"
-//           gridColumn="span 3"
-//           backgroundColor={colors.primary[400]}
-//           display="flex"
-//           alignItems="center"
-//           justifyContent="center"
-//         >
-//           <StatBox
-//             title="12,361"
-//             subtitle="Approved Leave Requests"
-//             progress="0.75"
-//             increase="+14%"
-//             icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
-//           />
-//         </Box>
-//         <Box
-//           className="rounded"
-//           gridColumn="span 3"
-//           backgroundColor={colors.primary[400]}
-//           display="flex"
-//           alignItems="center"
-//           justifyContent="center"
-//         >
-//           <StatBox
-//             title="12,361"
-//             subtitle="Rejected Leave Requests"
-//             progress="0.75"
-//             increase="+14%"
-//             icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
-//           />
-//         </Box>
-//         <Box
-//           className="rounded"
-//           gridColumn="span 3"
-//           backgroundColor={colors.primary[400]}
-//           display="flex"
-//           alignItems="center"
-//           justifyContent="center"
-//         >
-//           <StatBox
-//             title="431,225"
-//             subtitle="Pending Resignation Request"
-//             progress="0.50"
-//             increase="+21%"
-//             icon={<SendIcon className="text-dark fs-3" />}
-//           />
-//         </Box>
-//         <Box
-//           className="rounded"
-//           gridColumn="span 3"
-//           backgroundColor={colors.primary[400]}
-//           display="flex"
-//           alignItems="center"
-//           justifyContent="center"
-//         >
-//           <StatBox
-//             title="431,225"
-//             subtitle="Approved Resignation Requests"
-//             progress="0.50"
-//             increase="+21%"
-//             icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
-//           />
-//         </Box>
-//         <Box
-//           className="rounded"
-//           gridColumn="span 3"
-//           backgroundColor={colors.primary[400]}
-//           display="flex"
-//           alignItems="center"
-//           justifyContent="center"
-//         >
-//           <StatBox
-//             title="431,225"
-//             subtitle="Rejected Resignation Requests"
-//             progress="0.50"
-//             increase="+21%"
-//             icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
-//           />
-//         </Box>
-//         <Box
-//           className="rounded"
-//           gridColumn="span 3"
-//           backgroundColor={colors.primary[400]}
-//           display="flex"
-//           alignItems="center"
-//           justifyContent="center"
-//         >
-//           <StatBox
-//             title="32,441"
-//             subtitle="Available Employees"
-//             progress="0.30"
-//             increase="+5%"
-//             icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
-//           />
-//         </Box>
-//         <Box
-//           className="rounded"
-//           gridColumn="span 8"
-//           gridRow="span 2"
-//           backgroundColor={colors.primary[400]}
-//         >
-//           <Box
-//             mt="25px"
-//             p="0 30px"
-//             display="flex "
-//             justifyContent="space-between"
-//             alignItems="center"
-//           >
-//             <Box>
-//               <Typography
-//                 variant="h5"
-//                 fontWeight="600"
-//                 color={colors.grey[100]}
-//               >
-//                 Employee Information Generated
-//               </Typography>
-//               <Typography
-//                 className="text-dark fw-bold"
-//                 variant="h3"
-//                 fontWeight="bold"
-//               >
-//                 $59,342.32
-//               </Typography>
-//             </Box>
-//             <Box>
-//               <IconButton>
-//                 <DownloadOutlinedIcon className="text-dark fs-3" />
-//               </IconButton>
-//             </Box>
-//           </Box>
-//           <Box height="250px" m="-20px 0 0 0">
-//             <LineChart isDashboard={true} />
-//           </Box>
-//         </Box>
-//         <Box
-//           gridColumn="span 4"
-//           gridRow="span 2"
-//           backgroundColor={colors.primary[400]}
-//           overflow="auto"
-//         >
-//           <Box
-//             display="flex"
-//             justifyContent="space-between"
-//             alignItems="center"
-//             borderBottom={`4px solid ${colors.primary[500]}`}
-//             colors={colors.grey[100]}
-//             p="15px"
-//           >
-//             <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-//               Recent Transactions
-//             </Typography>
-//           </Box>
-//           {mockTransactions.map((transaction, i) => (
-//             <Box
-//               key={`${transaction.txId}-${i}`}
-//               display="flex"
-//               justifyContent="space-between"
-//               alignItems="center"
-//               borderBottom={`4px solid ${colors.primary[500]}`}
-//               p="15px"
-//             >
-//               <Box>
-//                 <Typography
-//                   className="text-dark fw-bold"
-//                   variant="h5"
-//                   fontWeight="600"
-//                 >
-//                   {transaction.txId}
-//                 </Typography>
-//                 <Typography color={colors.grey[100]}>
-//                   {transaction.user}
-//                 </Typography>
-//               </Box>
-//               <Box color={colors.grey[100]}>{transaction.date}</Box>
-//               <Box
-//                 className="text-dark fs-5 fw-bold"
-//                 p="5px 10px"
-//                 borderRadius="4px"
-//               >
-//                 ${transaction.cost}
-//               </Box>
-//             </Box>
-//           ))}
-//         </Box>
-
-//         {/* ROW 3 */}
-//         <Box
-//           gridColumn="span 4"
-//           gridRow="span 2"
-//           backgroundColor={colors.primary[400]}
-//           p="30px"
-//         >
-//           <Typography variant="h5" fontWeight="600" className="text-dark">
-//             Campaign
-//           </Typography>
-//           <Box
-//             display="flex"
-//             flexDirection="column"
-//             alignItems="center"
-//             mt="25px"
-//           >
-//             <ProgressCircle size="125" />
-//             <Typography variant="h5" className="text-dark" sx={{ mt: "15px" }}>
-//               $48,352 revenue generated
-//             </Typography>
-//             <Typography>Includes extra misc expenditures and costs</Typography>
-//           </Box>
-//         </Box>
-//         <Box
-//           gridColumn="span 4"
-//           gridRow="span 2"
-//           backgroundColor={colors.primary[400]}
-//         >
-//           <Typography
-//             variant="h5"
-//             fontWeight="600"
-//             sx={{ padding: "30px 30px 0 30px" }}
-//           >
-//             Sales Quantity
-//           </Typography>
-//           <Box height="250px" mt="-20px">
-//             <BarChart isDashboard={true} />
-//           </Box>
-//         </Box>
-//       </Box>
-//     </Box>
-//   );
-// };
-
-// export default LeaveAdminDashboard;

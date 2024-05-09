@@ -1,20 +1,9 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 
-const BarChart = ({ activeEmployeeCount, inactiveEmployeeCount, isDashboard = false }) => {
+const BarChart = ({ data, xAxisLabel, yAxisLabel , isDashboard = false }) => {
   const theme = useTheme();
   const colors = theme.palette.mode === 'light' ? theme.palette.primary : theme.palette.secondary;
-
-  const data = [
-    {
-      status: "Active",
-      count: activeEmployeeCount,
-    },
-    {
-      status: "Inactive",
-      count: inactiveEmployeeCount,
-    },
-  ];
 
   return (
     <ResponsiveBar

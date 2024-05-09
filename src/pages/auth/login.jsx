@@ -25,7 +25,7 @@ const Login = ({ setIsAuthenticated }) => {
 
       const token = await response.text(); 
       sessionStorage.setItem("token", token);
-      navigate("/hrDashboard");
+      navigate("/");
     } catch (error) {
       setError('Invalid username or password');
       console.error(error);
