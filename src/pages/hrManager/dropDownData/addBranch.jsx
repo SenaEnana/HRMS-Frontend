@@ -2,7 +2,7 @@ import TextInput from "../../../components/textInput";
 import { NavLink } from "react-router-dom";
 import { dropDownValidation } from "./schema";
 import { Formik } from "formik";
-import { Box, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 
 function AddBranch() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -15,9 +15,9 @@ function AddBranch() {
         },
         body: JSON.stringify(values),
       });
-      console.log(response);
       if (response.ok) {
         console.log("successful");
+        alert("branch added successfully");
       } else {
         console.log("failed");
       }
@@ -25,14 +25,17 @@ function AddBranch() {
       console.error("Error adding new branch:", error.message);
     }
   }
-
   return (
     <>
-      <NavLink to={"/branchList"} className="float-end btn btn-info btn-sm m-2">
-        Branch List
-      </NavLink>
+      <div className="d-flex justify-content-between mt-5 text-dark">
+        <NavLink
+          to={"/branchList"}
+          className="float-end btn btn-info btn-sm m-2"
+        >
+          Branch List
+        </NavLink>
+      </div>
       <div className="row justify-content-center">
-        <Box className="m-2">
           <Formik
             initialValues={{
               Name: "",
@@ -41,35 +44,25 @@ function AddBranch() {
               addNewBranch(values);
               console.log(values);
             }}
-            validationSchema={dropDownValidation}
+            // validationSchema={dropDownValidation}
           >
             {(formikValues) => (
               <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
                 <div className="ms-3">
                   <p className="fs-4 text-dark text-center">Add New Branch</p>
                 </div>
-                <Box
-                  display="grid"
-                  gridTemplateColumns="repeat(2, minmax(0, 1fr))"
-                  sx={{
-                    "& > div": {
-                      gridColumn: isNonMobile ? undefined : "span 4",
-                    },
-                  }}
-                >
-                  <TextInput
-                    type="text"
-                    name="Name"
-                    label="Branch Name"
-                    placeholder="enter branch name"
-                    value={formikValues.values.Name}
-                    error={formikValues.errors.Name}
-                    onChange={formikValues.handleChange}
-                  />
-                </Box>
+                <TextInput
+                  type="text"
+                  name="Name"
+                  label="Branch Name"
+                  placeholder="enter branch name"
+                  value={formikValues.values.Name}
+                  error={formikValues.errors.Name}
+                  onChange={formikValues.handleChange}
+                />
                 <div className="m-3">
                   <input
-                    className="btn btn-info col-10 float-end m-2"
+                    className="btn btn-info col-10 m-2"
                     type="button"
                     value="add"
                     onClick={formikValues.handleSubmit}
@@ -78,7 +71,6 @@ function AddBranch() {
               </form>
             )}
           </Formik>
-        </Box>
       </div>
     </>
   );

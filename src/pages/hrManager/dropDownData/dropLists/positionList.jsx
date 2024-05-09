@@ -1,35 +1,31 @@
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-function PositionList(){
-    const [data, setData] = useState([]);
+function PositionList() {
+  const [data, setData] = useState([]);
 
-    useEffect(() => {
-      getData();
-    }, []);
-  
-    async function deleteOperation(Id) {
-      let result = await fetch(
-        `https://localhost:7140/Position/${Id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      result = await result.json();
-      getData();
-    }
-  
-    async function getData() {
-      let result = await fetch("https://localhost:7140/Position");
-      result = await result.json();
-      console.log(result);
-      setData(result);
-    }
-    return(
-        <>
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function deleteOperation(Id) {
+    let result = await fetch(`https://localhost:7140/Position/${Id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    result = await result.json();
+    getData();
+  }
+
+  async function getData() {
+    let result = await fetch("https://localhost:7140/Position");
+    result = await result.json();
+    setData(result);
+  }
+  return (
+    <>
       <div className="d-flex justify-content-between mt-5 text-dark">
         <h5 className="text-start ms-2">List Of Position</h5>
         <NavLink
@@ -79,8 +75,8 @@ function PositionList(){
           })}
         </tbody>
       </table>
-        </>
-    )
+    </>
+  );
 }
 
 export default PositionList;

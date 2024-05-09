@@ -22,13 +22,12 @@ function BranchList() {
   async function getData() {
     let result = await fetch("https://localhost:7140/Branch/GetBranches");
     result = await result.json();
-    console.log(result);
     setData(result);
   }
   return (
     <>
       <div className="d-flex justify-content-between mt-5 text-dark">
-        <h5 className="text-start ms-2">List Of Branches</h5>
+        <h5 className="text-start ms-3">List Of Branches</h5>
         <NavLink
           to={"/addBranch"}
           className="float-end btn btn-info btn-sm mb-2"

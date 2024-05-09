@@ -1,35 +1,31 @@
-import {useState, useEffect} from "react"
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-function GradeList(){
-    const [data, setData] = useState([]);
+function GradeList() {
+  const [data, setData] = useState([]);
 
-    useEffect(() => {
-      getData();
-    }, []);
-  
-    async function deleteOperation(Id) {
-      let result = await fetch(
-        `https://localhost:7140/Grade/${Id}`,
-        {
-          method: "DELETE",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      result = await result.json();
-      getData();
-    }
-  
-    async function getData() {
-      let result = await fetch("https://localhost:7140/Grade/GetGrades");
-      result = await result.json();
-      console.log(result);
-      setData(result);
-    }
-    return(
-        <>
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function deleteOperation(Id) {
+    let result = await fetch(`https://localhost:7140/Grade/${Id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    result = await result.json();
+    getData();
+  }
+
+  async function getData() {
+    let result = await fetch("https://localhost:7140/Grade/GetGrades");
+    result = await result.json();
+    setData(result);
+  }
+  return (
+    <>
       <div className="d-flex justify-content-between mt-5 text-dark">
         <h5 className="text-start ms-2">List Of Grades</h5>
         <NavLink
@@ -77,8 +73,8 @@ function GradeList(){
           })}
         </tbody>
       </table>
-        </>
-    )
+    </>
+  );
 }
 
 export default GradeList;

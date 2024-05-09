@@ -49,8 +49,8 @@ const Bar = () => {
       <Header title="Bar Chart" subtitle="Compliant Bar Chart" />
       <Box height="75vh">
         <BarChart
-          activeEmployeeCount={activeEmployeeCount}
-          inactiveEmployeeCount={inactiveEmployeeCount}
+          // activeEmployeeCount={activeEmployeeCount}
+          // inactiveEmployeeCount={inactiveEmployeeCount}
         />
       </Box>
     </Box>

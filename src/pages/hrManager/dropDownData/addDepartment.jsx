@@ -2,7 +2,7 @@ import TextInput from "../../../components/textInput";
 import { NavLink } from "react-router-dom";
 import { dropDownValidation } from "./schema";
 import { Formik } from "formik";
-import { Box, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 
 function AddDepartment() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -18,9 +18,9 @@ function AddDepartment() {
           body: JSON.stringify(values),
         }
       );
-      console.log(response);
       if (response.ok) {
         console.log("successful");
+        alert("department added successfully");
       } else {
         console.log("failed");
       }
@@ -31,14 +31,15 @@ function AddDepartment() {
 
   return (
     <>
-      <NavLink
-        to={"/departmentList"}
-        className="float-end btn btn-info btn-sm m-2"
-      >
-        Department List
-      </NavLink>
+      <div className="d-flex justify-content-between mt-5 text-dark">
+        <NavLink
+          to={"/departmentList"}
+          className="float-end btn btn-info btn-sm m-2"
+        >
+          Department List
+        </NavLink>
+      </div>
       <div className="row justify-content-center">
-        <Box className="m-2">
           <Formik
             initialValues={{
               Name: "",
@@ -56,28 +57,18 @@ function AddDepartment() {
                     Add New Department
                   </p>
                 </div>
-                <Box
-                  display="grid"
-                  gridTemplateColumns="repeat(2, minmax(0, 1fr))"
-                  sx={{
-                    "& > div": {
-                      gridColumn: isNonMobile ? undefined : "span 4",
-                    },
-                  }}
-                >
-                  <TextInput
-                    type="text"
-                    name="Name"
-                    label="Department Name"
-                    placeholder="enter department name"
-                    value={formikValues.values.Name}
-                    error={formikValues.errors.Name}
-                    onChange={formikValues.handleChange}
-                  />
-                </Box>
+                <TextInput
+                  type="text"
+                  name="Name"
+                  label="Department Name"
+                  placeholder="enter department name"
+                  value={formikValues.values.Name}
+                  error={formikValues.errors.Name}
+                  onChange={formikValues.handleChange}
+                />
                 <div className="m-3">
                   <input
-                    className="btn btn-info col-10 float-end m-2"
+                    className="btn btn-info col-10 m-2"
                     type="button"
                     value="add"
                     onClick={formikValues.handleSubmit}
@@ -86,7 +77,6 @@ function AddDepartment() {
               </form>
             )}
           </Formik>
-        </Box>
       </div>
     </>
   );
