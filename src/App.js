@@ -29,7 +29,8 @@ function App() {
   return (
     <div>
       {isAuth ? (
-        <SupervisorRouter /> 
+        <HrRouter /> 
+        
       ) : (
         <Auth /> 
       )}

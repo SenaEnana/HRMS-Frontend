@@ -7,11 +7,11 @@ function LeaveRequestList(){
     getData();
   }, []);
 //Below are not correct link for approved and rejected leave request and also the list of the requests
-  async function approveOperation(Id) {
+  async function approveOperation(leaveId) {
     let result = await fetch(
-      `https://localhost:7140/Employee/ApproveRequest/${Id}`,
+      `https://localhost:7140/api/Leave/ApproveLeave/${leaveId}`,
       {
-        method: "DELETE",
+        method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -23,11 +23,11 @@ function LeaveRequestList(){
     alert("approved successfully");
   }
 
-  async function rejectOperation(Id) {
+  async function rejectOperation(leaveId) {
     let result = await fetch(
-      `https://localhost:7140/Employee/RejectRequest/${Id}`,
+      `https://localhost:7140/api/Leave/RejectLeave/${leaveId}`,
       {
-        method: "DELETE",
+        method: "POST",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
@@ -40,7 +40,7 @@ function LeaveRequestList(){
   }
 
   async function getData() {
-    let result = await fetch("https://localhost:7140/Employee/ListLeaveRequests");
+    let result = await fetch("https://localhost:7140/api/Leave/GetPendingLeaveRequests");
     result = await result.json();
     console.log(result);
     setData(result);
@@ -48,7 +48,7 @@ function LeaveRequestList(){
   return(
     <>
     <div className="d-flex justify-content-between mt-5 text-dark">
-      <h5 className="text-start ms-2">Leave Request List</h5>
+      <h5 className="text-start ms-2">Pending Leave Requests</h5>
     </div>
     <table className="table table-hover text-dark w-100 fs-6">
       <thead>

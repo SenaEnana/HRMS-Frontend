@@ -200,7 +200,16 @@ const SupervisorDashboard = () => {
           Employee compliants
         </Typography>
         <Box height="250px" mt="-20px">
-          <BarChart addressedCompliantCount={addressedCompliantCount} pendingCompliantCount={pendingCompliantCount} />
+          <BarChart
+          
+          data={[
+            { status: "Pending", count: pendingCompliantCount },
+            { status: "Addressed", count: addressedCompliantCount },
+          ]}
+          xAxisLabel="Complaint Status"
+          yAxisLabel="Number of Complaints"
+          />
+          
         </Box>
       </Box>
     </Box>

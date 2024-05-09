@@ -379,7 +379,14 @@ const HrDashboard = () => {
             Employee Status
           </Typography>
           <Box height="250px" mt="-20px">
-          <BarChart activeEmployeeCount={activeEmployeeCount} inactiveEmployeeCount={inactiveEmployeeCount} />
+          <BarChart 
+          
+          data={[
+            { status: "Active", count: activeEmployeeCount },
+            { status: "Inactive", count: inactiveEmployeeCount },
+          ]}
+          xAxisLabel="Leave request Status"
+          yAxisLabel="Number of requests" />
           </Box>
         </Box>
       </Box>
