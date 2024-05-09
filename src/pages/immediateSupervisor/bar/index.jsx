@@ -10,7 +10,9 @@ const Bar = () => {
   useEffect(() => {
     const fetchInactiveEmployeeCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/InactiveCount");
+        const response = await fetch(
+          "https://localhost:7140/DashBoard/InactiveCount"
+        );
         const data = await response.json();
         setInactiveEmployeeCount(data);
       } catch (error) {
@@ -23,11 +25,16 @@ const Bar = () => {
   useEffect(() => {
     const fetchActiveEmployeeCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/ActiveCount");
+        const response = await fetch(
+          "https://localhost:7140/DashBoard/ActiveCount"
+        );
         const data = await response.json();
         setActiveEmployeeCount(data);
       } catch (error) {
-        console.error("Error fetching available employee count:", error.message);
+        console.error(
+          "Error fetching available employee count:",
+          error.message
+        );
       }
     };
     fetchActiveEmployeeCount();
@@ -37,7 +44,10 @@ const Bar = () => {
     <Box m="20px">
       <Header title="Bar Chart" subtitle="Simple Bar Chart" />
       <Box height="75vh">
-        <BarChart activeEmployeeCount={activeEmployeeCount} inactiveEmployeeCount={inactiveEmployeeCount} />
+        <BarChart
+          activeEmployeeCount={activeEmployeeCount}
+          inactiveEmployeeCount={inactiveEmployeeCount}
+        />
       </Box>
     </Box>
   );

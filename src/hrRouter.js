@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import Team from "./pages/hrManager/team";
 import Bar from "./pages/hrManager/bar";
 import Pie from "./pages/hrManager/pie";
 import Line from "./pages/hrManager/line";
 import { ColorModeContext, useMode } from "./theme";
-import Topbar from "./pages/commonPages/topbar";
 import HrDashboard from "./pages/hrManager/dashboard/hrDashboard";
 import EmployeeBasic from "./pages/hrManager/form/employeeBasic/employeeBasic";
 import EmployeeList from "./pages/hrManager/employeeList/employeeList";
@@ -30,12 +27,13 @@ import DepartmentList from "./pages/hrManager/dropDownData/dropLists/departmentL
 
 function HrRouter() {
   const [theme, colorMode] = useMode();
+  
   const isAuth = true;
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div>
+        <div className="app">
           {/* <HrSidebar isHrSidebar={isHrSidebar} /> */}
           {isAuth &&
                   <HrSidebar/>
@@ -43,7 +41,6 @@ function HrRouter() {
           <main className="content">
             <Routes>
               <Route path="/hrDashboard" element={<HrDashboard />} />
-              <Route path="/team" element={<Team />} />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />
               <Route path="/line" element={<Line />} />

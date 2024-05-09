@@ -16,7 +16,7 @@ const isAuth = true;
             <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
               <CssBaseline />
-              <div>
+              <div className="app">
                 {isAuth &&
                   <EmployeeSidebar/>
                   }

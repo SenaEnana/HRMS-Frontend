@@ -4,9 +4,9 @@ import HrRouter from "./hrRouter";
 import SupervisorRouter from "./supervisorRouter";
 import LeaveAdminRouter from "./leaveAdminRouter";
 import Auth from "./pages/auth/auth";
-import Login from "./pages/auth/login";
 import { useState ,useEffect} from "react";
 import { useNavigate } from "react-router-dom"; 
+import CeoRouter from "./ceoRouter";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -29,7 +29,7 @@ function App() {
   return (
     <div>
       {isAuth ? (
-        <SupervisorRouter /> 
+        <HrRouter /> 
       ) : (
         <Auth /> 
       )}

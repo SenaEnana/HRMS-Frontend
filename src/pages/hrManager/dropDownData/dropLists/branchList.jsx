@@ -39,7 +39,7 @@ function BranchList() {
       <table className="table table-hover text-dark w-100 fs-6">
         <thead>
           <tr>
-            <th>Branch Id</th>
+            <th>Id</th>
             <th>Name</th>
             <th></th>
           </tr>
