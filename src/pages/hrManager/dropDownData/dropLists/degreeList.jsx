@@ -33,7 +33,7 @@ function DegreeList(){
       <div className="d-flex justify-content-between mt-5 text-dark">
         <h5 className="text-start ms-2">List Of Degree</h5>
         <NavLink
-          to={"/addGrade"}
+          to={"/addDegree"}
           className="float-end btn btn-info btn-sm mb-2"
         >
           Add new Degree

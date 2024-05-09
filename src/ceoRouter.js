@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import AdminDashboard from "./pages/superAdmin/dashboard/adminDashboard";
-import Team from "./pages/superAdmin/team";
-import Form from "./pages/superAdmin/form";
-import Bar from "./pages/superAdmin/bar";
-import Pie from "./pages/superAdmin/pie";
-import Line from "./pages/superAdmin/line";
+import Form from "./pages/ceo/form";
+import Bar from "./pages/ceo/bar";
+import Pie from "./pages/ceo/pie";
+import Line from "./pages/ceo/line";
 import { ColorModeContext, useMode } from "./theme";
 import Sidebar from "./pages/commonPages/sidebar";
-import Topbar from "./pages/commonPages/topbar";
+import CeoDashboard from "./pages/ceo/dashboard/ceoDashboard";
 
 function CeoRouter() {
     const [theme, colorMode] = useMode();
@@ -21,10 +19,8 @@ function CeoRouter() {
               <div className="app">
                   <Sidebar isCeoSidebar={isCeoSidebar} />
                 <main className="content">
-                  {/* <Topbar setIsCeoSidebar={setIsCeoSidebar} /> */}
                   <Routes>
-                  <Route path="/adminDashboard" element={<AdminDashboard />} />
-                  <Route path="/team" element={<Team />} />
+                  <Route path="/ceoDashboard" element={<CeoDashboard/>} />
                   <Route path="/form" element={<Form />} />
                   <Route path="/bar" element={<Bar />} />
                   <Route path="/pie" element={<Pie />} />

@@ -42,7 +42,7 @@ function PositionList(){
       <table className="table table-hover text-dark w-100 fs-6">
         <thead>
           <tr>
-            <th>Position Id</th>
+            <th>Id</th>
             <th>Name</th>
             <th>Description</th>
             <th>Salary</th>

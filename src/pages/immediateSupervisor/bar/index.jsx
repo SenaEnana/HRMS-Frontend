@@ -9,7 +9,9 @@ const Bar = () => {
   useEffect(() => {
     const fetchPendingCompliantCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/api/Complaint/PendingComplaintCount");
+        const response = await fetch(
+          "https://localhost:7140/api/Complaint/PendingComplaintCount"
+        );
         const data = await response.json();
         setPendingCompliantCount(data);
         console.log(data)
@@ -24,12 +26,17 @@ const Bar = () => {
   useEffect(() => {
     const fetchAddressedCompliantCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/api/Complaint/AddressedComplaintCount");
+        const response = await fetch(
+          "https://localhost:7140/api/Complaint/AddressedComplaintCount"
+        );
         const data = await response.json();
         setAddressedCompliantCount(data);
-        console.log(data)
+        console.log(data);
       } catch (error) {
-        console.error("Error fetching available employee count:", error.message);
+        console.error(
+          "Error fetching available employee count:",
+          error.message
+        );
       }
     };
     fetchAddressedCompliantCount();

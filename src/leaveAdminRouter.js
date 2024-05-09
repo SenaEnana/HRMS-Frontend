@@ -1,12 +1,11 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import LeaveRequestList from "./pages/leaveAdmin/form/leaveRequestList";
 import Bar from "./pages/leaveAdmin/bar";
 import Pie from "./pages/leaveAdmin/pie";
 import Line from "./pages/leaveAdmin/line";
-import Topbar from "./pages/commonPages/topbar";
 import LeaveAdminDashboard from "./pages/leaveAdmin/dashboard/leaveAdminDashboard";
 import LeaveSidebar from "./pages/leaveAdmin/sidebar/leaveSidebar";
 import AddLeaveType from "./pages/leaveAdmin/leaveType/addLeaveType";
@@ -23,7 +22,6 @@ function LeaveAdminRouter(){
           <div className="app">
               <LeaveSidebar isLeaveSidebar={isLeaveSidebar} />
             <main className="content">
-              <Topbar setIsLeaveSidebar={setIsLeaveSidebar} />
               <Routes>
               <Route path="/" element={<LeaveAdminDashboard />} />
               <Route path="/leaveRequestList" element={<LeaveRequestList/>} />
