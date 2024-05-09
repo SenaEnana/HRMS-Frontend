@@ -16,13 +16,10 @@ import React, { useState, useEffect } from "react";
 const SupervisorDashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [approvedLeaveCount, setApprovedLeaveCount] = useState("Loading...");
-  const [rejectedLeaveCount, setRejectedLeaveCount] = useState("Loading...");
-  const [activeEmployeeCount, setActiveEmployeeCount] = useState("Loading...");
-  const [employeeData, setEmployeeData] = useState([]);
-  const [pendingLeaveRequests, setPendingLeaveRequests] = useState([]);
+  const [addressedCompliantCount, setAddressedCompliantCount] = useState("Loading...");
+  const [addressedRequests, setAddressedRequests] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [inactiveEmployeeCount, setInactiveEmployeeCount] = useState(0);
+  const [pendingCompliantCount, setPendingCompliantCount] = useState("Loading...");
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -31,92 +28,55 @@ const SupervisorDashboard = () => {
     return `${day}/${month}/${year}`;
   };
   useEffect(() => {
-    const fetchPendingLeaveRequests = async () => {
+    const fetchAddressedRequests = async () => {
       try {
-        const response = await fetch("https://localhost:7140/api/Leave/GetPendingLeaveRequests");
+        const response = await fetch("https://localhost:7140/api/Complaint/AddressedComplaints");
         const data = await response.json();
-        setPendingLeaveRequests(data);
+        setAddressedRequests(data);
         setLoading(false);
+        console.log(data)
       } catch (error) {
         console.error("Error fetching pending leave requests:", error.message);
         setLoading(false);
       }
     };
 
-    fetchPendingLeaveRequests();
+    fetchAddressedRequests();
   }, []);
   useEffect(() => {
-    const fetchInactiveEmployeeCount = async () => {
+    const fetchPendingCompliantCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/InactiveCount");
+        const response = await fetch("https://localhost:7140/api/Complaint/PendingComplaintCount");
         const data = await response.json();
-        setInactiveEmployeeCount(data);
+        setPendingCompliantCount(data);
+        console.log(data)
         setLoading(false);
       } catch (error) {
         console.error("Error fetching inactive employee count:", error.message);
         setLoading(false);
       }
     };
-    fetchInactiveEmployeeCount();
-  }, []);
-  useEffect(() => {
-    const fetchEmployeeData = async () => {
-      try {
-        const response = await fetch("https://localhost:7140/DashBoard/TotalEmployeesPerBranch");
-        const data = await response.json();
-        console.log(data)
-        setEmployeeData(data);
-      } catch (error) {
-        console.error("Error fetching employee data:", error.message);
-      }
-    };
-    fetchEmployeeData();
+    fetchPendingCompliantCount();
   }, []);
 
   useEffect(() => {
-    const fetchApprovedLeaveCount = async () => {
+    const fetchAddressedCompliantCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/CountApprovedLeaveRequests");
+        const response = await fetch("https://localhost:7140/api/Complaint/AddressedComplaintCount");
         const data = await response.json();
-        setApprovedLeaveCount(data);
-        console.log(data)
-      } catch (error) {
-        console.error("Error fetching approved leave count:", error.message);
-      }
-    };
-    fetchApprovedLeaveCount();
-  }, []);
-  useEffect(() => {
-    const fetchRejectedLeaveCount = async () => {
-      try {
-        const response = await fetch("https://localhost:7140/DashBoard/CountRejectedLeaveRequests");
-        const data = await response.json();
-        setRejectedLeaveCount(data);
-        console.log(data)
-      } catch (error) {
-        console.error("Error fetching rejected leave count:", error.message);
-      }
-    };
-    fetchRejectedLeaveCount();
-  }, []);
-  useEffect(() => {
-    const fetchActiveEmployeeCount = async () => {
-      try {
-        const response = await fetch("https://localhost:7140/DashBoard/ActiveCount");
-        const data = await response.json();
-        setActiveEmployeeCount(data);
+        setAddressedCompliantCount(data);
         console.log(data)
       } catch (error) {
         console.error("Error fetching available employee count:", error.message);
       }
     };
-    fetchActiveEmployeeCount();
+    fetchAddressedCompliantCount();
   }, []);
   return (
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Admin Dashboard" subtitle="Welcome to your dashboard" />
+        <Header title="Suprvisor Dashboard" subtitle="Welcome to your dashboard" />
 
         <Box>
           <Button className="btn btn-info ps-1 pt-2 fw-bold">
@@ -126,265 +86,125 @@ const SupervisorDashboard = () => {
         </Box>
       </Box>
 
-      {/* GRID & CHARTS */}
       <Box
-        display="grid"
-        gridTemplateColumns="repeat(12, 1fr)"
-        gridAutoRows="140px"
-        gap="20px"
+      display="grid"
+      gridTemplateColumns="repeat(12, 1fr)"
+      gridAutoRows="140px"
+      gap="20px"
+>
+      {/* ROW 1 */}
+      <Box
+        className="rounded"
+        gridColumn="span 3"
+        backgroundColor={colors.primary[400]}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
       >
-        {/* ROW 1 */}
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
+        {addressedCompliantCount === "Loading..." ? (
+          <p>Fetching addressed compliant count...</p>
+        ) : (
           <StatBox
-            title="12,361"
-            subtitle="Send Leave Request"
-            progress="0.75"
-            increase="+14%"
-            icon={<SendIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="431,225"
-            subtitle="Send Resignation Request"
-            progress="0.50"
-            increase="+21%"
-            icon={<SendIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title={activeEmployeeCount.toLocaleString()}
-            subtitle="Active Employees"
-            icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          {approvedLeaveCount === "Loading..." ? (
-            <p>Fetching approved leave count...</p>
-          ) : (
-            <StatBox
-              title={approvedLeaveCount.toLocaleString()}
-              subtitle="Approved Leave Requests"
-              icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
-            />
-          )}
-
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title={rejectedLeaveCount.toLocaleString()}
-            subtitle="Rejected Leave Request"
-            icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="1,325,134"
-            subtitle="Approved Resignation Request"
-            progress="0.80"
-            increase="+43%"
+            title={addressedCompliantCount.toLocaleString()}
+            subtitle="Addressed Compliants"
             icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
           />
-        </Box>
+        )}
+      </Box>
+
+
+      <Box
+        className="rounded"
+        gridColumn="span 3"
+        backgroundColor={colors.primary[400]}
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
+        <StatBox
+          title={pendingCompliantCount.toLocaleString()}
+          subtitle="Pending Compliants"
+          icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
+        />
+      </Box>
+      <Box
+        gridColumn="span 4"
+        gridRow="span 2"
+        backgroundColor={colors.primary[400]}
+        overflow="auto"
+      >
         <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
           display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="1,325,134"
-            subtitle="Rejected Resignation Request"
-            progress="0.80"
-            increase="+43%"
-            icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          gridColumn="span 8"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          flexDirection="column"
         >
           <Box
-            mt="25px"
-            p="0 30px"
-            display="flex "
+            display="flex"
             justifyContent="space-between"
             alignItems="center"
+            borderBottom={`4px solid ${colors.primary[500]}`}
+            colors={colors.grey[100]}
+            p="15px"
           >
-            <Box>
-              <Typography
-                variant="h5"
-                fontWeight="600"
-                color={colors.grey[100]}
-              >
-                Total Employees Per Branch
-              </Typography>
-              <Typography
-                className="text-dark fw-bold"
-                variant="h3"
-                fontWeight="bold"
-              >
-
-              </Typography>
-            </Box>
-            <Box>
-              <IconButton>
-                <DownloadOutlinedIcon className="text-dark fs-3" />
-              </IconButton>
-            </Box>
+            <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+              Addressed Compliants
+            </Typography>
           </Box>
-          <Box height="250px" m="-20px 0 0 0">
-            <LineChart employeeData={employeeData} isDashboard={true} />
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          overflow="auto"
-        >
-          <Box
-            display="flex"
-            flexDirection="column" // Ensure each leave request is displayed vertically
-          >
-            <Box // This Box contains the header for the pending leave requests section
-              display="flex"
-              justifyContent="space-between"
-              alignItems="center"
-              borderBottom={`4px solid ${colors.primary[500]}`}
-              colors={colors.grey[100]}
-              p="15px"
-            >
-              <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-                Pending Leave Requests
-              </Typography>
-            </Box>
 
-            {/* Display each leave request in a separate Box */}
-            {!loading && pendingLeaveRequests.length > 0 && (
-              pendingLeaveRequests.map((leaveRequest, index) => (
-                <Box
-                  key={index}
-                  borderBottom={`4px solid ${colors.primary[500]}`}
-                  p="15px"
+          {!loading && addressedRequests.length > 0 && (
+            addressedRequests.map((leaveRequest, index) => (
+              <Box
+                key={index}
+                borderBottom={`4px solid ${colors.primary[500]}`}
+                p="15px"
+              >
+                <Typography
+                  className="text-dark fw-bold"
+                  variant="h5"
+                  fontWeight="600"
                 >
-                  {/* Render leave request details here */}
-                  <Typography
-                    className="text-dark fw-bold"
-                    variant="h5"
-                    fontWeight="600"
-                  >
-                    {leaveRequest.Id}
-                  </Typography>
-                  <Typography color={colors.grey[100]}>
-                    Reason: {leaveRequest.reason}
-                  </Typography>
-                  <Typography color={colors.grey[100]}>
-                    Start Date: {formatDate(leaveRequest.startDate)}<br/>
-                    End Date: {formatDate(leaveRequest.endDate)}
-                  </Typography>
-                  <Typography
-                    className="text-dark fs-5 fw-bold"
-                    p="5px 10px"
-                    borderRadius="4px"
-                  >
-                    
-                  </Typography>
-                </Box>
-              ))
-            )}
-          </Box>
+                  {leaveRequest.Id}
+                </Typography>
+                <Typography color={colors.grey[100]}>
+                  Employee Name: {leaveRequest.employeeName}<br />
+                  Employee Id: {leaveRequest.employeeId}
+                </Typography>
+                <Typography color={colors.grey[100]}>
+                  Date of Event: {formatDate(leaveRequest.dateOfEvent)}<br />
+                  Submitted Date: {formatDate(leaveRequest.submittedDate)}<br />
+                  Incident: {leaveRequest.incident}<br />
+                  Remedy: {leaveRequest.remedy}<br />
+                  Status:{leaveRequest.status}
+                </Typography>
+                <Typography
+                  className="text-dark fs-5 fw-bold"
+                  p="5px 10px"
+                  borderRadius="4px"
+                >
+                </Typography>
+              </Box>
+            ))
+          )}
         </Box>
-
-        {/* ROW 3 */}
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          p="30px"
+      </Box>
+      <Box
+        gridColumn="span 4"
+        gridRow="span 2"
+        backgroundColor={colors.primary[400]}
+      >
+        <Typography
+          className="text-dark"
+          variant="h5"
+          fontWeight="600"
+          sx={{ padding: "30px 30px 0 30px" }}
         >
-          <Typography variant="h5" fontWeight="600" className="text-dark">
-            Campaign
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography variant="h5" className="text-dark" sx={{ mt: "15px" }}>
-              $48,352 revenue generated
-            </Typography>
-            <Typography className="text-dark">
-              Includes extra misc expenditures and costs
-            </Typography>
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Typography
-            className="text-dark"
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            Employee Status
-          </Typography>
-          <Box height="250px" mt="-20px">
-          <BarChart activeEmployeeCount={activeEmployeeCount} inactiveEmployeeCount={inactiveEmployeeCount} />
-          </Box>
+          Employee compliants
+        </Typography>
+        <Box height="250px" mt="-20px">
+          <BarChart addressedCompliantCount={addressedCompliantCount} pendingCompliantCount={pendingCompliantCount} />
         </Box>
       </Box>
     </Box>
+    </Box >
   );
 };
 
