@@ -7,20 +7,19 @@ function ComplaintList() {
     getData();
   }, []);
 
-  async function deleteOperation(Id) {
-    let result = await fetch(`https://localhost:7140/Branch/${Id}`, {
-      method: "DELETE",
+  async function deleteOperation(complaintId) {
+    let result = await fetch(`https://localhost:7140/api/Complaint/AddressCompliant/${complaintId}`, {
+      method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
     });
-    result = await result.json();
     getData();
   }
 
   async function getData() {
-    let result = await fetch("https://localhost:7140/Branch/GetBranches");
+    let result = await fetch("https://localhost:7140/api/Complaint/PendingComplaints");
     result = await result.json();
     console.log(result);
     setData(result);

@@ -4,40 +4,45 @@ import BarChart from "../../../components/barChart";
 import React, { useState, useEffect } from "react";
 
 const Bar = () => {
-  const [activeEmployeeCount, setActiveEmployeeCount] = useState("Loading...");
-  const [inactiveEmployeeCount, setInactiveEmployeeCount] = useState(0);
-
+  const [addressedCompliantCount, setAddressedCompliantCount] = useState(0);
+  const [pendingCompliantCount, setPendingCompliantCount] = useState(0);
+  const [loading, setLoading] = useState(true); 
   useEffect(() => {
-    const fetchInactiveEmployeeCount = async () => {
+    const fetchPendingCompliantCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/InactiveCount");
+        const response = await fetch("https://localhost:7140/api/Complaint/PendingComplaintCount");
         const data = await response.json();
-        setInactiveEmployeeCount(data);
+        setPendingCompliantCount(data);
+        console.log(data)
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching inactive employee count:", error.message);
+        setLoading(false);
       }
     };
-    fetchInactiveEmployeeCount();
+    fetchPendingCompliantCount();
   }, []);
 
   useEffect(() => {
-    const fetchActiveEmployeeCount = async () => {
+    const fetchAddressedCompliantCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/ActiveCount");
+        const response = await fetch("https://localhost:7140/api/Complaint/AddressedComplaintCount");
         const data = await response.json();
-        setActiveEmployeeCount(data);
+        setAddressedCompliantCount(data);
+        console.log(data)
       } catch (error) {
         console.error("Error fetching available employee count:", error.message);
       }
     };
-    fetchActiveEmployeeCount();
+    fetchAddressedCompliantCount();
   }, []);
+  
 
   return (
     <Box m="20px">
-      <Header title="Bar Chart" subtitle="Simple Bar Chart" />
+      <Header title="Bar Chart" subtitle="Compliant Bar Chart" />
       <Box height="75vh">
-        <BarChart activeEmployeeCount={activeEmployeeCount} inactiveEmployeeCount={inactiveEmployeeCount} />
+        <BarChart addressedCompliantCount={addressedCompliantCount} pendingCompliantCount={pendingCompliantCount} />
       </Box>
     </Box>
   );
