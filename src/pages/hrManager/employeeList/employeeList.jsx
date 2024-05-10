@@ -52,6 +52,7 @@ const EmployeeList = () => {
             <th>Gender</th>
             <th>Mother Name</th>
             <th>Phone Number</th>
+            <th>Role</th>
             <th></th>
           </tr>
         </thead>
