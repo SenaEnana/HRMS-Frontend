@@ -20,7 +20,6 @@ const EmployeeList = () => {
         },
       }
     );
-    result = await result.json();
     getData();
   }
 
