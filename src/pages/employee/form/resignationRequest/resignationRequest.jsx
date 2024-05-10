@@ -74,7 +74,7 @@ function ResignationRequest() {
             Comment: "",
           }}
           onSubmit={handleSubmit} // Correct placement of onSubmit prop
-  validationSchema={resignationValidation}
+          validationSchema={resignationValidation}
         >
           {(formikValues) => (
 

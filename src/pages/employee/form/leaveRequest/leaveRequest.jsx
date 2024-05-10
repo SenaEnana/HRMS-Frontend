@@ -7,9 +7,28 @@ import DropDown from "../../../../components/DropDown";
 
 function LeaveRequest() {
   const navigate = useNavigate();
-  function handleSubmit() {
-    navigate("/employeeDashboard");
-  }
+  const handleSubmit = async (values) => {
+    console.log(values)
+    try {
+      const response = await fetch(
+        "https://localhost:7140/api/Leave/RequestLeave",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
+      if (response.ok) {
+        navigate("/employeeDashboard");
+      } else {
+        console.error("Failed to submit leave request");
+      }
+    } catch (error) {
+      console.error("Error submitting leave request:", error.message);
+    }
+  };
   const [LeaveTypeId, setLeaveTypeId] = useState([{ name: "", id: "" }]);
   useEffect(() => {
     const fetchData = async () => {
@@ -31,10 +50,7 @@ function LeaveRequest() {
             EndDate: "",
             Reason: "",
           }}
-          onSubmit={() => {
-            console.log("successful");
-            handleSubmit();
-          }}
+          onSubmit={handleSubmit}
           validationSchema={leaveValidation}
         >
           {(formikValues) => (
@@ -51,6 +67,7 @@ function LeaveRequest() {
                 error={formikValues.errors.Emp_Id}
                 onChange={formikValues.handleChange}
               />
+              
                <DropDown
                 type="number"
                 label="Leave TypeI d"
@@ -108,36 +125,3 @@ function LeaveRequest() {
 }
 
 export default LeaveRequest;
-
-//
-
-// const validationSchema = Yup.object().shape({
-//   username: Yup.string().required(),
-// });
-
-// const initialValues = {
-//   username: '',
-// };
-
-// class MyForm extends Component {
-//   render() {
-//     return (
-//       <Formik
-//         initialValues={initialValues}
-//         validationSchema={validationSchema}
-//         onSubmit={this.props.onSubmit}
-//       >
-//         {({ isValid }) => (
-//           <Form autoComplete="off">
-// <FormikTextField
-//   name="username"
-//   label="Username"
-//   margin="normal"
-//   fullWidth
-// />
-//           </Form>
-//         )}
-//       </Formik>
-//     );
-//   }
-// }
