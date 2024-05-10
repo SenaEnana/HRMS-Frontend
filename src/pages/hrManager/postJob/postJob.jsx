@@ -20,7 +20,7 @@ function PromoteEmployee() {
 //the following are the code for the api not correct link
   async function postJob(values) {
     try {
-      const response = await fetch("https://localhost:7140/Branch/AddBranch", {
+      const response = await fetch("https://localhost:7140/Promotion/PostJob", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

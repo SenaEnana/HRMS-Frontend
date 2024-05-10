@@ -22,7 +22,7 @@ function CeoRouter() {
                   <CeoSidebar isCeoSidebar={isCeoSidebar} />
                 <main className="content">
                   <Routes>
-                  <Route path="/" element={<CeoDashboard/>} />
+                  <Route path="/ceoDashboard" element={<CeoDashboard/>} />
                   <Route path="/form" element={<Form />} />
                   <Route path="/bar" element={<Bar />} />
                   <Route path="/pie" element={<Pie />} />

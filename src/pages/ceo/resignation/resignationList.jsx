@@ -9,7 +9,7 @@ function ResignationList(){
 //Below are not correct link for approved and rejected request and list
   async function approveOperation(resignationId) {
     let result = await fetch(
-      `https://localhost:7140/api/Leave/ApproveResignation/${resignationId}`,
+      `https://localhost:7140/Resignation/ApproveResignation/${resignationId}`,
       {
         method: "POST",
         headers: {
@@ -25,7 +25,7 @@ function ResignationList(){
 
   async function rejectOperation(resignationId) {
     let result = await fetch(
-      `https://localhost:7140/api/Leave/RejectResignation/${resignationId}`,
+      `https://localhost:7140/Resignation/RejectResignation/${resignationId}`,
       {
         method: "POST",
         headers: {
@@ -40,7 +40,7 @@ function ResignationList(){
   }
 
   async function getData() {
-    let result = await fetch("https://localhost:7140/api/Leave/GetPendingResignationRequests");
+    let result = await fetch("https://localhost:7140/Resignation/ListOfResignationRequests");
     result = await result.json();
     console.log(result);
     setData(result);
