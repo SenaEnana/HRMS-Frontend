@@ -48,7 +48,7 @@ function AddDepartment() {
               addNewDepartment(values);
               console.log(values);
             }}
-            validationSchema={dropDownValidation}
+            //validationSchema={dropDownValidation}
           >
             {(formikValues) => (
               <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">

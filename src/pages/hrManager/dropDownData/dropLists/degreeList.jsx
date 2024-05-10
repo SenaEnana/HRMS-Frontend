@@ -15,7 +15,6 @@ function DegreeList() {
         "Content-Type": "application/json",
       },
     });
-    result = await result.json();
     getData();
   }
 

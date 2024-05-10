@@ -15,7 +15,6 @@ function GradeList() {
         "Content-Type": "application/json",
       },
     });
-    result = await result.json();
     getData();
   }
 

@@ -15,7 +15,6 @@ function BranchList() {
         "Content-Type": "application/json",
       },
     });
-    result = await result.json();
     getData();
   }
 
