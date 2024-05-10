@@ -40,7 +40,7 @@ function HrRouter() {
                   }
           <main className="content">
             <Routes>
-              <Route path="/hrDashboard" element={<HrDashboard />} />
+              <Route path="/" element={<HrDashboard />} />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />
               <Route path="/line" element={<Line />} />

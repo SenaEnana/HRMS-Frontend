@@ -24,7 +24,7 @@ const isAuth = true;
                   }
                 <main className="content">
                   <Routes>
-                  <Route path="/employeeDashboard" element={<EmployeeDashboard/>} />
+                  <Route path="/" element={<EmployeeDashboard/>} />
                   <Route path="/employeeCalendar" element={<Calendar />} />
                   <Route path="/complaint" element={<Complaint/>}/>
                   <Route path="/leaveRequest" element={<LeaveRequest/>}/>
