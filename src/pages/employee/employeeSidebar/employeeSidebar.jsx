@@ -12,7 +12,7 @@ import { tokens } from "../../../theme";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
-  const colors =tokens(theme.palette.mode);
+  const colors = tokens(theme.palette.mode);
 
   return (
     <MenuItem
@@ -150,8 +150,29 @@ const EmployeeSidebar = () => {
               setSelected={setSelected}
             />
             <Item
+              title="Apply For Job"
+              to="/applyForJob"
+              icon={<AddCommentOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Typography
+              variant="h6"
+              className="text-dark fw-bold"
+              sx={{ m: "15px 0 5px 20px" }}
+            >
+              Data
+            </Typography>
+            <Item
               title="Supervisor Feedback"
               to="/supervisorFeedback"
+              icon={<FeedbackOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Posted Jobs"
+              to="/postedJob"
               icon={<FeedbackOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

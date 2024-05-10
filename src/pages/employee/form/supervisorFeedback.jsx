@@ -1,45 +1,51 @@
-function SupervisorFeedback() {
-  const data = [
-    {
-      point: "There is an improvement point in attendance",
-      recommendation: "I recommend you to wake up early in the morning",
-      expectation:
-        "There is no work expectation that the employee needs to fulfill",
-      problem: "No problem at all",
-      comments: "No other comment but try to improve yourself",
-    },
-  ];
+import { useState, useEffect } from "react";
 
-  return (
+function SupervisorFeedback(){
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getData();
+  }, []);
+  
+//Below are not correct link for posted jobs
+  async function getData() {
+    let result = await fetch("https://localhost:7140/api/Leave/GetPendingLeaveRequests");
+    result = await result.json();
+    console.log(result);
+    setData(result);
+  }
+  return(
     <>
-      <div className="justify-content-between mt-5">
-        <h5 className="ms-5 text-dark fs-4">Supervisor Feedback</h5>
-      </div>
-      <div className="rounded-3 border m-5 text-dark">
-        <table className="table justify-content-between p-4 m-3">
-          <th className="m-5 fs-6">
-            <tr>Improvement point</tr>
-            <tr>Recommended action for improvement</tr>
-            <tr>Work expectation</tr>
-            <tr>Problem faced because of the employee</tr>
-            <tr>Any other comments</tr>
-            <td></td>
-          </th>
-          {data.map((val, key) => {
-            return (
-              <td className="m-5 fs-6" key={key}>
-                <tr className="m-5">{val.point}</tr>
-                <tr>{val.recommendation}</tr>
-                <tr>{val.expectation}</tr>
-                <tr>{val.problem}</tr>
-                <tr>{val.comments}</tr>
-              </td>
-            );
-          })}
-        </table>
-      </div>
-    </>
-  );
+    <div className="d-flex justify-content-between mt-5 text-dark">
+      <h5 className="text-start ms-2">Supervisor Feedback</h5>
+    </div>
+    <table className="table table-hover text-dark w-100 fs-6">
+      <thead>
+        <tr>
+          <th>Improvement Point</th>
+          <th>Recommended Action</th>
+          <th>Work Expectation</th>
+          <th>Problem Faced</th>
+          <th>Comments</th>
+        </tr>
+      </thead>
+      <tbody>
+        {data.map((employee) => {
+          const employeeId = employee.id;
+          return (
+            <tr key={employeeId}>
+              {Object.values(employee).map((item, index) => (
+                <td key={index}>{item}</td>
+              ))}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </>
+  )
 }
 
 export default SupervisorFeedback;
+
+

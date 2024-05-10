@@ -6,8 +6,10 @@ import Bar from "./pages/ceo/bar";
 import Pie from "./pages/ceo/pie";
 import Line from "./pages/ceo/line";
 import { ColorModeContext, useMode } from "./theme";
-import Sidebar from "./pages/commonPages/sidebar";
 import CeoDashboard from "./pages/ceo/dashboard/ceoDashboard";
+import CeoSidebar from "./pages/ceo/sidebar/ceoSidebar";
+import ResignationList from "./pages/ceo/resignation/resignationList";
+import PromoteEmployee from "./pages/ceo/promotion/promoteEmployee";
 
 function CeoRouter() {
     const [theme, colorMode] = useMode();
@@ -17,7 +19,7 @@ function CeoRouter() {
             <ThemeProvider theme={theme}>
               <CssBaseline />
               <div className="app">
-                  <Sidebar isCeoSidebar={isCeoSidebar} />
+                  <CeoSidebar isCeoSidebar={isCeoSidebar} />
                 <main className="content">
                   <Routes>
                   <Route path="/ceoDashboard" element={<CeoDashboard/>} />
@@ -25,6 +27,8 @@ function CeoRouter() {
                   <Route path="/bar" element={<Bar />} />
                   <Route path="/pie" element={<Pie />} />
                   <Route path="/line" element={<Line />} />
+                  <Route path="/resignationList" element={<ResignationList/>}/>
+                  <Route path="/promoteEmployee" element={<PromoteEmployee/>}/>
                   </Routes>
                 </main>
               </div>

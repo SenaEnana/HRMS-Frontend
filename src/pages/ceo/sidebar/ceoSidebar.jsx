@@ -122,15 +122,15 @@ const CeoSidebar = () => {
               Pages
             </Typography>
             <Item
-              title="Complaint List"
-              to="/complaintList"
+              title="Resignation List"
+              to="/resignationList"
               icon={<TimeToLeaveOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Send Feedback"
-              to="/sendFeedback"
+              title="Promote Employee"
+              to="/promoteEmployee"
               icon={<TimeToLeaveOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
