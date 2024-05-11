@@ -37,7 +37,14 @@ const Bar = () => {
     <Box m="20px">
       <Header title="Bar Chart" subtitle="Simple Bar Chart" />
       <Box height="75vh">
-        <BarChart activeEmployeeCount={activeEmployeeCount} inactiveEmployeeCount={inactiveEmployeeCount} />
+      <BarChart 
+          
+          data={[
+            { status: "Active", count: activeEmployeeCount },
+            { status: "Inactive", count: inactiveEmployeeCount },
+          ]}
+          xAxisLabel="Leave request Status"
+          yAxisLabel="Number of requests" />
       </Box>
     </Box>
   );

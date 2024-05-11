@@ -8,7 +8,7 @@ const Line = () => {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/TotalEmployeesPerBranch");
+        const response = await fetch("https://localhost:7140/DashBoard/EmployeesHiredPerYear");
         const data = await response.json();
         console.log(data)
         setEmployeeData(data);
@@ -22,7 +22,7 @@ const Line = () => {
     <Box m="20px">
       <Header title="Line Chart" subtitle="Simple Line Chart" />
       <Box height="75vh">
-      <LineChart employeeData={employeeData} isDashboard={true} />
+      <LineChart data={employeeData}  />
       </Box>
     </Box>
   );

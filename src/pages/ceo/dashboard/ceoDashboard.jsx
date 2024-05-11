@@ -15,11 +15,11 @@ import React, { useState, useEffect } from "react";
 const CeoDashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [approvedLeaveCount, setApprovedLeaveCount] = useState("Loading...");
-  const [rejectedLeaveCount, setRejectedLeaveCount] = useState("Loading...");
+  const [pendingResignationCount, setPendingResignationCount] = useState("Loading...");
+  const [approvedResignationCount, setApprovedResignationCount] = useState("Loading...");
   const [activeEmployeeCount, setActiveEmployeeCount] = useState("Loading...");
   const [employeeData, setEmployeeData] = useState([]);
-  const [pendingLeaveRequests, setPendingLeaveRequests] = useState([]);
+  const [resignationRequests, setResignationRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [inactiveEmployeeCount, setInactiveEmployeeCount] = useState(0);
   const formatDate = (dateString) => {
@@ -30,27 +30,11 @@ const CeoDashboard = () => {
     return `${day}/${month}/${year}`;
   };
   useEffect(() => {
-    const fetchPendingLeaveRequests = async () => {
-      try {
-        const response = await fetch("https://localhost:7140/api/Leave/GetPendingLeaveRequests");
-        const data = await response.json();
-        setPendingLeaveRequests(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching pending leave requests:", error.message);
-        setLoading(false);
-      }
-    };
-
-    fetchPendingLeaveRequests();
-  }, []);
-  useEffect(() => {
     const fetchInactiveEmployeeCount = async () => {
       try {
         const response = await fetch("https://localhost:7140/DashBoard/InactiveCount");
         const data = await response.json();
         setInactiveEmployeeCount(data);
-        setLoading(false);
       } catch (error) {
         console.error("Error fetching inactive employee count:", error.message);
         setLoading(false);
@@ -61,7 +45,7 @@ const CeoDashboard = () => {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/TotalEmployeesPerBranch");
+        const response = await fetch("https://localhost:7140/DashBoard/EmployeesHiredPerYear");
         const data = await response.json();
         console.log(data)
         setEmployeeData(data);
@@ -73,30 +57,47 @@ const CeoDashboard = () => {
   }, []);
 
   useEffect(() => {
-    const fetchApprovedLeaveCount = async () => {
+    const fetchPendingResignationCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/CountApprovedLeaveRequests");
+        const response = await fetch("https://localhost:7140/Resignation/CountPendingResignations");
         const data = await response.json();
-        setApprovedLeaveCount(data);
+        setPendingResignationCount(data);
+        setLoading(false);
         console.log(data)
       } catch (error) {
         console.error("Error fetching approved leave count:", error.message);
       }
     };
-    fetchApprovedLeaveCount();
+    fetchPendingResignationCount();
   }, []);
   useEffect(() => {
-    const fetchRejectedLeaveCount = async () => {
+    const fetchApprovedResignationCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/CountRejectedLeaveRequests");
+        const response = await fetch("https://localhost:7140/Resignation/CountApprovedResignations");
         const data = await response.json();
-        setRejectedLeaveCount(data);
+        setApprovedResignationCount(data);
         console.log(data)
       } catch (error) {
         console.error("Error fetching rejected leave count:", error.message);
       }
     };
-    fetchRejectedLeaveCount();
+    fetchApprovedResignationCount();
+  }, []);
+  useEffect(() => {
+    const fetchResignationList = async () => {
+      try {
+        const response = await fetch("https://localhost:7140/Resignation/ListOfResignationRequests");
+        const data = await response.json();
+        console.log(data)
+        setResignationRequests(data);
+
+        setLoading(false);
+        
+      } catch (error) {
+        console.error("Error fetching rejected leave count:", error.message);
+      }
+    };
+    fetchResignationList();
   }, []);
   useEffect(() => {
     const fetchActiveEmployeeCount = async () => {
@@ -142,38 +143,6 @@ const CeoDashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title="12,361"
-            subtitle="Send Leave Request"
-            progress="0.75"
-            increase="+14%"
-            icon={<SendIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="431,225"
-            subtitle="Send Resignation Request"
-            progress="0.50"
-            increase="+21%"
-            icon={<SendIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
             title={activeEmployeeCount.toLocaleString()}
             subtitle="Active Employees"
             icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
@@ -187,15 +156,28 @@ const CeoDashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
-          {approvedLeaveCount === "Loading..." ? (
-            <p>Fetching approved leave count...</p>
-          ) : (
+          <StatBox
+            title={inactiveEmployeeCount.toLocaleString()}
+            subtitle="InActive Employees"
+            icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
+          />
+        </Box>
+        <Box
+          className="rounded"
+          gridColumn="span 3"
+          backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          
+         
             <StatBox
-              title={approvedLeaveCount.toLocaleString()}
-              subtitle="Approved Leave Requests"
+              title={pendingResignationCount.toLocaleString()}
+              subtitle="Pending Resignation Requests"
               icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
             />
-          )}
+          
 
         </Box>
         <Box
@@ -207,39 +189,8 @@ const CeoDashboard = () => {
           justifyContent="center"
         >
           <StatBox
-            title={rejectedLeaveCount.toLocaleString()}
-            subtitle="Rejected Leave Request"
-            icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="1,325,134"
-            subtitle="Approved Resignation Request"
-            progress="0.80"
-            increase="+43%"
-            icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="1,325,134"
-            subtitle="Rejected Resignation Request"
-            progress="0.80"
-            increase="+43%"
+            title={approvedResignationCount.toLocaleString()}
+            subtitle="Approved Resignation Requests"
             icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
@@ -261,7 +212,7 @@ const CeoDashboard = () => {
                 fontWeight="600"
                 color={colors.grey[100]}
               >
-                Total Employees Per Branch
+                Total Employees Hired Per Year
               </Typography>
               <Typography
                 className="text-dark fw-bold"
@@ -278,7 +229,7 @@ const CeoDashboard = () => {
             </Box>
           </Box>
           <Box height="250px" m="-20px 0 0 0">
-            <LineChart employeeData={employeeData} isDashboard={true} />
+            <LineChart data={employeeData}  />
           </Box>
         </Box>
         <Box
@@ -289,9 +240,9 @@ const CeoDashboard = () => {
         >
           <Box
             display="flex"
-            flexDirection="column" // Ensure each leave request is displayed vertically
+            flexDirection="column" 
           >
-            <Box // This Box contains the header for the pending leave requests section
+            <Box
               display="flex"
               justifyContent="space-between"
               alignItems="center"
@@ -300,13 +251,13 @@ const CeoDashboard = () => {
               p="15px"
             >
               <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-                Pending Leave Requests
+                Resignation Requests
               </Typography>
             </Box>
 
             {/* Display each leave request in a separate Box */}
-            {!loading && pendingLeaveRequests.length > 0 && (
-              pendingLeaveRequests.map((leaveRequest, index) => (
+            {!loading && resignationRequests && resignationRequests.length > 0 && (
+              resignationRequests.map((leaveRequest, index) => (
                 <Box
                   key={index}
                   borderBottom={`4px solid ${colors.primary[500]}`}
@@ -321,52 +272,32 @@ const CeoDashboard = () => {
                     {leaveRequest.Id}
                   </Typography>
                   <Typography color={colors.grey[100]}>
-                    Reason: {leaveRequest.reason}
+                    Employee ID: {leaveRequest.employeeId}
                   </Typography>
                   <Typography color={colors.grey[100]}>
-                    Start Date: {formatDate(leaveRequest.startDate)}<br/>
-                    End Date: {formatDate(leaveRequest.endDate)}
+                    Hire Date: {formatDate(leaveRequest.employeeHireDate)}<br />
+                    Separation Date: {formatDate(leaveRequest.separationDate)}
                   </Typography>
                   <Typography
                     className="text-dark fs-5 fw-bold"
                     p="5px 10px"
                     borderRadius="4px"
                   >
-                    
+
                   </Typography>
                 </Box>
               ))
+            )}
+            {loading && (
+              <p>Loading resignation requests...</p>
             )}
           </Box>
         </Box>
 
         {/* ROW 3 */}
+
         <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          p="30px"
-        >
-          <Typography variant="h5" fontWeight="600" className="text-dark">
-            Campaign
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography variant="h5" className="text-dark" sx={{ mt: "15px" }}>
-              $48,352 revenue generated
-            </Typography>
-            <Typography className="text-dark">
-              Includes extra misc expenditures and costs
-            </Typography>
-          </Box>
-        </Box>
-        <Box
-          gridColumn="span 4"
+          gridColumn="span 12"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
         >
@@ -379,7 +310,14 @@ const CeoDashboard = () => {
             Employee Status
           </Typography>
           <Box height="250px" mt="-20px">
-          <BarChart activeEmployeeCount={activeEmployeeCount} inactiveEmployeeCount={inactiveEmployeeCount} />
+          <BarChart 
+          
+          data={[
+            { status: "Active", count: activeEmployeeCount },
+            { status: "Inactive", count: inactiveEmployeeCount },
+          ]}
+          xAxisLabel="Leave request Status"
+          yAxisLabel="Number of requests" />
           </Box>
         </Box>
       </Box>
