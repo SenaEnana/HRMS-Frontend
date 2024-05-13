@@ -135,7 +135,7 @@ const HrSidebar = () => {
             </Box>
           )}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <Typography
+            <Typography
               variant="h6"
               className="text-dark fw-bold"
               sx={{ m: "15px 0 5px 20px" }}
@@ -148,6 +148,13 @@ const HrSidebar = () => {
               items={items}
               icon={<PeopleOutlinedIcon />}
               to="/employeeBasic"
+            />
+            <Item
+              title="Post Job"
+              to="/postJob"
+              icon={<TimeToLeaveOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
             />
             <Typography
               variant="h6"
@@ -209,13 +216,6 @@ const HrSidebar = () => {
               title="Pie Chart"
               to="/pie"
               icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

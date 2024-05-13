@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+
 function LeaveTypeList() {
   const [data, setData] = useState([]);
 
@@ -54,14 +55,6 @@ function LeaveTypeList() {
                   <td key={index}>{item}</td>
                 ))}
                 <td>
-                  <NavLink to={"/updateLeaveType/" + leaveTypeId}>
-                    <button
-                      className="btn btn-outline-info btn-sm"
-                      type="button"
-                    >
-                      Edit
-                    </button>
-                  </NavLink>
                   <button
                     onClick={() => deleteOperation(leaveTypeId)}
                     className="btn btn-outline-danger ms-1 btn-sm"

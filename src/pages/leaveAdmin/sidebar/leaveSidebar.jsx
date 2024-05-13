@@ -132,7 +132,7 @@ const LeaveSidebar = () => {
             </Typography>
 
              <Item
-              title="Leave Request List"
+              title="Pending Leave Request"
               to="/leaveRequestList"
               icon={<TimeToLeaveOutlinedIcon />}
               selected={selected}
@@ -157,20 +157,6 @@ const LeaveSidebar = () => {
               title="Bar Chart"
               to="/bar"
               icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Pie Chart"
-              to="/pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

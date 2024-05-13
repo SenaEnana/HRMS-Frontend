@@ -46,6 +46,7 @@ const EmployeeList = () => {
       <table className="table table-hover text-dark w-100 fs-6">
         <thead>
           <tr>
+            <th>Id</th>
             <th>Employee Id</th>
             <th>First Name</th>
             <th>Last Name</th>

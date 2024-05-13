@@ -270,7 +270,6 @@ const EmployeeDashboard = () => {
               Your Complaints
             </Typography>
           </Box>
-          {/* Replace mockTransactions with your complaint data */}
           {compliantRequests.map((complaint, i) => (
             <Box
               key={`${complaint.id}-${i}`}

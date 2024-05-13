@@ -1,17 +1,11 @@
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
-import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
-import TimeToLeaveOutlinedIcon from "@mui/icons-material/TimeToLeaveOutlined";
-import AddCommentOutlinedIcon from "@mui/icons-material/AddCommentOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import DropdownMenu from "../../../components/dropdownMenu";
 import { tokens } from "../../../theme";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -38,7 +32,6 @@ const AdminSidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-  const navigate = useNavigate();
 
   return (
     <Box
@@ -118,50 +111,14 @@ const AdminSidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Typography
-              variant="h6"
-              className="text-dark fw-bold"
-              sx={{ m: "15px 0 5px 20px" }}
-            >
-              Pages
-            </Typography>
-            <Item
-              title="Branch List"
-              to="/branchList"
-              icon={<TimeToLeaveOutlinedIcon />}
+          <Item
+              className=""
+              title="Super Admin  Dashboard"
+              to="/"
+              icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Grade List"
-              to="/gradeList"
-              icon={<TimeToLeaveOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Position List"
-              to="/positionList"
-              icon={<AddCommentOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Department List"
-              to="/departmentList"
-              icon={<FeedbackOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Degree List"
-              to="/degreeList"
-              icon={<FeedbackOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            {/* Hr Sidebar */}
             <Typography
               variant="h6"
               className="text-dark fw-bold"
@@ -169,13 +126,6 @@ const AdminSidebar = () => {
             >
               Data
             </Typography>
-
-            <DropdownMenu
-              label="Manage Employee"
-              items={items}
-              icon={<PeopleOutlinedIcon />}
-              to="/employeeBasic"
-            />
             <Typography
               variant="h6"
               className="text-dark fw-bold"
@@ -187,20 +137,6 @@ const AdminSidebar = () => {
               title="Bar Chart"
               to="/bar"
               icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Pie Chart"
-              to="/pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

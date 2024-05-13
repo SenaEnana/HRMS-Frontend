@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import {useState, useEffect} from "react";
 import DropDown from "../../../components/DropDown";
 
 function AdditionalInformation({ onNext, formikValues, onPrev }) {

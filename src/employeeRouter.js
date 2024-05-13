@@ -31,7 +31,7 @@ const isAuth = true;
                   <Route path="/resignationRequest" element={<ResignationRequest/>}/>
                   <Route path="/supervisorFeedback" element={<SupervisorFeedback/>}/>
                   <Route path="/applyForJob" element={<ApplyForJob/>}/>
-                  <Route path="postedJob" element={<PostedJob/>}/>
+                  <Route path="/postedJob" element={<PostedJob/>}/>
                   </Routes>
                 </main>
               </div>

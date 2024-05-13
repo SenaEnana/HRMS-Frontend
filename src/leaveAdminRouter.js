@@ -4,8 +4,6 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import LeaveRequestList from "./pages/leaveAdmin/form/leaveRequestList";
 import Bar from "./pages/leaveAdmin/bar";
-import Pie from "./pages/leaveAdmin/pie";
-import Line from "./pages/leaveAdmin/line";
 import LeaveAdminDashboard from "./pages/leaveAdmin/dashboard/leaveAdminDashboard";
 import LeaveSidebar from "./pages/leaveAdmin/sidebar/leaveSidebar";
 import AddLeaveType from "./pages/leaveAdmin/leaveType/addLeaveType";
@@ -26,8 +24,6 @@ function LeaveAdminRouter(){
               <Route path="/" element={<LeaveAdminDashboard />} />
               <Route path="/leaveRequestList" element={<LeaveRequestList/>} />
               <Route path="/bar" element={<Bar />} />
-              <Route path="/pie" element={<Pie />} />
-              <Route path="/line" element={<Line />} />
               <Route path="/addLeaveType" element={<AddLeaveType/>}/>
               <Route path="/leaveTypeList" element={<LeaveTypeList/>}/>
               </Routes>

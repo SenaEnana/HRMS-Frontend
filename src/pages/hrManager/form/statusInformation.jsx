@@ -4,11 +4,17 @@ import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import {useState} from "react";
 
 function StatusInformation({ onNext, formikValues, onPrev }) {
   const [MaritalStatus, setMaritalStatus] = useState("single");
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [inputFields, setInputFields] = useState([{ value: "" }]);
+
+  const handleAddField = () => {
+    setInputFields([...inputFields, { value: "" }]);
+  };
 
   const maritalStatusOptions = [
     { value: "single", label: "Single" },

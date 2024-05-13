@@ -14,12 +14,11 @@ function EmployeeInfo({ onNext, formikValues }) {
     { value: "male", label: "Male" },
   ];
 
-  function handleSubmit() {
+  function handleClick() {
     navigate("/statusInformation");
   }
   return (
     <div className="row justify-content-center">
-      <Box className="m-2">
         <Formik
           initialValues={{
             Emp_Id: "",
@@ -37,7 +36,7 @@ function EmployeeInfo({ onNext, formikValues }) {
           }}
           onSubmit={(values) => {
             console.log(values);
-            handleSubmit();
+            navigate("/statusInformation");
           }}
         >
           {(formikValues) => (
@@ -171,12 +170,12 @@ function EmployeeInfo({ onNext, formikValues }) {
                   type="button"
                   value="next"
                   onClick={onNext}
+                    // onClick={formikValues.handleSubmit}
                 />
               </div>
             </form>
           )}
         </Formik>
-      </Box>
     </div>
   );
 }
