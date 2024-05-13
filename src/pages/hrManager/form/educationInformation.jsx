@@ -2,13 +2,14 @@ import TextInput from "../../../components/textInput";
 import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
+import { useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 function EducationInformation({ onNext, formikValues, onPrev }) {
   const [MaritalStatus, setMaritalStatus] = useState("single");
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
-
+  const [inputFields, setInputFields] = useState([{ value: "" }]);
   const maritalStatusOptions = [
     { value: "single", label: "Single" },
     { value: "married", label: "Married" },
@@ -19,6 +20,9 @@ function EducationInformation({ onNext, formikValues, onPrev }) {
   function handleSubmit() {
     navigate("/contactInformation");
   }
+  const handleAddField = () => {
+    setInputFields([...inputFields, { value: "" }]);
+  };
   return (
     <div className="row justify-content-center">
       <Box className="m-2">

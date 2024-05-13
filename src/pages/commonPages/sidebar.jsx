@@ -158,11 +158,7 @@ const Sidebar = () => {
                 setSelected={setSelected}
               />*/}
             {/* Bellow are the sidebar for employee */}
-<<<<<<< HEAD
-            { /* <Typography
-=======
             <Typography
->>>>>>> c289df35ffab41cfa95041c5996490beebea5635
               variant="h6"
               className="text-dark fw-bold"
               sx={{ m: "15px 0 5px 20px" }}
@@ -196,11 +192,7 @@ const Sidebar = () => {
               icon={<FeedbackOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-<<<<<<< HEAD
-            />*/}
-=======
             />
->>>>>>> c289df35ffab41cfa95041c5996490beebea5635
 
             {/* Hr Sidebar */}
             <Typography

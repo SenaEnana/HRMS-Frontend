@@ -238,32 +238,6 @@ const HrDashboard = () => {
 
         {/* ROW 3 */}
         <Box
-<<<<<<< HEAD
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          p="30px"
-        >
-          <Typography variant="h5" fontWeight="600" className="text-dark">
-            Campaign
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography variant="h5" className="text-dark" sx={{ mt: "15px" }}>
-              $48,352 revenue generated
-            </Typography>
-            <Typography className="text-dark">
-              Includes extra misc expenditures and costs
-            </Typography>
-          </Box>
-        </Box>
-
-=======
           gridColumn="span 12"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -287,7 +261,6 @@ const HrDashboard = () => {
           yAxisLabel="Number of requests" />
           </Box>
         </Box>
->>>>>>> c289df35ffab41cfa95041c5996490beebea5635
       </Box>
     </Box>
   );
