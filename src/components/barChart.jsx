@@ -1,82 +1,30 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
-import { tokens } from "../theme";
-import { mockBarData as data } from "../data/mockData";
 
-const BarChart = ({ isDashboard = false }) => {
+const BarChart = ({ data, xAxisLabel, yAxisLabel , isDashboard = false }) => {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  const colors = theme.palette.mode === 'light' ? theme.palette.primary : theme.palette.secondary;
 
   return (
     <ResponsiveBar
       data={data}
-      theme={{
-        // added
-        axis: {
-          domain: {
-            line: {
-              stroke: colors.grey[100],
-            },
-          },
-          legend: {
-            text: {
-              fill: colors.grey[100],
-            },
-          },
-          ticks: {
-            line: {
-              stroke: colors.grey[100],
-              strokeWidth: 1,
-            },
-            text: {
-              fill: colors.grey[100],
-            },
-          },
-        },
-        legends: {
-          text: {
-            fill: colors.grey[100],
-          },
-        },
-      }}
-      keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-      indexBy="country"
-      margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+      keys={["count"]}
+      indexBy="status"
+      margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
       padding={0.3}
-      valueScale={{ type: "linear" }}
       indexScale={{ type: "band", round: true }}
-      colors={{ scheme: "nivo" }}
-      defs={[
-        {
-          id: "dots",
-          type: "patternDots",
-          background: "inherit",
-          color: "#38bcb2",
-          size: 4,
-          padding: 1,
-          stagger: true,
-        },
-        {
-          id: "lines",
-          type: "patternLines",
-          background: "inherit",
-          color: "#eed312",
-          rotation: -45,
-          lineWidth: 6,
-          spacing: 10,
-        },
-      ]}
+      colors={[colors[500], colors[700]]}
       borderColor={{
         from: "color",
         modifiers: [["darker", "1.6"]],
-      }}
+      }} // Removed unnecessary color modifier (optional)
       axisTop={null}
       axisRight={null}
       axisBottom={{
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "country", // changed
+        legend: isDashboard ? undefined : "Status",
         legendPosition: "middle",
         legendOffset: 32,
       }}
@@ -84,20 +32,19 @@ const BarChart = ({ isDashboard = false }) => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: isDashboard ? undefined : "food", // changed
+        legend: isDashboard ? undefined : "Count",
         legendPosition: "middle",
         legendOffset: -40,
       }}
-      enableLabel={false}
+      enableLabel={false} // Removed unnecessary label styles
       labelSkipWidth={12}
       labelSkipHeight={12}
       labelTextColor={{
         from: "color",
         modifiers: [["darker", 1.6]],
-      }}
+      }} // Removed unnecessary color modifier (optional)
       legends={[
         {
-          dataFrom: "keys",
           anchor: "bottom-right",
           direction: "column",
           justify: false,
@@ -119,9 +66,15 @@ const BarChart = ({ isDashboard = false }) => {
           ],
         },
       ]}
+      enableHover={true} // Enable hover interactions
+      tooltip={({ index, value, color }) => (
+        <div style={{ background: color, padding: '8px 10px', borderRadius: '4px' }}>
+          <strong>{index}:</strong> {value}
+        </div>
+      )} // Define custom tooltip content and style
       role="application"
       barAriaLabel={function (e) {
-        return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;
+        return e.id + ": " + e.formattedValue + " in status: " + e.indexValue;
       }}
     />
   );

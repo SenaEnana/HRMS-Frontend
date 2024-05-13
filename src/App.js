@@ -1,6 +1,7 @@
 //import AdminRouter from "./adminRouter";
 //import EmployeeRouter from "./employeeRouter";
 import HrRouter from "./hrRouter";
+<<<<<<< HEAD
 //import AdminRouter from "./adminRouter";
 //import Auth from "./pages/auth/auth";
 //import Login from "./pages/auth/login";
@@ -32,53 +33,75 @@ function App() {
    
    <HrRouter/>
     </div>       
+=======
+import SupervisorRouter from "./supervisorRouter";
+import LeaveAdminRouter from "./leaveAdminRouter";
+import Auth from "./pages/auth/auth";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import CeoRouter from "./ceoRouter";
+
+function App() {
+  const [isAuth, setIsAuth] = useState(false);
+  const navigate = useNavigate();
+  function isTokenValid(token) {
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      const expirationTime = decodedToken.exp * 1000;
+      const currentTime = Date.now();
+
+      return currentTime < expirationTime;
+    } catch (error) {
+      console.error('Error decoding or validating token:', error);
+      return false;
+    }
+  }
+  function getUserRoleFromToken(token) {
+    const decodedToken = JSON.parse(atob(token.split('.')[1]));
+    return decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+  }
+  useEffect(() => {
+    try {
+      const token = sessionStorage.getItem('token');
+      if (token && token.length > 0) {
+        setIsAuth(true);
+      } else {
+        setIsAuth(false);
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }, [navigate]);
+
+  return (
+    <div>
+      {isAuth ? (
+        renderDashboardBasedOnRole()
+      ) : (
+        <Auth />
+      )}
+    </div>
+>>>>>>> c289df35ffab41cfa95041c5996490beebea5635
   );
+  function renderDashboardBasedOnRole() {
+    const token = sessionStorage.getItem('token');
+    const role = getUserRoleFromToken(token);
+    console.log(role)
+    switch (role) {
+      case 'LeaveAdmin':
+        return <LeaveAdminRouter /> ;
+      case 'HRManager':
+        return <HrRouter /> ;
+      case 'Employee':
+        return <EmployeeRouter /> ;
+        default:
+          return <p>You don't have access to any dashboard.</p>;
+    }
+  }
 }
-
 export default App;
-
-// import { useState } from "react";
-// import Sidebar from "./layouts/Sidebar";
-// import Router from "./router";
-// import NavBar from "./layouts/Navbar";
-// import FrontPageRouter from "./frontpagerouter";
-// import StudentSidebar from "./layouts/studentSidebar";
-
-// function App() {
-
-//   const role = JSON.parse(localStorage.getItem("role"));
-//   return (
-    // <div>
-        
-    //    {isAuth ? (
-    //     <div className="col-12 overflow-none bg-white">
-    //     <NavBar/>
-    //        <div className="row col-12">
-    //        {role === "Admin" ?
-    //             <div className="col-2">
-    //             <Sidebar />
-    //             </div>
-    //           : <>
-    //         {role === "student"? 
-    //         <div className="col-2">
-    //           <StudentSidebar/>
-    //         </div>:
-    //     null
-    //         }
-    //      </>
-    //      }
-    //         <div className="col-10 ">
-    //         <Router />
-    //         </div> 
-    //       </div>
-    //     </div>
-    //   ) : (
-    //        <div className="col-12 ">
-    //           <FrontPageRouter/>
-    //         </div>  
-    //   )} 
-    // </div> 
-//   );
-// }
-// export default App;
-  

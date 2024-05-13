@@ -2,33 +2,80 @@ import { useNavigate } from "react-router";
 import { Formik } from "formik";
 import TextInput from "../../../../components/textInput";
 import { complaintValidation } from "./schema";
+import { useState, useEffect } from "react";
 import { FormikTextField } from "formik-material-fields";
+import DropDown from "../../../../components/DropDown";
 
 function Complaint() {
   const navigate = useNavigate();
-  function handleSubmit() {
-    navigate("/employeeDashboard");
+  const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
+  const [BranchId, setBranchId] = useState([{ name: "", id: "" }]);
+  const [inputFields, setInputFields] = useState([{ value: "" }]);
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("https://localhost:7140/Position");
+      const newData = await response.json();
+      setPositionId(newData);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("https://localhost:7140/Branch/GetBranches");
+      const newData = await response.json();
+      setBranchId(newData);
+    };
+    fetchData();
+  }, []);
+
+  async function handleSubmit(values, formikBag) {
+    try {
+      const response = await fetch(
+        "https://localhost:7140/api/Complaint/SubmitCompliant",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
+
+      if (response.ok) {
+        console.log("Complaint submitted successfully");
+        navigate("/employeeDashboard");
+      } else {
+        console.error("Failed to submit complaint:", response.statusText);
+        formikBag.setSubmitting(false);
+        formikBag.setErrors({ submit: "Failed to submit complaint" });
+      }
+    } catch (error) {
+      console.error("Error submitting complaint:", error.message);
+      formikBag.setSubmitting(false);
+      formikBag.setErrors({ submit: "Error submitting complaint" });
+    }
   }
+
+  const handleAddField = () => {
+    setInputFields([...inputFields, { value: "" }]);
+  };
 
   return (
     <>
       <div className="row justify-content-center">
         <Formik
           initialValues={{
-            name: "",
-            position: "",
-            branch: "",
-            department: "",
-            complaintEventDate: "",
-            complaint: "",
-            specificFacts: "",
-            complaintRemedy: "",
-            submissionDate: "",
+            Name: "",
+            Emp_Id: "",
+            PositionId: "",
+            BranchId: "",
+            DateOfEvent: "",
+            Incident: "",
+            Remedy: "",
           }}
-          onSubmit={() => {
-            console.log("successful");
-            handleSubmit();
-          }}
+          onSubmit={(values, formikBag) => handleSubmit(values, formikBag)}
           validationSchema={complaintValidation}
         >
           {(formikValues) => (
@@ -38,116 +85,76 @@ function Complaint() {
               </div>
               <TextInput
                 type="text"
-                name="name"
+                name="Name"
                 label="Name"
-                placeholder="enter your name"
-                value={formikValues.values.name}
-                error={formikValues.errors.name}
+                placeholder="enter Name"
+                value={formikValues.values.Name}
+                error={formikValues.errors.Name}
                 onChange={formikValues.handleChange}
               />
               <TextInput
                 type="text"
-                name="position"
-                label="Position"
-                placeholder="enter your position"
-                value={formikValues.values.position}
-                error={formikValues.errors.position}
+                name="Emp_Id"
+                label="Employee Id"
+                placeholder="enter employee id"
+                value={formikValues.values.Emp_Id}
+                error={formikValues.errors.Emp_Id}
                 onChange={formikValues.handleChange}
               />
-              <TextInput
-                type="text"
-                name="branch"
-                label="Branch"
-                placeholder="enter your branch"
-                value={formikValues.values.branch}
-                error={formikValues.errors.branch}
-                onChange={formikValues.handleChange}
+              <DropDown
+                type="number"
+                label="PositionId"
+                name="PositionId"
+                options={PositionId}
+                value={formikValues.values.PositionId}
+                error={formikValues.errors.PositionId}
+                onChange={(selectedOption) => {
+                  const parsedValue = parseInt(selectedOption, 10);
+                  formikValues.setFieldValue("PositionId", parsedValue);
+                }}
               />
-              <TextInput
-                type="text"
-                name="department"
-                label="Department"
-                placeholder="enter your department"
-                value={formikValues.values.department}
-                error={formikValues.errors.department}
-                onChange={formikValues.handleChange}
+              <DropDown
+                type="number"
+                label="BranchId"
+                name="BranchId"
+                options={BranchId}
+                value={formikValues.values.BranchId}
+                error={formikValues.errors.BranchId}
+                onChange={(selectedOption) => {
+                  const parsedValue = parseInt(selectedOption, 10);
+                  formikValues.setFieldValue("BranchId", parsedValue);
+                }}
               />
               <TextInput
                 type="date"
-                name="complaintEventDate"
-                label="Complaint Event Date"
-                placeholder="enter complaint event date"
-                value={formikValues.values.complaintEventDate}
-                error={formikValues.errors.complaintEventDate}
+                name="DateOfEvent"
+                label="Event Date"
+                placeholder="enter event date"
+                value={formikValues.values.DateOfEvent}
+                error={formikValues.errors.DateOfEvent}
                 onChange={formikValues.handleChange}
               />
-              {/* <TextInput
-                type="text"
-                name="complaint"
-                label="Complaint"
-                placeholder="write your complaint here"
-                value={formikValues.values.complaint}
-                error={formikValues.errors.complaint}
-                onChange={formikValues.handleChange}
-              /> */}
 
               <FormikTextField
                 className="form-control text-dark float-start mt-1 p-1 fs-5"
-                name="complaint"
-                label="Complaint"
+                name="Incident"
+                label="Incident"
                 margin="normal"
-                value={formikValues.values.complaint}
-                error={formikValues.errors.complaint}
-                onChange={formikValues.handleChange}
-                fullWidth
-              />
-              <FormikTextField
-                className="form-control text-dark float-start mt-1 p-1 fs-5"
-                name="specificFacts"
-                label="Specific Facts"
-                margin="normal"
-                value={formikValues.values.specificFacts}
-                error={formikValues.errors.specificFacts}
-                onChange={formikValues.handleChange}
-                fullWidth
-              />
-              <FormikTextField
-                className="form-control text-dark float-start mt-1 p-1 fs-5"
-                name="complaintRemedy"
-                label="Complaint Remedy"
-                margin="normal"
-                value={formikValues.values.complaintRemedy}
-                error={formikValues.errors.complaintRemedy}
+                value={formikValues.values.Incident}
+                error={formikValues.errors.Incident}
                 onChange={formikValues.handleChange}
                 fullWidth
               />
 
-              {/* <TextInput
-                type="text"
-                name="specificFacts"
-                label="Specific Facts"
-                placeholder="enter specific facts you have"
-                value={formikValues.values.specificFacts}
-                error={formikValues.errors.specificFacts}
-                onChange={formikValues.handleChange}
-              /> 
-              <TextInput
-                type="text"
-                name="complaintRemedy"
+              <FormikTextField
+                className="form-control text-dark float-start mt-1 p-1 fs-5"
+                name="Remedy"
                 label="Complaint Remedy"
-                placeholder="enter your complaint remedy"
-                value={formikValues.values.complaintRemedy}
-                error={formikValues.errors.complaintRemedy}
+                margin="normal"
+                value={formikValues.values.Remedy}
+                error={formikValues.errors.Remedy}
                 onChange={formikValues.handleChange}
-              /> */}
-              <TextInput
-                type="date"
-                name="submissionDate"
-                label="Submission Date"
-                placeholder="enter submission date"
-                value={formikValues.values.submissionDate}
-                error={formikValues.errors.submissionDate}
-                onChange={formikValues.handleChange}
+                fullWidth
               />
 
               <div className="m-3">

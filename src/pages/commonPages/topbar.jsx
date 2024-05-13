@@ -13,56 +13,78 @@ const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-  const [input, setInput] = useState("");
-  const fetchData = (value) => {
-    fetch("https://localhost:7140/Employee/ListEmployees")
+  const [fetchedData, setFetchedData] = useState(null); 
+  const [searchQuery, setSearchQuery] = useState({
+    empId: "",
+    name: "",
+    branch: "",
+    department: "",
+    email:"",
+    position:"",
+  });
+
+  const handleChange = (field, value) => {
+    setSearchQuery((prevSearchQuery) => ({
+      ...prevSearchQuery,
+      [field]: value,
+    }));
+  };
+
+  const fetchData = () => {
+    const queryParams = new URLSearchParams(searchQuery).toString();
+    fetch(`https://localhost:7140/Employee/Filter?${queryParams}`)
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        const results = json.filter((user) => {
-          return (
-            value &&
-            user &&
-            user.name &&
-            user.name.toLowerCase().includes(value)
-          );
-        });
-        console.log(results);
+        setFetchedData(json);
+        // Handle the fetched data here
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
       });
   };
-  const handleChange = (value) => {
-    setInput(value);
-    fetchData(value);
-  };
+  
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
       {/* SEARCH BAR */}
-      <Box className="d-flex rounded m-2" backgroundColor={colors.primary[400]}>
+      <Box className="d-flex rounded m-1" backgroundColor={colors.primary[400]}>
         <InputBase
-          className="ps-2 fs-6 d-flex text-dark"
-          placeholder="type name"
-          value={input}
-          onChange={(e) => handleChange(e.target.value)}
+          className="ps-2 fs-6 m-1 text-dark"
+          placeholder="Enter Employee ID"
+          value={searchQuery.empId}
+          onChange={(e) => handleChange("empId", e.target.value)}
         />
-        <IconButton type="button" className="btn p-1 text-dark">
-          <SearchIcon className="text-info" />
-        </IconButton>
-      </Box>
-      <Box className="d-flex rounded m-2" backgroundColor={colors.primary[400]}>
         <InputBase
-          className="ps-2 fs-6 d-flex text-dark"
-          placeholder="type department"
-        />{" "}
-        <IconButton type="button" className="btn p-1 text-dark">
-          <SearchIcon className="text-info" />
-        </IconButton>
-      </Box>
-      <Box className="d-flex rounded m-2" backgroundColor={colors.primary[400]}>
-        <InputBase
-          className="ps-2 fs-6 d-flex text-dark"
-          placeholder="type branch"
+          className="ps-2 fs-6 m-1 text-dark"
+          placeholder="Enter Name "
+          value={searchQuery.name}
+          onChange={(e) => handleChange("name", e.target.value)}
         />
-        <IconButton type="button" className="btn p-1 text-dark">
+        <InputBase
+          className="ps-2 fs-6 m-1 text-dark"
+          placeholder="Branch name"
+          value={searchQuery.branch}
+          onChange={(e) => handleChange("branch", e.target.value)}
+        />
+        <InputBase
+          className="ps-2 fs-6 m-1 text-dark"
+          placeholder="Department name"
+          value={searchQuery.department}
+          onChange={(e) => handleChange("department", e.target.value)}
+        />
+          <InputBase
+          className="ps-2 fs-6 m-1 text-dark"
+          placeholder="Position name"
+          value={searchQuery.position}
+          onChange={(e) => handleChange("position", e.target.value)}
+        />
+         <InputBase
+          className="ps-2 fs-6 m-1 text-dark"
+          placeholder="Enter Email"
+          value={searchQuery.email}
+          onChange={(e) => handleChange("email", e.target.value)}
+        />
+        <IconButton type="button" className="btn p-1" onClick={fetchData}>
           <SearchIcon className="text-info" />
         </IconButton>
       </Box>

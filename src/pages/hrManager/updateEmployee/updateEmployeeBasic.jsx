@@ -69,7 +69,7 @@ function UpdateEmployeeBasic() {
 
   async function updateEmployees(values) {
     setLoading(true);
-    let result = await fetch("http://127.0.0.1:8000/api/updateTeacher/" + id, {
+    let result = await fetch("https://localhost:7140/Employee/" + id, {
       method: "PUT",
       body: JSON.stringify(values),
       headers: {

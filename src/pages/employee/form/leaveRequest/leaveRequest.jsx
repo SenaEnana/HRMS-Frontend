@@ -1,33 +1,56 @@
 import { useNavigate } from "react-router";
 import { Formik } from "formik";
+import {useState, useEffect} from 'react'
 import TextInput from "../../../../components/textInput";
 import { leaveValidation } from "./schema";
+import DropDown from "../../../../components/DropDown";
 
 function LeaveRequest() {
   const navigate = useNavigate();
-  function handleSubmit() {
-    navigate("/employeeDashboard");
-  }
+  const handleSubmit = async (values) => {
+    console.log(values)
+    try {
+      const response = await fetch(
+        "https://localhost:7140/api/Leave/RequestLeave",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
+      if (response.ok) {
+        navigate("/employeeDashboard");
+      } else {
+        console.error("Failed to submit leave request");
+      }
+    } catch (error) {
+      console.error("Error submitting leave request:", error.message);
+    }
+  };
+  const [LeaveTypeId, setLeaveTypeId] = useState([{ name: "", id: "" }]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("https://localhost:7140/LeaveType/GetLeaveTypes");
+      const newData = await response.json();
+      setLeaveTypeId(newData);
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <div className="row justify-content-center">
         <Formik
           initialValues={{
-            date: "",
-            name: "",
-            idNo: "",
-            department: "",
-            jobTitle: "",
-            leaveRequested: "",
-            leaveType: "",
-            placeDuringLeave: "",
-            phoneNumber: "",
-            email: "",
+            Emp_Id: "",
+            LeaveTypeId: "",
+            StartDate: "",
+            EndDate: "",
+            Reason: "",
           }}
-          onSubmit={() => {
-            console.log("successful");
-            handleSubmit();
-          }}
+          onSubmit={handleSubmit}
           validationSchema={leaveValidation}
         >
           {(formikValues) => (
@@ -36,93 +59,52 @@ function LeaveRequest() {
                 <p className="fs-4 text-dark text-center">Leave Request Form</p>
               </div>
               <TextInput
+                type="text"
+                name="Emp_Id"
+                label="Emp_Id"
+                placeholder="enter Emp_Id"
+                value={formikValues.values.Emp_Id}
+                error={formikValues.errors.Emp_Id}
+                onChange={formikValues.handleChange}
+              />
+              
+               <DropDown
+                type="number"
+                label="Leave TypeI d"
+                name="LeaveTypeId"
+                options={LeaveTypeId}
+                value={formikValues.values.LeaveTypeId}
+                error={formikValues.errors.LeaveTypeId}
+                onChange={(selectedOption) => {
+                  const parsedValue = parseInt(selectedOption, 10);
+                  formikValues.setFieldValue("LeaveTypeId", parsedValue);
+                }}
+              />
+              <TextInput
                 type="date"
-                name="date"
-                label="Date"
-                placeholder="enter date"
-                value={formikValues.values.date}
-                error={formikValues.errors.date}
+                name="StartDate"
+                label="Start Date"
+                placeholder="enter employee start date"
+                value={formikValues.values.StartDate}
+                error={formikValues.errors.StartDate}
+                onChange={formikValues.handleChange}
+              />
+           <TextInput
+                type="date"
+                name="EndDate"
+                label="End Date"
+                placeholder="enter employee end date"
+                value={formikValues.values.EndDate}
+                error={formikValues.errors.EndDate}
                 onChange={formikValues.handleChange}
               />
               <TextInput
                 type="text"
-                name="name"
-                label="Name"
-                placeholder="enter your name"
-                value={formikValues.values.name}
-                error={formikValues.errors.name}
-                onChange={formikValues.handleChange}
-              />
-              <TextInput
-                type="number"
-                name="idNo"
-                label="Id Number"
-                placeholder="enter your id Number"
-                value={formikValues.values.idNo}
-                error={formikValues.errors.idNo}
-                onChange={formikValues.handleChange}
-              />
-              <TextInput
-                type="text"
-                name="department"
-                label="Department"
-                placeholder="enter your department"
-                value={formikValues.values.department}
-                error={formikValues.errors.department}
-                onChange={formikValues.handleChange}
-              />
-              <TextInput
-                type="text"
-                name="jobTitle"
-                label="Job Title"
-                placeholder="enter your job title"
-                value={formikValues.values.jobTitle}
-                error={formikValues.errors.jobTitle}
-                onChange={formikValues.handleChange}
-              />
-              <TextInput
-                type="number"
-                name="leaveRequested"
-                label="Leave Requested"
-                placeholder="enter your requested leave number"
-                value={formikValues.values.leaveRequested}
-                error={formikValues.errors.leaveRequested}
-                onChange={formikValues.handleChange}
-              />
-              <TextInput
-                type="text"
-                name="leaveType"
-                label="Leave Type"
-                placeholder="enter leave type"
-                value={formikValues.values.leaveType}
-                error={formikValues.errors.leaveType}
-                onChange={formikValues.handleChange}
-              />
-              <TextInput
-                type="text"
-                name="placeDuringLeave"
-                label="Place During Leave"
-                placeholder="enter your place during leave"
-                value={formikValues.values.placeDuringLeave}
-                error={formikValues.errors.placeDuringLeave}
-                onChange={formikValues.handleChange}
-              />
-              <TextInput
-                type="number"
-                name="phoneNumber"
-                label="Phone Number"
-                placeholder="enter your phone number"
-                value={formikValues.values.phoneNumber}
-                error={formikValues.errors.phoneNumber}
-                onChange={formikValues.handleChange}
-              />
-              <TextInput
-                type="email"
-                name="email"
-                label="Email"
-                placeholder="enter your email account"
-                value={formikValues.values.email}
-                error={formikValues.errors.email}
+                name="Reason"
+                label="Reason"
+                placeholder="enter leave reason"
+                value={formikValues.values.Reason}
+                error={formikValues.errors.Reason}
                 onChange={formikValues.handleChange}
               />
 
@@ -143,36 +125,3 @@ function LeaveRequest() {
 }
 
 export default LeaveRequest;
-
-//
-
-// const validationSchema = Yup.object().shape({
-//   username: Yup.string().required(),
-// });
-
-// const initialValues = {
-//   username: '',
-// };
-
-// class MyForm extends Component {
-//   render() {
-//     return (
-//       <Formik
-//         initialValues={initialValues}
-//         validationSchema={validationSchema}
-//         onSubmit={this.props.onSubmit}
-//       >
-//         {({ isValid }) => (
-//           <Form autoComplete="off">
-// <FormikTextField
-//   name="username"
-//   label="Username"
-//   margin="normal"
-//   fullWidth
-// />
-//           </Form>
-//         )}
-//       </Formik>
-//     );
-//   }
-// }

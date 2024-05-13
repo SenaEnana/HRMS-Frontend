@@ -1,40 +1,84 @@
 import { useNavigate } from "react-router";
 import { Formik } from "formik";
+import { useState, useEffect } from "react";
 import { resignationValidation } from "./schema";
 import { FormikTextField } from "formik-material-fields";
 import TextInput from "../../../../components/textInput";
+import DropDown from "../../../../components/DropDown";
+import {Box, useTheme} from "@mui/material";
+import { tokens } from "../../../../theme";
 
 function ResignationRequest() {
   const navigate = useNavigate();
-  function handleSubmit() {
-    navigate("/employeeDashboard");
-  }
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
+  const [DepartmentId, setDepartmentId] = useState([{ name: "", id: "" }]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(
+        "https://localhost:7140/Department/GetDepartments"
+      );
+      const newData = await response.json();
+      setDepartmentId(newData);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("https://localhost:7140/Position");
+      const newData = await response.json();
+      setPositionId(newData);
+    };
+    fetchData();
+  }, []);
+  const handleSubmit = async (values) => {
+    try {
+      const response = await fetch(
+        "https://localhost:7140/Resignation/RequestResignation",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
+      if (response.ok) {
+        navigate("/employeeDashboard");
+      } else {
+        console.error("Failed to submit resignation request");
+      }
+    } catch (error) {
+      console.error("Error submitting resignation request:", error.message);
+    }
+  };
 
   return (
     <>
       <div className="row justify-content-center">
         <Formik
           initialValues={{
-            name: "",
-            department: "",
-            hireDate: "",
-            position: "",
-            dutyStation: "",
-            separationDate: "",
-            reason: "",
-            satisfaction: "",
-            workRelationship: "",
-            recommendation: "",
-            comments: "",
+            Emp_Id: "",
+            FullName: "",
+            DepartmentId: "",
+            PositionId: "",
+            EmployeeHireDate: "",
+            SeparationDate: "",
+            Reason: "",
+            Satisfaction: "",
+            EmployeeRelationship: "",
+            Recommendation: "",
+            Comment: "",
           }}
-          onSubmit={() => {
-            console.log("successful");
-            handleSubmit();
-          }}
+          onSubmit={handleSubmit} // Correct placement of onSubmit prop
           validationSchema={resignationValidation}
         >
           {(formikValues) => (
-            <form className="form-group rounded border col-5 pe-3 mt-5 bg-light">
+
+            <form className="form-group rounded border col-5 pe-3 mt-5">
               <div className="mt-3">
                 <p className="fs-4 text-dark text-center">
                   Resignation Request Form
@@ -42,67 +86,72 @@ function ResignationRequest() {
               </div>
               <TextInput
                 type="text"
-                name="name"
-                label="Name"
-                placeholder="enter your name"
-                value={formikValues.values.name}
-                error={formikValues.errors.name}
+                name="Emp_Id"
+                label="Employee Id"
+                placeholder="enter employee id"
+                value={formikValues.values.Emp_Id}
+                error={formikValues.errors.Emp_Id}
                 onChange={formikValues.handleChange}
               />
               <TextInput
                 type="text"
-                name="department"
-                label="Department"
-                placeholder="enter your department"
-                value={formikValues.values.department}
-                error={formikValues.errors.department}
+                name="FullName"
+                label="Full Name"
+                placeholder="enter full name"
+                value={formikValues.values.FullName}
+                error={formikValues.errors.FullName}
                 onChange={formikValues.handleChange}
               />
+              <DropDown
+                    type="number"
+                    label="PositionId"
+                    name="PositionId"
+                    options={PositionId}
+                    value={formikValues.values.PositionId}
+                    error={formikValues.errors.PositionId}
+                    onChange={(selectedOption) => {
+                      const parsedValue = parseInt(selectedOption, 10);
+                      formikValues.setFieldValue("PositionId", parsedValue);
+                    }}
+                  />
+                       <DropDown
+                    type="number"
+                    label="DepartmentId"
+                    name="DepartmentId"
+                    options={DepartmentId}
+                    value={formikValues.values.DepartmentId}
+                    error={formikValues.errors.DepartmentId}
+                    onChange={(selectedOption) => {
+                      const parsedValue = parseInt(selectedOption, 10);
+                      formikValues.setFieldValue("DepartmentId", parsedValue);
+                    }}
+                  />
               <TextInput
                 type="date"
-                name="hireDate"
-                label="Hire Date"
-                placeholder="enter your hire date"
-                value={formikValues.values.hireDate}
-                error={formikValues.errors.hireDate}
+                name="EmployeeHireDate"
+                label="Employee Hire Date"
+                placeholder="enter employee hire date"
+                value={formikValues.values.EmployeeHireDate}
+                error={formikValues.errors.EmployeeHireDate}
                 onChange={formikValues.handleChange}
               />
 
               <TextInput
-                type="text"
-                name="position"
-                label="Position"
-                placeholder="enter your position"
-                value={formikValues.values.position}
-                error={formikValues.errors.position}
-                onChange={formikValues.handleChange}
-              />
-
-              <TextInput
                 type="date"
-                name="dutyStation"
-                label="Duty Station"
-                placeholder="enter your duty station"
-                value={formikValues.values.dutyStation}
-                error={formikValues.errors.dutyStation}
-                onChange={formikValues.handleChange}
-              />
-              <TextInput
-                type="date"
-                name="separationDate"
+                name="SeparationDate"
                 label="Separation Date"
-                placeholder="enter your separation date"
-                value={formikValues.values.separationDate}
-                error={formikValues.errors.separationDate}
+                placeholder="enter employee separation date"
+                value={formikValues.values.SeparationDate}
+                error={formikValues.errors.SeparationDate}
                 onChange={formikValues.handleChange}
               />
               <FormikTextField
                 className="form-control text-dark float-start mt-1 p-1 fs-5"
-                name="reason"
+                name="Reason"
                 label="Reason"
                 margin="normal"
-                value={formikValues.values.reason}
-                error={formikValues.errors.reason}
+                value={formikValues.values.Reason}
+                error={formikValues.errors.Reason}
                 onChange={formikValues.handleChange}
                 fullWidth
               />
@@ -117,36 +166,39 @@ function ResignationRequest() {
               /> */}
               <TextInput
                 type="text"
-                name="satisfaction"
+                name="Satisfaction"
                 label="Satisfaction"
                 placeholder="enter if you are satisfied or not"
-                value={formikValues.values.satisfaction}
-                error={formikValues.errors.satisfaction}
+                value={formikValues.values.Satisfaction}
+                error={formikValues.errors.Satisfaction}
                 onChange={formikValues.handleChange}
               />
               <TextInput
                 type="text"
-                name="workRelationship"
+                name="EmployeeRelationship"
                 label="Work Relationship"
-                placeholder="enter your work relationship"
-                value={formikValues.values.workRelationship}
-                error={formikValues.errors.workRelationship}
+                placeholder="enter work relationship"
+                value={formikValues.values.EmployeeRelationship}
+                error={formikValues.errors.EmployeeRelationship}
                 onChange={formikValues.handleChange}
               />
               <FormikTextField
                 className="form-control text-dark float-start mt-1 p-1 fs-5"
-                name="recommendation"
+                name="Recommendation"
                 label="Recommendation"
                 margin="normal"
-                value={formikValues.values.recommendation}
-                error={formikValues.errors.recommendation}
+                value={formikValues.values.Recommendation}
+                error={formikValues.errors.Recommendation}
                 onChange={formikValues.handleChange}
                 fullWidth
               />
               <FormikTextField
-                name="comments"
-                label="Comments"
+                name="Comment"
+                label="Comment"
                 margin="normal"
+                value={formikValues.values.Comment}
+                error={formikValues.errors.Comment}
+                onChange={formikValues.handleChange}
                 fullWidth
               />
               {/* <TextInput

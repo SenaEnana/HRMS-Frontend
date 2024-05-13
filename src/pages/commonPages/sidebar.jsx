@@ -4,6 +4,9 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
+import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
+import TimeToLeaveOutlinedIcon from "@mui/icons-material/TimeToLeaveOutlined";
+import AddCommentOutlinedIcon from "@mui/icons-material/AddCommentOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
@@ -155,7 +158,11 @@ const Sidebar = () => {
                 setSelected={setSelected}
               />*/}
             {/* Bellow are the sidebar for employee */}
+<<<<<<< HEAD
             { /* <Typography
+=======
+            <Typography
+>>>>>>> c289df35ffab41cfa95041c5996490beebea5635
               variant="h6"
               className="text-dark fw-bold"
               sx={{ m: "15px 0 5px 20px" }}
@@ -189,7 +196,11 @@ const Sidebar = () => {
               icon={<FeedbackOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+<<<<<<< HEAD
             />*/}
+=======
+            />
+>>>>>>> c289df35ffab41cfa95041c5996490beebea5635
 
             {/* Hr Sidebar */}
             <Typography

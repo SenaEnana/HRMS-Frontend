@@ -1,4 +1,10 @@
+import { tokens } from "../theme";
+import {Box, useTheme} from "@mui/material";
+
 function TextInput({ value, type, name, label, onChange, error, placeholder }) {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   return (
     <div className="col-12 row">
       <div>
@@ -14,7 +20,7 @@ function TextInput({ value, type, name, label, onChange, error, placeholder }) {
           onChange={onChange}
         />
       </div>
-      {<p className="text-danger text-start m-2">{error}</p>}
+      {<p className="text-danger text-start m-1">{error}</p>}
     </div>
   );
 }
