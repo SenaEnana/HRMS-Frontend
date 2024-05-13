@@ -16,10 +16,9 @@ function AddDegree() {
         body: JSON.stringify(values),
       });
       if (response.ok) {
-        console.log("successful");
         alert("degree added successfully");
       } else {
-        console.log("failed");
+        alert("failed");
       }
     } catch (error) {
       console.error("Error adding new degree:", error.message);

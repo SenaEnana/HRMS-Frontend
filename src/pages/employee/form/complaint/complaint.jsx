@@ -11,7 +11,7 @@ function Complaint() {
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
   const [BranchId, setBranchId] = useState([{ name: "", id: "" }]);
   const [inputFields, setInputFields] = useState([{ value: "" }]);
-  
+  const [error, setError] = useState(null); 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("https://localhost:7140/Position");
@@ -44,17 +44,14 @@ function Complaint() {
       );
 
       if (response.ok) {
-        console.log("Complaint submitted successfully");
+        alert("Complaint submitted successfully");
         navigate("/employeeDashboard");
       } else {
-        console.error("Failed to submit complaint:", response.statusText);
-        formikBag.setSubmitting(false);
-        formikBag.setErrors({ submit: "Failed to submit complaint" });
+        const errorMessage = await response.text(); 
+        setError(errorMessage); 
       }
     } catch (error) {
-      console.error("Error submitting complaint:", error.message);
-      formikBag.setSubmitting(false);
-      formikBag.setErrors({ submit: "Error submitting complaint" });
+      setError("Error submitting leave request"); 
     }
   }
 
@@ -156,7 +153,7 @@ function Complaint() {
                 onChange={formikValues.handleChange}
                 fullWidth
               />
-
+  {error && <p className="text-danger">{error}</p>}
               <div className="m-3">
                 <input
                   className="btn btn-info col-12"

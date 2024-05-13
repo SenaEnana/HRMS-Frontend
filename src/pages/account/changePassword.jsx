@@ -2,8 +2,10 @@ import { NavLink } from "react-router-dom";
 import { Formik } from "formik";
 import { Box, useMediaQuery } from "@mui/material";
 import TextInput from "../../components/textInput";
+import {useState, useEffect} from 'react'
 
 function ChangePassword() {
+  const [error, setError] = useState(null); 
   const isNonMobile = useMediaQuery("(min-width:600px)");
   async function changePassword(values) {
     try {
@@ -19,12 +21,13 @@ function ChangePassword() {
       );
       console.log(response);
       if (response.ok) {
-        console.log("successful");
+        alert("successful");
       } else {
-        console.log("failed");
+        const errorMessage = await response.text(); 
+        setError(errorMessage); 
       }
     } catch (error) {
-      console.error("Error adding new branch:", error.message);
+      setError("Error submitting leave request");  
     }
   }
 
@@ -86,6 +89,7 @@ function ChangePassword() {
                   onChange={formikValues.handleChange}
                 />
               </Box>
+              {error && <p className="text-danger">{error}</p>}
               <div className="m-3">
                 <input
                   className="btn btn-info col-10 float-end m-2"

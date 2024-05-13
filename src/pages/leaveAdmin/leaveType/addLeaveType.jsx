@@ -20,7 +20,7 @@ function AddLeaveType() {
       );
       console.log(response);
       if (response.ok) {
-        console.log("successful");
+        alert("Leave Type added successfully");
       } else {
         console.log("failed");
       }

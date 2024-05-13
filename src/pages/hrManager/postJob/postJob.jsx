@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 function PromoteEmployee() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
-
+  const [error, setError] = useState(null); 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("https://localhost:7140/Position");
@@ -28,13 +28,13 @@ function PromoteEmployee() {
         body: JSON.stringify(values),
       });
       if (response.ok) {
-        console.log("successful");
         alert("job posted successfully");
       } else {
-        console.log("failed");
+        const errorMessage = await response.text(); 
+        setError(errorMessage); 
       }
     } catch (error) {
-      console.error("Error posting job:", error.message);
+      setError("Error posting job");
     }
   }
   return (
@@ -95,6 +95,7 @@ function PromoteEmployee() {
                 error={formikValues.errors.Requirement}
                 onChange={formikValues.handleChange}
               />
+                {error && <p className="text-danger">{error}</p>}
               <div className="m-3">
                 <input
                   className="btn btn-info col-10 m-2"

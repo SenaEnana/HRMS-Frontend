@@ -19,10 +19,9 @@ function AddDepartment() {
         }
       );
       if (response.ok) {
-        console.log("successful");
         alert("department added successfully");
       } else {
-        console.log("failed");
+        alert("failed");
       }
     } catch (error) {
       console.error("Error adding new department:", error.message);
