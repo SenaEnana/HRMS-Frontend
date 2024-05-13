@@ -1,11 +1,11 @@
 import TextInput from "../../../components/textInput";
-import { NavLink } from "react-router-dom";
-import { dropDownValidation } from "./schema";
 import { Formik } from "formik";
 import { useMediaQuery } from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 function AddGrade() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const navigate = useNavigate();
   async function addNewGrade(values) {
     try {
       const response = await fetch("https://localhost:7140/Grade/AddGrade", {
@@ -18,6 +18,7 @@ function AddGrade() {
       if (response.ok) {
         console.log("successful");
         alert("grade added successfully");
+        navigate("/gradeList");
       } else {
         console.log("failed");
       }
@@ -28,27 +29,18 @@ function AddGrade() {
 
   return (
     <>
-      <div className="d-flex justify-content-between mt-5 text-dark">
-        <NavLink
-          to={"/gradeList"}
-          className="float-end btn btn-info btn-sm m-2"
-        >
-          Grade List
-        </NavLink>
-      </div>
-      <div className="row justify-content-center">
+
+      <div className="row justify-content-center mt-5">
           <Formik
             initialValues={{
               Name: "",
             }}
             onSubmit={(values) => {
               addNewGrade(values);
-              console.log(values);
             }}
-            //validationSchema={dropDownValidation}
           >
             {(formikValues) => (
-              <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
+              <form className="form-group rounded border col-6 ms-5 ms-4 bg-light">
                 <div className="ms-3">
                   <p className="fs-4 text-dark text-center">Add New Grade</p>
                 </div>
@@ -63,7 +55,7 @@ function AddGrade() {
                 />
                 <div className="m-3">
                   <input
-                    className="btn btn-info col-10 m-2"
+                    className="btn btn-success col-10 m-2"
                     type="button"
                     value="add"
                     onClick={formikValues.handleSubmit}

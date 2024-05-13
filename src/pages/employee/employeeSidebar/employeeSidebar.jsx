@@ -113,14 +113,14 @@ const EmployeeSidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
+          <Item
               className=""
-              title="Dashboard"
-              to="/employeeDashboard"
+              title="Employee Dashboard"
+              to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> 
             <Typography
               variant="h6"
               className="text-dark fw-bold"

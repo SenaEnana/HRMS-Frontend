@@ -29,7 +29,7 @@ function PositionList() {
         <h5 className="text-start ms-2">List Of Position</h5>
         <NavLink
           to={"/addPosition"}
-          className="float-end btn btn-info btn-sm mb-2"
+          className="float-end btn btn-secondary btn-sm mb-2"
         >
           Add new Position
         </NavLink>
@@ -53,14 +53,6 @@ function PositionList() {
                   <td key={index}>{item}</td>
                 ))}
                 <td>
-                  <NavLink to={"/updatePosition/" + positionId}>
-                    <button
-                      className="btn btn-outline-info btn-sm"
-                      type="button"
-                    >
-                      Edit
-                    </button>
-                  </NavLink>
                   <button
                     onClick={() => deleteOperation(positionId)}
                     className="btn btn-outline-danger ms-1 btn-sm"

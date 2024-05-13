@@ -31,7 +31,7 @@ function DepartmentList() {
         <h5 className="text-start ms-2">List Of Departments</h5>
         <NavLink
           to={"/addDepartment"}
-          className="float-end btn btn-info btn-sm mb-2"
+          className="float-end btn btn-secondary btn-sm mb-2"
         >
           Add new Department
         </NavLink>
@@ -53,14 +53,6 @@ function DepartmentList() {
                   <td key={index}>{item}</td>
                 ))}
                 <td>
-                  <NavLink to={"/updateDepartment/" + departmentId}>
-                    <button
-                      className="btn btn-outline-info btn-sm"
-                      type="button"
-                    >
-                      Edit
-                    </button>
-                  </NavLink>
                   <button
                     onClick={() => deleteOperation(departmentId)}
                     className="btn btn-outline-danger ms-1 btn-sm"

@@ -4,6 +4,7 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import TimeToLeaveOutlinedIcon from "@mui/icons-material/TimeToLeaveOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined"; 
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
@@ -113,7 +114,14 @@ const CeoSidebar = () => {
             </Box>
           )}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-
+          <Item
+              className=""
+              title="Ceo Dashboard"
+              to="/"
+              icon={<HomeOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            /> 
             <Typography
               variant="h6"
               className="text-dark fw-bold"

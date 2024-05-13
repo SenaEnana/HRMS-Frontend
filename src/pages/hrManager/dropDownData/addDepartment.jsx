@@ -1,11 +1,12 @@
 import TextInput from "../../../components/textInput";
 import { NavLink } from "react-router-dom";
-import { dropDownValidation } from "./schema";
 import { Formik } from "formik";
 import { useMediaQuery } from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 function AddDepartment() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const navigate = useNavigate();
   async function addNewDepartment(values) {
     try {
       const response = await fetch(
@@ -21,6 +22,7 @@ function AddDepartment() {
       if (response.ok) {
         console.log("successful");
         alert("department added successfully");
+        navigate("/departmentList");
       } else {
         console.log("failed");
       }
@@ -31,27 +33,17 @@ function AddDepartment() {
 
   return (
     <>
-      <div className="d-flex justify-content-between mt-5 text-dark">
-        <NavLink
-          to={"/departmentList"}
-          className="float-end btn btn-info btn-sm m-2"
-        >
-          Department List
-        </NavLink>
-      </div>
-      <div className="row justify-content-center">
+      <div className="row justify-content-center mt-5">
           <Formik
             initialValues={{
               Name: "",
             }}
             onSubmit={(values) => {
               addNewDepartment(values);
-              console.log(values);
             }}
-            //validationSchema={dropDownValidation}
           >
             {(formikValues) => (
-              <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
+              <form className="form-group rounded border col-6 ms-5 ms-4 bg-light">
                 <div className="ms-3">
                   <p className="fs-4 text-dark text-center">
                     Add New Department
@@ -68,7 +60,7 @@ function AddDepartment() {
                 />
                 <div className="m-3">
                   <input
-                    className="btn btn-info col-10 m-2"
+                    className="btn btn-success col-10 m-2"
                     type="button"
                     value="add"
                     onClick={formikValues.handleSubmit}

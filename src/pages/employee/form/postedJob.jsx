@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 function PostedJob() {
   const [data, setData] = useState([]);
@@ -16,6 +17,19 @@ function PostedJob() {
     console.log(result);
     setData(result);
   }
+
+  async function applyForJobOperation(Id) {
+    let result = await fetch(`https://localhost:7140/LeaveType/${Id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    result = await result.json();
+    getData();
+  }
+
   return (
     <>
       <div className="d-flex justify-content-between mt-5 text-dark">
@@ -31,13 +45,22 @@ function PostedJob() {
           </tr>
         </thead>
         <tbody>
-          {data.map((employee) => {
-            const employeeId = employee.id;
+          {data.map((job) => {
+            const jobId = job.id;
             return (
-              <tr key={employeeId}>
-                {Object.values(employee).map((item, index) => (
+              <tr key={jobId}>
+                {Object.values(job).map((item, index) => (
                   <td key={index}>{item}</td>
                 ))}
+                <td>
+                <button
+                    onClick={() => applyForJobOperation(jobId)}
+                    className="btn btn-outline-info ms-1 btn-sm"
+                    type="button"
+                  >
+                    Apply
+                  </button>
+                </td>
               </tr>
             );
           })}

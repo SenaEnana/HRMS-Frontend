@@ -3,9 +3,11 @@ import { leaveTypeValidation } from "./schema";
 import TextInput from "../../../components/textInput";
 import { Formik } from "formik";
 import { Box, useMediaQuery } from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 function AddLeaveType() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const navigate = useNavigate();
   async function addNewLeaveType(values) {
     try {
       const response = await fetch(
@@ -21,24 +23,17 @@ function AddLeaveType() {
       console.log(response);
       if (response.ok) {
         console.log("successful");
+        navigate("/leaveTypeList");
       } else {
         console.log("failed");
       }
     } catch (error) {
-      console.error("Error adding new branch:", error.message);
+      console.error("Error adding new leave type:", error.message);
     }
   }
 
   return (
     <>
-      <div className="d-flex justify-content-between mt-5 text-dark">
-        <NavLink
-          to={"/leaveTypeList"}
-          className="float-end btn btn-info btn-sm m-2"
-        >
-          Leave Type List
-        </NavLink>
-      </div>
       <div className="row justify-content-center">
         <Formik
           initialValues={{
@@ -52,7 +47,7 @@ function AddLeaveType() {
           validationSchema={leaveTypeValidation}
         >
           {(formikValues) => (
-            <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
+            <form className="form-group rounded border col-6 ms-5 ms-4 bg-light">
               <div className="ms-3">
                 <p className="fs-4 text-dark text-center">Add New Leave Type</p>
               </div>
@@ -76,7 +71,7 @@ function AddLeaveType() {
               />
               <div className="m-3">
                 <input
-                  className="btn btn-info col-10 float-end m-2"
+                  className="btn btn-success col-10 float-end m-2"
                   type="button"
                   value="add"
                   onClick={formikValues.handleSubmit}

@@ -29,7 +29,7 @@ function BranchList() {
         <h5 className="text-start ms-3">List Of Branches</h5>
         <NavLink
           to={"/addBranch"}
-          className="float-end btn btn-info btn-sm mb-2"
+          className="float-end btn btn-secondary btn-sm mb-2"
         >
           Add new Branch
         </NavLink>
@@ -51,14 +51,6 @@ function BranchList() {
                   <td key={index}>{item}</td>
                 ))}
                 <td>
-                  <NavLink to={"/updateEmployeeBasic/" + branchId}>
-                    <button
-                      className="btn btn-outline-info btn-sm"
-                      type="button"
-                    >
-                      Edit
-                    </button>
-                  </NavLink>
                   <button
                     onClick={() => deleteOperation(branchId)}
                     className="btn btn-outline-danger ms-1 btn-sm"
