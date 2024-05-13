@@ -19,7 +19,7 @@ function AdminRouter() {
                   <Sidebar isAdminSidebar={isAdminSidebar} />
                 <main className="content">
                   <Routes>
-                  <Route path="/adminDashboard" element={<AdminDashboard />} />
+                  <Route path="/" element={<AdminDashboard />} />
                   <Route path="/team" element={<Team />} />
                   <Route path="/form" element={<Form />} />
                   <Route path="/bar" element={<Bar />} />
