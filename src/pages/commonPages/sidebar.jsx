@@ -11,6 +11,10 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+//import TimeToLeaveOutlinedIcon from "@mui/icons-material/TimeToLeaveOutlined";
+//import AddCommentOutlinedIcon from "@mui/icons-material/AddCommentOutlined";
+//import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
 import { tokens } from "../../theme";
 import DropdownMenu from "../../components/dropdownMenu";
 
@@ -136,25 +140,29 @@ const Sidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            {/* <Item
+            {<Item
               className=""
               title="Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> */}
-            {/* 
-            <Item
-              className=""
-              title="Dashboard"
-              to="/employeeDashboard"
-              icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> */}
+            />}
+            {/*
+              <Item
+                className=""
+                title="EDashboard"
+                to="/employeeDashboard"
+                icon={<HomeOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />*/}
             {/* Bellow are the sidebar for employee */}
+<<<<<<< HEAD
+            { /* <Typography
+=======
             <Typography
+>>>>>>> c289df35ffab41cfa95041c5996490beebea5635
               variant="h6"
               className="text-dark fw-bold"
               sx={{ m: "15px 0 5px 20px" }}
@@ -188,7 +196,11 @@ const Sidebar = () => {
               icon={<FeedbackOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+<<<<<<< HEAD
+            />*/}
+=======
             />
+>>>>>>> c289df35ffab41cfa95041c5996490beebea5635
 
             {/* Hr Sidebar */}
             <Typography

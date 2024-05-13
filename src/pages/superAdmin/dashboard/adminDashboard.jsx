@@ -367,7 +367,14 @@ const AdminDashboard = () => {
             </Typography>
           </Box>
         </Box>
-        <Box
+
+      </Box>
+    </Box>
+  );
+};
+
+export default AdminDashboard;
+/*<Box
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -384,9 +391,4 @@ const AdminDashboard = () => {
           <BarChart activeEmployeeCount={activeEmployeeCount} inactiveEmployeeCount={inactiveEmployeeCount} />
           </Box>
         </Box>
-      </Box>
-    </Box>
-  );
-};
-
-export default AdminDashboard;
+        */

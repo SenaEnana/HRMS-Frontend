@@ -18,7 +18,7 @@ function SupervisorRouter(){
               <SupervisorSidebar />
             <main className="content">
               <Routes>
-              <Route path="/superv" element={<SupervisorDashboard />} />
+              <Route path="/" element={<SupervisorDashboard />} />
               <Route path="/sendFeedback" element={<SendFeedback/>} />
               <Route path="/complaintList" element={<ComplaintList/>}/>
               <Route path="/bar" element={<Bar />} />

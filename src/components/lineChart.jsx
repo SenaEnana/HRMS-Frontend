@@ -3,22 +3,20 @@ import { useTheme } from "@mui/material";
 import { tokens } from "../theme";
 import React from "react";
 
-const LineChart = ({ employeeData }) => {
+const LineChart = ({ data }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  const sortedBranchData = employeeData.sort((a, b) => a.branchName.localeCompare(b.x));
-
-  const formattedData = sortedBranchData.map(({ branchName, totalEmployees }) => ({
-    x: branchName,
-    y: totalEmployees,
+  const formattedData = data.map(({ year, count }) => ({
+    x: year,
+    y: count,
   }));
   
   return (
     <ResponsiveLine
     data={[
       {
-        id: "Branch",
+        id: "Year",
         data: formattedData,
       },
     ]}
@@ -74,7 +72,7 @@ const LineChart = ({ employeeData }) => {
         tickSize: 0,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "Branch",
+        legend: "Year",
         legendOffset: 36,
         legendPosition: "middle",
       }}

@@ -1,6 +1,39 @@
-import AdminRouter from "./adminRouter";
-import EmployeeRouter from "./employeeRouter";
+//import AdminRouter from "./adminRouter";
+//import EmployeeRouter from "./employeeRouter";
 import HrRouter from "./hrRouter";
+<<<<<<< HEAD
+//import AdminRouter from "./adminRouter";
+//import Auth from "./pages/auth/auth";
+//import Login from "./pages/auth/login";
+//import ImmediateSupRouter from "./ImmediatSupRouter";
+//import { useState } from "react";
+
+
+function App() {
+  //const username = JSON.parse(localStorage.getItem("username"));
+  //const [isAuth, setAuth] = useState(false);
+  //console.log(username);
+  return (
+<div>   
+        {/* {isAuth ? (
+         <div className="col-12 overflow-none bg-white">
+        
+        <EmployeeRouter/>
+          <AdminRouter/>
+          <HrRouter/> 
+      </div>
+       ) : (
+            <div className="col-12 ">
+               <Auth/>
+             </div>  
+       )}  */}
+       {/* <Auth/> <ImmediateSupRouter/> */}
+      {/*   ><EmployeeRouter/>  <AdminRouter/>
+     */}
+   
+   <HrRouter/>
+    </div>       
+=======
 import SupervisorRouter from "./supervisorRouter";
 import LeaveAdminRouter from "./leaveAdminRouter";
 import Auth from "./pages/auth/auth";
@@ -54,6 +87,7 @@ function App() {
       )} */}
       <HrRouter/>
     </div>
+>>>>>>> c289df35ffab41cfa95041c5996490beebea5635
   );
   // function renderDashboardBasedOnRole() {
   //   const token = sessionStorage.getItem('token');
