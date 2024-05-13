@@ -67,7 +67,7 @@ function HrRouter() {
               <Route path="/positionList" element={<PositionList/>}/>
               <Route path="/gradeList" element={<GradeList/>}/>
               <Route path="/performanceManagement" element={<PerformanceManagement/>}/>
-              <Route path="/employeeDetail/{id}" element={<EmployeeDetail/>}/>
+              <Route path="/employeeDetail/:id" element={<EmployeeDetail/>}/>
               <Route path="/newEmployeeList" element={<NewEmployeeList/>}/>
               <Route path="/postJob" element={<PostJob/>}/>
             </Routes>
