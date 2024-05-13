@@ -135,14 +135,14 @@ const HrSidebar = () => {
             </Box>
           )}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <Item
+            <Item
               className=""
               title="Hr Manager Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> 
+            />
             <Typography
               variant="h6"
               className="text-dark fw-bold"
@@ -174,6 +174,13 @@ const HrSidebar = () => {
             <Item
               title="Branch List"
               to="/branchList"
+              icon={<TimeToLeaveOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Posted Job List"
+              to="/postedJob"
               icon={<TimeToLeaveOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

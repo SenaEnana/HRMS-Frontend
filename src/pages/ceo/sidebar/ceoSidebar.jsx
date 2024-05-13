@@ -137,8 +137,8 @@ const CeoSidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Promote Employee"
-              to="/promoteEmployee"
+              title="Shortlisted Employee List"
+              to="/shortListed"
               icon={<TimeToLeaveOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

@@ -6,7 +6,7 @@ import Team from "./pages/superAdmin/team";
 import Form from "./pages/superAdmin/form";
 import Bar from "./pages/superAdmin/bar";
 import { ColorModeContext, useMode } from "./theme";
-import Sidebar from "./pages/commonPages/sidebar";
+import AdminSidebar from "./pages/superAdmin/sidebar/adminSidebar";
 
 function AdminRouter() {
     const [theme, colorMode] = useMode();
@@ -16,7 +16,7 @@ function AdminRouter() {
             <ThemeProvider theme={theme}>
               <CssBaseline />
               <div className="app">
-                  <Sidebar isAdminSidebar={isAdminSidebar} />
+                  <AdminSidebar isAdminSidebar={isAdminSidebar} />
                 <main className="content">
                   <Routes>
                   <Route path="/" element={<AdminDashboard />} />

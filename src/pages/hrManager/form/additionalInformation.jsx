@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import DropDown from "../../../components/DropDown";
 
 function AdditionalInformation({ onNext, formikValues, onPrev }) {
@@ -112,7 +112,9 @@ function AdditionalInformation({ onNext, formikValues, onPrev }) {
           {(formikValues) => (
             <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
               <div className="ms-3">
-                <p className="fs-4 text-dark text-center">Additional Information</p>
+                <p className="fs-4 text-dark text-center">
+                  Additional Information
+                </p>
               </div>
               <Box
                 display="grid"
@@ -139,75 +141,71 @@ function AdditionalInformation({ onNext, formikValues, onPrev }) {
                   error={formikValues.errors.Salary}
                   onChange={formikValues.handleChange}
                 />
-                
-                  <DropDown
-                    type="number"
-                    label="Grade"
-                    name="GradeId"
-                    options={GradeId}
-                    error={formikValues.errors.GradeId}
-                    onChange={(selectedOption) => {
-                      const parsedValue = parseInt(selectedOption, 10);
-                      formikValues.setFieldValue("GradeId", parsedValue);
-                    }}
-                  />
-                
-                
-                  <DropDown
-                    type="number"
-                    label="PositionId"
-                    name="PositionId"
-                    options={PositionId}
-                    value={formikValues.values.PositionId}
-                    error={formikValues.errors.PositionId}
-                    onChange={(selectedOption) => {
-                      const parsedValue = parseInt(selectedOption, 10);
-                      formikValues.setFieldValue("PositionId", parsedValue);
-                    }}
-                  />
-                
-                
-                  <DropDown
-                    type="number"
-                    label="BranchId"
-                    name="BranchId"
-                    options={BranchId}
-                    value={formikValues.values.BranchId}
-                    error={formikValues.errors.BranchId}
-                    onChange={(selectedOption) => {
-                      const parsedValue = parseInt(selectedOption, 10);
-                      formikValues.setFieldValue("BranchId", parsedValue);
-                    }}
-                  />
-                
-                
-                  <DropDown
-                    type="number"
-                    label="DepartmentId"
-                    name="DepartmentId"
-                    options={DepartmentId}
-                    value={formikValues.values.DepartmentId}
-                    error={formikValues.errors.DepartmentId}
-                    onChange={(selectedOption) => {
-                      const parsedValue = parseInt(selectedOption, 10);
-                      formikValues.setFieldValue("DepartmentId", parsedValue);
-                    }}
-                  />
-                
-                
-                  <DropDown
-                    type="number"
-                    label="DegreeId"
-                    name="DegreeId"
-                    options={DegreeId}
-                    value={formikValues.values.DegreeId}
-                    error={formikValues.errors.DegreeId}
-                    onChange={(selectedOption) => {
-                      const parsedValue = parseInt(selectedOption, 10);
-                      formikValues.setFieldValue("DegreeId", parsedValue);
-                    }}
-                  />
-                
+
+                <DropDown
+                  type="number"
+                  label="Grade"
+                  name="GradeId"
+                  options={GradeId}
+                  error={formikValues.errors.GradeId}
+                  onChange={(selectedOption) => {
+                    const parsedValue = parseInt(selectedOption, 10);
+                    formikValues.setFieldValue("GradeId", parsedValue);
+                  }}
+                />
+
+                <DropDown
+                  type="number"
+                  label="PositionId"
+                  name="PositionId"
+                  options={PositionId}
+                  value={formikValues.values.PositionId}
+                  error={formikValues.errors.PositionId}
+                  onChange={(selectedOption) => {
+                    const parsedValue = parseInt(selectedOption, 10);
+                    formikValues.setFieldValue("PositionId", parsedValue);
+                  }}
+                />
+
+                <DropDown
+                  type="number"
+                  label="BranchId"
+                  name="BranchId"
+                  options={BranchId}
+                  value={formikValues.values.BranchId}
+                  error={formikValues.errors.BranchId}
+                  onChange={(selectedOption) => {
+                    const parsedValue = parseInt(selectedOption, 10);
+                    formikValues.setFieldValue("BranchId", parsedValue);
+                  }}
+                />
+
+                <DropDown
+                  type="number"
+                  label="DepartmentId"
+                  name="DepartmentId"
+                  options={DepartmentId}
+                  value={formikValues.values.DepartmentId}
+                  error={formikValues.errors.DepartmentId}
+                  onChange={(selectedOption) => {
+                    const parsedValue = parseInt(selectedOption, 10);
+                    formikValues.setFieldValue("DepartmentId", parsedValue);
+                  }}
+                />
+
+                <DropDown
+                  type="number"
+                  label="DegreeId"
+                  name="DegreeId"
+                  options={DegreeId}
+                  value={formikValues.values.DegreeId}
+                  error={formikValues.errors.DegreeId}
+                  onChange={(selectedOption) => {
+                    const parsedValue = parseInt(selectedOption, 10);
+                    formikValues.setFieldValue("DegreeId", parsedValue);
+                  }}
+                />
+
                 <DropDown
                   label="Grade"
                   name="GradeId"
@@ -265,8 +263,8 @@ function AdditionalInformation({ onNext, formikValues, onPrev }) {
                   value="next"
                   onClick={onNext}
                 />
-                                <input
-                  className="btn btn-info col-10 float-end m-2"
+                <input
+                  className="btn btn-success col-10 float-end m-2"
                   type="button"
                   value="previous"
                   onClick={onPrev}

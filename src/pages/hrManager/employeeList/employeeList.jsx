@@ -22,7 +22,7 @@ const EmployeeList = () => {
       <div className="container mt-5">
         <div className="d-flex justify-content-between text-dark mb-3">
           <h5 className="text-start">Employee List</h5>
-          <NavLink to={"/employeeBasic"} className="btn btn-info btn-sm">
+          <NavLink to={"/employeeBasic"} className="btn btn-secondary btn-sm">
             Add new Employee
           </NavLink>
         </div>
@@ -51,7 +51,7 @@ const EmployeeList = () => {
                 <td>{employee.role}</td>
                 <td>
                   <Link to={`/employeeDetail/${employee.id}`}>
-                    <button className="btn btn-outline-info btn-sm">Detail</button>
+                    <button className="btn btn-outline-secondary btn-sm">Detail</button>
                   </Link>
                 </td>
               </tr>
@@ -64,20 +64,6 @@ const EmployeeList = () => {
 };
 
 export default EmployeeList;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 // import { NavLink } from "react-router-dom";

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
@@ -111,7 +111,7 @@ const AdminSidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <Item
+            <Item
               className=""
               title="Super Admin  Dashboard"
               to="/"
@@ -126,6 +126,13 @@ const AdminSidebar = () => {
             >
               Data
             </Typography>
+            <Item
+              title="Control User Account"
+              to="/team"
+              icon={<BarChartOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Typography
               variant="h6"
               className="text-dark fw-bold"

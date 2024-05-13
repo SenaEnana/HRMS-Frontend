@@ -5,7 +5,7 @@ import { resignationValidation } from "./schema";
 import { FormikTextField } from "formik-material-fields";
 import TextInput from "../../../../components/textInput";
 import DropDown from "../../../../components/DropDown";
-import {Box, useTheme} from "@mui/material";
+import { Box, useTheme } from "@mui/material";
 import { tokens } from "../../../../theme";
 
 function ResignationRequest() {
@@ -14,7 +14,7 @@ function ResignationRequest() {
   const colors = tokens(theme.palette.mode);
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
   const [DepartmentId, setDepartmentId] = useState([{ name: "", id: "" }]);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
@@ -47,11 +47,11 @@ function ResignationRequest() {
         }
       );
       if (response.ok) {
-        alert("Resignation request submitted successfully")
+        alert("Resignation request submitted successfully");
         navigate("/employeeDashboard");
       } else {
-        const errorMessage = await response.text(); 
-        setError(errorMessage); 
+        const errorMessage = await response.text();
+        setError(errorMessage);
       }
     } catch (error) {
       setError("Error submitting resignation request");
@@ -79,7 +79,6 @@ function ResignationRequest() {
           validationSchema={resignationValidation}
         >
           {(formikValues) => (
-
             <form className="form-group rounded border col-5 pe-3 mt-5">
               <div className="mt-3">
                 <p className="fs-4 text-dark text-center">
@@ -105,29 +104,29 @@ function ResignationRequest() {
                 onChange={formikValues.handleChange}
               />
               <DropDown
-                    type="number"
-                    label="PositionId"
-                    name="PositionId"
-                    options={PositionId}
-                    value={formikValues.values.PositionId}
-                    error={formikValues.errors.PositionId}
-                    onChange={(selectedOption) => {
-                      const parsedValue = parseInt(selectedOption, 10);
-                      formikValues.setFieldValue("PositionId", parsedValue);
-                    }}
-                  />
-                       <DropDown
-                    type="number"
-                    label="DepartmentId"
-                    name="DepartmentId"
-                    options={DepartmentId}
-                    value={formikValues.values.DepartmentId}
-                    error={formikValues.errors.DepartmentId}
-                    onChange={(selectedOption) => {
-                      const parsedValue = parseInt(selectedOption, 10);
-                      formikValues.setFieldValue("DepartmentId", parsedValue);
-                    }}
-                  />
+                type="number"
+                label="PositionId"
+                name="PositionId"
+                options={PositionId}
+                value={formikValues.values.PositionId}
+                error={formikValues.errors.PositionId}
+                onChange={(selectedOption) => {
+                  const parsedValue = parseInt(selectedOption, 10);
+                  formikValues.setFieldValue("PositionId", parsedValue);
+                }}
+              />
+              <DropDown
+                type="number"
+                label="DepartmentId"
+                name="DepartmentId"
+                options={DepartmentId}
+                value={formikValues.values.DepartmentId}
+                error={formikValues.errors.DepartmentId}
+                onChange={(selectedOption) => {
+                  const parsedValue = parseInt(selectedOption, 10);
+                  formikValues.setFieldValue("DepartmentId", parsedValue);
+                }}
+              />
               <TextInput
                 type="date"
                 name="EmployeeHireDate"
@@ -203,11 +202,11 @@ function ResignationRequest() {
                 onChange={formikValues.handleChange}
                 fullWidth
               />
-                {error && <p className="text-danger">{error}</p>}
+              {error && <p className="text-danger">{error}</p>}
 
               <div className="m-3">
                 <input
-                  className="btn btn-info col-12"
+                  className="btn btn-success col-12"
                   type="button"
                   value="submit"
                   onClick={formikValues.handleSubmit}
