@@ -14,7 +14,7 @@ function ResignationRequest() {
   const colors = tokens(theme.palette.mode);
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
   const [DepartmentId, setDepartmentId] = useState([{ name: "", id: "" }]);
-
+  const [error, setError] = useState(null); 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
@@ -47,12 +47,14 @@ function ResignationRequest() {
         }
       );
       if (response.ok) {
+        alert("Resignation request submitted successfully")
         navigate("/employeeDashboard");
       } else {
-        console.error("Failed to submit resignation request");
+        const errorMessage = await response.text(); 
+        setError(errorMessage); 
       }
     } catch (error) {
-      console.error("Error submitting resignation request:", error.message);
+      setError("Error submitting resignation request");
     }
   };
 
@@ -201,24 +203,7 @@ function ResignationRequest() {
                 onChange={formikValues.handleChange}
                 fullWidth
               />
-              {/* <TextInput
-                type="textbox"
-                name="recommendation"
-                label="Recommendation"
-                placeholder="enter any recommendation"
-                value={formikValues.values.recommendation}
-                error={formikValues.errors.recommendation}
-                onChange={formikValues.handleChange}
-              />
-              <TextInput
-                type="textbox"
-                name="comments"
-                label="Comments"
-                placeholder="enter any comments"
-                value={formikValues.values.comments}
-                error={formikValues.errors.comments}
-                onChange={formikValues.handleChange}
-              /> */}
+                {error && <p className="text-danger">{error}</p>}
 
               <div className="m-3">
                 <input

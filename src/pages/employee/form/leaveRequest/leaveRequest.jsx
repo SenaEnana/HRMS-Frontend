@@ -7,8 +7,19 @@ import DropDown from "../../../../components/DropDown";
 
 function LeaveRequest() {
   const navigate = useNavigate();
+  const [LeaveTypeId, setLeaveTypeId] = useState([{ name: "", id: "" }]);
+  const [error, setError] = useState(null); 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("https://localhost:7140/LeaveType/GetLeaveTypes");
+      const newData = await response.json();
+      setLeaveTypeId(newData);
+    };
+    fetchData();
+  }, []);
+
   const handleSubmit = async (values) => {
-    console.log(values)
     try {
       const response = await fetch(
         "https://localhost:7140/api/Leave/RequestLeave",
@@ -20,24 +31,20 @@ function LeaveRequest() {
           body: JSON.stringify(values),
         }
       );
+  
       if (response.ok) {
+        const data = await response.json();
+        alert("Leave request submitted successfully")
         navigate("/employeeDashboard");
       } else {
-        console.error("Failed to submit leave request");
+        const errorMessage = await response.text(); 
+        setError(errorMessage); 
       }
     } catch (error) {
-      console.error("Error submitting leave request:", error.message);
+      setError("Error submitting leave request"); 
     }
   };
-  const [LeaveTypeId, setLeaveTypeId] = useState([{ name: "", id: "" }]);
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("https://localhost:7140/LeaveType/GetLeaveTypes");
-      const newData = await response.json();
-      setLeaveTypeId(newData);
-    };
-    fetchData();
-  }, []);
+  
 
   return (
     <>
@@ -107,7 +114,7 @@ function LeaveRequest() {
                 error={formikValues.errors.Reason}
                 onChange={formikValues.handleChange}
               />
-
+  {error && <p className="text-danger">{error}</p>}
               <div className="m-3">
                 <input
                   className="btn btn-info col-12"

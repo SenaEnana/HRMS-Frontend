@@ -2,9 +2,11 @@ import { Formik } from "formik";
 import { useMediaQuery } from "@mui/material";
 import { promotionValidation } from "./schema";
 import TextInput from "../../../components/textInput";
+import {useState, useEffect} from 'react'
 
 function PromoteEmployee() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const [error, setError] = useState(null); 
   async function promoteEmployee(values) {
     try {
       const response = await fetch("https://localhost:7140/Branch/AddBranch", {
@@ -15,13 +17,13 @@ function PromoteEmployee() {
         body: JSON.stringify(values),
       });
       if (response.ok) {
-        console.log("successful");
         alert("promote employee successfully");
       } else {
-        console.log("failed");
+        const errorMessage = await response.text(); 
+        setError(errorMessage); 
       }
     } catch (error) {
-      console.error("Error promoting employee:", error.message);
+      setError("Error promotting employee");
     }
   }
   return (
@@ -81,6 +83,7 @@ function PromoteEmployee() {
                 error={formikValues.errors.NewSalary}
                 onChange={formikValues.handleChange}
               />
+                {error && <p className="text-danger">{error}</p>}
               <div className="m-3">
                 <input
                   className="btn btn-info col-10 m-2"

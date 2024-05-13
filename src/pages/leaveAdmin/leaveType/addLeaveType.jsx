@@ -3,7 +3,7 @@ import { leaveTypeValidation } from "./schema";
 import TextInput from "../../../components/textInput";
 import { Formik } from "formik";
 import { Box, useMediaQuery } from "@mui/material";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function AddLeaveType() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -22,7 +22,7 @@ function AddLeaveType() {
       );
       console.log(response);
       if (response.ok) {
-        console.log("successful");
+        alert("Leave Type added successfully");
         navigate("/leaveTypeList");
       } else {
         console.log("failed");

@@ -16,11 +16,10 @@ function AddGrade() {
         body: JSON.stringify(values),
       });
       if (response.ok) {
-        console.log("successful");
         alert("grade added successfully");
         navigate("/gradeList");
       } else {
-        console.log("failed");
+        alert("failed");
       }
     } catch (error) {
       console.error("Error adding new grade:", error.message);
