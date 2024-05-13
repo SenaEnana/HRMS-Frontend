@@ -266,7 +266,14 @@ const AdminDashboard = () => {
             <Typography>Includes extra misc expenditures and costs</Typography>
           </Box>
         </Box>
-        <Box
+
+      </Box>
+    </Box>
+  );
+};
+
+export default AdminDashboard;
+/*<Box
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
@@ -282,9 +289,4 @@ const AdminDashboard = () => {
             <BarChart isDashboard={true} />
           </Box>
         </Box>
-      </Box>
-    </Box>
-  );
-};
-
-export default AdminDashboard;
+        */

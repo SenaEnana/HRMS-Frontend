@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import Calendar from "./pages/employee/calendar/calendar";
 import { ColorModeContext, useMode } from "./theme";
@@ -11,27 +11,27 @@ import SupervisorFeedback from "./pages/employee/form/supervisorFeedback";
 import ResignationRequest from "./pages/employee/form/resignationRequest/resignationRequest";
 
 function EmployeeRouter() {
-    const [theme, colorMode] = useMode();
-     const [isSidebar, setIsSidebar] = useState(true);
-    return(
-            <ColorModeContext.Provider value={colorMode}>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <div className="app">
-                  <Sidebar isSidebar={isSidebar} />
-                <main className="content">
-                  <Routes>
-                  <Route path="/employeeDashboard" element={<EmployeeDashboard/>} />
-                  <Route path="/employeeCalendar" element={<Calendar />} />
-                  <Route path="/complaint" element={<Complaint/>}/>
-                  <Route path="/leaveRequest" element={<LeaveRequest/>}/>
-                  <Route path="/resignationRequest" element={<ResignationRequest/>}/>
-                  <Route path="/supervisorFeedback" element={<SupervisorFeedback/>}/>
-                  </Routes>
-                </main>
-              </div>
-            </ThemeProvider>
-          </ColorModeContext.Provider>
-          );
-        }
+  const [theme, colorMode] = useMode();
+  const [isSidebar, setIsSidebar] = useState(true);
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app">
+          <Sidebar isSidebar={isSidebar} />
+          <main className="content">
+            <Routes>
+              <Route path="/employeeDashboard" element={<EmployeeDashboard />} />
+              <Route path="/employeeCalendar" element={<Calendar />} />
+              <Route path="/complaint" element={<Complaint />} />
+              <Route path="/leaveRequest" element={<LeaveRequest />} />
+              <Route path="/resignationRequest" element={<ResignationRequest />} />
+              <Route path="/supervisorFeedback" element={<SupervisorFeedback />} />
+            </Routes>
+          </main>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
 export default EmployeeRouter;

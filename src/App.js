@@ -1,20 +1,24 @@
-import AdminRouter from "./adminRouter";
-import EmployeeRouter from "./employeeRouter";
+//import AdminRouter from "./adminRouter";
+//import EmployeeRouter from "./employeeRouter";
 import HrRouter from "./hrRouter";
-import Auth from "./pages/auth/auth";
-import Login from "./pages/auth/login";
-import { useState } from "react";
+//import AdminRouter from "./adminRouter";
+//import Auth from "./pages/auth/auth";
+//import Login from "./pages/auth/login";
+//import ImmediateSupRouter from "./ImmediatSupRouter";
+//import { useState } from "react";
+
 
 function App() {
-  const username = JSON.parse(localStorage.getItem("username"));
-  const [isAuth, setAuth] = useState(false);
-  console.log(username);
+  //const username = JSON.parse(localStorage.getItem("username"));
+  //const [isAuth, setAuth] = useState(false);
+  //console.log(username);
   return (
 <div>   
         {/* {isAuth ? (
          <div className="col-12 overflow-none bg-white">
+        
+        <EmployeeRouter/>
           <AdminRouter/>
-          <EmployeeRouter/>
           <HrRouter/> 
       </div>
        ) : (
@@ -22,11 +26,11 @@ function App() {
                <Auth/>
              </div>  
        )}  */}
-       {/* <Auth/> */}
-      {/* <AdminRouter/> 
-      <EmployeeRouter/>*/}
-     
-  <HrRouter/>  
+       {/* <Auth/> <ImmediateSupRouter/> */}
+      {/*   ><EmployeeRouter/>  <AdminRouter/>
+     */}
+   
+   <HrRouter/>
     </div>       
   );
 }
