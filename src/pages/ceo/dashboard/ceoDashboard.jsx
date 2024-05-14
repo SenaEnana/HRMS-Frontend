@@ -145,7 +145,7 @@ const CeoDashboard = () => {
           <StatBox
             title={activeEmployeeCount.toLocaleString()}
             subtitle="Active Employees"
-            icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
+            icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
         <Box
@@ -159,7 +159,7 @@ const CeoDashboard = () => {
           <StatBox
             title={inactiveEmployeeCount.toLocaleString()}
             subtitle="InActive Employees"
-            icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
+            icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
         <Box
@@ -169,16 +169,13 @@ const CeoDashboard = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
-        >
-          
+        >        
          
             <StatBox
               title={pendingResignationCount.toLocaleString()}
               subtitle="Pending Resignation Requests"
-              icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
+              icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
             />
-          
-
         </Box>
         <Box
           className="rounded"
@@ -191,7 +188,7 @@ const CeoDashboard = () => {
           <StatBox
             title={approvedResignationCount.toLocaleString()}
             subtitle="Approved Resignation Requests"
-            icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
+            icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
         <Box

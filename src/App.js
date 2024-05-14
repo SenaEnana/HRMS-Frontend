@@ -57,12 +57,11 @@ function App() {
   function renderDashboardBasedOnRole() {
     const token = sessionStorage.getItem('token');
     const role = getUserRoleFromToken(token);
-    console.log(role)
     switch (role) {
       case 'LeaveAdmin':
         return <LeaveAdminRouter /> ;
       case 'HRManager':
-        return <HrRouter /> ;
+        return <CeoRouter /> ;
       case 'Employee':
         return <EmployeeRouter /> ;
         default:
