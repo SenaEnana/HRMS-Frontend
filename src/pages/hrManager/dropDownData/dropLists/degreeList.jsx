@@ -29,7 +29,7 @@ function DegreeList() {
         <h5 className="text-start ms-2">List Of Degree</h5>
         <NavLink
           to={"/addDegree"}
-          className="float-end btn btn-info btn-sm mb-2"
+          className="float-end btn btn-secondary btn-sm mb-2"
         >
           Add new Degree
         </NavLink>
@@ -51,14 +51,6 @@ function DegreeList() {
                   <td key={index}>{item}</td>
                 ))}
                 <td>
-                  <NavLink to={"/updateDegree/" + degreeId}>
-                    <button
-                      className="btn btn-outline-info btn-sm"
-                      type="button"
-                    >
-                      Edit
-                    </button>
-                  </NavLink>
                   <button
                     onClick={() => deleteOperation(degreeId)}
                     className="btn btn-outline-danger ms-1 btn-sm"

@@ -48,7 +48,7 @@ const EmployeeDetail = () => {
           <p>Woreda: {employee.woreda}</p>
           <p>Kebele: {employee.kebele}</p>
           <p>House Number: {employee.houseNo}</p>
-           
+
           <p>Experience:</p>
           <ul>
             {employee.experiences.map((exp, index) => (
@@ -70,14 +70,13 @@ const EmployeeDetail = () => {
           <ul>
             {employee.contactPersons.map((contact, index) => (
               <li key={index}>
-               Name: {contact.name}  
-               Relationship: {contact.relationship}
-               Phone Number: {contact.contactPhoneNo}
-               Region: {contact.contactRegion}
-               Kebele: {contact.contactKebele}
-               House No: {contact.contactHouseNo}
-               Woreda: {contact.contactWoreda}
-
+                Name: {contact.name}
+                Relationship: {contact.relationship}
+                Phone Number: {contact.contactPhoneNo}
+                Region: {contact.contactRegion}
+                Kebele: {contact.contactKebele}
+                House No: {contact.contactHouseNo}
+                Woreda: {contact.contactWoreda}
               </li>
             ))}
           </ul>

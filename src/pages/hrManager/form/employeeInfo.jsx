@@ -166,7 +166,7 @@ function EmployeeInfo({ onNext, formikValues }) {
               </Box>
               <div className="m-3">
                 <input
-                  className="btn btn-info col-10 float-end m-2"
+                  className="btn btn-success col-10 float-end m-2"
                   type="button"
                   value="next"
                   onClick={onNext}

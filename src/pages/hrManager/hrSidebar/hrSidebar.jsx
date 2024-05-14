@@ -9,7 +9,7 @@ import TimeToLeaveOutlinedIcon from "@mui/icons-material/TimeToLeaveOutlined";
 import AddCommentOutlinedIcon from "@mui/icons-material/AddCommentOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import DropdownMenu from "../../../components/dropdownMenu";
 import { tokens } from "../../../theme";
@@ -135,6 +135,14 @@ const HrSidebar = () => {
             </Box>
           )}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+            <Item
+              className=""
+              title="Hr Manager Dashboard"
+              to="/"
+              icon={<HomeOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Typography
               variant="h6"
               className="text-dark fw-bold"
@@ -166,6 +174,13 @@ const HrSidebar = () => {
             <Item
               title="Branch List"
               to="/branchList"
+              icon={<TimeToLeaveOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Posted Job List"
+              to="/postedJob"
               icon={<TimeToLeaveOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

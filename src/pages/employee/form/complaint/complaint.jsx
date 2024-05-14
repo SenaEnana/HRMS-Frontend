@@ -11,7 +11,7 @@ function Complaint() {
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
   const [BranchId, setBranchId] = useState([{ name: "", id: "" }]);
   const [inputFields, setInputFields] = useState([{ value: "" }]);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("https://localhost:7140/Position");
@@ -47,11 +47,11 @@ function Complaint() {
         alert("Complaint submitted successfully");
         navigate("/employeeDashboard");
       } else {
-        const errorMessage = await response.text(); 
-        setError(errorMessage); 
+        const errorMessage = await response.text();
+        setError(errorMessage);
       }
     } catch (error) {
-      setError("Error submitting leave request"); 
+      setError("Error submitting leave request");
     }
   }
 
@@ -153,10 +153,10 @@ function Complaint() {
                 onChange={formikValues.handleChange}
                 fullWidth
               />
-  {error && <p className="text-danger">{error}</p>}
+              {error && <p className="text-danger">{error}</p>}
               <div className="m-3">
                 <input
-                  className="btn btn-info col-12"
+                  className="btn btn-success col-12"
                   type="button"
                   value="submit"
                   onClick={formikValues.handleSubmit}

@@ -53,7 +53,7 @@ function ComplaintList() {
                 <td>
                   <button
                     onClick={() => deleteOperation(complaintId)}
-                    className="btn btn-outline-info ms-1 btn-sm"
+                    className="btn btn-outline-secondary ms-1 btn-sm"
                     type="button"
                   >
                     Address

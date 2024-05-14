@@ -4,7 +4,7 @@ import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import {useState} from "react";
+import { useState } from "react";
 
 function StatusInformation({ onNext, formikValues, onPrev }) {
   const [MaritalStatus, setMaritalStatus] = useState("single");
@@ -147,8 +147,8 @@ function StatusInformation({ onNext, formikValues, onPrev }) {
                   value="next"
                   onClick={onNext}
                 />
-                                <input
-                  className="btn btn-info col-10 float-end m-2"
+                <input
+                  className="btn btn-success col-10 float-end m-2"
                   type="button"
                   value="previous"
                   onClick={onPrev}

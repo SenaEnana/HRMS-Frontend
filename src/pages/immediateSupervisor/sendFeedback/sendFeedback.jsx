@@ -8,7 +8,7 @@ import { sendFeedbackValidation } from "./schema";
 function SendFeedback() {
   const navigate = useNavigate();
   function handleSubmit() {
-    navigate("/supervisorDashboard");
+    navigate("/");
   }
   const [LeaveTypeId, setLeaveTypeId] = useState([{ name: "", id: "" }]);
   useEffect(() => {
@@ -106,7 +106,7 @@ function SendFeedback() {
               />
               <div className="m-3">
                 <input
-                  className="btn btn-info col-12"
+                  className="btn btn-success col-12"
                   type="button"
                   value="submit"
                   onClick={formikValues.handleSubmit}

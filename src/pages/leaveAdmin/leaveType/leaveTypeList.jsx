@@ -32,7 +32,7 @@ function LeaveTypeList() {
         <h5 className="text-start ms-2">List Of Leave Types</h5>
         <NavLink
           to={"/addLeaveType"}
-          className="float-end btn btn-info btn-sm mb-2"
+          className="float-end btn btn-secondary btn-sm mb-2"
         >
           Add new Leave Type
         </NavLink>

@@ -43,7 +43,7 @@ function PromoteEmployee() {
           validationSchema={promotionValidation}
         >
           {(formikValues) => (
-            <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
+            <form className="form-group rounded border col-8 ms-5 ms-4 bg-light">
               <div className="ms-3">
                 <p className="fs-4 text-dark text-center">Promote Employee</p>
               </div>
@@ -86,7 +86,7 @@ function PromoteEmployee() {
                 {error && <p className="text-danger">{error}</p>}
               <div className="m-3">
                 <input
-                  className="btn btn-info col-10 m-2"
+                  className="btn btn-success col-10 m-2"
                   type="button"
                   value="submit"
                   onClick={formikValues.handleSubmit}

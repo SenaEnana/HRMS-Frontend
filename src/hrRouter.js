@@ -25,9 +25,11 @@ import GradeList from "./pages/hrManager/dropDownData/dropLists/gradeList";
 import HrSidebar from "./pages/hrManager/hrSidebar/hrSidebar";
 import PerformanceManagement from "./pages/hrManager/PerformanceManagement/PerformanceManagement";
 import DepartmentList from "./pages/hrManager/dropDownData/dropLists/departmentList";
-import EmployeeDetail from "./pages/hrManager/form/employeeDetail";
-import NewEmployeeList from "./pages/hrManager/form/newEmployeeList";
+import EmployeeDetail from "./pages/hrManager/employeeList/employeeDetail";
 import PostJob from "./pages/hrManager/postJob/postJob";
+import PostedJob from "./pages/hrManager/postJob/postedJob";
+import CandidateList from "./pages/hrManager/postJob/candidateList";
+import CandidateDetail from "./pages/hrManager/postJob/candidateDetail";
 
 function HrRouter() {
   const [theme, colorMode] = useMode();
@@ -68,8 +70,10 @@ function HrRouter() {
               <Route path="/gradeList" element={<GradeList/>}/>
               <Route path="/performanceManagement" element={<PerformanceManagement/>}/>
               <Route path="/employeeDetail/:id" element={<EmployeeDetail/>}/>
-              <Route path="/newEmployeeList" element={<NewEmployeeList/>}/>
               <Route path="/postJob" element={<PostJob/>}/>
+              <Route path="/postedJob" element={<PostedJob/>}/>
+              <Route path="/candidateList/:id" element={<CandidateList/>}/>
+              <Route path="/candidateDetail/:id" element={<CandidateDetail/>}/>
             </Routes>
           </main>
         </div>

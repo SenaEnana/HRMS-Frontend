@@ -35,9 +35,9 @@ function PostedJob() {
               <td>{job.positionId}</td>
               <td>{job.position}</td>
               <td>
-                <Link to={`/jobDetail/${job.id}`}>
+                <Link to={`/candidateList/${job.id}`}>
                   <button className="btn btn-outline-secondary btn-sm">
-                    Detail
+                    Candidates
                   </button>
                 </Link>
               </td>
