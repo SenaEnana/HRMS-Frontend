@@ -45,7 +45,7 @@ function PromoteEmployee() {
             JobTitle: "",
             PositionId: "",
             Description: "",
-            Requirement: "",
+            Requirements: "",
           }}
           onSubmit={(values) => {
             postJob(values);
@@ -88,11 +88,11 @@ function PromoteEmployee() {
               />
               <TextInput
                 type="text"
-                name="Requirement"
+                name="Requirements"
                 label="Requirement"
                 placeholder="enter job requirement"
-                value={formikValues.values.Requirement}
-                error={formikValues.errors.Requirement}
+                value={formikValues.values.Requirements}
+                error={formikValues.errors.Requirements}
                 onChange={formikValues.handleChange}
               />
               {error && <p className="text-danger">{error}</p>}
