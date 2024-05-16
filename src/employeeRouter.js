@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
-import Calendar from "./pages/employee/calendar/calendar";
 import { ColorModeContext, useMode } from "./theme";
 import Complaint from "./pages/employee/form/complaint/complaint";
 import LeaveRequest from "./pages/employee/form/leaveRequest/leaveRequest";
@@ -25,7 +24,6 @@ const isAuth = true;
                 <main className="content">
                   <Routes>
                   <Route path="/" element={<EmployeeDashboard/>} />
-                  <Route path="/employeeCalendar" element={<Calendar />} />
                   <Route path="/complaint" element={<Complaint/>}/>
                   <Route path="/leaveRequest" element={<LeaveRequest/>}/>
                   <Route path="/resignationRequest" element={<ResignationRequest/>}/>

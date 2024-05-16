@@ -1,26 +1,27 @@
 import { Box, IconButton, useTheme } from "@mui/material";
 import { useContext, useState } from "react";
 import InputBase from "@mui/material/InputBase";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import SearchIcon from "@mui/icons-material/Search";
 import { ColorModeContext, tokens } from "../../theme";
+// import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
+// import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
+// import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
+// import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+// import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+//{searchQuery, handleChange, fetchData}
 
 const Topbar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-  const [fetchedData, setFetchedData] = useState(null); 
+  const [fetchedData, setFetchedData] = useState(null);
   const [searchQuery, setSearchQuery] = useState({
     empId: "",
     name: "",
     branch: "",
     department: "",
-    email:"",
-    position:"",
+    email: "",
+    position: "",
   });
 
   const handleChange = (field, value) => {
@@ -37,13 +38,12 @@ const Topbar = () => {
       .then((json) => {
         console.log(json);
         setFetchedData(json);
-        // Handle the fetched data here
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
   };
-  
+
   return (
     <Box display="flex" justifyContent="space-between" p={2}>
       {/* SEARCH BAR */}
@@ -72,41 +72,45 @@ const Topbar = () => {
           value={searchQuery.department}
           onChange={(e) => handleChange("department", e.target.value)}
         />
-          <InputBase
+        <InputBase
           className="ps-2 fs-6 m-1 text-dark"
           placeholder="Position name"
           value={searchQuery.position}
           onChange={(e) => handleChange("position", e.target.value)}
         />
-         <InputBase
+        <InputBase
           className="ps-2 fs-6 m-1 text-dark"
           placeholder="Enter Email"
           value={searchQuery.email}
           onChange={(e) => handleChange("email", e.target.value)}
         />
-        <IconButton type="button" className="btn p-1" onClick={fetchData}>
-          <SearchIcon className="text-info" />
+        <IconButton
+          type="button"
+          className="btn p-1"
+          onClick={fetchData}
+        >
+          <SearchIcon className="text-success" />
         </IconButton>
       </Box>
       {/* ICONS */}
-      <Box display="flex">
-        <IconButton onClick={colorMode.toggleColorMode}>
-          {theme.palette.mode === "dark" ? (
-            <DarkModeOutlinedIcon />
-          ) : (
-            <LightModeOutlinedIcon />
-          )}
-        </IconButton>
-        <IconButton>
-          <NotificationsOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <SettingsOutlinedIcon />
-        </IconButton>
-        <IconButton>
-          <PersonOutlinedIcon />
-        </IconButton>
-      </Box>
+      {/* // <Box display="flex">
+      //   <IconButton onClick={colorMode.toggleColorMode}>
+      //     {theme.palette.mode === "dark" ? (
+      //       <DarkModeOutlinedIcon />
+      //     ) : (
+      //       <LightModeOutlinedIcon />
+      //     )}
+      //   </IconButton>
+      //   <IconButton>
+      //     <NotificationsOutlinedIcon />
+      //   </IconButton>
+      //   <IconButton>
+      //     <SettingsOutlinedIcon />
+      //   </IconButton>
+      //   <IconButton>
+      //     <PersonOutlinedIcon />
+      //   </IconButton>
+      // </Box> */}
     </Box>
   );
 };

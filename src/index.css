@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Open+Sans:wght@300&family=Questrial&display=swap");
-
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  font-family: "Lato", sans-serif;
+}
 html,
 body,
 #root,
@@ -36,4 +41,23 @@ body,
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+.card {
+  padding: 1.5rem;
+  width: 250px;
+  box-shadow: 0 0 28px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+.first_card{
+  padding: 1.5rem;
+  width: 100%;
+  box-shadow: 0 0 28px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.card_container {
+  display: flex;
+  flex-wrap: wrap;
 }

@@ -8,9 +8,11 @@ const Line = () => {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/EmployeesHiredPerYear");
+        const response = await fetch(
+          "https://localhost:7140/DashBoard/EmployeesHiredPerYear"
+        );
         const data = await response.json();
-        console.log(data)
+        console.log(data);
         setEmployeeData(data);
       } catch (error) {
         console.error("Error fetching employee data:", error.message);
@@ -22,7 +24,7 @@ const Line = () => {
     <Box m="20px">
       <Header title="Line Chart" subtitle="Simple Line Chart" />
       <Box height="75vh">
-      <LineChart data={employeeData}  />
+        <LineChart data={employeeData} />
       </Box>
     </Box>
   );

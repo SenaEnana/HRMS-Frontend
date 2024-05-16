@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import TimeToLeaveOutlinedIcon from "@mui/icons-material/TimeToLeaveOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { tokens } from "../../../theme";
+import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
+import ChecklistRtlOutlinedIcon from '@mui/icons-material/ChecklistRtlOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -35,7 +34,6 @@ const LeaveSidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-  const navigate = useNavigate();
 
   return (
     <Box
@@ -134,7 +132,7 @@ const LeaveSidebar = () => {
              <Item
               title="Pending Leave Request"
               to="/leaveRequestList"
-              icon={<TimeToLeaveOutlinedIcon />}
+              icon={<PendingOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -142,7 +140,7 @@ const LeaveSidebar = () => {
             <Item
               title="Leave Type List"
               to="/leaveTypeList"
-              icon={<TimeToLeaveOutlinedIcon />}
+              icon={<ChecklistRtlOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

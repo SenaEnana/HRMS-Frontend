@@ -4,15 +4,14 @@ import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
-import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
-import TimeToLeaveOutlinedIcon from "@mui/icons-material/TimeToLeaveOutlined";
-import AddCommentOutlinedIcon from "@mui/icons-material/AddCommentOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import DropdownMenu from "../../../components/dropdownMenu";
 import { tokens } from "../../../theme";
+import LocalPostOfficeOutlinedIcon from '@mui/icons-material/LocalPostOfficeOutlined';
+import ChecklistRtlOutlinedIcon from '@mui/icons-material/ChecklistRtlOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -137,7 +136,7 @@ const HrSidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               className=""
-              title="Hr Manager Dashboard"
+              title="Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
@@ -160,7 +159,7 @@ const HrSidebar = () => {
             <Item
               title="Post Job"
               to="/postJob"
-              icon={<TimeToLeaveOutlinedIcon />}
+              icon={<LocalPostOfficeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -172,44 +171,44 @@ const HrSidebar = () => {
               Pages
             </Typography>
             <Item
-              title="Branch List"
-              to="/branchList"
-              icon={<TimeToLeaveOutlinedIcon />}
+              title="Posted Job List"
+              to="/postedJob"
+              icon={<ChecklistRtlOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Posted Job List"
-              to="/postedJob"
-              icon={<TimeToLeaveOutlinedIcon />}
+              title="Branch List"
+              to="/branchList"
+              icon={<ChecklistRtlOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Grade List"
               to="/gradeList"
-              icon={<TimeToLeaveOutlinedIcon />}
+              icon={<ChecklistRtlOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Position List"
               to="/positionList"
-              icon={<AddCommentOutlinedIcon />}
+              icon={<ChecklistRtlOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Department List"
               to="/departmentList"
-              icon={<FeedbackOutlinedIcon />}
+              icon={<ChecklistRtlOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Degree List"
               to="/degreeList"
-              icon={<FeedbackOutlinedIcon />}
+              icon={<ChecklistRtlOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

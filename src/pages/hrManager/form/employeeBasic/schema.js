@@ -32,8 +32,12 @@ export const employeeBasValidation = Yup.object().shape({
     ContactWoreda:Yup.string().required("this field is required"),
     ContactHouseNo:Yup.string().required("this field is required"),
     Relationship:Yup.string().required("this field is required"),
-    ChildName:Yup.string().required("this field is required"),
-    DateOfBirth:Yup.date().required("this field is required"),
+    ChildInformations: Yup.array().of(
+        Yup.object().shape({
+          ChildName: Yup.string().optional(), // Making ChildName optional
+          DateOfBirth: Yup.date().optional(), // Making DateOfBirth optional
+        })
+      ),
     Institute:Yup.string().required("this field is required"),
     Degree:Yup.string().required("this field is required"),
 });

@@ -1,15 +1,13 @@
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import TimeToLeaveOutlinedIcon from "@mui/icons-material/TimeToLeaveOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { tokens } from "../../../theme";
+import ChecklistRtlOutlinedIcon from '@mui/icons-material/ChecklistRtlOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -35,7 +33,6 @@ const SupervisorSidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-  const navigate = useNavigate();
 
   return (
     <Box
@@ -132,17 +129,17 @@ const SupervisorSidebar = () => {
             <Item
               title="Complaint List"
               to="/complaintList"
-              icon={<TimeToLeaveOutlinedIcon />}
+              icon={<ChecklistRtlOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
+            {/* <Item
               title="Send Feedback"
               to="/sendFeedback"
               icon={<TimeToLeaveOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Typography
               variant="h6"
               className="text-dark fw-bold"
@@ -154,20 +151,6 @@ const SupervisorSidebar = () => {
               title="Bar Chart"
               to="/bar"
               icon={<BarChartOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Pie Chart"
-              to="/pie"
-              icon={<PieChartOutlineOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Line Chart"
-              to="/line"
-              icon={<TimelineOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

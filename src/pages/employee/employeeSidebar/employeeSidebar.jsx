@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
-import FeedbackOutlinedIcon from "@mui/icons-material/FeedbackOutlined";
 import TimeToLeaveOutlinedIcon from "@mui/icons-material/TimeToLeaveOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import AddCommentOutlinedIcon from "@mui/icons-material/AddCommentOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { tokens } from "../../../theme";
+import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
+import PostAddOutlinedIcon from "@mui/icons-material/PostAddOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -113,14 +114,14 @@ const EmployeeSidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <Item
+            <Item
               className=""
-              title="Employee Dashboard"
+              title="Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> 
+            />
             <Typography
               variant="h6"
               className="text-dark fw-bold"
@@ -131,7 +132,7 @@ const EmployeeSidebar = () => {
             <Item
               title="Send Leave Request"
               to="/leaveRequest"
-              icon={<TimeToLeaveOutlinedIcon />}
+              icon={<ExitToAppOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -156,24 +157,17 @@ const EmployeeSidebar = () => {
             >
               Data
             </Typography>
-            <Item
+            {/* <Item
               title="Supervisor Feedback"
               to="/supervisorFeedback"
               icon={<FeedbackOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="Posted Jobs"
               to="/postedJob"
-              icon={<FeedbackOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Employee Calendar"
-              to="/employeeCalendar"
-              icon={<FeedbackOutlinedIcon />}
+              icon={<PostAddOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

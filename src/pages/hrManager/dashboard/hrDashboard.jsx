@@ -101,14 +101,7 @@ const HrDashboard = () => {
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Admin Dashboard" subtitle="Welcome to your dashboard" />
-
-        <Box>
-          <Button className="btn btn-info ps-1 pt-2 fw-bold">
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
-          </Button>
-        </Box>
+        <Header title="HR Manager Dashboard" subtitle="Welcome to your dashboard" />
       </Box>
 
       {/* GRID & CHARTS */}

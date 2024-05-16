@@ -1,10 +1,6 @@
 import React, { useState } from "react";
-import { tokens } from "../theme";
-import {Box, useTheme} from "@mui/material";
 
 const RadioButton = ({ title, options, value, onChange }) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   const [selectedValue, setSelectedValue] = useState(value || options[0].value);
   const handleChange = (event) => {
     setSelectedValue(event.target.value);

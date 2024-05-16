@@ -7,6 +7,7 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { tokens } from "../../../theme";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -129,7 +130,7 @@ const AdminSidebar = () => {
             <Item
               title="Control User Account"
               to="/team"
-              icon={<BarChartOutlinedIcon />}
+              icon={<AccountCircleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
