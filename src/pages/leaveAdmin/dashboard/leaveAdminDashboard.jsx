@@ -65,7 +65,6 @@ const LeaveAdminDashboard = () => {
         const response = await fetch("https://localhost:7140/DashBoard/CountApprovedLeaveRequests");
         const data = await response.json();
         setApprovedLeaveCount(data);
-        console.log(data)
       } catch (error) {
         console.error("Error fetching approved leave count:", error.message);
       }
@@ -78,7 +77,6 @@ const LeaveAdminDashboard = () => {
         const response = await fetch("https://localhost:7140/DashBoard/CountPendingLeaveRequests");
         const data = await response.json();
         setPendingLeaveCount(data);
-        console.log(data)
       } catch (error) {
         console.error("Error fetching approved leave count:", error.message);
       }
@@ -91,7 +89,6 @@ const LeaveAdminDashboard = () => {
         const response = await fetch("https://localhost:7140/DashBoard/CountRejectedLeaveRequests");
         const data = await response.json();
         setRejectedLeaveCount(data);
-        console.log(data)
       } catch (error) {
         console.error("Error fetching rejected leave count:", error.message);
       }
@@ -116,7 +113,7 @@ const LeaveAdminDashboard = () => {
         {/* ROW 1 */}
         <Box
           className="rounded"
-          gridColumn="span 3"
+          gridColumn="span 4"
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
@@ -135,7 +132,7 @@ const LeaveAdminDashboard = () => {
         </Box>
         <Box
           className="rounded"
-          gridColumn="span 3"
+          gridColumn="span 4"
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
@@ -154,7 +151,7 @@ const LeaveAdminDashboard = () => {
         </Box>
         <Box
           className="rounded"
-          gridColumn="span 3"
+          gridColumn="span 4"
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"

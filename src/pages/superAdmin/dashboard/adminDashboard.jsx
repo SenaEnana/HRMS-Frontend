@@ -21,7 +21,7 @@ const AdminDashboard = () => {
   const [rejectedLeaveCount, setRejectedLeaveCount] = useState("Loading...");
   const [activeEmployeeCount, setActiveEmployeeCount] = useState("Loading...");
   const [employeeData, setEmployeeData] = useState([]);
-  const [pendingLeaveRequests, setPendingLeaveRequests] = useState([]);
+  const [listOfUsers, setListOfUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [inactiveEmployeeCount, setInactiveEmployeeCount] = useState(0);
   const formatDate = (dateString) => {
@@ -32,11 +32,11 @@ const AdminDashboard = () => {
     return `${day}/${month}/${year}`;
   };
   useEffect(() => {
-    const fetchPendingLeaveRequests = async () => {
+    const fetchListOfUsers = async () => {
       try {
-        const response = await fetch("https://localhost:7140/api/Leave/GetPendingLeaveRequests");
+        const response = await fetch("https://localhost:7140/User");
         const data = await response.json();
-        setPendingLeaveRequests(data);
+        setListOfUsers(data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching pending leave requests:", error.message);
@@ -44,7 +44,7 @@ const AdminDashboard = () => {
       }
     };
 
-    fetchPendingLeaveRequests();
+    fetchListOfUsers();
   }, []);
   useEffect(() => {
     const fetchInactiveEmployeeCount = async () => {
@@ -63,7 +63,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/TotalEmployeesPerBranch");
+        const response = await fetch("https://localhost:7140/User/UsersCount");
         const data = await response.json();
         console.log(data)
         setEmployeeData(data);
@@ -74,32 +74,6 @@ const AdminDashboard = () => {
     fetchEmployeeData();
   }, []);
 
-  useEffect(() => {
-    const fetchApprovedLeaveCount = async () => {
-      try {
-        const response = await fetch("https://localhost:7140/DashBoard/CountApprovedLeaveRequests");
-        const data = await response.json();
-        setApprovedLeaveCount(data);
-        console.log(data)
-      } catch (error) {
-        console.error("Error fetching approved leave count:", error.message);
-      }
-    };
-    fetchApprovedLeaveCount();
-  }, []);
-  useEffect(() => {
-    const fetchRejectedLeaveCount = async () => {
-      try {
-        const response = await fetch("https://localhost:7140/DashBoard/CountRejectedLeaveRequests");
-        const data = await response.json();
-        setRejectedLeaveCount(data);
-        console.log(data)
-      } catch (error) {
-        console.error("Error fetching rejected leave count:", error.message);
-      }
-    };
-    fetchRejectedLeaveCount();
-  }, []);
   useEffect(() => {
     const fetchActiveEmployeeCount = async () => {
       try {
@@ -117,7 +91,7 @@ const AdminDashboard = () => {
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Admin Dashboard" subtitle="Welcome to your dashboard" />
+        <Header title="Admin Dashboard" subtitle="" />
 
         <Box>
           <Button className="btn btn-info ps-1 pt-2 fw-bold">
@@ -137,39 +111,7 @@ const AdminDashboard = () => {
         {/* ROW 1 */}
         <Box
           className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="12,361"
-            subtitle="Send Leave Request"
-            progress="0.75"
-            increase="+14%"
-            icon={<SendIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="431,225"
-            subtitle="Send Resignation Request"
-            progress="0.50"
-            increase="+21%"
-            icon={<SendIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
+          gridColumn="span 4"
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
@@ -178,122 +120,48 @@ const AdminDashboard = () => {
           <StatBox
             title={activeEmployeeCount.toLocaleString()}
             subtitle="Active Employees"
-            icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          {approvedLeaveCount === "Loading..." ? (
-            <p>Fetching approved leave count...</p>
-          ) : (
-            <StatBox
-              title={approvedLeaveCount.toLocaleString()}
-              subtitle="Approved Leave Requests"
-              icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
-            />
-          )}
-
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title={rejectedLeaveCount.toLocaleString()}
-            subtitle="Rejected Leave Request"
-            icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="1,325,134"
-            subtitle="Approved Resignation Request"
-            progress="0.80"
-            increase="+43%"
             icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
         <Box
-          gridColumn="span 3"
+          className="rounded"
+          gridColumn="span 4"
           backgroundColor={colors.primary[400]}
           display="flex"
           alignItems="center"
           justifyContent="center"
         >
           <StatBox
-            title="1,325,134"
-            subtitle="Rejected Resignation Request"
-            progress="0.80"
-            increase="+43%"
+            title={inactiveEmployeeCount.toLocaleString()}
+            subtitle="InActive Employees"
             icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
         <Box
-          gridColumn="span 8"
-          gridRow="span 2"
+          className="rounded"
+          gridColumn="span 4"
           backgroundColor={colors.primary[400]}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
         >
-          <Box
-            mt="25px"
-            p="0 30px"
-            display="flex "
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <Box>
-              <Typography
-                variant="h5"
-                fontWeight="600"
-                color={colors.grey[100]}
-              >
-                Total Employees Per Branch
-              </Typography>
-              <Typography
-                className="text-dark fw-bold"
-                variant="h3"
-                fontWeight="bold"
-              >
-
-              </Typography>
-            </Box>
-            <Box>
-              <IconButton>
-                <DownloadOutlinedIcon className="text-dark fs-3" />
-              </IconButton>
-            </Box>
-          </Box>
-          <Box height="250px" m="-20px 0 0 0">
-            <LineChart employeeData={employeeData} isDashboard={true} />
-          </Box>
+          <StatBox
+            title={employeeData.toLocaleString()}
+            subtitle="Total users"
+            icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
+          />
         </Box>
         <Box
-          gridColumn="span 4"
+          gridColumn="span 12"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
           overflow="auto"
         >
           <Box
             display="flex"
-            flexDirection="column" // Ensure each leave request is displayed vertically
+            flexDirection="column" 
           >
-            <Box // This Box contains the header for the pending leave requests section
+            <Box 
               display="flex"
               justifyContent="space-between"
               alignItems="center"
@@ -302,13 +170,13 @@ const AdminDashboard = () => {
               p="15px"
             >
               <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-                Pending Leave Requests
+                List of users
               </Typography>
             </Box>
 
             {/* Display each leave request in a separate Box */}
-            {!loading && pendingLeaveRequests.length > 0 && (
-              pendingLeaveRequests.map((leaveRequest, index) => (
+            {!loading && listOfUsers.length > 0 && (
+              listOfUsers.map((leaveRequest, index) => (
                 <Box
                   key={index}
                   borderBottom={`4px solid ${colors.primary[500]}`}
@@ -323,11 +191,10 @@ const AdminDashboard = () => {
                     {leaveRequest.Id}
                   </Typography>
                   <Typography color={colors.grey[100]}>
-                    Reason: {leaveRequest.reason}
+                    Name: {leaveRequest.name}
                   </Typography>
                   <Typography color={colors.grey[100]}>
-                    Start Date: {formatDate(leaveRequest.startDate)}<br/>
-                    End Date: {formatDate(leaveRequest.endDate)}
+                  Role: {leaveRequest.roles}
                   </Typography>
                   <Typography
                     className="text-dark fs-5 fw-bold"
@@ -344,27 +211,27 @@ const AdminDashboard = () => {
 
         {/* ROW 3 */}
         <Box
-          gridColumn="span 4"
+          gridColumn="span 12"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          p="30px"
         >
-          <Typography variant="h5" fontWeight="600" className="text-dark">
-            Campaign
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
+          <Typography
+            className="text-dark"
+            variant="h5"
+            fontWeight="600"
+            sx={{ padding: "30px 30px 0 30px" }}
           >
-            <ProgressCircle size="125" />
-            <Typography variant="h5" className="text-dark" sx={{ mt: "15px" }}>
-              $48,352 revenue generated
-            </Typography>
-            <Typography className="text-dark">
-              Includes extra misc expenditures and costs
-            </Typography>
+            Employee Status
+          </Typography>
+          <Box height="250px" mt="-20px">
+          <BarChart 
+          
+          data={[
+            { status: "Active", count: activeEmployeeCount },
+            { status: "Inactive", count: inactiveEmployeeCount },
+          ]}
+          xAxisLabel="Leave request Status"
+          yAxisLabel="Number of requests" />
           </Box>
         </Box>
 
@@ -388,7 +255,14 @@ export default AdminDashboard;
             Employee Status
           </Typography>
           <Box height="250px" mt="-20px">
-          <BarChart activeEmployeeCount={activeEmployeeCount} inactiveEmployeeCount={inactiveEmployeeCount} />
+          <BarChart 
+          
+          data={[
+            { status: "Active", count: activeEmployeeCount },
+            { status: "Inactive", count: inactiveEmployeeCount },
+          ]}
+          xAxisLabel="Leave request Status"
+          yAxisLabel="Number of requests" />
           </Box>
         </Box>
         */

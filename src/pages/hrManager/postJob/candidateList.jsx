@@ -1,19 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 const CandidateList = () => {
   const [data, setData] = useState([]);
+  const { jobId } = useParams();
+  
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
+  // async function getData() {
+  //   let result = await fetch(`https://localhost:7140/Promotion/JobCandidates`);
+  //   result = await result.json();
+  //   setData(result);
+  // }
   useEffect(() => {
-    getData();
-  }, []);
-
-  async function getData() {
-    let result = await fetch("https://localhost:7140/Employee/ListEmployees");
-    result = await result.json();
-    setData(result);
-  }
-
+    fetch(`https://localhost:7140/Promotion/JobCandidates/${jobId}`)
+      .then((response) => response.json())
+      .then((data) => setData(data))
+      .catch((error) =>
+        console.error("Error fetching employee details:", error)
+      );
+  }, [jobId]);
   return (
     <>
       <div className="container mt-5">
@@ -23,26 +31,15 @@ const CandidateList = () => {
         <table className="table table-hover text-dark w-100 fs-6">
           <thead>
             <tr>
-              <th>Employee Id</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Gender</th>
-              <th>Mother Name</th>
-              <th>Phone Number</th>
-              <th>Role</th>
-              <th>Action</th>
+              <th>Status</th>
+
             </tr>
           </thead>
           <tbody>
             {data.map((employee) => (
               <tr key={employee.id}>
-                <td>{employee.emp_Id}</td>
-                <td>{employee.firstName}</td>
-                <td>{employee.lastName}</td>
-                <td>{employee.gender}</td>
-                <td>{employee.motherName}</td>
-                <td>{employee.phoneNo}</td>
-                <td>{employee.role}</td>
+                <td>{employee.status}</td>
+
                 <td>
                   <Link to={`/candidateDetail/${employee.id}`}>
                     <button className="btn btn-outline-secondary btn-sm">

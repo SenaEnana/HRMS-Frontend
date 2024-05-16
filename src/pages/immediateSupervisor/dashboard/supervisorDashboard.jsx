@@ -76,7 +76,7 @@ const SupervisorDashboard = () => {
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Suprvisor Dashboard" subtitle="Welcome to your dashboard" />
+        <Header title="Suprvisor Dashboard" subtitle="" />
 
         <Box>
           <Button className="btn btn-info ps-1 pt-2 fw-bold">
@@ -95,7 +95,7 @@ const SupervisorDashboard = () => {
       {/* ROW 1 */}
       <Box
         className="rounded"
-        gridColumn="span 3"
+        gridColumn="span 6"
         backgroundColor={colors.primary[400]}
         display="flex"
         alignItems="center"
@@ -115,7 +115,7 @@ const SupervisorDashboard = () => {
 
       <Box
         className="rounded"
-        gridColumn="span 3"
+        gridColumn="span 6"
         backgroundColor={colors.primary[400]}
         display="flex"
         alignItems="center"
@@ -128,7 +128,7 @@ const SupervisorDashboard = () => {
         />
       </Box>
       <Box
-        gridColumn="span 4"
+        gridColumn="span 12"
         gridRow="span 2"
         backgroundColor={colors.primary[400]}
         overflow="auto"
@@ -184,32 +184,6 @@ const SupervisorDashboard = () => {
               </Box>
             ))
           )}
-        </Box>
-      </Box>
-      <Box
-        gridColumn="span 4"
-        gridRow="span 2"
-        backgroundColor={colors.primary[400]}
-      >
-        <Typography
-          className="text-dark"
-          variant="h5"
-          fontWeight="600"
-          sx={{ padding: "30px 30px 0 30px" }}
-        >
-          Employee compliants
-        </Typography>
-        <Box height="250px" mt="-20px">
-          <BarChart
-          
-          data={[
-            { status: "Pending", count: pendingCompliantCount },
-            { status: "Addressed", count: addressedCompliantCount },
-          ]}
-          xAxisLabel="Complaint Status"
-          yAxisLabel="Number of Complaints"
-          />
-          
         </Box>
       </Box>
     </Box>
