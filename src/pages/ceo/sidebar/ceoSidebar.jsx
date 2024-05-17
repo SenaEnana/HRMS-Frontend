@@ -10,6 +10,10 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { tokens } from "../../../theme";
 import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
+import AccountBoxIcon from "@mui/icons-material/AccountBox"
+
+
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -114,6 +118,15 @@ const CeoSidebar = () => {
           )}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
+
+              className=""
+              title="My Account"
+              to="/myaccount"
+              icon={<AccountBoxIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               className=""
               title="Ceo Dashboard"
               to="/"
@@ -139,6 +152,13 @@ const CeoSidebar = () => {
               title="Shortlisted Employee List"
               to="/shortListed"
               icon={<ChecklistRtlOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Notifications"
+              to="/notifications"
+              icon={<NotificationsNoneIcon />}
               selected={selected}
               setSelected={setSelected}
             />

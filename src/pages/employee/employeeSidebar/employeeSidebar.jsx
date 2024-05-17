@@ -11,6 +11,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { tokens } from "../../../theme";
 import ExitToAppOutlinedIcon from "@mui/icons-material/ExitToAppOutlined";
 import PostAddOutlinedIcon from "@mui/icons-material/PostAddOutlined";
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -178,6 +179,13 @@ const EmployeeSidebar = () => {
               title="Posted Jobs"
               to="/postedJob"
               icon={<PostAddOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Notifications"
+              to="/notifications"
+              icon={<NotificationsNoneIcon />}
               selected={selected}
               setSelected={setSelected}
             />
