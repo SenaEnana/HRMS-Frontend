@@ -25,9 +25,17 @@ function EmployeeBasic() {
   ];
   const maritalStatusOptions = [
     { value: "single", label: "Single" },
-    { value: "Hr Manager", label: "Married" },
+    { value: "married", label: "Married" },
     { value: "divorced", label: "Divorced" },
     { value: "widowed", label: "Widowed" },
+  ];
+  const roleOptions = [
+    { value: "employee", label: "Employee" },
+    { value: "admin", label: "Admin" },
+    { value: "ceo", label: "CEO" },
+    { value: "hrManager", label: "HRManager" },
+    { value: "leaveAdmin", label: "LeaveAdmin" },
+    { value: "immediateSupervisor", label: "ImmediateSupervisor" },
   ];
 
   useEffect(() => {
