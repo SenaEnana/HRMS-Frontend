@@ -42,22 +42,22 @@ body,
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-.card {
-  padding: 1.5rem;
-  width: 250px;
-  box-shadow: 0 0 28px 4px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
-  cursor: pointer;
-}
-.first_card{
-  padding: 1.5rem;
-  width: 100%;
-  box-shadow: 0 0 28px 4px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
-  cursor: pointer;
+.card-header {
+  font-size: 1.25rem;
 }
 
-.card_container {
-  display: flex;
-  flex-wrap: wrap;
+.card-body {
+  font-size: 1rem;
+}
+
+.card-body p {
+  margin: 0.5rem 0;
+}
+
+.card-body ul {
+  padding-left: 1.25rem;
+}
+
+.card-body ul li {
+  margin-bottom: 0.5rem;
 }

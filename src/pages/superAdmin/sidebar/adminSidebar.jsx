@@ -6,6 +6,8 @@ import "react-pro-sidebar/dist/css/styles.css";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { tokens } from "../../../theme";
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
