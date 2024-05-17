@@ -1,16 +1,16 @@
-import AdminRouter from "./adminRouter";
+//import AdminRouter from "./adminRouter";
 import EmployeeRouter from "./employeeRouter";
-import HrRouter from "./hrRouter";
-import SupervisorRouter from "./supervisorRouter";
-import LeaveAdminRouter from "./leaveAdminRouter";
-import Auth from "./pages/auth/auth";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import CeoRouter from "./ceoRouter";
+//import HrRouter from "./hrRouter";
+//import SupervisorRouter from "./supervisorRouter";
+//import LeaveAdminRouter from "./leaveAdminRouter";
+//import Auth from "./pages/auth/auth";
+//import { useState, useEffect } from "react";
+//import { useNavigate } from "react-router-dom";
+//import CeoRouter from "./ceoRouter";
 
 function App() {
 
-  const [isAuth, setIsAuth] = useState(false);
+  /*const [isAuth, setIsAuth] = useState(false);
   const navigate = useNavigate();
   function isTokenValid(token) {
     if (!token) {
@@ -44,21 +44,22 @@ function App() {
     } catch (error) {
       console.error("Error:", error);
     }
-  }, [navigate]);
+  }, [navigate]);*/
 
 
   return (
     <div>
 
-      {isAuth ? (
+      {/*isAuth ? (
         renderDashboardBasedOnRole()
       ) : (
         <Auth />
-      )}
+      )*/}
+      <EmployeeRouter />
 
     </div>
   );
-  function renderDashboardBasedOnRole() {
+  /*function renderDashboardBasedOnRole() {
     const token = sessionStorage.getItem('token');
     const role = getUserRoleFromToken(token);
     console.log(role)
@@ -72,6 +73,6 @@ function App() {
       default:
         return <p>You don't have access to any dashboard.</p>;
     }
-  }
+  }*/
 }
 export default App;

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Button from "../../../components/button";
 
 const Team = () => {
   const [data, setData] = useState([]);
@@ -33,18 +34,16 @@ const Team = () => {
               <td>{employee.emp_Id}</td>
               <td>{employee.roles}</td>
               <td>
-              <img
-                style={{ width: 100, borderRadius: 100 }}
-                src={
-                  "https://localhost:7140/Data/images/" + employee.pictureURL
-                }
-                alt=""
-              />
-            </td>
+                <img
+                  style={{ width: 100, borderRadius: 100 }}
+                  src={
+                    "https://localhost:7140/Data/images/" + employee.pictureURL
+                  }
+                  alt=""
+                />
+              </td>
               <td>
-                <button className="btn btn-outline-secondary btn-sm">
-                  LockUnlock
-                </button>
+                <Button />
                 <button className="btn btn-outline-danger btn-sm">
                   Delate
                 </button>
@@ -90,15 +89,15 @@ export default Team;
 //             <td>{user.name}</td>
 //             <td>{user.email}</td>
 //             <td>{user.role}</td>
-            // <td>
-            //   <img
-            //     style={{ width: 100, borderRadius: 100 }}
-            //     src={
-            //       "http://127.0.0.1:8000/storage/users_image/" + user.file_path
-            //     }
-            //     alt=""
-            //   />
-            // </td>
+// <td>
+//   <img
+//     style={{ width: 100, borderRadius: 100 }}
+//     src={
+//       "http://127.0.0.1:8000/storage/users_image/" + user.file_path
+//     }
+//     alt=""
+//   />
+// </td>
 //             <td>
 //               <button
 //                 className="btn btn-sm btn-outline-info"
