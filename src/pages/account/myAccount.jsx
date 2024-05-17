@@ -4,10 +4,41 @@ import { useState, useEffect } from "react";
 function MyAccount() {
     const [profilePicture, setProfilePicture] = useState(null);
     const [username, setUsername] = useState('');
-
+    function getUserIdFromToken(token) {
+        const decodedToken = JSON.parse(atob(token.split('.')[1]));
+        return decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+      }
+      function isTokenValid(token) {
+        if (!token) {
+          return false;
+        }
+    
+        try {
+          const decodedToken = JSON.parse(atob(token.split('.')[1]));
+          const expirationTime = decodedToken.exp * 1000;
+          const currentTime = Date.now();
+    
+          return currentTime < expirationTime;
+        } catch (error) {
+          console.error('Error decoding or validating token:', error);
+          return false;
+        }
+      }
     useEffect(() => {
+      const token = sessionStorage.getItem('token');
+      if (!token) {
+        console.error('Token not found in session storage');
+        return;
+      }
+
+      const isValid = isTokenValid(token);
+      if (!isValid) {
+        console.error('Invalid token');
+        return;
+      }
+      const userId = getUserIdFromToken(token);
         // Fetch user profile data to get the username
-        fetch('https://localhost:7140/Account/profile', {
+        fetch(`https://localhost:7140/Account/profile?userId=${userId}`, {
             method: 'GET',
             headers: {
                 Accept: "application/json",
@@ -33,11 +64,7 @@ function MyAccount() {
     const handleProfilePictureChange = (e) => {
         const file = e.target.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setProfilePicture(reader.result); // Set profile picture as data URL
-            };
-            reader.readAsDataURL(file);
+            setProfilePicture(file);
         }
     };
 
@@ -51,10 +78,10 @@ function MyAccount() {
         const formData = new FormData();
         formData.append('profilePicture', profilePicture);
 
-        fetch('https://localhost:7140/Account/update', {
+        fetch('https://localhost:7140/Account/update?userId=${userId}', {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}` // Adjust this according to your authentication mechanism
+                
             },
             body: formData
         })

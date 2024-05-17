@@ -66,7 +66,7 @@ function App() {
        case 'HRManager':
          return <EmployeeRouter /> ;
        case 'Employee':
-         return <HrRouter /> ;
+         return <EmployeeRouter /> ;
          default:
            return <p>You don't have access to any dashboard.</p>;
      }
