@@ -8,7 +8,7 @@ const Team = () => {
   }, []);
 
   async function getData() {
-    let result = await fetch("https://localhost:7140/Employee/ListEmployees");
+    let result = await fetch("https://localhost:7140/User");
     result = await result.json();
     setData(result);
   }
@@ -36,7 +36,7 @@ const Team = () => {
               <img
                 style={{ width: 100, borderRadius: 100 }}
                 src={
-                  "https://localhost:7140/Data/images/" + employee.pictureURL
+                  "https://localhost:7140" + employee.pictureURL
                 }
                 alt=""
               />
