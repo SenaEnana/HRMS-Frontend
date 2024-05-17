@@ -44,7 +44,7 @@ const ShortListed = () => {
                 <td>{employee.phoneNo}</td>
                 <td>{employee.role}</td>
                 <td>
-                  <Link to={`/candidateDetail/${employee.id}`}>
+                  <Link to={`/shortListedDetail/${employee.id}`}>
                     <button className="btn btn-outline-secondary btn-sm">
                       Detail
                     </button>

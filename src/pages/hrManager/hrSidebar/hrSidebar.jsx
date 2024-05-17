@@ -9,8 +9,6 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import DropdownMenu from "../../../components/dropdownMenu";
-
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { tokens } from "../../../theme";
 import LocalPostOfficeOutlinedIcon from '@mui/icons-material/LocalPostOfficeOutlined';
 import ChecklistRtlOutlinedIcon from '@mui/icons-material/ChecklistRtlOutlined';
@@ -51,11 +49,6 @@ const HrSidebar = () => {
       label: "Employee List",
       value: "employeeList",
       onClick: () => navigate("/employeeList"),
-    },
-    {
-      label: "Control Account",
-      value: "employeeRole",
-      onClick: () => navigate("/team"),
     },
   ];
 

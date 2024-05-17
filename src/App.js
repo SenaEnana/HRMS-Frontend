@@ -15,7 +15,6 @@ function App() {
    if (!token) {
      return false;
    }
-
    try {
      const decodedToken = JSON.parse(atob(token.split('.')[1]));
      const expirationTime = decodedToken.exp * 1000;
@@ -52,8 +51,7 @@ function App() {
         renderDashboardBasedOnRole()
       ) : (
         <Auth />
-      )}
-      
+      )}  
     </div>
   );
    function renderDashboardBasedOnRole() {
@@ -66,7 +64,7 @@ function App() {
        case 'HRManager':
          return <EmployeeRouter /> ;
        case 'Employee':
-         return <HrRouter /> ;
+         return <EmployeeRouter /> ;
          default:
            return <p>You don't have access to any dashboard.</p>;
      }
