@@ -1,49 +1,51 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+//import Button from "../../components/button";
+
 function MyAccount() {
     const [profilePicture, setProfilePicture] = useState(null);
     const [username, setUsername] = useState('');
     function getUserIdFromToken(token) {
         const decodedToken = JSON.parse(atob(token.split('.')[1]));
         return decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
-      }
-      function isTokenValid(token) {
+    }
+    function isTokenValid(token) {
         if (!token) {
-          return false;
+            return false;
         }
-    
-        try {
-          const decodedToken = JSON.parse(atob(token.split('.')[1]));
-          const expirationTime = decodedToken.exp * 1000;
-          const currentTime = Date.now();
-    
-          return currentTime < expirationTime;
-        } catch (error) {
-          console.error('Error decoding or validating token:', error);
-          return false;
-        }
-      }
-    useEffect(() => {
-      const token = sessionStorage.getItem('token');
-      if (!token) {
-        console.error('Token not found in session storage');
-        return;
-      }
 
-      const isValid = isTokenValid(token);
-      if (!isValid) {
-        console.error('Invalid token');
-        return;
-      }
-      const userId = getUserIdFromToken(token);
+        try {
+            const decodedToken = JSON.parse(atob(token.split('.')[1]));
+            const expirationTime = decodedToken.exp * 1000;
+            const currentTime = Date.now();
+
+            return currentTime < expirationTime;
+        } catch (error) {
+            console.error('Error decoding or validating token:', error);
+            return false;
+        }
+    }
+    useEffect(() => {
+        const token = sessionStorage.getItem('token');
+        if (!token) {
+            console.error('Token not found in session storage');
+            return;
+        }
+
+        const isValid = isTokenValid(token);
+        if (!isValid) {
+            console.error('Invalid token');
+            return;
+        }
+        const userId = getUserIdFromToken(token);
         // Fetch user profile data to get the username
         fetch(`https://localhost:7140/Account/profile?userId=${userId}`, {
             method: 'GET',
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
-              },
+            },
         })
             .then(response => {
                 if (response.ok) {
@@ -81,7 +83,7 @@ function MyAccount() {
         fetch('https://localhost:7140/Account/update?userId=${userId}', {
             method: 'POST',
             headers: {
-                
+
             },
             body: formData
         })
@@ -136,3 +138,4 @@ function MyAccount() {
 
 }
 export default MyAccount;
+//<Button />
