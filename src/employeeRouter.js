@@ -9,32 +9,34 @@ import SupervisorFeedback from "./pages/employee/form/supervisorFeedback";
 import ResignationRequest from "./pages/employee/form/resignationRequest/resignationRequest";
 import EmployeeSidebar from "./pages/employee/employeeSidebar/employeeSidebar";
 import PostedJob from "./pages/employee/form/postedJob";
+import MyAccount from "./pages/account/myAccount";
 
 function EmployeeRouter() {
-    const [theme, colorMode] = useMode();
-const isAuth = true;
-    return(
-            <ColorModeContext.Provider value={colorMode}>
-            <ThemeProvider theme={theme}>
-              <CssBaseline />
-              <div className="app">
-                {isAuth &&
-                  <EmployeeSidebar/>
-                  }
-                <main className="content">
-                  <Routes>
-                  <Route path="/" element={<EmployeeDashboard/>} />
-                  <Route path="/employeeCalendar" element={<Calendar />} />
-                  <Route path="/complaint" element={<Complaint/>}/>
-                  <Route path="/leaveRequest" element={<LeaveRequest/>}/>
-                  <Route path="/resignationRequest" element={<ResignationRequest/>}/>
-                  <Route path="/supervisorFeedback" element={<SupervisorFeedback/>}/>
-                  <Route path="/postedJob" element={<PostedJob/>}/>
-                  </Routes>
-                </main>
-              </div>
-            </ThemeProvider>
-          </ColorModeContext.Provider>
-          );
-        }
+  const [theme, colorMode] = useMode();
+  const isAuth = true;
+  return (
+    <ColorModeContext.Provider value={colorMode}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <div className="app">
+          {isAuth &&
+            <EmployeeSidebar />
+          }
+          <main className="content">
+            <Routes>
+              <Route path="/" element={<EmployeeDashboard />} />
+              <Route path="/employeeCalendar" element={<Calendar />} />
+              <Route path="/myaccount" element={<MyAccount />} />
+              <Route path="/complaint" element={<Complaint />} />
+              <Route path="/leaveRequest" element={<LeaveRequest />} />
+              <Route path="/resignationRequest" element={<ResignationRequest />} />
+              <Route path="/supervisorFeedback" element={<SupervisorFeedback />} />
+              <Route path="/postedJob" element={<PostedJob />} />
+            </Routes>
+          </main>
+        </div>
+      </ThemeProvider>
+    </ColorModeContext.Provider>
+  );
+}
 export default EmployeeRouter;

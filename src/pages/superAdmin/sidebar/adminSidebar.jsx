@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { tokens } from "../../../theme";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -111,7 +113,15 @@ const AdminSidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <Item
+            <Item
+              className=""
+              title="My Account"
+              to="/myaccount"
+              icon={<AccountBoxIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               className=""
               title="Super Admin  Dashboard"
               to="/"

@@ -6,9 +6,12 @@ import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import TimeToLeaveOutlinedIcon from "@mui/icons-material/TimeToLeaveOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
+//import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
+//import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+
 import { tokens } from "../../../theme";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -117,12 +120,20 @@ const LeaveSidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               className=""
+              title="My Account"
+              to="/myaccount"
+              icon={<AccountBoxIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              className=""
               title="Leave Admin Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />          
+            />
             <Typography
               variant="h6"
               className="text-dark fw-bold"
@@ -131,14 +142,14 @@ const LeaveSidebar = () => {
               Data
             </Typography>
 
-             <Item
+            <Item
               title="Pending Leave Request"
               to="/leaveRequestList"
               icon={<TimeToLeaveOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            
+
             <Item
               title="Leave Type List"
               to="/leaveTypeList"

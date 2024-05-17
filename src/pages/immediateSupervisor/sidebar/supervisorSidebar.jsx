@@ -9,6 +9,8 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { tokens } from "../../../theme";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -114,7 +116,15 @@ const SupervisorSidebar = () => {
             </Box>
           )}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <Item
+            <Item
+              className=""
+              title="My Account"
+              to="/myaccount"
+              icon={<AccountBoxIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               className=""
               title="Immediate Supervisor Dashboard"
               to="/"

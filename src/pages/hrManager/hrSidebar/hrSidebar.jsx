@@ -12,6 +12,8 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import DropdownMenu from "../../../components/dropdownMenu";
+
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { tokens } from "../../../theme";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -135,14 +137,22 @@ const HrSidebar = () => {
             </Box>
           )}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <Item
+            <Item
+              className=""
+              title="My Account"
+              to="/myaccount"
+              icon={<AccountBoxIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               className=""
               title="Hr Manager Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> 
+            />
             <Typography
               variant="h6"
               className="text-dark fw-bold"

@@ -8,6 +8,7 @@ import TimeToLeaveOutlinedIcon from "@mui/icons-material/TimeToLeaveOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import AddCommentOutlinedIcon from "@mui/icons-material/AddCommentOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { tokens } from "../../../theme";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -113,14 +114,22 @@ const EmployeeSidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <Item
+            <Item
+              className=""
+              title="My Account"
+              to="/myaccount"
+              icon={<AccountBoxIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               className=""
               title="Employee Dashboard"
-              to="/"
+              to="/employeeDashboard"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> 
+            />
             <Typography
               variant="h6"
               className="text-dark fw-bold"
