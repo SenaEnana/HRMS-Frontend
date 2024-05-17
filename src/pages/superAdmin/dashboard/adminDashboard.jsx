@@ -1,20 +1,16 @@
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme } from "@mui/material";
 import Button from "react-bootstrap/Button";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import SendIcon from "@mui/icons-material/Send";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import SwipeLeftAltOutlinedIcon from "@mui/icons-material/SwipeLeftAltOutlined";
 import Header from "../../../components/header";
-import LineChart from "../../../components/lineChart";
 import BarChart from "../../../components/barChart";
 import StatBox from "../../../components/statBox";
-import ProgressCircle from "../../../components/progressCircle";
 import { tokens } from "../../../theme";
 import React, { useState, useEffect } from "react";
 
 const AdminDashboard = () => {
-  
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [approvedLeaveCount, setApprovedLeaveCount] = useState("Loading...");
@@ -49,7 +45,9 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchInactiveEmployeeCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/InactiveCount");
+        const response = await fetch(
+          "https://localhost:7140/DashBoard/InactiveCount"
+        );
         const data = await response.json();
         setInactiveEmployeeCount(data);
         setLoading(false);
@@ -65,7 +63,7 @@ const AdminDashboard = () => {
       try {
         const response = await fetch("https://localhost:7140/User/UsersCount");
         const data = await response.json();
-        console.log(data)
+        console.log(data);
         setEmployeeData(data);
       } catch (error) {
         console.error("Error fetching employee data:", error.message);
@@ -77,12 +75,17 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchActiveEmployeeCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/ActiveCount");
+        const response = await fetch(
+          "https://localhost:7140/DashBoard/ActiveCount"
+        );
         const data = await response.json();
         setActiveEmployeeCount(data);
-        console.log(data)
+        console.log(data);
       } catch (error) {
-        console.error("Error fetching available employee count:", error.message);
+        console.error(
+          "Error fetching available employee count:",
+          error.message
+        );
       }
     };
     fetchActiveEmployeeCount();
@@ -157,11 +160,8 @@ const AdminDashboard = () => {
           backgroundColor={colors.primary[400]}
           overflow="auto"
         >
-          <Box
-            display="flex"
-            flexDirection="column" 
-          >
-            <Box 
+          <Box display="flex" flexDirection="column">
+            <Box
               display="flex"
               justifyContent="space-between"
               alignItems="center"
@@ -169,13 +169,18 @@ const AdminDashboard = () => {
               colors={colors.grey[100]}
               p="15px"
             >
-              <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+              <Typography
+                color={colors.grey[100]}
+                variant="h5"
+                fontWeight="600"
+              >
                 List of users
               </Typography>
             </Box>
 
             {/* Display each leave request in a separate Box */}
-            {!loading && listOfUsers.length > 0 && (
+            {!loading &&
+              listOfUsers.length > 0 &&
               listOfUsers.map((leaveRequest, index) => (
                 <Box
                   key={index}
@@ -194,18 +199,15 @@ const AdminDashboard = () => {
                     Name: {leaveRequest.name}
                   </Typography>
                   <Typography color={colors.grey[100]}>
-                  Role: {leaveRequest.roles}
+                    Role: {leaveRequest.roles}
                   </Typography>
                   <Typography
                     className="text-dark fs-5 fw-bold"
                     p="5px 10px"
                     borderRadius="4px"
-                  >
-                    
-                  </Typography>
+                  ></Typography>
                 </Box>
-              ))
-            )}
+              ))}
           </Box>
         </Box>
 
@@ -224,17 +226,16 @@ const AdminDashboard = () => {
             Employee Status
           </Typography>
           <Box height="250px" mt="-20px">
-          <BarChart 
-          
-          data={[
-            { status: "Active", count: activeEmployeeCount },
-            { status: "Inactive", count: inactiveEmployeeCount },
-          ]}
-          xAxisLabel="Leave request Status"
-          yAxisLabel="Number of requests" />
+            <BarChart
+              data={[
+                { status: "Active", count: activeEmployeeCount },
+                { status: "Inactive", count: inactiveEmployeeCount },
+              ]}
+              xAxisLabel="Leave request Status"
+              yAxisLabel="Number of requests"
+            />
           </Box>
         </Box>
-
       </Box>
     </Box>
   );

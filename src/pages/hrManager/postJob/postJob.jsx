@@ -4,9 +4,12 @@ import { postJobValidation, promotionValidation } from "./schema";
 import TextInput from "../../../components/textInput";
 import DropDown from "../../../components/DropDown";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+import { FormikTextField } from "formik-material-fields";
 
 function PromoteEmployee() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const navigate = useNavigate();
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
   const [error, setError] = useState(null);
   useEffect(() => {
@@ -17,7 +20,7 @@ function PromoteEmployee() {
     };
     fetchData();
   }, []);
-  //the following are the code for the api not correct link
+  
   async function postJob(values) {
     try {
       const response = await fetch("https://localhost:7140/Promotion/PostJob", {
@@ -29,6 +32,7 @@ function PromoteEmployee() {
       });
       if (response.ok) {
         alert("job posted successfully");
+        navigate("/postedJob");
       } else {
         const errorMessage = await response.text();
         setError(errorMessage);
@@ -49,12 +53,11 @@ function PromoteEmployee() {
           }}
           onSubmit={(values) => {
             postJob(values);
-            console.log(values);
           }}
           validationSchema={postJobValidation}
         >
           {(formikValues) => (
-            <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
+            <form className="form-group rounded border col-6 mt-5 ms-4 bg-light">
               <div className="ms-3">
                 <p className="fs-4 text-dark text-center">Post Job</p>
               </div>
@@ -77,23 +80,23 @@ function PromoteEmployee() {
                   formikValues.setFieldValue("PositionId", selectedOption);
                 }}
               />
-              <TextInput
-                type="text"
+              <FormikTextField
                 name="Description"
                 label="Description"
-                placeholder="enter post description"
+                margin="normal"
                 value={formikValues.values.Description}
                 error={formikValues.errors.Description}
                 onChange={formikValues.handleChange}
+                fullWidth
               />
-              <TextInput
-                type="text"
+              <FormikTextField
                 name="Requirements"
-                label="Requirement"
-                placeholder="enter job requirement"
+                label="Requirements"
+                margin="normal"
                 value={formikValues.values.Requirements}
                 error={formikValues.errors.Requirements}
                 onChange={formikValues.handleChange}
+                fullWidth
               />
               {error && <p className="text-danger">{error}</p>}
               <div className="m-3">

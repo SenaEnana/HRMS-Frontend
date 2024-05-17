@@ -24,28 +24,28 @@ const EmployeeDetail = () => {
       <div className="first_card mt-5 me-3 text-dark d-flex">
         <p className="fs-5">{employee.firstName}</p>
         <div className="card_body fs-5 d-flex">
-          <p>Employee Id: {employee.id}</p>
-          <p>First Name: {employee.firstName}</p>
-          <p>Last Name: {employee.lastName}</p>
-          <p>Gender: {employee.gender}</p>
-          <p>Mother Name: {employee.motherName}</p>
-          <p>Phone Number: {employee.phoneNo}</p>
-          <p>Marital Status: {employee.maritalStatus}</p>
-          <p>Region: {employee.region}</p>
-          <p>Woreda: {employee.woreda}</p>
-          <p>Kebele: {employee.kebele}</p>
-          <p>House Number: {employee.houseNo}</p>
-          <p>Department: {employee.departmentId}</p>
-          <p>Grade: {employee.gradeId}</p>
-          <p>Branch: {employee.branchId}</p>
-          <p>Degree: {employee.degreeId}</p>
-          <p>Hire Date: {employee.hireDate}</p>
-          <p>Salary: {employee.salary}</p>
-          <p>Roles: {employee.roles}</p>
-          <p>Region: {employee.region}</p>
-          <p>Woreda: {employee.woreda}</p>
-          <p>Kebele: {employee.kebele}</p>
-          <p>House Number: {employee.houseNo}</p>
+          <div>Employee Id: {employee.id}</div>
+          <div>First Name: {employee.firstName}</div>
+          <div>Last Name: {employee.lastName}</div>
+          <div>Gender: {employee.gender}</div>
+          <div>Mother Name: {employee.motherName}</div>
+          <div>Phone Number: {employee.phoneNo}</div>
+          <div>Marital Status: {employee.maritalStatus}</div>
+          <div>Region: {employee.region}</div>
+          <div>Woreda: {employee.woreda}</div>
+          <div>Kebele: {employee.kebele}</div>
+          <div>House Number: {employee.houseNo}</div>
+          <div>Department: {employee.departmentId}</div>
+          <div>Grade: {employee.gradeId}</div>
+          <div>Branch: {employee.branchId}</div>
+          <div>Degree: {employee.degreeId}</div>
+          <div>Hire Date: {employee.hireDate}</div>
+          <div>Salary: {employee.salary}</div>
+          <div>Roles: {employee.roles}</div>
+          <div>Region: {employee.region}</div>
+          <div>Woreda: {employee.woreda}</div>
+          <div>Kebele: {employee.kebele}</div>
+          <div>House Number: {employee.houseNo}</div>
         </div>
       </div>
       <div className="card mt-5 m-3 text-dark">

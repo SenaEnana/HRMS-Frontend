@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function JobDetail() {
   const { id } = useParams();
   const [job, setJob] = useState(null);
-
+  // https://localhost:7140/Promotion/ApplyForJob?jobId=1
   // there is no end point that fetch job by id so i has to be done first before the bellow are not the correct link
   useEffect(() => {
     fetch(`https://localhost:7140/Job/${id}`)

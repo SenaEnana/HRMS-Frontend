@@ -44,7 +44,6 @@ function App() {
   //     console.error("Error:", error);
   //   }
   // }, [navigate]);
-
   
   return (
     <div>
@@ -52,23 +51,24 @@ function App() {
         renderDashboardBasedOnRole()
       ) : (
         <Auth />
-      )} */}
-      <HrRouter/>
+      )}  */}
+       <HrRouter/> 
+     {/* <EmployeeRouter/>*/}
     </div>
   );
-  function renderDashboardBasedOnRole() {
-    const token = sessionStorage.getItem('token');
-    const role = getUserRoleFromToken(token);
-    switch (role) {
-      case 'LeaveAdmin':
-        return <LeaveAdminRouter /> ;
-      case 'HRManager':
-        return <HrRouter /> ;
-      case 'Employee':
-        return <EmployeeRouter /> ;
-        default:
-          return <p>You don't have access to any dashboard.</p>;
-    }
-  }
+  // function renderDashboardBasedOnRole() {
+  //   const token = sessionStorage.getItem('token');
+  //   const role = getUserRoleFromToken(token);
+  //   switch (role) {
+  //     case 'LeaveAdmin':
+  //       return <LeaveAdminRouter /> ;
+  //     case 'HrManager':
+  //       return <HrRouter /> ;
+  //     case 'Employee':
+  //       return <EmployeeRouter /> ;
+  //       default:
+  //         return <p>You don't have access to any dashboard.</p>;
+  //   }
+  // }
 }
 export default App;
