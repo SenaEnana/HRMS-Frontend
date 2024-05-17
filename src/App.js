@@ -55,7 +55,6 @@ function App() {
       ) : (
         <Auth />
       )}
-      <EmployeeRouter />
 
     </div>
   );
@@ -67,9 +66,9 @@ function App() {
        case 'LeaveAdmin':
          return <LeaveAdminRouter /> ;
        case 'HRManager':
-         return <EmployeeRouter /> ;
+         return <HrRouter /> ;
        case 'Employee':
-         return <EmployeeRouter /> ;
+         return <HrRouter /> ;
          default:
            return <p>You don't have access to any dashboard.</p>;
      }
