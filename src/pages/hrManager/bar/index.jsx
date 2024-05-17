@@ -35,7 +35,7 @@ const Bar = () => {
 
   return (
     <Box m="20px">
-      <Header title="Bar Chart" subtitle="Simple Bar Chart" />
+      <Header title="Employee status bar chart" subtitle="" />
       <Box height="75vh">
       <BarChart 
           

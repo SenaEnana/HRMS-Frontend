@@ -1,7 +1,6 @@
 // EmployeeDetail.js
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Topbar from "../../commonPages/topbar";
 
 const EmployeeDetail = () => {
   const { id } = useParams();
@@ -22,10 +21,9 @@ const EmployeeDetail = () => {
 
   return (
     <>
-      <Topbar />
-      <div className="container mt-5 text-dark">
-        <h2>Employee Details</h2>
-        <div>
+      <div className="first_card mt-5 me-3 text-dark d-flex">
+        <p className="fs-5">{employee.firstName}</p>
+        <div className="card_body fs-5 d-flex">
           <p>Employee Id: {employee.id}</p>
           <p>First Name: {employee.firstName}</p>
           <p>Last Name: {employee.lastName}</p>
@@ -48,8 +46,11 @@ const EmployeeDetail = () => {
           <p>Woreda: {employee.woreda}</p>
           <p>Kebele: {employee.kebele}</p>
           <p>House Number: {employee.houseNo}</p>
-           
-          <p>Experience:</p>
+        </div>
+      </div>
+      <div className="card mt-5 m-3 text-dark">
+        <p className="fs-5">Experience</p>
+        <div className="card_body fs-6">
           <ul>
             {employee.experiences.map((exp, index) => (
               <li key={index}>
@@ -58,7 +59,11 @@ const EmployeeDetail = () => {
               </li>
             ))}
           </ul>
-          <p>Child Information:</p>
+        </div>
+      </div>
+      <div className="card mt-5 me-3 text-dark">
+        <p className="text-dark fs-5">Child Information</p>
+        <div className="card_body fs-6">
           <ul>
             {employee.childInformations.map((child, index) => (
               <li key={index}>
@@ -66,22 +71,29 @@ const EmployeeDetail = () => {
               </li>
             ))}
           </ul>
-          <p>Contact Person:</p>
+        </div>
+      </div>
+      <div className="card mt-5 me-3 text-dark">
+        <p className="text-dark fs-5">Contact Person</p>
+        <div className="card_body fs-6">
           <ul>
             {employee.contactPersons.map((contact, index) => (
               <li key={index}>
-               Name: {contact.name}  
-               Relationship: {contact.relationship}
-               Phone Number: {contact.contactPhoneNo}
-               Region: {contact.contactRegion}
-               Kebele: {contact.contactKebele}
-               House No: {contact.contactHouseNo}
-               Woreda: {contact.contactWoreda}
-
+                Name: {contact.name}
+                Relationship: {contact.relationship}
+                Phone Number: {contact.contactPhoneNo}
+                Region: {contact.contactRegion}
+                Kebele: {contact.contactKebele}
+                House No: {contact.contactHouseNo}
+                Woreda: {contact.contactWoreda}
               </li>
             ))}
           </ul>
-          <p>Education:</p>
+        </div>
+      </div>
+      <div className="card mt-5 me-3 text-dark">
+        <p className="text-dark fs-5">Education</p>
+        <div className="card_body fs-6">
           <ul>
             {employee.educations.map((edu, index) => (
               <li key={index}>
@@ -96,3 +108,27 @@ const EmployeeDetail = () => {
 };
 
 export default EmployeeDetail;
+// <div className="card mt-5 me-3">
+//   <div className="mb-2 fs-5 fw-bold">Name:-{result.name}</div>
+//   <div className="card_body">
+//     <div className="ms-1 fw-lighter">Address:-{result.address}</div>
+//     <div className="ms-1 fw-lighter">Gender:-{result.gender}</div>
+//     {/* <div className="ms-1 fw-lighter">Phone:-{result.phoneNo}</div>
+//     <div className="ms-1 fw-lighter">Expert:-{result.expert}</div>
+//     <div className="ms-1 fw-lighter">
+//       Education Level:-{result.educationLevel}
+//     </div>
+//     <div className="ms-1 fw-lighter">Days:-{result.day}</div>
+//     <div className="ms-1 fw-lighter">Time:-{result.time}</div> */}
+//     <div>
+//       {/* <button className="btn btn-info" onClick={() =>navigate("/singleTeacher/") }>
+//         more
+//       </button> */}
+//       <NavLink to={"/singleTeacher/" + result.id}>
+//         <button className="btn btn-outline-primary btn-sm" type="button">
+//           more
+//         </button>
+//       </NavLink>
+//     </div>
+//   </div>
+// </div>

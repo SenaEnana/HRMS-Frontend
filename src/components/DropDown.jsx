@@ -1,12 +1,8 @@
 import React from "react";
-import { tokens } from "../theme";
-import {useTheme} from "@mui/material";
-const DropDown = ({ options, onChange, label, name ,type}) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  
+
+const DropDown = ({ options, onChange, label, name, type }) => {
+
   return (
-  
     <div className="col-12 row">
       <div>
         <label className="text-dark float-start mt-1 p-1 fs-5" htmlFor="option">
@@ -15,7 +11,7 @@ const DropDown = ({ options, onChange, label, name ,type}) => {
       </div>
       <div>
         <select
-        type={type}
+          type={type}
           className="form-control mb-3"
           id="option"
           name={name}
@@ -31,6 +27,5 @@ const DropDown = ({ options, onChange, label, name ,type}) => {
     </div>
   );
 };
-
 
 export default DropDown;

@@ -1,11 +1,17 @@
+<<<<<<< HEAD
 import { Box,  Typography, useTheme } from "@mui/material";
 //import Button from "react-bootstrap/Button";
 //import SendIcon from "@mui/icons-material/Send";
+=======
+import { Box, IconButton, Typography, useTheme } from "@mui/material";
+>>>>>>> 2262aacacc78d305a7aeb1c8dc23f23849aed197
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
-//import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import Header from "../../../components/header";
 import StatBox from "../../../components/statBox";
+<<<<<<< HEAD
 //import { mockTransactions } from "../../../data/mockData";
+=======
+>>>>>>> 2262aacacc78d305a7aeb1c8dc23f23849aed197
 import { tokens } from "../../../theme";
 import ProgressCircle from "../../../components/progressCircle";
 import React, { useState, useEffect } from "react";
@@ -46,9 +52,7 @@ const EmployeeDashboard = () => {
         navigate('/login');
         return;
       }
-
       const userId = getUserIdFromToken(token);
-      console.log(userId);
 
       const url = `https://localhost:7140/api/Leave/GetMyLeaveBalance?userId=${userId}`;
       const response = await fetch(url);
@@ -56,9 +60,7 @@ const EmployeeDashboard = () => {
       if (!response.ok) {
         throw new Error('Failed to fetch leave balance');
       }
-
       const data = await response.json();
-      console.log(data)
       setLeaveBalances(data);
     } catch (error) {
       console.error("Error fetching leave balance:", error.message);
@@ -72,26 +74,20 @@ const EmployeeDashboard = () => {
         navigate('/login');
         return;
       }
-
       const isValid = isTokenValid(token);
       if (!isValid) {
         console.error('Invalid token');
         navigate('/login');
         return;
       }
-
       const userId = getUserIdFromToken(token);
-      console.log(userId);
-
       const url = `https://localhost:7140/api/Complaint/MyCompliants?userId=${userId}`;
       const response = await fetch(url);
 
       if (!response.ok) {
         throw new Error('Failed to fetch complaint requests');
       }
-
       const data = await response.json();
-      console.log(data)
       setCompliantRequests(data);
     } catch (error) {
       console.error("Error fetching compliant requests:", error.message);
@@ -105,7 +101,6 @@ const EmployeeDashboard = () => {
         navigate('/login');
         return;
       }
-
       const isValid = isTokenValid(token);
       if (!isValid) {
         console.error('Invalid token');
@@ -114,8 +109,6 @@ const EmployeeDashboard = () => {
       }
 
       const userId = getUserIdFromToken(token);
-      console.log(userId);
-
       const url = `https://localhost:7140/api/Leave/MyLeaveRequests?userId=${userId}`;
       const response = await fetch(url);
 
@@ -124,7 +117,6 @@ const EmployeeDashboard = () => {
       }
 
       const data = await response.json();
-      console.log(data)
       setLeaveRequests(data);
     } catch (error) {
       console.error("Error fetching leave requests:", error.message);
@@ -159,7 +151,7 @@ const EmployeeDashboard = () => {
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header
           title="Employee Dashboard"
-          subtitle="Welcome to your dashboard"
+          subtitle=""
         />
       </Box>
 
@@ -186,12 +178,12 @@ const EmployeeDashboard = () => {
                 Allowed Days: {balance.allowedDays}
               </>}
 
-              subtitle={`${balance.remainingLeaveBalance} days remaining`} // Using remainingLeaveBalance
+              subtitle={`${balance.remainingLeaveBalance} days remaining`} 
               icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
             />
           </Box>
         ))}
-        <Box
+        {/* <Box
           className="rounded"
           gridColumn="span 3"
           backgroundColor={colors.primary[400]}
@@ -204,7 +196,7 @@ const EmployeeDashboard = () => {
             subtitle="Performance Evaluation Result"
             icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
           />
-        </Box>
+        </Box> */}
         {/* ROW 2 */}
         <Box
           gridColumn="span 4"
@@ -291,31 +283,7 @@ const EmployeeDashboard = () => {
             </Box>
           ))}
         </Box>
-
-
-        {/* ROW 3 */}
-        <Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-          p="30px"
-        >
-          <Typography className="text-dark" variant="h5" fontWeight="600">
-            Employee Transaction
-          </Typography>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            mt="25px"
-          >
-            <ProgressCircle size="125" />
-            <Typography variant="h5" className="text-dark" sx={{ mt: "15px" }}>
-              $48,352 revenue generated
-            </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
-          </Box>
-        </Box>
+        
       </Box>
     </Box>
   );

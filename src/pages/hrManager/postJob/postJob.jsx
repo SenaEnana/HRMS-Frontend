@@ -8,7 +8,7 @@ import { useState, useEffect } from "react";
 function PromoteEmployee() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("https://localhost:7140/Position");
@@ -17,7 +17,7 @@ function PromoteEmployee() {
     };
     fetchData();
   }, []);
-//the following are the code for the api not correct link
+  //the following are the code for the api not correct link
   async function postJob(values) {
     try {
       const response = await fetch("https://localhost:7140/Promotion/PostJob", {
@@ -30,8 +30,8 @@ function PromoteEmployee() {
       if (response.ok) {
         alert("job posted successfully");
       } else {
-        const errorMessage = await response.text(); 
-        setError(errorMessage); 
+        const errorMessage = await response.text();
+        setError(errorMessage);
       }
     } catch (error) {
       setError("Error posting job");
@@ -45,7 +45,7 @@ function PromoteEmployee() {
             JobTitle: "",
             PositionId: "",
             Description: "",
-            Requirement: "",
+            Requirements: "",
           }}
           onSubmit={(values) => {
             postJob(values);
@@ -88,17 +88,17 @@ function PromoteEmployee() {
               />
               <TextInput
                 type="text"
-                name="Requirement"
+                name="Requirements"
                 label="Requirement"
                 placeholder="enter job requirement"
-                value={formikValues.values.Requirement}
-                error={formikValues.errors.Requirement}
+                value={formikValues.values.Requirements}
+                error={formikValues.errors.Requirements}
                 onChange={formikValues.handleChange}
               />
-                {error && <p className="text-danger">{error}</p>}
+              {error && <p className="text-danger">{error}</p>}
               <div className="m-3">
                 <input
-                  className="btn btn-info col-10 m-2"
+                  className="btn btn-success col-10 m-2"
                   type="button"
                   value="post"
                   onClick={formikValues.handleSubmit}

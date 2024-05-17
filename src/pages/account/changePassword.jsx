@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Formik } from "formik";
-import { Box, useMediaQuery } from "@mui/material";
+import { useMediaQuery } from "@mui/material";
 import TextInput from "../../components/textInput";
 import {useState, useEffect} from 'react'
 
@@ -33,10 +33,9 @@ function ChangePassword() {
 
   return (
     <div className="row justify-content-center">
-      <NavLink to={"/myAccount"} className="float-end btn btn-info btn-sm mb-2">
+      <NavLink to={"/myAccount"} className="float-end btn btn-secondary btn-sm mb-2">
         Back
       </NavLink>
-      <Box className="m-2">
         <Formik
           initialValues={{
             OldPassword: "",
@@ -50,17 +49,10 @@ function ChangePassword() {
           validationSchema={leaveTypeValidation}
         >
           {(formikValues) => (
-            <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
+            <form className="form-group rounded border col-6 ms-5 ms-4 bg-light">
               <div className="ms-3">
                 <p className="fs-4 text-dark text-center">Change Password</p>
               </div>
-              <Box
-                display="grid"
-                gridTemplateColumns="repeat(2, minmax(0, 1fr))"
-                sx={{
-                  "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-                }}
-              >
                 <TextInput
                   type="password"
                   name="OldPassword"
@@ -88,11 +80,10 @@ function ChangePassword() {
                   error={formikValues.errors.ConfirmPassword}
                   onChange={formikValues.handleChange}
                 />
-              </Box>
               {error && <p className="text-danger">{error}</p>}
               <div className="m-3">
                 <input
-                  className="btn btn-info col-10 float-end m-2"
+                  className="btn btn-success col-10 float-end m-2"
                   type="button"
                   value="add"
                   onClick={formikValues.handleSubmit}
@@ -101,7 +92,6 @@ function ChangePassword() {
             </form>
           )}
         </Formik>
-      </Box>
     </div>
   );
 }

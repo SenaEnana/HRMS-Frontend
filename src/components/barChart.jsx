@@ -1,9 +1,12 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveBar } from "@nivo/bar";
 
-const BarChart = ({ data, xAxisLabel, yAxisLabel , isDashboard = false }) => {
+const BarChart = ({ data, xAxisLabel, yAxisLabel, isDashboard = false }) => {
   const theme = useTheme();
-  const colors = theme.palette.mode === 'light' ? theme.palette.primary : theme.palette.secondary;
+  const colors =
+    theme.palette.mode === "light"
+      ? theme.palette.primary
+      : theme.palette.secondary;
 
   return (
     <ResponsiveBar
@@ -68,7 +71,13 @@ const BarChart = ({ data, xAxisLabel, yAxisLabel , isDashboard = false }) => {
       ]}
       enableHover={true} // Enable hover interactions
       tooltip={({ index, value, color }) => (
-        <div style={{ background: color, padding: '8px 10px', borderRadius: '4px' }}>
+        <div
+          style={{
+            background: color,
+            padding: "8px 10px",
+            borderRadius: "4px",
+          }}
+        >
           <strong>{index}:</strong> {value}
         </div>
       )} // Define custom tooltip content and style

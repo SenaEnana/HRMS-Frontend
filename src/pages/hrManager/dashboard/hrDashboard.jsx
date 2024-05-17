@@ -64,7 +64,6 @@ const HrDashboard = () => {
         const response = await fetch("https://localhost:7140/DashBoard/CountApprovedLeaveRequests");
         const data = await response.json();
         setApprovedLeaveCount(data);
-        console.log(data)
       } catch (error) {
         console.error("Error fetching approved leave count:", error.message);
       }
@@ -77,7 +76,6 @@ const HrDashboard = () => {
         const response = await fetch("https://localhost:7140/DashBoard/CountRejectedLeaveRequests");
         const data = await response.json();
         setRejectedLeaveCount(data);
-        console.log(data)
       } catch (error) {
         console.error("Error fetching rejected leave count:", error.message);
       }
@@ -90,7 +88,6 @@ const HrDashboard = () => {
         const response = await fetch("https://localhost:7140/DashBoard/ActiveCount");
         const data = await response.json();
         setActiveEmployeeCount(data);
-        console.log(data)
       } catch (error) {
         console.error("Error fetching available employee count:", error.message);
       }
@@ -101,14 +98,7 @@ const HrDashboard = () => {
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Admin Dashboard" subtitle="Welcome to your dashboard" />
-
-        <Box>
-          <Button className="btn btn-info ps-1 pt-2 fw-bold">
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
-          </Button>
-        </Box>
+        <Header title="HR Manager Dashboard" subtitle="" />
       </Box>
 
       {/* GRID & CHARTS */}

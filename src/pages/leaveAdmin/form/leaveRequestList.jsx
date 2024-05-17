@@ -72,7 +72,7 @@ function LeaveRequestList(){
               <td>
                   <button
                   onClick={() => approveOperation(employeeId)}
-                  className="btn btn-outline-info btn-sm"
+                  className="btn btn-outline-secondary btn-sm"
                   type="button"
                 >
                   Approve

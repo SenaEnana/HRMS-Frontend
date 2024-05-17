@@ -11,16 +11,16 @@ const LineChart = ({ data }) => {
     x: year,
     y: count,
   }));
-  
+
   return (
     <ResponsiveLine
-    data={[
-      {
-        id: "Year",
-        data: formattedData,
-      },
-    ]}
-      theme={{ 
+      data={[
+        {
+          id: "Year",
+          data: formattedData,
+        },
+      ]}
+      theme={{
         axis: {
           domain: {
             line: {
@@ -53,7 +53,7 @@ const LineChart = ({ data }) => {
           },
         },
       }}
-      colors={{scheme: "nivo" }} 
+      colors={{ scheme: "nivo" }}
       margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
       xScale={{ type: "point" }}
       yScale={{

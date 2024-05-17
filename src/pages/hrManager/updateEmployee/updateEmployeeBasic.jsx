@@ -515,7 +515,7 @@ function UpdateEmployeeBasic() {
                   />
                   <div className="m-3">
                     <input
-                      className="btn btn-info col-10 float-end"
+                      className="btn btn-success col-10 float-end"
                       type="button"
                       value="update"
                       onClick={formikValues.handleSubmit}

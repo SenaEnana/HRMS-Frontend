@@ -9,6 +9,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { tokens } from "../../../theme";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -115,14 +116,6 @@ const AdminSidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               className=""
-              title="My Account"
-              to="/myaccount"
-              icon={<AccountBoxIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              className=""
               title="Super Admin  Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
@@ -136,6 +129,13 @@ const AdminSidebar = () => {
             >
               Data
             </Typography>
+            <Item
+              title="Control User Account"
+              to="/team"
+              icon={<AccountCircleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Typography
               variant="h6"
               className="text-dark fw-bold"

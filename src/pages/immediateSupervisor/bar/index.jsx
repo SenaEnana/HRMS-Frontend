@@ -44,7 +44,7 @@ const Bar = () => {
 
   return (
     <Box m="20px">
-      <Header title="Bar Chart" subtitle="Compliant Bar Chart" />
+      <Header title="Bar Chart for compliants" subtitle="" />
       <Box height="75vh">
       <BarChart
           

@@ -1,9 +1,7 @@
-// NewEmployeeList.js
 import React, { useState, useEffect } from "react";
-import { NavLink, Link } from "react-router-dom";
-import Topbar from "../../commonPages/topbar";
+import { Link } from "react-router-dom";
 
-const NewEmployeeList = () => {
+const ShortListedDetail = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -18,13 +16,9 @@ const NewEmployeeList = () => {
 
   return (
     <>
-      <Topbar />
       <div className="container mt-5">
         <div className="d-flex justify-content-between text-dark mb-3">
-          <h5 className="text-start">Employee List</h5>
-          <NavLink to={"/employeeBasic"} className="btn btn-info btn-sm">
-            Add new Employee
-          </NavLink>
+          <h5 className="text-start">Shortlisted Candidate Detail</h5>
         </div>
         <table className="table table-hover text-dark w-100 fs-6">
           <thead>
@@ -35,22 +29,29 @@ const NewEmployeeList = () => {
               <th>Gender</th>
               <th>Mother Name</th>
               <th>Phone Number</th>
+              <th>Role</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
             {data.map((employee) => (
               <tr key={employee.id}>
-                <td>{employee.id}</td>
+                <td>{employee.emp_Id}</td>
                 <td>{employee.firstName}</td>
                 <td>{employee.lastName}</td>
                 <td>{employee.gender}</td>
                 <td>{employee.motherName}</td>
                 <td>{employee.phoneNo}</td>
+                <td>{employee.role}</td>
                 <td>
-                  <Link to={`/employeeDetail/${employee.id}`}>
-                    <button className="btn btn-outline-info btn-sm">Detail</button>
+                  <Link to={`/promoteEmployee`}>
+                    <button className="btn btn-outline-secondary btn-sm">
+                      Promote
+                    </button>
                   </Link>
+                  <button className="btn btn-outline-danger btn-sm">
+                    Reject
+                  </button>
                 </td>
               </tr>
             ))}
@@ -61,4 +62,4 @@ const NewEmployeeList = () => {
   );
 };
 
-export default NewEmployeeList;
+export default ShortListedDetail;

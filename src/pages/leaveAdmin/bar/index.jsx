@@ -50,7 +50,7 @@ const Bar = () => {
 
   return (
     <Box m="20px">
-      <Header title="Bar Chart" subtitle="Simple Bar Chart" />
+      <Header title="Bar Chart for leave request status" subtitle="" />
       <Box height="75vh">
       <BarChart 
           data={[

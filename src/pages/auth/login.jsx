@@ -74,7 +74,7 @@ const Login = ({ setIsAuthenticated }) => {
   {error && <p className="text-danger">{error}</p>}
               <div className="m-3">
                 <input
-                  className="btn btn-info col-12"
+                  className="btn btn-success col-12"
                   type="button"
                   value="login"
                   onClick={formikValues.handleSubmit}

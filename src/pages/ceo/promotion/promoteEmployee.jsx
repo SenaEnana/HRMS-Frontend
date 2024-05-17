@@ -2,11 +2,11 @@ import { Formik } from "formik";
 import { useMediaQuery } from "@mui/material";
 import { promotionValidation } from "./schema";
 import TextInput from "../../../components/textInput";
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from "react";
 
 function PromoteEmployee() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
   async function promoteEmployee(values) {
     try {
       const response = await fetch("https://localhost:7140/Branch/AddBranch", {
@@ -19,8 +19,8 @@ function PromoteEmployee() {
       if (response.ok) {
         alert("promote employee successfully");
       } else {
-        const errorMessage = await response.text(); 
-        setError(errorMessage); 
+        const errorMessage = await response.text();
+        setError(errorMessage);
       }
     } catch (error) {
       setError("Error promotting employee");
@@ -43,7 +43,7 @@ function PromoteEmployee() {
           validationSchema={promotionValidation}
         >
           {(formikValues) => (
-            <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
+            <form className="form-group rounded border col-8 ms-5 ms-4 bg-light">
               <div className="ms-3">
                 <p className="fs-4 text-dark text-center">Promote Employee</p>
               </div>
@@ -83,10 +83,10 @@ function PromoteEmployee() {
                 error={formikValues.errors.NewSalary}
                 onChange={formikValues.handleChange}
               />
-                {error && <p className="text-danger">{error}</p>}
+              {error && <p className="text-danger">{error}</p>}
               <div className="m-3">
                 <input
-                  className="btn btn-info col-10 m-2"
+                  className="btn btn-success col-10 m-2"
                   type="button"
                   value="submit"
                   onClick={formikValues.handleSubmit}

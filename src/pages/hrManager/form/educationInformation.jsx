@@ -40,16 +40,16 @@ function EducationInformation({ onNext, formikValues, onPrev }) {
           }}
           onSubmit={(values) => {
             values.Educations = values.Educations.filter(
-                (education) =>
-                  education.Degree !== "" || education.Institute !== ""
-              );
-              values.Experiences = values.Experiences.filter(
-                (experience) =>
-                  experience.CompanyName !== "" ||
-                  experience.ExperiencePosition !== "" ||
-                  experience.ExperienceStartDate !== "" ||
-                  experience.ExperienceEndDate !== ""
-              );
+              (education) =>
+                education.Degree !== "" || education.Institute !== ""
+            );
+            values.Experiences = values.Experiences.filter(
+              (experience) =>
+                experience.CompanyName !== "" ||
+                experience.ExperiencePosition !== "" ||
+                experience.ExperienceStartDate !== "" ||
+                experience.ExperienceEndDate !== ""
+            );
             console.log(values);
             handleSubmit();
           }}
@@ -57,7 +57,9 @@ function EducationInformation({ onNext, formikValues, onPrev }) {
           {(formikValues) => (
             <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
               <div className="ms-3">
-                <p className="fs-4 text-dark text-center">Education Related Information</p>
+                <p className="fs-4 text-dark text-center">
+                  Education Related Information
+                </p>
               </div>
               {formikValues.values.Educations.map((education, index) => (
                 <div key={index}>
@@ -67,12 +69,8 @@ function EducationInformation({ onNext, formikValues, onPrev }) {
                     name={`Educations[${index}].Degree`}
                     label="Degree"
                     placeholder="Enter degree"
-                    value={
-                      formikValues.values.Educations[index].Degree
-                    }
-                    error={
-                      formikValues.errors.Educations?.[index]?.Degree
-                    }
+                    value={formikValues.values.Educations[index].Degree}
+                    error={formikValues.errors.Educations?.[index]?.Degree}
                     onChange={formikValues.handleChange}
                   />
                   <TextInput
@@ -80,13 +78,8 @@ function EducationInformation({ onNext, formikValues, onPrev }) {
                     name={`Educations[${index}].Institute`}
                     label="Institute"
                     placeholder="Enter education Institute"
-                    value={
-                      formikValues.values.Educations[index].Institute
-                    }
-                    error={
-                      formikValues.errors.Educations?.[index]
-                        ?.Institute
-                    }
+                    value={formikValues.values.Educations[index].Institute}
+                    error={formikValues.errors.Educations?.[index]?.Institute}
                     onChange={formikValues.handleChange}
                   />
                   {/* Delete Button for Child */}
@@ -175,8 +168,8 @@ function EducationInformation({ onNext, formikValues, onPrev }) {
                   value="next"
                   onClick={onNext}
                 />
-                                <input
-                  className="btn btn-info col-10 float-end m-2"
+                <input
+                  className="btn btn-success col-10 float-end m-2"
                   type="button"
                   value="previous"
                   onClick={onPrev}

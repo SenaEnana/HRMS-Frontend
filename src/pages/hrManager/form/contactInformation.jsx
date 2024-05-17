@@ -9,7 +9,7 @@ function ContactInformation({ onNext, formikValues, onPrev }) {
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const [inputFields, setInputFields] = useState([{ value: "" }]);
-  
+
   const handleAddField = () => {
     setInputFields([...inputFields, { value: "" }]);
   };
@@ -299,7 +299,7 @@ function ContactInformation({ onNext, formikValues, onPrev }) {
                   onClick={onNext}
                 />
                 <input
-                  className="btn btn-info col-10 float-end m-2"
+                  className="btn btn-success col-10 float-end m-2"
                   type="button"
                   value="previous"
                   onClick={onPrev}
