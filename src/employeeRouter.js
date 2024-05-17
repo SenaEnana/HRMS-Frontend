@@ -8,6 +8,7 @@ import SupervisorFeedback from "./pages/employee/form/supervisorFeedback";
 import ResignationRequest from "./pages/employee/form/resignationRequest/resignationRequest";
 import EmployeeSidebar from "./pages/employee/employeeSidebar/employeeSidebar";
 import MyAccount from "./pages/account/myAccount";
+import Notifications from "./pages/commonPages/Notification";
 
 import PostedJob from "./pages/employee/form/postedJob";
 
@@ -29,6 +30,8 @@ function EmployeeRouter() {
               <Route path="/" element={<EmployeeDashboard />} />
 
               <Route path="/myaccount" element={<MyAccount />} />
+
+              <Route path="/notifications" element={<Notifications />} />
               <Route path="/complaint" element={<Complaint />} />
               <Route path="/leaveRequest" element={<LeaveRequest />} />
               <Route path="/resignationRequest" element={<ResignationRequest />} />
