@@ -37,7 +37,7 @@ function EmployeeRouter() {
               <Route path="/resignationRequest" element={<ResignationRequest />} />
               <Route path="/supervisorFeedback" element={<SupervisorFeedback />} />
               <Route path="/postedJob" element={<PostedJob />} />
-              <Route path="/jobDetail/:id" element={<JobDetail />} />
+              <Route path="/jobDetail/:jobId" element={<JobDetail />} />
             </Routes>
           </main>
         </div>

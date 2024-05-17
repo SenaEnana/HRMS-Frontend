@@ -1,15 +1,10 @@
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import Button from "react-bootstrap/Button";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import SendIcon from "@mui/icons-material/Send";
+import { Box, Typography, useTheme } from "@mui/material";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import SwipeLeftAltOutlinedIcon from "@mui/icons-material/SwipeLeftAltOutlined";
 import Header from "../../../components/header";
-import LineChart from "../../../components/lineChart";
 import BarChart from "../../../components/barChart";
 import StatBox from "../../../components/statBox";
-import ProgressCircle from "../../../components/progressCircle";
 import { tokens } from "../../../theme";
 import React, { useState, useEffect } from "react";
 const HrDashboard = () => {
@@ -31,7 +26,9 @@ const HrDashboard = () => {
   useEffect(() => {
     const fetchPendingLeaveRequests = async () => {
       try {
-        const response = await fetch("https://localhost:7140/api/Leave/GetPendingLeaveRequests");
+        const response = await fetch(
+          "https://localhost:7140/api/Leave/GetPendingLeaveRequests"
+        );
         const data = await response.json();
         setPendingLeaveRequests(data);
         setLoading(false);
@@ -46,7 +43,9 @@ const HrDashboard = () => {
   useEffect(() => {
     const fetchInactiveEmployeeCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/InactiveCount");
+        const response = await fetch(
+          "https://localhost:7140/DashBoard/InactiveCount"
+        );
         const data = await response.json();
         setInactiveEmployeeCount(data);
         setLoading(false);
@@ -61,7 +60,9 @@ const HrDashboard = () => {
   useEffect(() => {
     const fetchApprovedLeaveCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/CountApprovedLeaveRequests");
+        const response = await fetch(
+          "https://localhost:7140/DashBoard/CountApprovedLeaveRequests"
+        );
         const data = await response.json();
         setApprovedLeaveCount(data);
       } catch (error) {
@@ -73,7 +74,9 @@ const HrDashboard = () => {
   useEffect(() => {
     const fetchRejectedLeaveCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/CountRejectedLeaveRequests");
+        const response = await fetch(
+          "https://localhost:7140/DashBoard/CountRejectedLeaveRequests"
+        );
         const data = await response.json();
         setRejectedLeaveCount(data);
       } catch (error) {
@@ -85,11 +88,16 @@ const HrDashboard = () => {
   useEffect(() => {
     const fetchActiveEmployeeCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/ActiveCount");
+        const response = await fetch(
+          "https://localhost:7140/DashBoard/ActiveCount"
+        );
         const data = await response.json();
         setActiveEmployeeCount(data);
       } catch (error) {
-        console.error("Error fetching available employee count:", error.message);
+        console.error(
+          "Error fetching available employee count:",
+          error.message
+        );
       }
     };
     fetchActiveEmployeeCount();
@@ -145,13 +153,11 @@ const HrDashboard = () => {
           alignItems="center"
           justifyContent="center"
         >
-
-            <StatBox
-              title={approvedLeaveCount.toLocaleString()}
-              subtitle="Approved Leave Requests"
-              icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
-            />
-
+          <StatBox
+            title={approvedLeaveCount.toLocaleString()}
+            subtitle="Approved Leave Requests"
+            icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
+          />
         </Box>
         <Box
           className="rounded"
@@ -173,11 +179,8 @@ const HrDashboard = () => {
           backgroundColor={colors.primary[400]}
           overflow="auto"
         >
-          <Box
-            display="flex"
-            flexDirection="column"
-          >
-            <Box 
+          <Box display="flex" flexDirection="column">
+            <Box
               display="flex"
               justifyContent="space-between"
               alignItems="center"
@@ -185,13 +188,18 @@ const HrDashboard = () => {
               colors={colors.grey[100]}
               p="15px"
             >
-              <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+              <Typography
+                color={colors.grey[100]}
+                variant="h5"
+                fontWeight="600"
+              >
                 Pending Leave Requests
               </Typography>
             </Box>
 
             {/* Display each leave request in a separate Box */}
-            {!loading && pendingLeaveRequests.length > 0 && (
+            {!loading &&
+              pendingLeaveRequests.length > 0 &&
               pendingLeaveRequests.map((leaveRequest, index) => (
                 <Box
                   key={index}
@@ -210,19 +218,17 @@ const HrDashboard = () => {
                     Reason: {leaveRequest.reason}
                   </Typography>
                   <Typography color={colors.grey[100]}>
-                    Start Date: {formatDate(leaveRequest.startDate)}<br/>
+                    Start Date: {formatDate(leaveRequest.startDate)}
+                    <br />
                     End Date: {formatDate(leaveRequest.endDate)}
                   </Typography>
                   <Typography
                     className="text-dark fs-5 fw-bold"
                     p="5px 10px"
                     borderRadius="4px"
-                  >
-                    
-                  </Typography>
+                  ></Typography>
                 </Box>
-              ))
-            )}
+              ))}
           </Box>
         </Box>
 
@@ -241,14 +247,14 @@ const HrDashboard = () => {
             Employee Status
           </Typography>
           <Box height="250px" mt="-20px">
-          <BarChart 
-          
-          data={[
-            { status: "Active", count: activeEmployeeCount },
-            { status: "Inactive", count: inactiveEmployeeCount },
-          ]}
-          xAxisLabel="Leave request Status"
-          yAxisLabel="Number of requests" />
+            <BarChart
+              data={[
+                { status: "Active", count: activeEmployeeCount },
+                { status: "Inactive", count: inactiveEmployeeCount },
+              ]}
+              xAxisLabel="Leave request Status"
+              yAxisLabel="Number of requests"
+            />
           </Box>
         </Box>
       </Box>

@@ -11,8 +11,6 @@ const EmployeeDashboard = () => {
   const [leaveBalances, setLeaveBalances] = useState([]);
   const [leaveRequests, setLeaveRequests] = useState([]);
   const [compliantRequests, setCompliantRequests] = useState([]);
-  const [readNotification, setReadNotification] = useState([]);
-  const [unReadNotification, setUnReadNotification] = useState([]);
   const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -27,8 +25,6 @@ const EmployeeDashboard = () => {
     fetchLeaveBalance();
     fetchLeaveRequests();
     fetchMyCompliant();
-    fetchReadNotification();
-    fetchUnReadNotification();
   }, []);
 
   async function fetchLeaveBalance() {
@@ -117,62 +113,6 @@ const EmployeeDashboard = () => {
     }
   }
 
-  async function fetchReadNotification() {
-    try {
-      const token = sessionStorage.getItem('token');
-      if (!token) {
-        console.error('Token not found in session storage');
-        navigate('/login');
-        return;
-      }
-      const isValid = isTokenValid(token);
-      if (!isValid) {
-        console.error('Invalid token');
-        navigate('/login');
-        return;
-      }
-      const userId = getUserIdFromToken(token);
-      const url = `https://localhost:7140/Notification/GetReadNotificationCount?userId=${userId}`;
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch notifications');
-      }
-      const data = await response.json();
-      setReadNotification(data);
-    } catch (error) {
-      console.error("Error fetching notifications:", error.message);
-    }
-  }
-
-  async function fetchUnReadNotification() {
-    try {
-      const token = sessionStorage.getItem('token');
-      if (!token) {
-        console.error('Token not found in session storage');
-        navigate('/login');
-        return;
-      }
-      const isValid = isTokenValid(token);
-      if (!isValid) {
-        console.error('Invalid token');
-        navigate('/login');
-        return;
-      }
-      const userId = getUserIdFromToken(token);
-      const url = `https://localhost:7140/Notification/GetUnreadNotificationCount?userId=${userId}`;
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch notifications');
-      }
-      const data = await response.json();
-      setUnReadNotification(data);
-    } catch (error) {
-      console.error("Error fetching notifications:", error.message);
-    }
-  }
-
   function isTokenValid(token) {
     if (!token) {
       return false;
@@ -233,34 +173,6 @@ const EmployeeDashboard = () => {
             />
           </Box>
         ))}
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title={readNotification.toLocaleString()}
-            subtitle="Read Notifications"
-            icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
-          />
-        </Box>
-        <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title={unReadNotification.toLocaleString()}
-            subtitle="New Notifications"
-            icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
-          />
-        </Box>
         {/* <Box
           className="rounded"
           gridColumn="span 3"
