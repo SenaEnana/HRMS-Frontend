@@ -9,7 +9,7 @@ const Team = () => {
   }, []);
 
   async function getData() {
-    let result = await fetch("https://localhost:7140/Employee/ListEmployees");
+    let result = await fetch("https://localhost:7140/User");
     result = await result.json();
     setData(result);
   }
@@ -34,6 +34,7 @@ const Team = () => {
               <td>{employee.emp_Id}</td>
               <td>{employee.roles}</td>
               <td>
+<<<<<<< HEAD
                 <img
                   style={{ width: 100, borderRadius: 100 }}
                   src={
@@ -42,6 +43,16 @@ const Team = () => {
                   alt=""
                 />
               </td>
+=======
+              <img
+                style={{ width: 100, borderRadius: 100 }}
+                src={
+                  "https://localhost:7140" + employee.pictureURL
+                }
+                alt=""
+              />
+            </td>
+>>>>>>> 183cead2cbd1e960d5aa32a841e08c82d5d1f5a9
               <td>
                 <Button />
                 <button className="btn btn-outline-danger btn-sm">
