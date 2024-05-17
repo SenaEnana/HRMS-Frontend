@@ -1,14 +1,10 @@
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import SendIcon from "@mui/icons-material/Send";
+import { Box, Typography, useTheme } from "@mui/material";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import SwipeLeftAltOutlinedIcon from "@mui/icons-material/SwipeLeftAltOutlined";
 import Header from "../../../components/header";
-import LineChart from "../../../components/lineChart";
 import BarChart from "../../../components/barChart";
 import StatBox from "../../../components/statBox";
-import ProgressCircle from "../../../components/progressCircle";
 import { tokens } from "../../../theme";
 import { useState, useEffect } from "react";
 
@@ -31,7 +27,9 @@ const LeaveAdminDashboard = () => {
   useEffect(() => {
     const fetchApprovedLeaveRequests = async () => {
       try {
-        const response = await fetch("https://localhost:7140/api/Leave/GetApprovedLeaveRequests");
+        const response = await fetch(
+          "https://localhost:7140/api/Leave/GetApprovedLeaveRequests"
+        );
         const data = await response.json();
         setApprovedLeaveRequests(data);
         setLoading(false);
@@ -46,7 +44,9 @@ const LeaveAdminDashboard = () => {
   useEffect(() => {
     const fetchAllLeaveRequests = async () => {
       try {
-        const response = await fetch("https://localhost:7140/api/Leave/ListOfLeaveRequests");
+        const response = await fetch(
+          "https://localhost:7140/api/Leave/ListOfLeaveRequests"
+        );
         const data = await response.json();
         setAllLeaveRequests(data);
         setLoading(false);
@@ -62,7 +62,9 @@ const LeaveAdminDashboard = () => {
   useEffect(() => {
     const fetchApprovedLeaveCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/CountApprovedLeaveRequests");
+        const response = await fetch(
+          "https://localhost:7140/DashBoard/CountApprovedLeaveRequests"
+        );
         const data = await response.json();
         setApprovedLeaveCount(data);
       } catch (error) {
@@ -74,7 +76,9 @@ const LeaveAdminDashboard = () => {
   useEffect(() => {
     const fetchPendingLeaveCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/CountPendingLeaveRequests");
+        const response = await fetch(
+          "https://localhost:7140/DashBoard/CountPendingLeaveRequests"
+        );
         const data = await response.json();
         setPendingLeaveCount(data);
       } catch (error) {
@@ -86,7 +90,9 @@ const LeaveAdminDashboard = () => {
   useEffect(() => {
     const fetchRejectedLeaveCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/CountRejectedLeaveRequests");
+        const response = await fetch(
+          "https://localhost:7140/DashBoard/CountRejectedLeaveRequests"
+        );
         const data = await response.json();
         setRejectedLeaveCount(data);
       } catch (error) {
@@ -128,7 +134,6 @@ const LeaveAdminDashboard = () => {
               icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
             />
           )}
-
         </Box>
         <Box
           className="rounded"
@@ -147,7 +152,6 @@ const LeaveAdminDashboard = () => {
               icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
             />
           )}
-
         </Box>
         <Box
           className="rounded"
@@ -166,7 +170,6 @@ const LeaveAdminDashboard = () => {
               icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
             />
           )}
-
         </Box>
         <Box
           gridColumn="span 4"
@@ -174,11 +177,8 @@ const LeaveAdminDashboard = () => {
           backgroundColor={colors.primary[400]}
           overflow="auto"
         >
-          <Box
-            display="flex"
-            flexDirection="column" 
-          >
-            <Box 
+          <Box display="flex" flexDirection="column">
+            <Box
               display="flex"
               justifyContent="space-between"
               alignItems="center"
@@ -186,13 +186,18 @@ const LeaveAdminDashboard = () => {
               colors={colors.grey[100]}
               p="15px"
             >
-              <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+              <Typography
+                color={colors.grey[100]}
+                variant="h5"
+                fontWeight="600"
+              >
                 Approved Leave Requests
               </Typography>
             </Box>
 
             {/* Display each leave request in a separate Box */}
-            {!loading && approvedLeaveRequests.length > 0 && (
+            {!loading &&
+              approvedLeaveRequests.length > 0 &&
               approvedLeaveRequests.map((leaveRequest, index) => (
                 <Box
                   key={index}
@@ -211,18 +216,17 @@ const LeaveAdminDashboard = () => {
                     Reason: {leaveRequest.reason}
                   </Typography>
                   <Typography color={colors.grey[100]}>
-                    Start Date: {formatDate(leaveRequest.startDate)}<br />
+                    Start Date: {formatDate(leaveRequest.startDate)}
+                    <br />
                     End Date: {formatDate(leaveRequest.endDate)}
                   </Typography>
                   <Typography
                     className="text-dark fs-5 fw-bold"
                     p="5px 10px"
                     borderRadius="4px"
-                  >
-                  </Typography>
+                  ></Typography>
                 </Box>
-              ))
-            )}
+              ))}
           </Box>
         </Box>
 
@@ -256,18 +260,26 @@ const LeaveAdminDashboard = () => {
               p="15px"
             >
               <Box>
-                <Typography className="text-dark fw-bold" variant="h5" fontWeight="600">
+                <Typography
+                  className="text-dark fw-bold"
+                  variant="h5"
+                  fontWeight="600"
+                >
                   Employee Id: {leaveRequest.employeeId}
-
                 </Typography>
                 <Typography color={colors.grey[100]}>
-                  Employee Name: {leaveRequest.employeeName}<br />
-                  Leave Type:{leaveRequest.leaveTypeName}<br />
-                  Allowed Days: {leaveRequest.allowedDays}<br />
-                  Remaining Days: {leaveRequest.remainingLeaveBalance}<br />
+                  Employee Name: {leaveRequest.employeeName}
+                  <br />
+                  Leave Type:{leaveRequest.leaveTypeName}
+                  <br />
+                  Allowed Days: {leaveRequest.allowedDays}
+                  <br />
+                  Remaining Days: {leaveRequest.remainingLeaveBalance}
+                  <br />
                 </Typography>
                 <Typography color={colors.grey[100]}>
-                  From: {formatDate(leaveRequest.startDate)} - {formatDate(leaveRequest.endDate)}
+                  From: {formatDate(leaveRequest.startDate)} -{" "}
+                  {formatDate(leaveRequest.endDate)}
                 </Typography>
               </Box>
               <Box color={colors.grey[100]}>{leaveRequest.status}</Box>
@@ -290,16 +302,15 @@ const LeaveAdminDashboard = () => {
             Employee Status
           </Typography>
           <Box height="250px" mt="-20px">
-          <BarChart 
-          data={[
-            { status: "Pending", count: pendingLeaveCount },
-            { status: "Approved", count: approvedLeaveCount },
-            { status: "Rejected", count: rejectedLeaveCount },
-          ]}
-          xAxisLabel="Leave request Status"
-          yAxisLabel="Number of requests"
-              
-            /> 
+            <BarChart
+              data={[
+                { status: "Pending", count: pendingLeaveCount },
+                { status: "Approved", count: approvedLeaveCount },
+                { status: "Rejected", count: rejectedLeaveCount },
+              ]}
+              xAxisLabel="Leave request Status"
+              yAxisLabel="Number of requests"
+            />
           </Box>
         </Box>
       </Box>
@@ -308,4 +319,3 @@ const LeaveAdminDashboard = () => {
 };
 
 export default LeaveAdminDashboard;
-

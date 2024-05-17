@@ -12,20 +12,6 @@ function EmployeeBasic() {
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const [selectedRoles, setSelectedRoles] = useState("");
-
-  const Roles = [
-    { label: "Employee", value: "employee" },
-    { label: "Super Admin", value: "superAdmin" },
-    { label: "Ceo", value: "ceo" },
-    { label: "Hr Manager", value: "hrManager" },
-    { label: "Leave Admin", value: "leaveAdmin" },
-    { label: "Immediate Supervisor", value: "immediateSupervisor" },
-  ];
-
-  const handleChange = (event) => {
-    setSelectedRoles(event.target.value);
-  };
   const [inputFields, setInputFields] = useState([{ value: "" }]);
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
   const [BranchId, setBranchId] = useState([{ name: "", id: "" }]);
@@ -33,20 +19,23 @@ function EmployeeBasic() {
   const [DegreeId, setDegreeId] = useState([{ name: "", id: "" }]);
   const [GradeId, setGradeId] = useState([{ name: "", id: "" }]);
 
-  const [Gender, setGender] = useState("female");
-  const [MaritalStatus, setMaritalStatus] = useState("single");
-  const handleGenderChange = (value) => setGender(value);
-  const handleMaritalStatusChange = (value) => setMaritalStatus(value);
-
   const genderOptions = [
     { value: "female", label: "Female" },
     { value: "male", label: "Male" },
   ];
   const maritalStatusOptions = [
     { value: "single", label: "Single" },
-    { value: "Hr Manager", label: "Married" },
+    { value: "married", label: "Married" },
     { value: "divorced", label: "Divorced" },
     { value: "widowed", label: "Widowed" },
+  ];
+  const roleOptions = [
+    { value: "employee", label: "Employee" },
+    { value: "admin", label: "Admin" },
+    { value: "ceo", label: "CEO" },
+    { value: "hrManager", label: "HRManager" },
+    { value: "leaveAdmin", label: "LeaveAdmin" },
+    { value: "immediateSupervisor", label: "ImmediateSupervisor" },
   ];
 
   useEffect(() => {
@@ -108,9 +97,9 @@ function EmployeeBasic() {
           body: JSON.stringify(values),
         }
       );
-      console.log(response);
       if (response.ok) {
         console.log("successful");
+        navigate("/employeeList");
       } else {
         console.log("failed");
       }
@@ -253,14 +242,14 @@ function EmployeeBasic() {
           FirstName: "",
           LastName: "",
           Email: "",
-          Gender: "",
-          selectedRoles: Roles[0].value,
+          Gender: "female",
+          Roles: "employee",
           MotherName: "",
           Region: "",
           Kebele: "",
           Woreda: "",
           PhoneNo: "",
-          MaritalStatus: "",
+          MaritalStatus: "single",
           HouseNo: "",
           ChildInformations: [{ ChildName: "", DateOfBirth: "" }],
           HireDate: "",
@@ -381,31 +370,28 @@ function EmployeeBasic() {
                 <div>
                   <label
                     className="text-dark float-start mt-1 p-1 fs-5"
-                    htmlFor="Roles"
+                    htmlFor="roleOptions"
                   >
                     Roles
                   </label>
                 </div>
                 <select
-                  id="Roles"
-                  name="selectedRoles"
+                  id="roleOptions"
+                  name="Roles"
                   className="form-control mb-3"
-                  value={formikProps.values.selectedRoles}
+                  value={formikProps.values.Roles}
                   onChange={(event) => {
-                    formikProps.setFieldValue(
-                      "selectedRoles",
-                      event.target.value
-                    );
+                    formikProps.setFieldValue("Roles", event.target.value);
                   }}
                 >
-                  {Roles.map((role) => (
+                  {roleOptions.map((role) => (
                     <option key={role.value} value={role.value}>
                       {role.label}
                     </option>
                   ))}
                 </select>
-                {formikProps.values.selectedRoles && (
-                  <p>Selected option: {formikProps.values.selectedRoles}</p>
+                {formikProps.values.Roles && (
+                  <p>Selected option: {formikProps.values.Roles}</p>
                 )}
               </div>
               <TextInput
@@ -614,71 +600,11 @@ function EmployeeBasic() {
             >
               Add contact person
             </button>
-            {/* <div>
-              <p className=" pr-64 mb-3 font-bold text-xl -mt-2 fs-4 text-dark text-center fw-bold">
-                {" "}
-                Children information:{" "}
-              </p>
-              {inputFields.map((field, index) => (
-                <div key={field.id}>
-                  {formikProps.values.ChildInformations.map(
-                    (childInformation, index) => (
-                      <div key={index}>
-                        <TextInput
-                          type="text"
-                          name={`ChildInformations[${index}].ChildName`}
-                          label="Child Name"
-                          placeholder="Enter child name"
-                          value={`${formikProps.values.ChildInformations[index].ChildName} ${field.value}`}
-                          error={
-                            formikProps.errors.ChildInformations?.[index]
-                              ?.ChildName
-                          }
-                          onChange={(event) => {
-                            formikProps.handleChange(event);
-                            handleInputChangeChild(index, event);
-                          }}
-                        />
-                        <TextInput
-                          type="date"
-                          name={`ChildInformations[${index}].DateOfBirth`}
-                          label="Child Birth Date"
-                          placeholder="Enter child birth date"
-                          value={`${formikProps.values.ChildInformations[index].DateOfBirth} ${field.value}`}
-                          error={
-                            formikProps.errors.ChildInformations?.[index]
-                              ?.DateOfBirth
-                          }
-                          onChange={(event) => {
-                            formikProps.handleChange(event);
-                            handleInputChange(index, event);
-                          }}
-                        />
-                      </div>
-                    )
-                  )}
-                  <button
-                    onClick={() =>
-                      handleDeleteChildInformations(formikProps, index)
-                    }
-                    className="btn btn-outline-danger btn-small m-1 float-end p-1"
-                  >
-                    Delete child
-                  </button>
-                </div>
-              ))}
-              <button
-                onClick={() => handleAddChildInformations(formikProps)}
-                className="btn btn-outline-secondary btn-small m-1 float-end p-1"
-              >
-                Add child
-              </button>
-            </div> */}
             <div>
               <p className="pr-64 mb-3 font-bold text-xl -mt-2 fs-4 text-dark text-center fw-bold">
                 Children information
               </p>
-              
+
               {formikProps.values.ChildInformations.map((child, outerIndex) => (
                 <div key={outerIndex}>
                   <TextInput
@@ -944,56 +870,6 @@ function EmployeeBasic() {
                   formikProps.setFieldValue("GradeId", parsedValue);
                 }}
               />
-              {/* <DropDown
-                  label="Degree"
-                  name="DegreeId"
-                  options={DegreeId}
-                  value={formikProps.values.DegreeId}
-                  error={formikProps.errors.DegreeId}
-                  onChange={(selectedOption) => {
-                    formikProps.setFieldValue("DegreeId", selectedOption);
-                  }}
-                /> */}
-
-              {/* <DropDown
-                  label="Grade"
-                  name="GradeId"
-                  options={GradeId}
-                  error={formikProps.errors.GradeId}
-                  onChange={(selectedOption) => {
-                    formikProps.setFieldValue("GradeId", selectedOption);
-                  }}
-                /> */}
-              {/* // <DropDown
-                //   label="Position"
-                //   name="PositionId"
-                //   options={PositionId}
-                //   value={formikProps.values.PositionId}
-                //   error={formikProps.errors.PositionId}
-                //   onChange={(selectedOption) => {
-                //     formikProps.setFieldValue("PositionId", selectedOption);
-                //   }}
-                // />
-                // <DropDown
-                //   label="Branch"
-                //   name="BranchId"
-                //   options={BranchId}
-                //   value={formikProps.values.BranchId}
-                //   error={formikProps.errors.BranchId}
-                //   onChange={(selectedOption) => {
-                //     formikProps.setFieldValue("BranchId", selectedOption);
-                //   }}
-                // />
-                // <DropDown
-                //   label="Department"
-                //   name="DepartmentId"
-                //   options={DepartmentId}
-                //   value={formikProps.values.DepartmentId}
-                //   error={formikProps.errors.DepartmentId}
-                //   onChange={(selectedOption) => {
-                //     formikProps.setFieldValue("DepartmentId", selectedOption);
-                //   }}
-                // /> */}
             </Box>
             <div className="m-3">
               <input
