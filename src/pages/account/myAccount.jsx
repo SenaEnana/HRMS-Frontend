@@ -10,8 +10,9 @@ function MyAccount() {
         fetch('https://localhost:7140/Account/profile', {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${localStorage.getItem('token')}` // Adjust this according to your authentication mechanism
-            }
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
         })
             .then(response => {
                 if (response.ok) {
