@@ -1,22 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Link, useNavigate } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 function JobDetail() {
   const { id } = useParams();
   const [job, setJob] = useState(null);
-  const [data, setData] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    getData();
-  }, []);
-
-  async function getData() {
-    let result = await fetch(`https://localhost:7140/Promotion/${id}`);
-    result = await result.json();
-    setData(result);
-  }
+    fetch(`https://localhost:7140/Promotion/${id}`)
+      .then((response) => response.json())
+      .then((data) => setJob(data))
+      .catch((error) =>
+        console.error("Error fetching employee details:", error)
+      );
+  }, [id]);
 
   async function applyOperation(jobId) {
     try {
@@ -43,7 +40,7 @@ function JobDetail() {
         }
       );
       result = await result.json();
-      getData();
+      // getData();
       alert("applied successfully");
     } catch (error) {
       console.error("Error applying:", error.message);
@@ -69,48 +66,51 @@ function JobDetail() {
       return false;
     }
   }
+  if (!job) {
+    return <div>Loading...</div>;
+  }
   //the button apply should be removed after the employee already applied for that job and we will fix that later
   return (
     <>
-      <div className="d-flex justify-content-between mt-5 text-dark">
-        <div class="card" style="width: 18rem;">
+      <div className="d-flex text-dark w-100">
+        <div class="card ms-4 me-4 mt-5">
           <div class="card-body">
-            <h5 class="card-title">Job Detail</h5>
-            <table className="table table-hover text-dark w-100 fs-6">
-              <thead>
-                <tr>
-                  <th>Job Title</th>
-                  <th>Position</th>
-                  <th>Description</th>
-                  <th>Requirement</th>
-                  <th>Posting Date</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
+            <h5 class="card-title bg-secondary p-2 rounded text-light">Job Detail</h5>
+            <table className="table table-hover text-dark fs-6">
+              <div className="row">
+                <div className="col-md-10">
+                  <div>
+                    <strong>Job Title:  </strong> {job.jobTitle}
+                  </div>
+                  <div>
+                    <strong>Position:</strong> {job.positionName}
+                  </div>
+                  <div>
+                    <strong>Description:</strong> {job.description}
+                  </div>
+                  <div>
+                    <strong>Requirement:</strong> {job.requirements}
+                  </div>
+                  <div>
+                    <strong>Posting Date:</strong> {job.postingDate}
+                  </div>
+                </div>
+              </div>
               <tbody>
-                {data.map((job) => (
-                  <tr key={job.id}>
-                    <td>{job.jobTitle}</td>
-                    <td>{job.position}</td>
-                    <td>{job.description}</td>
-                    <td>{job.requirement}</td>
-                    <td>{job.postingDate}</td>
-                    <td>
+                <td>
                       <button
                         onClick={() => applyOperation(job.id)}
-                        className="btn btn-outline-secondary btn-sm"
+                        className="btn btn-outline-secondary btn-sm float-end ms-2"
                         type="button"
                       >
                         Apply
                       </button>
                       <Link to={`/postedJob`}>
-                        <button className="btn btn-outline-danger btn-sm">
+                        <button className="btn btn-outline-danger btn-sm float-end me-2 p-2">
                           Back
                         </button>
                       </Link>
                     </td>
-                  </tr>
-                ))}
               </tbody>
             </table>
           </div>

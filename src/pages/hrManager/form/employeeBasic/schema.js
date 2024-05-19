@@ -14,10 +14,6 @@ export const employeeBasValidation = Yup.object().shape({
     Woreda:Yup.string().required("this field is required"),
     HouseNo:Yup.string().required("this field is required"),
     MaritalStatus:Yup.string().required("this field is required"),
-    CompanyName:Yup.string().required("this field is required"),
-    ExperiencePosition:Yup.string().required("this field is required"),
-    ExperienceStartDate:Yup.date().required("this field is required"),
-    ExperienceEndDate:Yup.date().required("this field is required"),
     BranchId:Yup.string().required("this field is required"),
     HireDate:Yup.date().required("this field is required"),
     GradeId:Yup.number().required("this field is required"),
@@ -25,19 +21,35 @@ export const employeeBasValidation = Yup.object().shape({
     DepartmentId:Yup.string().required("this field is required"),
     Salary:Yup.number().required("this field is required"),
     DegreeId:Yup.string().required("this field is required"),
-    ContactPersonName:Yup.string().required("this field is required"),
-    ContactPhoneNo:Yup.string().required("this field is required"),
-    ContactRegion:Yup.string().required("this field is required"),
-    ContactKebele:Yup.number().required("this field is required"),
-    ContactWoreda:Yup.string().required("this field is required"),
-    ContactHouseNo:Yup.string().required("this field is required"),
-    Relationship:Yup.string().required("this field is required"),
     ChildInformations: Yup.array().of(
         Yup.object().shape({
-          ChildName: Yup.string().optional(), // Making ChildName optional
-          DateOfBirth: Yup.date().optional(), // Making DateOfBirth optional
+          ChildName: Yup.string().optional(),
+          DateOfBirth: Yup.date().optional(),
         })
       ),
-    Institute:Yup.string().required("this field is required"),
-    Degree:Yup.string().required("this field is required"),
+      ContactPersons: Yup.array().of(
+        Yup.object().shape({
+          ContactPersonName:Yup.string().required("this field is required"),
+          ContactPhoneNo:Yup.string().required("this field is required"),
+          ContactRegion:Yup.string().required("this field is required"),
+          ContactKebele:Yup.number().required("this field is required"),
+          ContactWoreda:Yup.string().required("this field is required"),
+          ContactHouseNo:Yup.string().required("this field is required"),
+          Relationship:Yup.string().required("this field is required"),
+        })
+      ),
+      Educations: Yup.array().of(
+        Yup.object().shape({
+          Institute:Yup.string().required("this field is required"),
+          Degree:Yup.string().required("this field is required"),
+        })
+      ),
+      Experiences: Yup.array().of(
+        Yup.object().shape({
+          CompanyName:Yup.string().required("this field is required"),
+          ExperiencePosition:Yup.string().required("this field is required"),
+          ExperienceStartDate:Yup.date().required("this field is required"),
+          ExperienceEndDate:Yup.date().required("this field is required"),
+        })
+      ),
 });
