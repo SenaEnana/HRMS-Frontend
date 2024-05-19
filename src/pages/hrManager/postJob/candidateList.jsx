@@ -11,7 +11,7 @@ const CandidateList = () => {
   }, []);
   async function shortListCandidate(employeeId) {
     let result = await fetch(
-      `https://localhost:7140/Promotion/ShortlistCandidate/${employeeId}`,
+      `https://localhost:52339/Promotion/ShortlistCandidate/${employeeId}`,
       {
         method: "POST",
         headers: {
@@ -26,7 +26,7 @@ const CandidateList = () => {
     }
   }
   async function getData() {
-    let result = await fetch(`https://localhost:7140/Promotion/JobCandidates/${jobId}`);
+    let result = await fetch(`https://localhost:52339/Promotion/JobCandidates/${jobId}`);
     result = await result.json();
     setData(result);
   }
@@ -86,11 +86,11 @@ const CandidateList = () => {
                 <td>{employee.employeeNo}</td>
                 <td>{employee.employeeEmail}</td>
                 <td>
-                  {/* <Link to={`/candidateDetail/${employee.id}`}>
+                  {<Link to={`/candidateDetail/${employee.id}`}>
                     <button className="btn btn-outline-secondary btn-sm">
                       Detail
                     </button>
-                  </Link> */}
+                  </Link> }
                   <button
                     className="btn btn-outline-secondary btn-sm float-end"
                     onClick={() => shortListCandidate(employee.id)}

@@ -7,7 +7,7 @@ function JobDetail() {
   const [job, setJob] = useState(null);
 
   useEffect(() => {
-    fetch(`https://localhost:7140/Promotion/${id}`)
+    fetch(`https://localhost:52339/Promotion/${id}`)
       .then((response) => response.json())
       .then((data) => setJob(data))
       .catch((error) =>
@@ -30,7 +30,7 @@ function JobDetail() {
       }
       const userId = getUserIdFromToken(token);
       let result = await fetch(
-        `https://localhost:7140/Promotion/ApplyForJob/${jobId}?userId=${userId}`,
+        `https://localhost:52339/Promotion/ApplyForJob/${jobId}?userId=${userId}`,
         {
           method: "POST",
           headers: {

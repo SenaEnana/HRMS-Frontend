@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-
+import { useNavigate } from "react-router";
 //import Button from "../../components/button";
 
 function MyAccount() {
+    const navigate = useNavigate();
     const [profilePicture, setProfilePicture] = useState(null);
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState("");
+    const [user, setUser] = useState(null);
     function getUserIdFromToken(token) {
         const decodedToken = JSON.parse(atob(token.split('.')[1]));
         return decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
@@ -39,7 +41,6 @@ function MyAccount() {
             return;
         }
         const userId = getUserIdFromToken(token);
-        // Fetch user profile data to get the username
         fetch(`https://localhost:52339/Account/profile?userId=${userId}`, {
             method: 'GET',
             headers: {
@@ -55,6 +56,7 @@ function MyAccount() {
                 }
             })
             .then(data => {
+                setUser(data); 
                 setUsername(data.username);
             })
             .catch(error => {
@@ -97,13 +99,16 @@ function MyAccount() {
             })
             .catch(error => {
                 console.error('Set profile picture error:', error);
-                // Handle error
             });
     };
 
     const LogoutHandler = () => {
-        alert("Are you sure you want to log out");
-    };
+        sessionStorage.removeItem("token"); 
+        alert("Logout successfull")
+      navigate("/");
+        
+      };
+    
 
     return (
         <div className="container mt-5 ">
@@ -111,7 +116,7 @@ function MyAccount() {
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <h1 className="text-left mt-5 text-black">My Profile</h1>
-                    <h3 className="mt-12 text-black text-left">Username: {username}</h3>
+                    <h3 className="mt-12 text-black text-left">Username: {user.username}</h3>
                     <input type="file" accept="image/*" onChange={handleProfilePictureChange} className="form-control mt-3" /><br></br>
                     <div className="d-flex justify-content-center">
                         <button className="btn btn-primary btn-lg mt-3 mr-16  " onClick={handleSetProfile}>Set Profile</button>

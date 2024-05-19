@@ -34,7 +34,7 @@ const CeoDashboard = () => {
     const fetchInactiveEmployeeCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/InactiveCount"
+          "https://localhost:52339/DashBoard/InactiveCount"
         );
         const data = await response.json();
         setInactiveEmployeeCount(data);
@@ -49,7 +49,7 @@ const CeoDashboard = () => {
     const fetchEmployeeData = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/EmployeesHiredPerYear"
+          "https://localhost:52339/DashBoard/EmployeesHiredPerYear"
         );
         const data = await response.json();
         console.log(data);
@@ -65,7 +65,7 @@ const CeoDashboard = () => {
     const fetchPendingResignationCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/Resignation/CountPendingResignations"
+          "https://localhost:52339/Resignation/CountPendingResignations"
         );
         const data = await response.json();
         setPendingResignationCount(data);
@@ -81,7 +81,7 @@ const CeoDashboard = () => {
     const fetchApprovedResignationCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/Resignation/CountApprovedResignations"
+          "https://localhost:52339/Resignation/CountApprovedResignations"
         );
         const data = await response.json();
         setApprovedResignationCount(data);
@@ -96,7 +96,7 @@ const CeoDashboard = () => {
     const fetchResignationList = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/Resignation/ListOfResignationRequests"
+          "https://localhost:52339/Resignation/ListOfResignationRequests"
         );
         const data = await response.json();
         console.log(data);
@@ -113,7 +113,7 @@ const CeoDashboard = () => {
     const fetchActiveEmployeeCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/ActiveCount"
+          "https://localhost:52339/DashBoard/ActiveCount"
         );
         const data = await response.json();
         setActiveEmployeeCount(data);

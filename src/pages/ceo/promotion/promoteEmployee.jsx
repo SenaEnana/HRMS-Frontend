@@ -9,7 +9,7 @@ function PromoteEmployee() {
   const [error, setError] = useState(null);
   async function promoteEmployee(values) {
     try {
-      const response = await fetch("https://localhost:7140/Promotion/PromoteEmployee", {
+      const response = await fetch("https://localhost:52339/Promotion/PromoteEmployee", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
