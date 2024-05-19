@@ -40,7 +40,7 @@ function MyAccount() {
         }
         const userId = getUserIdFromToken(token);
         // Fetch user profile data to get the username
-        fetch(`https://localhost:7140/Account/profile?userId=${userId}`, {
+        fetch(`https://localhost:52339/Account/profile?userId=${userId}`, {
             method: 'GET',
             headers: {
                 Accept: "application/json",
@@ -80,7 +80,7 @@ function MyAccount() {
         const formData = new FormData();
         formData.append('profilePicture', profilePicture);
 
-        fetch('https://localhost:7140/Account/update?userId=${userId}', {
+        fetch('https://localhost:52339/Account/update?userId=${userId}', {
             method: 'POST',
             headers: {
 
