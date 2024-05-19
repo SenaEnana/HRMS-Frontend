@@ -28,7 +28,7 @@ function CeoRouter() {
                   <Route path="/pie" element={<Pie />} />
                   <Route path="/line" element={<Line />} />
                   <Route path="/resignationList" element={<ResignationList/>}/>
-                  <Route path="/promoteEmployee" element={<PromoteEmployee/>}/>
+                  <Route path="/promoteEmployee/:id" element={<PromoteEmployee/>}/>
                   <Route path="/shortListed" element={<ShortListed/>}/>
                   <Route path="/shortListedDetail/:id" element={<ShortListedDetail/>}/>
                   </Routes>

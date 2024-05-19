@@ -1,23 +1,9 @@
 import { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
 
 function PostedJob() {
   const [data, setData] = useState([]);
 
-  async function applyForJob(jobId) {
-    let result = await fetch(
-      `https://localhost:7140/Promotion/ApplyForJob/${jobId}`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    getData();
-    alert("applied successfully");
-    console.log(result)
-  }
   useEffect(() => {
     getData();
   }, []);
@@ -87,10 +73,7 @@ function PostedJob() {
         <thead>
           <tr>
             <th>Job Title</th>
-            <th>Position Id</th>
             <th>Position</th>
-            <th>Description</th>
-            <th>Requirement</th>
             <th>Posting Date</th>
             <th>Action</th>
           </tr>
@@ -99,21 +82,21 @@ function PostedJob() {
           {data.map((job) => (
             <tr key={job.id}>
               <td>{job.jobTitle}</td>
-              <td>{job.positionId}</td>
               <td>{job.position}</td>
+              <td>{job.postingDate}</td>
               <td>
-                <button
+                {/* <button
                   onClick={() => applyOperation(job.id)}
                   className="btn btn-outline-secondary btn-sm"
                   type="button"
                 >
                   Apply
-                </button>
-                {/* <Link to={`/jobDetail/${job.id}`}>
+                </button> */}
+                <Link to={`/jobDetail/${job.id}`}>
                   <button className="btn btn-outline-secondary btn-sm">
                     Detail
                   </button>
-                </Link> */}
+                </Link>
               </td>
             </tr>
           ))}

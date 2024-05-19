@@ -16,7 +16,6 @@ function App() {
     if (!token) {
       return false;
     }
-
     try {
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
       const expirationTime = decodedToken.exp * 1000;
@@ -66,7 +65,7 @@ function App() {
        case 'LeaveAdmin':
          return <LeaveAdminRouter /> ;
        case 'HRManager':
-         return <HrRouter /> ;
+         return <EmployeeRouter /> ;
        case 'Employee':
          return <HrRouter /> ;
          default:

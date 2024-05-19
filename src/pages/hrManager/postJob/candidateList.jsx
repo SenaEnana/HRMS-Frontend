@@ -4,16 +4,6 @@ import { useParams } from "react-router-dom";
 const CandidateList = () => {
   const [data, setData] = useState([]);
   const { jobId } = useParams();
-  
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-
-  // async function getData() {
-  //   let result = await fetch(`https://localhost:7140/Promotion/JobCandidates`);
-  //   result = await result.json();
-  //   setData(result);
-  // }
   useEffect(() => {
     fetch(`https://localhost:7140/Promotion/JobCandidates/${jobId}`)
       .then((response) => response.json())

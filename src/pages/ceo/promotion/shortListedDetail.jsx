@@ -1,19 +1,43 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 const ShortListedDetail = () => {
-  const [data, setData] = useState([]);
+  const { id } = useParams();
+  const [employee, setEmployee] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    getData();
-  }, []);
+    fetch(`https://localhost:7140/Employee/${id}`)
+      .then((response) => response.json())
+      .then((data) => setEmployee(data))
+      .catch((error) =>
+        console.error("Error fetching employee details:", error)
+      );
+  }, [id]);
 
-  async function getData() {
-    let result = await fetch("https://localhost:7140/Employee/ListEmployees");
-    result = await result.json();
-    setData(result);
+  const rejectCandidate = async (employeeId) => {
+    try {
+      const response = await fetch(
+        `https://localhost:7140/Promotion/ShortlistCandidate/${employeeId}`,
+        {
+          method: "POST",
+        }
+      );
+      if (response.ok) {
+        alert("Employee rejected successfully.");
+        navigate("/shortListed");
+      } else {
+        alert("Failed to reject employee.");
+      }
+    } catch (error) {
+      console.error("Error rejecting employee:", error);
+      alert("Error rejecting employee.");
+    }
+  };
+
+  if (!employee) {
+    return <div>Loading...</div>;
   }
-
   return (
     <>
       <div className="container mt-5">
@@ -44,12 +68,15 @@ const ShortListedDetail = () => {
                 <td>{employee.phoneNo}</td>
                 <td>{employee.role}</td>
                 <td>
-                  <Link to={`/promoteEmployee`}>
-                    <button className="btn btn-outline-secondary btn-sm">
+                  <Link to={`/promoteEmployee/${employee.id}`}>
+                    <button className="btn btn-outline-secondary btn-sm me-2">
                       Promote
                     </button>
                   </Link>
-                  <button className="btn btn-outline-danger btn-sm">
+                  <button
+                    className="btn btn-outline-danger btn-sm float-end"
+                    onClick={() => rejectCandidate(employee.id)}
+                  >
                     Reject
                   </button>
                 </td>

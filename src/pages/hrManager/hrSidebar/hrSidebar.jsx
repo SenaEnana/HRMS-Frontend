@@ -54,11 +54,6 @@ const HrSidebar = () => {
       value: "employeeList",
       onClick: () => navigate("/employeeList"),
     },
-    {
-      label: "Control Account",
-      value: "employeeRole",
-      onClick: () => navigate("/team"),
-    },
   ];
 
   return (
