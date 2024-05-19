@@ -23,7 +23,6 @@ function PostedJob() {
         <thead>
           <tr>
             <th>Job Title</th>
-            <th>Position Id</th>
             <th>Position</th>
             <th>Action</th>
           </tr>
@@ -33,7 +32,6 @@ function PostedJob() {
             <tr key={job.id}>
               <td>{job.jobTitle}</td>
               <td>{job.positionId}</td>
-              <td>{job.position}</td>
               <td>
                 <Link to={`/candidateList/${job.id}`}>
                   <button className="btn btn-outline-secondary btn-sm">

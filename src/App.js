@@ -65,7 +65,7 @@ function App() {
        case 'LeaveAdmin':
          return <LeaveAdminRouter /> ;
        case 'HRManager':
-         return <EmployeeRouter /> ;
+         return <HrRouter /> ;
        case 'Employee':
          return <HrRouter /> ;
          default:

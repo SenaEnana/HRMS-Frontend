@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
@@ -9,13 +9,11 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import DropdownMenu from "../../../components/dropdownMenu";
-
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { tokens } from "../../../theme";
-import LocalPostOfficeOutlinedIcon from '@mui/icons-material/LocalPostOfficeOutlined';
-import ChecklistRtlOutlinedIcon from '@mui/icons-material/ChecklistRtlOutlined';
+import LocalPostOfficeOutlinedIcon from "@mui/icons-material/LocalPostOfficeOutlined";
+import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -43,6 +41,21 @@ const HrSidebar = () => {
   const [selected, setSelected] = useState("Dashboard");
   const navigate = useNavigate();
 
+  const { id } = useParams();
+  const [employee, setEmployee] = useState(null);
+
+  useEffect(() => {
+    fetch(`https://localhost:7140/Employee/${id}`)
+      .then((response) => response.json())
+      .then((data) => setEmployee(data))
+      .catch((error) =>
+        console.error("Error fetching employee details:", error)
+      );
+  }, [id]);
+
+  if (!employee) {
+    return <div>Loading...</div>;
+  }
   const items = [
     {
       label: "Add New Employee",
@@ -95,7 +108,7 @@ const HrSidebar = () => {
               >
                 <Typography
                   variant="h3"
-                  className="text-dark fst-italic fw-bold"
+                  className="text-info fst-italic fw-bold"
                 >
                   AKUFADA
                 </Typography>
@@ -111,15 +124,6 @@ const HrSidebar = () => {
 
           {!isCollapsed && (
             <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  // src={`../../assets/user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
-              </Box>
               <Box textAlign="center">
                 <Typography
                   variant="h2"
@@ -127,7 +131,7 @@ const HrSidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  User Name
+                  welcome, {employee.firstName}
                 </Typography>
               </Box>
             </Box>

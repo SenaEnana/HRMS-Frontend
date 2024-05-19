@@ -4,7 +4,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 const EmployeeDetail = () => {
   const { id } = useParams();
   const [employee, setEmployee] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   // const [data, setData] = useState([]);
 
   // useEffect(() => {
@@ -33,21 +33,24 @@ const EmployeeDetail = () => {
         console.error("Error fetching employee details:", error)
       );
   }, [id]);
-  
+
   const handleDelete = async () => {
     try {
-      const response = await fetch(`https://localhost:7140/Employee/DeleteEmployee/${id}`, {
-        method: 'DELETE',
-      });
+      const response = await fetch(
+        `https://localhost:7140/Employee/DeleteEmployee/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (response.ok) {
-        alert('Employee deleted successfully.');
-        navigate.push('/employeeList'); 
+        alert("Employee deleted successfully.");
+        navigate.push("/employeeList");
       } else {
-        alert('Failed to delete the employee.');
+        alert("Failed to delete the employee.");
       }
     } catch (error) {
-      console.error('Error deleting employee:', error);
-      alert('Error deleting the employee.');
+      console.error("Error deleting employee:", error);
+      alert("Error deleting the employee.");
     }
   };
 
@@ -56,8 +59,22 @@ const EmployeeDetail = () => {
   }
   return (
     <>
-      <div className="card mt-5 me-3 text-dark">
-        <div className="card-header text-white">
+      <p className="text-dark m-3 fs-5">Employee Detail</p>
+      <div className="mb-3 me-3">
+        <Link to={`/updateEmployee/${employee.id}`}>
+          <button className="btn btn-outline-secondary btn-sm me-2 float-end">
+            Update
+          </button>
+        </Link>
+        <button
+          className="btn btn-outline-danger btn-sm float-end me-2"
+          onClick={handleDelete}
+        >
+          Delete
+        </button>
+      </div>
+      <div className="card mt-5 me-3 ms-4 text-dark">
+        <div className="card-header">
           <h5>
             {employee.firstName} {employee.lastName}
           </h5>
@@ -125,9 +142,8 @@ const EmployeeDetail = () => {
           </div>
         </div>
       </div>
-
-      <div className="card mt-5 m-3 text-dark">
-        <div className="card-header text-white">
+      <div className="card mt-5 me-3 ms-4 text-dark">
+        <div className="card-header">
           <h5>Experience</h5>
         </div>
         <div className="card-body">
@@ -141,9 +157,8 @@ const EmployeeDetail = () => {
           </ul>
         </div>
       </div>
-
-      <div className="card mt-5 me-3 text-dark">
-        <div className="card-header text-white">
+      <div className="card mt-5 me-3 ms-4 text-dark">
+        <div className="card-header">
           <h5>Child Information</h5>
         </div>
         <div className="card-body">
@@ -157,8 +172,8 @@ const EmployeeDetail = () => {
         </div>
       </div>
 
-      <div className="card mt-5 me-3 text-dark">
-        <div className="card-header text-white">
+      <div className="card mt-5 me-3 ms-4 text-dark">
+        <div className="card-header">
           <h5>Contact Person</h5>
         </div>
         <div className="card-body">
@@ -191,8 +206,8 @@ const EmployeeDetail = () => {
           </ul>
         </div>
       </div>
-      <div className="card mt-5 me-3 text-dark">
-        <div className="card-header text-white">
+      <div className="card mt-5 me-3 ms-4 text-dark">
+        <div className="card-header">
           <h5>Education</h5>
         </div>
         <div className="card-body">
@@ -204,16 +219,6 @@ const EmployeeDetail = () => {
             ))}
           </ul>
         </div>
-      </div>
-      <div>
-        <Link to={`/updateEmployee/${employee.id}`}>
-          <button className="btn btn-outline-secondary btn-sm me-2 float-end">
-            Update
-          </button>
-        </Link>
-        <button className="btn btn-outline-danger btn-sm float-end" onClick={handleDelete}>
-          Delete
-        </button>
       </div>
     </>
   );
