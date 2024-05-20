@@ -1,10 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-<<<<<<< HEAD
-import MockSearch from "../../components/mockSearch";
-=======
 import { useNavigate } from "react-router";
->>>>>>> 7db93dc2c348b086e70984c87ee204b22f4e8fe4
 //import Button from "../../components/button";
 
 function MyAccount() {
@@ -112,72 +108,6 @@ function MyAccount() {
     navigate("/");
   };
 
-<<<<<<< HEAD
-    const handleSetProfile = () => {
-        if (!profilePicture) {
-            alert("Please select a profile picture");
-            return;
-        }
-
-        // Send profile picture to backend API
-        const formData = new FormData();
-        formData.append('profilePicture', profilePicture);
-
-        fetch('https://localhost:7140/Account/update?userId=${userId}', {
-            method: 'POST',
-            headers: {
-
-            },
-            body: formData
-        })
-            .then(response => {
-                if (response.ok) {
-                    // Profile picture set successfully
-                    alert("Profile picture set successfully");
-                } else {
-                    throw new Error('Failed to set profile picture');
-                }
-            })
-            .catch(error => {
-                console.error('Set profile picture error:', error);
-                // Handle error
-            });
-    };
-
-    const LogoutHandler = () => {
-        alert("Are you sure you want to log out");
-    };
-
-    return (
-        <div className="container mt-5 ">
-            <h1>My Profile</h1>
-            <div className="row justify-content-center">
-                <div className="col-md-6">
-                    <h1 className="text-left mt-5 text-black">My Profile</h1>
-                    <h3 className="mt-12 text-black text-left">Username: {username}</h3>
-                    <input type="file" accept="image/*" onChange={handleProfilePictureChange} className="form-control mt-3" /><br></br>
-                    <div className="d-flex justify-content-center">
-                        <button className="btn btn-primary btn-lg mt-3 mr-16  " onClick={handleSetProfile}>Set Profile</button>
-                        <Link to="/">
-                            <button className="btn btn-primary btn-lg mt-3 ml-4" onClick={LogoutHandler}>Log Out</button>
-                        </Link>
-                    </div>
-                </div>
-                <div className="col-md-6">
-                    <div className="d-flex justify-content-center">
-                        {profilePicture && (
-                            <img
-                                src={profilePicture}
-                                alt="Profile"
-                                className="img-fluid rounded-circle mt-5"
-                                style={{ width: "200px", height: "200px" }}
-                            />
-                        )}
-                    </div>
-                </div>
-            </div>
-            <MockSearch />
-=======
   return (
     <div className="container mt-5 ">
       <h4>My Profile</h4>
@@ -215,7 +145,6 @@ function MyAccount() {
               </button>
             </Link>
           </div>
->>>>>>> 7db93dc2c348b086e70984c87ee204b22f4e8fe4
         </div>
         <div className="col-md-6">
           <div className="d-flex justify-content-center">
@@ -235,4 +164,3 @@ function MyAccount() {
 }
 export default MyAccount;
 //<Button />
-//<MockSearch />
