@@ -8,6 +8,8 @@ import LeaveAdminDashboard from "./pages/leaveAdmin/dashboard/leaveAdminDashboar
 import LeaveSidebar from "./pages/leaveAdmin/sidebar/leaveSidebar";
 import AddLeaveType from "./pages/leaveAdmin/leaveType/addLeaveType";
 import LeaveTypeList from "./pages/leaveAdmin/leaveType/leaveTypeList";
+import MyAccount from "./pages/account/myAccount";
+import ChangePassword from "./pages/account/changePassword";
 
 function LeaveAdminRouter(){
     const [theme, colorMode] = useMode();
@@ -26,6 +28,8 @@ function LeaveAdminRouter(){
               <Route path="/bar" element={<Bar />} />
               <Route path="/addLeaveType" element={<AddLeaveType/>}/>
               <Route path="/leaveTypeList" element={<LeaveTypeList/>}/>
+              <Route path="/changePassword" element={<ChangePassword/>}/>
+              <Route path="/myAccount" element={<MyAccount/>}/>
               </Routes>
             </main>
           </div>

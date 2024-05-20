@@ -5,16 +5,11 @@ import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-//import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
-//import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
-
 import { tokens } from "../../../theme";
 import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
 import ChecklistRtlOutlinedIcon from '@mui/icons-material/ChecklistRtlOutlined';
-
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -97,15 +92,6 @@ const LeaveSidebar = () => {
 
           {!isCollapsed && (
             <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  // src={`../../assets/user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
-              </Box>
               <Box textAlign="center">
                 <Typography
                   variant="h2"
@@ -120,17 +106,17 @@ const LeaveSidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
+          <Item
               className=""
               title="My Account"
-              to="/myaccount"
+              to="/myAccount"
               icon={<AccountBoxIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               className=""
-              title="Leave Admin Dashboard"
+              title="Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}

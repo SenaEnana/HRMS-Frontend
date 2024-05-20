@@ -11,6 +11,8 @@ import ResignationList from "./pages/ceo/resignation/resignationList";
 import PromoteEmployee from "./pages/ceo/promotion/promoteEmployee";
 import ShortListed from "./pages/ceo/promotion/shortListed";
 import ShortListedDetail from "./pages/ceo/promotion/shortListedDetail";
+import ChangePassword from "./pages/account/changePassword";
+import MyAccount from "./pages/account/myAccount";
 
 function CeoRouter() {
     const [theme, colorMode] = useMode();
@@ -31,6 +33,8 @@ function CeoRouter() {
                   <Route path="/promoteEmployee/:id" element={<PromoteEmployee/>}/>
                   <Route path="/shortListed" element={<ShortListed/>}/>
                   <Route path="/shortListedDetail/:id" element={<ShortListedDetail/>}/>
+                  <Route path="/myAccount" element={<MyAccount/>}/>
+                  <Route path="/changePassword" element={<ChangePassword/>}/>
                   </Routes>
                 </main>
               </div>

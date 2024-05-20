@@ -10,10 +10,9 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { tokens } from "../../../theme";
 import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
-import AccountBoxIcon from "@mui/icons-material/AccountBox"
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
-
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -95,15 +94,6 @@ const CeoSidebar = () => {
 
           {!isCollapsed && (
             <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  // src={`../../assets/user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
-              </Box>
               <Box textAlign="center">
                 <Typography
                   variant="h2"
@@ -118,17 +108,16 @@ const CeoSidebar = () => {
           )}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
-
               className=""
               title="My Account"
-              to="/myaccount"
+              to="/myAccount"
               icon={<AccountBoxIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               className=""
-              title="Ceo Dashboard"
+              title="Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}

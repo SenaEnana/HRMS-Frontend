@@ -1,5 +1,4 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import SwipeLeftAltOutlinedIcon from "@mui/icons-material/SwipeLeftAltOutlined";
 import Header from "../../../components/header";
@@ -7,6 +6,7 @@ import BarChart from "../../../components/barChart";
 import StatBox from "../../../components/statBox";
 import { tokens } from "../../../theme";
 import { useState, useEffect } from "react";
+import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
 
 const LeaveAdminDashboard = () => {
   const theme = useTheme();
@@ -131,7 +131,7 @@ const LeaveAdminDashboard = () => {
             <StatBox
               title={pendingLeaveCount.toLocaleString()}
               subtitle="Pending Leave Requests"
-              icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
+              icon={<PendingOutlinedIcon className="text-dark fs-3" />}
             />
           )}
         </Box>

@@ -5,6 +5,8 @@ import Team from "./pages/superAdmin/team";
 import Bar from "./pages/superAdmin/bar";
 import { ColorModeContext, useMode } from "./theme";
 import AdminSidebar from "./pages/superAdmin/sidebar/adminSidebar";
+import ChangePassword from "./pages/account/changePassword";
+import MyAccount from "./pages/account/myAccount";
 
 function AdminRouter() {
     const [theme, colorMode] = useMode();
@@ -19,6 +21,8 @@ function AdminRouter() {
                   <Route path="/" element={<AdminDashboard />} />
                   <Route path="/team" element={<Team />} />
                   <Route path="/bar" element={<Bar />} />
+                  <Route path="/changePassword" element={<ChangePassword/>}/>
+                  <Route path="/myAccount" element={<MyAccount/>}/>
                   </Routes>
                 </main>
               </div>

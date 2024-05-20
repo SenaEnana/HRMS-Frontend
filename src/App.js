@@ -1,7 +1,18 @@
-import AdminRouter from "./adminRouter";
-import EmployeeRouter from "./employeeRouter";
+
+//import AdminRouter from "./adminRouter";
+//import EmployeeRouter from "./employeeRouter";
+//import HrRouter from "./hrRouter";
+//import SupervisorRouter from "./supervisorRouter";
+//import LeaveAdminRouter from "./leaveAdminRouter";
+//import Auth from "./pages/auth/auth";
+//import { useState, useEffect } from "react";
+//import { useNavigate } from "react-router-dom";
+//import CeoRouter from "./ceoRouter";
+
+//import AdminRouter from "./adminRouter";
+//import EmployeeRouter from "./employeeRouter";
 import HrRouter from "./hrRouter";
-import SupervisorRouter from "./supervisorRouter";
+//import SupervisorRouter from "./supervisorRouter";
 import LeaveAdminRouter from "./leaveAdminRouter";
 import Auth from "./pages/auth/auth";
 import { useState, useEffect } from "react";
@@ -53,24 +64,45 @@ function App() {
         renderDashboardBasedOnRole()
       ) : (
         <Auth />
+
       )}
+
 
     </div>
   );
-   function renderDashboardBasedOnRole() {
-     const token = sessionStorage.getItem('token');
-     const role = getUserRoleFromToken(token);
-     console.log(role)
-     switch (role) {
-       case 'LeaveAdmin':
-         return <LeaveAdminRouter /> ;
-       case 'HR Manager':
-         return <CeoRouter /> ;
-       case 'Employee':
-         return <HrRouter /> ;
-         default:
-           return <p>Not Allowed.</p>;
-     }
-   }
+
+  /*function renderDashboardBasedOnRole() {
+    const token = sessionStorage.getItem('token');
+    const role = getUserRoleFromToken(token);
+    console.log(role)
+    switch (role) {
+      case 'LeaveAdmin':
+        return <LeaveAdminRouter />;
+      case 'Hr Manager':
+        return <HrRouter />;
+      case 'Employee':
+        return <EmployeeRouter />;
+      default:
+        return <p>You don't have access to any dashboard.</p>;
+    }
+  }*/
+
+
+
+  function renderDashboardBasedOnRole() {
+    const token = sessionStorage.getItem('token');
+    const role = getUserRoleFromToken(token);
+    console.log(role)
+    switch (role) {
+      case 'LeaveAdmin':
+        return <LeaveAdminRouter />;
+      case 'HR Manager':
+        return <CeoRouter />;
+      case 'Employee':
+        return <HrRouter />;
+      default:
+        return <p>Not Allowed.</p>;
+    }
+  }
 }
 export default App; 
