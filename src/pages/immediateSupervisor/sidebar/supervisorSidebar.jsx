@@ -6,11 +6,9 @@ import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { tokens } from "../../../theme";
 import ChecklistRtlOutlinedIcon from '@mui/icons-material/ChecklistRtlOutlined';
-
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -93,15 +91,6 @@ const SupervisorSidebar = () => {
 
           {!isCollapsed && (
             <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  // src={`../../assets/user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
-              </Box>
               <Box textAlign="center">
                 <Typography
                   variant="h2"
@@ -115,17 +104,17 @@ const SupervisorSidebar = () => {
             </Box>
           )}
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
+          <Item
               className=""
               title="My Account"
-              to="/myaccount"
+              to="/myAccount"
               icon={<AccountBoxIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               className=""
-              title="Immediate Supervisor Dashboard"
+              title="Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}

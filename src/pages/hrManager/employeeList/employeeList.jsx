@@ -83,25 +83,25 @@ export default EmployeeList;
 // import Topbar from "../../commonPages/topbar";
 
 // const EmployeeList = () => {
-//   const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
-//   useEffect(() => {
-//     getData();
-//   }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
-//   async function deleteOperation(Id) {
-//     let result = await fetch(
-//       `https://localhost:7140/Employee/DeleteEmployee/${Id}`,
-//       {
-//         method: "DELETE",
-//         headers: {
-//           Accept: "application/json",
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-//     getData();
-//   }
+  // async function deleteOperation(Id) {
+  //   let result = await fetch(
+  //     `https://localhost:7140/Employee/DeleteEmployee/${Id}`,
+  //     {
+  //       method: "DELETE",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //     }
+  //   );
+  //   getData();
+  // }
 
 //   async function getData() {
 //     let result = await fetch("https://localhost:7140/Employee/ListEmployees");

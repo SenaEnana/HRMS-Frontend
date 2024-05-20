@@ -1,5 +1,4 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import SwipeLeftAltOutlinedIcon from "@mui/icons-material/SwipeLeftAltOutlined";
 import Header from "../../../components/header";
@@ -7,6 +6,9 @@ import BarChart from "../../../components/barChart";
 import StatBox from "../../../components/statBox";
 import { tokens } from "../../../theme";
 import React, { useState, useEffect } from "react";
+import ToggleOffOutlinedIcon from '@mui/icons-material/ToggleOffOutlined';
+import ToggleOnOutlinedIcon from '@mui/icons-material/ToggleOnOutlined';
+
 const HrDashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -27,7 +29,7 @@ const HrDashboard = () => {
     const fetchPendingLeaveRequests = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/api/Leave/GetPendingLeaveRequests"
+          "https://localhost:52339/api/Leave/GetPendingLeaveRequests"
         );
         const data = await response.json();
         setPendingLeaveRequests(data);
@@ -44,7 +46,7 @@ const HrDashboard = () => {
     const fetchInactiveEmployeeCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/InactiveCount"
+          "https://localhost:52339/DashBoard/InactiveCount"
         );
         const data = await response.json();
         setInactiveEmployeeCount(data);
@@ -61,7 +63,7 @@ const HrDashboard = () => {
     const fetchApprovedLeaveCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/CountApprovedLeaveRequests"
+          "https://localhost:52339/DashBoard/CountApprovedLeaveRequests"
         );
         const data = await response.json();
         setApprovedLeaveCount(data);
@@ -75,7 +77,7 @@ const HrDashboard = () => {
     const fetchRejectedLeaveCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/CountRejectedLeaveRequests"
+          "https://localhost:52339/DashBoard/CountRejectedLeaveRequests"
         );
         const data = await response.json();
         setRejectedLeaveCount(data);
@@ -89,7 +91,7 @@ const HrDashboard = () => {
     const fetchActiveEmployeeCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/ActiveCount"
+          "https://localhost:52339/DashBoard/ActiveCount"
         );
         const data = await response.json();
         setActiveEmployeeCount(data);
@@ -104,19 +106,15 @@ const HrDashboard = () => {
   }, []);
   return (
     <Box m="20px">
-      {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="HR Manager Dashboard" subtitle="" />
       </Box>
-
-      {/* GRID & CHARTS */}
       <Box
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="140px"
         gap="20px"
       >
-        {/* ROW 1 */}
         <Box
           className="rounded"
           gridColumn="span 3"
@@ -128,7 +126,7 @@ const HrDashboard = () => {
           <StatBox
             title={activeEmployeeCount.toLocaleString()}
             subtitle="Active Employees"
-            icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
+            icon={<ToggleOnOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
         <Box
@@ -142,7 +140,7 @@ const HrDashboard = () => {
           <StatBox
             title={inactiveEmployeeCount.toLocaleString()}
             subtitle="InActive Employees"
-            icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
+            icon={<ToggleOffOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
         <Box

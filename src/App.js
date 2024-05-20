@@ -1,6 +1,7 @@
+
 //import AdminRouter from "./adminRouter";
 //import EmployeeRouter from "./employeeRouter";
-import HrRouter from "./hrRouter";
+//import HrRouter from "./hrRouter";
 //import SupervisorRouter from "./supervisorRouter";
 //import LeaveAdminRouter from "./leaveAdminRouter";
 //import Auth from "./pages/auth/auth";
@@ -8,15 +9,24 @@ import HrRouter from "./hrRouter";
 //import { useNavigate } from "react-router-dom";
 //import CeoRouter from "./ceoRouter";
 
+//import AdminRouter from "./adminRouter";
+//import EmployeeRouter from "./employeeRouter";
+import HrRouter from "./hrRouter";
+//import SupervisorRouter from "./supervisorRouter";
+import LeaveAdminRouter from "./leaveAdminRouter";
+import Auth from "./pages/auth/auth";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import CeoRouter from "./ceoRouter";
+
 function App() {
 
-  /*const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
   const navigate = useNavigate();
   function isTokenValid(token) {
     if (!token) {
       return false;
     }
-
     try {
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
       const expirationTime = decodedToken.exp * 1000;
@@ -44,18 +54,19 @@ function App() {
     } catch (error) {
       console.error("Error:", error);
     }
-  }, [navigate]);*/
+  }, [navigate]);
 
 
   return (
     <div>
 
-      {/*isAuth ? (
+      {isAuth ? (
         renderDashboardBasedOnRole()
       ) : (
         <Auth />
-      )*/}
-      <HrRouter />
+
+      )}
+
 
     </div>
   );
@@ -76,5 +87,22 @@ function App() {
     }
   }*/
 
+
+
+  function renderDashboardBasedOnRole() {
+    const token = sessionStorage.getItem('token');
+    const role = getUserRoleFromToken(token);
+    console.log(role)
+    switch (role) {
+      case 'LeaveAdmin':
+        return <LeaveAdminRouter />;
+      case 'HR Manager':
+        return <CeoRouter />;
+      case 'Employee':
+        return <HrRouter />;
+      default:
+        return <p>Not Allowed.</p>;
+    }
+  }
 }
-export default App;
+export default App; 

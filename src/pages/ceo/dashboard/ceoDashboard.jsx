@@ -1,15 +1,16 @@
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import Button from "react-bootstrap/Button";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
-import SwipeLeftAltOutlinedIcon from "@mui/icons-material/SwipeLeftAltOutlined";
 import Header from "../../../components/header";
 import LineChart from "../../../components/lineChart";
 import BarChart from "../../../components/barChart";
 import StatBox from "../../../components/statBox";
 import { tokens } from "../../../theme";
 import React, { useState, useEffect } from "react";
+import ToggleOffOutlinedIcon from '@mui/icons-material/ToggleOffOutlined';
+import ToggleOnOutlinedIcon from '@mui/icons-material/ToggleOnOutlined';
+import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
 
 const CeoDashboard = () => {
   const theme = useTheme();
@@ -34,7 +35,7 @@ const CeoDashboard = () => {
     const fetchInactiveEmployeeCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/InactiveCount"
+          "https://localhost:52339/DashBoard/InactiveCount"
         );
         const data = await response.json();
         setInactiveEmployeeCount(data);
@@ -49,7 +50,7 @@ const CeoDashboard = () => {
     const fetchEmployeeData = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/EmployeesHiredPerYear"
+          "https://localhost:52339/DashBoard/EmployeesHiredPerYear"
         );
         const data = await response.json();
         console.log(data);
@@ -65,7 +66,7 @@ const CeoDashboard = () => {
     const fetchPendingResignationCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/Resignation/CountPendingResignations"
+          "https://localhost:52339/Resignation/CountPendingResignations"
         );
         const data = await response.json();
         setPendingResignationCount(data);
@@ -81,7 +82,7 @@ const CeoDashboard = () => {
     const fetchApprovedResignationCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/Resignation/CountApprovedResignations"
+          "https://localhost:52339/Resignation/CountApprovedResignations"
         );
         const data = await response.json();
         setApprovedResignationCount(data);
@@ -96,7 +97,7 @@ const CeoDashboard = () => {
     const fetchResignationList = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/Resignation/ListOfResignationRequests"
+          "https://localhost:52339/Resignation/ListOfResignationRequests"
         );
         const data = await response.json();
         console.log(data);
@@ -113,7 +114,7 @@ const CeoDashboard = () => {
     const fetchActiveEmployeeCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/ActiveCount"
+          "https://localhost:52339/DashBoard/ActiveCount"
         );
         const data = await response.json();
         setActiveEmployeeCount(data);
@@ -131,10 +132,10 @@ const CeoDashboard = () => {
     <Box m="20px">
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Ceo Dashboard" subtitle="Welcome to your dashboard" />
+        <Header title="Ceo Dashboard" subtitle="" />
 
         <Box>
-          <Button className="btn btn-info ps-1 pt-2 fw-bold">
+          <Button className="btn btn-secondary ps-1 pt-2 fw-light">
             <DownloadOutlinedIcon sx={{ mr: "10px" }} />
             Download Reports
           </Button>
@@ -160,7 +161,7 @@ const CeoDashboard = () => {
           <StatBox
             title={activeEmployeeCount.toLocaleString()}
             subtitle="Active Employees"
-            icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
+            icon={<ToggleOnOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
         <Box
@@ -174,7 +175,7 @@ const CeoDashboard = () => {
           <StatBox
             title={inactiveEmployeeCount.toLocaleString()}
             subtitle="InActive Employees"
-            icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
+            icon={<ToggleOffOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
         <Box
@@ -189,7 +190,7 @@ const CeoDashboard = () => {
             <StatBox
               title={pendingResignationCount.toLocaleString()}
               subtitle="Pending Resignation Requests"
-              icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
+              icon={<PendingOutlinedIcon className="text-dark fs-3" />}
             />
         </Box>
         <Box
