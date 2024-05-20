@@ -43,7 +43,7 @@ const EmployeeDashboard = () => {
       }
       const userId = getUserIdFromToken(token);
 
-      const url = `https://localhost:7140/api/Leave/GetMyLeaveBalance?userId=${userId}`;
+      const url = `https://localhost:52339/api/Leave/GetMyLeaveBalance?userId=${userId}`;
       const response = await fetch(url);
 
       if (!response.ok) {
@@ -70,7 +70,7 @@ const EmployeeDashboard = () => {
         return;
       }
       const userId = getUserIdFromToken(token);
-      const url = `https://localhost:7140/api/Complaint/MyCompliants?userId=${userId}`;
+      const url = `https://localhost:52339/api/Complaint/MyCompliants?userId=${userId}`;
       const response = await fetch(url);
 
       if (!response.ok) {
@@ -98,7 +98,7 @@ const EmployeeDashboard = () => {
       }
 
       const userId = getUserIdFromToken(token);
-      const url = `https://localhost:7140/api/Leave/MyLeaveRequests?userId=${userId}`;
+      const url = `https://localhost:52339/api/Leave/MyLeaveRequests?userId=${userId}`;
       const response = await fetch(url);
 
       if (!response.ok) {

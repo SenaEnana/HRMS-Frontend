@@ -64,12 +64,12 @@ function App() {
      switch (role) {
        case 'LeaveAdmin':
          return <LeaveAdminRouter /> ;
-       case 'HRManager':
-         return <HrRouter /> ;
+       case 'HR Manager':
+         return <CeoRouter /> ;
        case 'Employee':
          return <HrRouter /> ;
          default:
-           return <p>You don't have access to any dashboard.</p>;
+           return <p>Not Allowed.</p>;
      }
    }
 }

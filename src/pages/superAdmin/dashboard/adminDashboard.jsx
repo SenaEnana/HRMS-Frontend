@@ -30,7 +30,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchListOfUsers = async () => {
       try {
-        const response = await fetch("https://localhost:7140/User");
+        const response = await fetch("https://localhost:52339/User");
         const data = await response.json();
         setListOfUsers(data);
         setLoading(false);
@@ -46,7 +46,7 @@ const AdminDashboard = () => {
     const fetchInactiveEmployeeCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/InactiveCount"
+          "https://localhost:52339/DashBoard/InactiveCount"
         );
         const data = await response.json();
         setInactiveEmployeeCount(data);
@@ -61,7 +61,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await fetch("https://localhost:7140/User/UsersCount");
+        const response = await fetch("https://localhost:52339/User/UsersCount");
         const data = await response.json();
         console.log(data);
         setEmployeeData(data);
@@ -76,7 +76,7 @@ const AdminDashboard = () => {
     const fetchActiveEmployeeCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/ActiveCount"
+          "https://localhost:52339/DashBoard/ActiveCount"
         );
         const data = await response.json();
         setActiveEmployeeCount(data);

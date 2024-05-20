@@ -45,7 +45,7 @@ const HrSidebar = () => {
   const [employee, setEmployee] = useState(null);
 
   useEffect(() => {
-    fetch(`https://localhost:7140/Employee/${id}`)
+    fetch(`https://localhost:52339/Employee/${id}`)
       .then((response) => response.json())
       .then((data) => setEmployee(data))
       .catch((error) =>

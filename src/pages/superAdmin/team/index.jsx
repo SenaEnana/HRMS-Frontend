@@ -9,7 +9,7 @@ const Team = () => {
   }, []);
 
   async function getData() {
-    let result = await fetch("https://localhost:7140/User");
+    let result = await fetch("https://localhost:52339/User");
     result = await result.json();
     setData(result);
   }
@@ -37,7 +37,7 @@ const Team = () => {
               <img
                 style={{ width: 100, borderRadius: 100 }}
                 src={
-                  "https://localhost:7140" + employee.pictureURL
+                  "https://localhost:52339" + employee.pictureURL
                 }
                 alt=""
               />

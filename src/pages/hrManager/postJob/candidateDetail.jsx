@@ -8,7 +8,7 @@ const CandidateDetail = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`https://localhost:7140/Employee/${id}`)
+    fetch(`https://localhost:52339/Employee/${id}`)
       .then((response) => response.json())
       .then((data) => setEmployee(data))
       .catch((error) =>
@@ -19,7 +19,7 @@ const CandidateDetail = () => {
   const shortListCandidate = async (employeeId) => {
     try {
       const response = await fetch(
-        `https://localhost:7140/Promotion/ShortlistCandidate/${employeeId}`,
+        `https://localhost:52339/Promotion/ShortlistCandidate/${employeeId}`,
         {
           method: "POST",
         }
@@ -28,7 +28,7 @@ const CandidateDetail = () => {
         alert("Employee shortListed successfully.");
         navigate("/candidateList");
       } else {
-        alert("Failed to delete the employee.");
+        alert("Failed to shortlist employee.");
       }
     } catch (error) {
       console.error("Error shortListing employee:", error);

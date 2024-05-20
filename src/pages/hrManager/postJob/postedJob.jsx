@@ -9,7 +9,7 @@ function PostedJob() {
   }, []);
 
   async function getData() {
-    let result = await fetch("https://localhost:7140/Promotion/PostedJobs");
+    let result = await fetch("https://localhost:52339/Promotion/PostedJobs");
     result = await result.json();
     setData(result);
   }
