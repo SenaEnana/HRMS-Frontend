@@ -37,6 +37,7 @@ const ShortListed = () => {
           <tbody>
             {data.map((employee) => (
               <tr key={employee.id}>
+                console.log(employee.id)
                 <td>{employee.emp_Id}</td>
                 <td>{employee.firstName}</td>
                 <td>{employee.lastName}</td>
