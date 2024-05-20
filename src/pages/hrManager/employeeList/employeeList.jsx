@@ -38,9 +38,9 @@ const EmployeeList = () => {
         console.log(json);
         setFetchedData(json);
       })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+         .catch((error) => {
+          console.error("Error fetching data:", error);
+        });
   };
 
   useEffect(() => {

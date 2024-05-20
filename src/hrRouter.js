@@ -1,12 +1,20 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import { CssBaseline, ThemeProvider } from "@mui/material";
+import Team from "./pages/hrManager/team";
 import Bar from "./pages/hrManager/bar";
 import Pie from "./pages/hrManager/pie";
+import Line from "./pages/hrManager/line";
 import { ColorModeContext, useMode } from "./theme";
-import HrDashboard from "./pages/hrManager/dashboard/hrDashboard";
+import Sidebar from "./pages/commonPages/sidebar";
+//import Topbar from "./pages/commonPages/topbar";
+import HrDashboard from "./pages/hrManager/dashboard/HrDashboard.1";
 import EmployeeBasic from "./pages/hrManager/form/employeeBasic/employeeBasic";
 import EmployeeList from "./pages/hrManager/employeeList/employeeList";
 import UpdateEmployeeBasic from "./pages/hrManager/updateEmployee/updateEmployeeBasic";
+
+import EmployeeAddList from "./pages/hrManager/employeeList/employeeAddList";
+import ContactInfoList from "./pages/hrManager/employeeList/contactInfoList";
 import EmployeeInfo from "./pages/hrManager/form/employeeInfo";
 import StatusInformation from "./pages/hrManager/form/statusInformation";
 import ContactInformation from "./pages/hrManager/form/contactInformation";
@@ -33,46 +41,62 @@ import CandidateDetail from "./pages/hrManager/postJob/candidateDetail";
 import ChangePassword from "./pages/account/changePassword";
 import MyAccount from "./pages/account/myAccount";
 
+
 function HrRouter() {
   const [theme, colorMode] = useMode();
+  const [isHrSidebar, setIsHrSidebar] = useState(true);
+
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-                  <HrSidebar/>
+
+          <Sidebar isHrSidebar={isHrSidebar} />
+
+          <HrSidebar />
           <main className="content">
+            {/* <Topbar setIsHrSidebar={setIsHrSidebar} /> */}
             <Routes>
-              <Route path="/" element={<HrDashboard />} />
+              <Route path="/hrDashboard" element={<HrDashboard />} />
+              <Route path="/team" element={<Team />} />
               <Route path="/bar" element={<Bar />} />
               <Route path="/pie" element={<Pie />} />
-              <Route path="/employeeBasic" element={<EmployeeBasic/>}/>
-              <Route path="/employeeInfo" element={<EmployeeInfo/>}/>
-              <Route path="/contactInformation" element={<ContactInformation/>}/>
-              <Route path="/statusInformation" element={<StatusInformation/>}/>
-              <Route path="/multiStepForm" element={<MultiStepForm/>}/>
-              <Route path="/educationInformation" element={<EducationInformation/>}/>
-              <Route path="/additionalInformation" element={<AdditionalInformation/>}/>
-              <Route path="/employeeList" element={<EmployeeList/>}/>
-              <Route path="/updateEmployeeBasic/:id" element={<UpdateEmployeeBasic/>}/>
-              <Route path="/addBranch" element={<AddBranch/>}/>
-              <Route path="/addPosition" element={<AddPosition/>}/>
-              <Route path="/addDegree" element={<AddDegree/>}/>
-              <Route path="/addDepartment" element={<AddDepartment/>}/>
-              <Route path="/addGrade" element={<AddGrade/>}/>
-              <Route path="/branchList" element={<BranchList/>}/>
-              <Route path="/departmentList" element={<DepartmentList/>}/>
-              <Route path="/degreeList" element={<DegreeList/>}/>
-              <Route path="/positionList" element={<PositionList/>}/>
-              <Route path="/gradeList" element={<GradeList/>}/>
-              <Route path="/performanceManagement" element={<PerformanceManagement/>}/>
-              <Route path="/employeeDetail/:id" element={<EmployeeDetail/>}/>
-              <Route path="/postJob" element={<PostJob/>}/>
-              <Route path="/postedJob" element={<PostedJob/>}/>
-              <Route path="/candidateList/:jobId" element={<CandidateList/>}/>
-              <Route path="/candidateDetail/:id" element={<CandidateDetail/>}/>
-              <Route path="/changePassword" element={<ChangePassword/>}/>
-              <Route path="/myAccount" element={<MyAccount/>}/>
+              <Route path="/line" element={<Line />} />
+              <Route path="/employeeBasic" element={<EmployeeBasic />} />
+              <Route path="/employeeList" element={<EmployeeList />} />
+              <Route path="/employeeAddList" element={<EmployeeAddList />} />
+              <Route path="/updateEmployeeBasic" element={<UpdateEmployeeBasic />} />
+              <Route path="/employeeContactInfoList" element={<ContactInfoList />} />
+              <Route path="/employeeBasic" element={<EmployeeBasic />} />
+              <Route path="/employeeInfo" element={<EmployeeInfo />} />
+              <Route path="/contactInformation" element={<ContactInformation />} />
+              <Route path="/statusInformation" element={<StatusInformation />} />
+              <Route path="/multiStepForm" element={<MultiStepForm />} />
+              <Route path="/educationInformation" element={<EducationInformation />} />
+              <Route path="/additionalInformation" element={<AdditionalInformation />} />
+              <Route path="/employeeList" element={<EmployeeList />} />
+              <Route path="/updateEmployeeBasic/:id" element={<UpdateEmployeeBasic />} />
+              <Route path="/addBranch" element={<AddBranch />} />
+              <Route path="/addPosition" element={<AddPosition />} />
+              <Route path="/addDegree" element={<AddDegree />} />
+              <Route path="/addDepartment" element={<AddDepartment />} />
+              <Route path="/addGrade" element={<AddGrade />} />
+              <Route path="/branchList" element={<BranchList />} />
+              <Route path="/departmentList" element={<DepartmentList />} />
+              <Route path="/degreeList" element={<DegreeList />} />
+              <Route path="/positionList" element={<PositionList />} />
+              <Route path="/gradeList" element={<GradeList />} />
+              <Route path="/performanceManagement" element={<PerformanceManagement />} />
+              <Route path="/employeeDetail/:id" element={<EmployeeDetail />} />
+              <Route path="/postJob" element={<PostJob />} />
+              <Route path="/postedJob" element={<PostedJob />} />
+              <Route path="/candidateList/:jobId" element={<CandidateList />} />
+              <Route path="/candidateDetail/:id" element={<CandidateDetail />} />
+              <Route path="/changePassword" element={<ChangePassword />} />
+              <Route path="/myAccount" element={<MyAccount />} />
+
             </Routes>
           </main>
         </div>

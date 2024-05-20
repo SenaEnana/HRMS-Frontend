@@ -34,14 +34,19 @@ const Team = () => {
               <td>{employee.name}</td>
               <td>{employee.roles}</td>
               <td>
-              <img
-                style={{ width: 100, borderRadius: 100 }}
-                src={
-                  "https://localhost:52339" + employee.pictureURL
-                }
-                alt=""
-              />
-            </td>
+
+                <img
+                  style={{ width: 100, borderRadius: 100 }}
+                  src={
+                    "https://localhost:7140" + employee.pictureURL
+                  }
+                  alt=""
+                />
+              </td>
+
+
+
+
               <td>
                 <Button />
                 <button className="btn btn-outline-danger btn-sm">
@@ -57,3 +62,10 @@ const Team = () => {
 };
 
 export default Team;
+/*  <img
+                style={{ width: 100, borderRadius: 100 }}
+                src={
+                  "https://localhost:52339" + employee.pictureURL
+                }
+                alt=""
+              />*/
