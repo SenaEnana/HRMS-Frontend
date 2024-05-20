@@ -45,7 +45,7 @@ const Team = () => {
               <td>
                 <Button />
                 <button className="btn btn-outline-danger btn-sm">
-                  Delate
+                  Delete
                 </button>
               </td>
             </tr>

@@ -30,20 +30,17 @@ import PostJob from "./pages/hrManager/postJob/postJob";
 import PostedJob from "./pages/hrManager/postJob/postedJob";
 import CandidateList from "./pages/hrManager/postJob/candidateList";
 import CandidateDetail from "./pages/hrManager/postJob/candidateDetail";
+import ChangePassword from "./pages/account/changePassword";
+import MyAccount from "./pages/account/myAccount";
 
 function HrRouter() {
   const [theme, colorMode] = useMode();
-  
-  const isAuth = true;
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          {/* <HrSidebar isHrSidebar={isHrSidebar} /> */}
-          {isAuth &&
                   <HrSidebar/>
-                  }
           <main className="content">
             <Routes>
               <Route path="/" element={<HrDashboard />} />
@@ -74,6 +71,8 @@ function HrRouter() {
               <Route path="/postedJob" element={<PostedJob/>}/>
               <Route path="/candidateList/:jobId" element={<CandidateList/>}/>
               <Route path="/candidateDetail/:id" element={<CandidateDetail/>}/>
+              <Route path="/changePassword" element={<ChangePassword/>}/>
+              <Route path="/myAccount" element={<MyAccount/>}/>
             </Routes>
           </main>
         </div>

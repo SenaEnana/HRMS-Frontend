@@ -6,7 +6,6 @@ import "react-pro-sidebar/dist/css/styles.css";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import { tokens } from "../../../theme";
@@ -92,15 +91,6 @@ const AdminSidebar = () => {
 
           {!isCollapsed && (
             <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
-                <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  // src={`../../assets/user.png`}
-                  style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
-              </Box>
               <Box textAlign="center">
                 <Typography
                   variant="h2"
@@ -115,18 +105,17 @@ const AdminSidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
-
+          <Item
               className=""
               title="My Account"
-              to="/myaccount"
+              to="/myAccount"
               icon={<AccountBoxIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               className=""
-              title="Super Admin  Dashboard"
+              title="Dashboard"
               to="/"
               icon={<HomeOutlinedIcon />}
               selected={selected}

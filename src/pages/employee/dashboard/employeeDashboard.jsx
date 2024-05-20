@@ -1,6 +1,5 @@
 import { Box, Typography, useTheme } from "@mui/material";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
-import SwipeLeftAltOutlinedIcon from "@mui/icons-material/SwipeLeftAltOutlined";
 import Header from "../../../components/header";
 import StatBox from "../../../components/statBox";
 import { tokens } from "../../../theme";

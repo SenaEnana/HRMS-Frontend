@@ -131,7 +131,8 @@ const HrSidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  welcome, {employee.firstName}
+                  welcome,
+                  {/* {employee.firstName} */}
                 </Typography>
               </Box>
             </Box>
@@ -140,7 +141,7 @@ const HrSidebar = () => {
             <Item
               className=""
               title="My Account"
-              to="/myaccount"
+              to="/myAccount"
               icon={<AccountBoxIcon />}
               selected={selected}
               setSelected={setSelected}

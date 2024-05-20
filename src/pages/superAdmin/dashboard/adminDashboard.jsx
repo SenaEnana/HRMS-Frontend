@@ -2,13 +2,13 @@ import { Box, Typography, useTheme } from "@mui/material";
 import Button from "react-bootstrap/Button";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import EventAvailableOutlinedIcon from "@mui/icons-material/EventAvailableOutlined";
-import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
-import SwipeLeftAltOutlinedIcon from "@mui/icons-material/SwipeLeftAltOutlined";
 import Header from "../../../components/header";
 import BarChart from "../../../components/barChart";
 import StatBox from "../../../components/statBox";
 import { tokens } from "../../../theme";
 import React, { useState, useEffect } from "react";
+import ToggleOffOutlinedIcon from "@mui/icons-material/ToggleOffOutlined";
+import ToggleOnOutlinedIcon from "@mui/icons-material/ToggleOnOutlined";
 
 const AdminDashboard = () => {
   const theme = useTheme();
@@ -97,7 +97,7 @@ const AdminDashboard = () => {
         <Header title="Admin Dashboard" subtitle="" />
 
         <Box>
-          <Button className="btn btn-info ps-1 pt-2 fw-bold">
+          <Button className="btn btn-secondary ps-1 pt-2 fw-light">
             <DownloadOutlinedIcon sx={{ mr: "10px" }} />
             Download Reports
           </Button>
@@ -123,7 +123,7 @@ const AdminDashboard = () => {
           <StatBox
             title={activeEmployeeCount.toLocaleString()}
             subtitle="Active Employees"
-            icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
+            icon={<ToggleOnOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
         <Box
@@ -137,7 +137,7 @@ const AdminDashboard = () => {
           <StatBox
             title={inactiveEmployeeCount.toLocaleString()}
             subtitle="InActive Employees"
-            icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
+            icon={<ToggleOffOutlinedIcon className="text-dark fs-3" />}
           />
         </Box>
         <Box
