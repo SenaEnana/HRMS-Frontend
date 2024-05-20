@@ -64,10 +64,10 @@ function App() {
      switch (role) {
        case 'LeaveAdmin':
          return <LeaveAdminRouter /> ;
-       case 'HR Manager':
-         return <CeoRouter /> ;
-       case 'Employee':
+       case 'HRManager':
          return <HrRouter /> ;
+       case 'Employee':
+         return <EmployeeRouter /> ;
          default:
            return <p>Not Allowed.</p>;
      }

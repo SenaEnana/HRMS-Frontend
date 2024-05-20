@@ -1,13 +1,14 @@
-import { Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router";
-//import Button from "../../components/button";
 
 function MyAccount() {
   const navigate = useNavigate();
   const [profilePicture, setProfilePicture] = useState(null);
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
+  const { id } = useParams();
+  const [employee, setEmployee] = useState(null);
+
   function getUserIdFromToken(token) {
     const decodedToken = JSON.parse(atob(token.split(".")[1]));
     return decodedToken[
@@ -30,6 +31,7 @@ function MyAccount() {
       return false;
     }
   }
+
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     if (!token) {
@@ -65,102 +67,64 @@ function MyAccount() {
         console.error("Profile fetch error:", error);
         // Handle error
       });
-  }, []); // Fetch username only once when component mounts
-
-  const handleProfilePictureChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setProfilePicture(file);
-    }
-  };
-
-  const handleSetProfile = () => {
-    if (!profilePicture) {
-      alert("Please select a profile picture");
-      return;
-    }
-
-    // Send profile picture to backend API
-    const formData = new FormData();
-    formData.append("profilePicture", profilePicture);
-
-    fetch("https://localhost:52339/Account/update?userId=${userId}", {
-      method: "POST",
-      headers: {},
-      body: formData,
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Profile picture set successfully
-          alert("Profile picture set successfully");
-        } else {
-          throw new Error("Failed to set profile picture");
-        }
-      })
-      .catch((error) => {
-        console.error("Set profile picture error:", error);
-      });
-  };
+  }, []);
 
   const LogoutHandler = () => {
     sessionStorage.removeItem("token");
-    alert("Logout successfull");
+    alert("Logout successfully");
     navigate("/");
   };
 
+  useEffect(() => {
+    fetch(`https://localhost:7140/Employee/${id}`)
+      .then((response) => response.json())
+      .then((data) => setEmployee(data))
+      .catch((error) =>
+        console.error("Error fetching employee details:", error)
+      );
+  }, [id]);
+  if (!employee) {
+    return <div>Loading...</div>;
+  }
+
   return (
-    <div className="container mt-5 ">
-      <h4>My Profile</h4>
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <h5 className="text-left mt-5 text-black">My Profile</h5>
-          <h6 className="mt-12 text-black text-left">
-            Username: {user.username}
-          </h6>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleProfilePictureChange}
-            className="form-control mt-3"
-          />
-          <br></br>
-          <div className="d-flex justify-content-center">
-            <button
-              className="btn btn-secondary btn-sm mt-3 ms-2  "
-              onClick={handleSetProfile}
-            >
-              Set profile
+    <>
+      <div className="card" style="width: 18rem;">
+        <img
+          style={{ width: 100, borderRadius: 100 }}
+          src={"https://localhost:7140" + employee.pictureURL}
+          alt=""
+        />
+        <div className="card-body">
+          <h5 className="card-title">My profile</h5>
+          <p>
+            <strong>Name</strong> {employee.name}
+          </p>
+          <p>
+            <strong>Role:</strong> {employee.roles}
+          </p>
+          <Link to="/changePassword">
+            <button className="btn btn-outline-secondary btn-sm mt-3 me-3">
+              change password
             </button>
-            <Link to="/changePassword">
-              <button className="btn btn-outline-secondary btn-sm mt-3 me-3">
-                Change password
-              </button>
-            </Link>
-            <Link to="/">
-              <button
-                className="btn btn-danger btn-sm mt-3 me-3 ms-2"
-                onClick={LogoutHandler}
-              >
-                Log out
-              </button>
-            </Link>
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="d-flex justify-content-center">
-            {profilePicture && (
-              <img
-                src={profilePicture}
-                alt="Profile"
-                className="img-fluid rounded-circle mt-5"
-                style={{ width: "200px", height: "200px" }}
-              />
-            )}
-          </div>
+          </Link>
+          <Link to="/change profile">
+            <button className="btn btn-outline-secondary btn-sm mt-3 me-3 ms-2">
+              change profile
+            </button>
+          </Link>
+          <Link to="/">
+            <button
+              className="btn btn-danger btn-sm mt-3 me-3 ms-2"
+              onClick={LogoutHandler}
+            >
+              log out
+            </button>
+          </Link>
         </div>
       </div>
-    </div>
+    </>
   );
 }
+
 export default MyAccount;
-//<Button />

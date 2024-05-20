@@ -10,6 +10,7 @@ import AddLeaveType from "./pages/leaveAdmin/leaveType/addLeaveType";
 import LeaveTypeList from "./pages/leaveAdmin/leaveType/leaveTypeList";
 import MyAccount from "./pages/account/myAccount";
 import ChangePassword from "./pages/account/changePassword";
+import UploadImage from "./pages/account/uploadImage";
 
 function LeaveAdminRouter(){
     const [theme, colorMode] = useMode();
@@ -30,6 +31,7 @@ function LeaveAdminRouter(){
               <Route path="/leaveTypeList" element={<LeaveTypeList/>}/>
               <Route path="/changePassword" element={<ChangePassword/>}/>
               <Route path="/myAccount" element={<MyAccount/>}/>
+              <Route paht="/uploadImage" element={<UploadImage/>}/>
               </Routes>
             </main>
           </div>

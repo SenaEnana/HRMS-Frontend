@@ -6,31 +6,30 @@ import { useState } from "react";
 
 const Login = ({ setIsAuthenticated }) => {
   const navigate = useNavigate();
-  const [error, setError] = useState(null); 
+  const [error, setError] = useState(null);
   const username = JSON.parse(localStorage.getItem("username"));
 
   async function handleLogin(values) {
     try {
-      const response = await fetch('https://localhost:52339/Account/Login', {
-        method: 'POST',
+      const response = await fetch("https://localhost:7140/Account/Login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(values)
+        body: JSON.stringify(values),
       });
 
       if (response.ok) {
-        const token = await response.text(); 
-      sessionStorage.setItem("token", token);
-      alert("Login successfull")
-      navigate("/");
-        
-      }else{
-        const errorMessage = await response.text(); 
-        setError(errorMessage); 
+        const token = await response.text();
+        sessionStorage.setItem("token", token);
+        alert("Login successfull");
+        navigate("/");
+      } else {
+        const errorMessage = await response.text();
+        setError(errorMessage);
       }
     } catch (error) {
-      setError('Invalid username or password');
+      setError("Invalid username or password");
       console.error(error);
     }
   }
@@ -71,7 +70,7 @@ const Login = ({ setIsAuthenticated }) => {
                 error={formikValues.errors.password}
                 onChange={formikValues.handleChange}
               />
-  {error && <p className="text-danger">{error}</p>}
+              {error && <p className="text-danger">{error}</p>}
               <div className="m-3">
                 <input
                   className="btn btn-success col-12"
@@ -80,7 +79,6 @@ const Login = ({ setIsAuthenticated }) => {
                   onClick={formikValues.handleSubmit}
                 />
               </div>
-         
             </form>
           )}
         </Formik>

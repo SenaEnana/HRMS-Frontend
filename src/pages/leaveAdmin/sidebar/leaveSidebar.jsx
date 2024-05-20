@@ -6,11 +6,11 @@ import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { tokens } from "../../../theme";
-import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
-import ChecklistRtlOutlinedIcon from '@mui/icons-material/ChecklistRtlOutlined';
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
+import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -76,7 +76,7 @@ const LeaveSidebar = () => {
               >
                 <Typography
                   variant="h3"
-                  className="text-dark fst-italic fw-bold"
+                  className="text-info fst-italic fw-bold"
                 >
                   AKUFADA
                 </Typography>
@@ -106,7 +106,7 @@ const LeaveSidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <Item
+            <Item
               className=""
               title="My Account"
               to="/myAccount"

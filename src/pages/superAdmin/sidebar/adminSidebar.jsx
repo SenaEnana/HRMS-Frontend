@@ -6,10 +6,10 @@ import "react-pro-sidebar/dist/css/styles.css";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
-import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { tokens } from "../../../theme";
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -75,7 +75,7 @@ const AdminSidebar = () => {
               >
                 <Typography
                   variant="h3"
-                  className="text-dark fst-italic fw-bold"
+                  className="text-info fst-italic fw-bold"
                 >
                   AKUFADA
                 </Typography>
@@ -105,7 +105,7 @@ const AdminSidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-          <Item
+            <Item
               className=""
               title="My Account"
               to="/myAccount"

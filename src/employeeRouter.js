@@ -12,6 +12,7 @@ import ChangePassword from "./pages/account/changePassword";
 import Notifications from "./pages/commonPages/Notification";
 import PostedJob from "./pages/employee/form/postedJob";
 import JobDetail from "./pages/employee/form/jobDetail";
+import UploadImage from "./pages/account/uploadImage";
 
 function EmployeeRouter() {
   const [theme, colorMode] = useMode();
@@ -36,6 +37,7 @@ function EmployeeRouter() {
               <Route path="/postedJob" element={<PostedJob />} />
               <Route path="/jobDetail/:id" element={<JobDetail />} />
               <Route path="/changePassword" element={<ChangePassword/>}/>
+              <Route path="/uploadImage" element={<UploadImage/>}/>
             </Routes>
           </main>
         </div>

@@ -77,7 +77,7 @@ const EmployeeSidebar = () => {
               >
                 <Typography
                   variant="h3"
-                  className="text-dark fst-italic fw-bold"
+                  className="text-info fst-italic fw-bold"
                 >
                   AKUFADA
                 </Typography>

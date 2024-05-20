@@ -13,6 +13,7 @@ import ShortListed from "./pages/ceo/promotion/shortListed";
 import ShortListedDetail from "./pages/ceo/promotion/shortListedDetail";
 import ChangePassword from "./pages/account/changePassword";
 import MyAccount from "./pages/account/myAccount";
+import UploadImage from "./pages/account/uploadImage";
 
 function CeoRouter() {
     const [theme, colorMode] = useMode();
@@ -35,6 +36,7 @@ function CeoRouter() {
                   <Route path="/shortListedDetail/:id" element={<ShortListedDetail/>}/>
                   <Route path="/myAccount" element={<MyAccount/>}/>
                   <Route path="/changePassword" element={<ChangePassword/>}/>
+                  <Route path="/uploadImage" element={<UploadImage/>}/>
                   </Routes>
                 </main>
               </div>

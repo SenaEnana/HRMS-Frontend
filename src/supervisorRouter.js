@@ -8,6 +8,7 @@ import SendFeedback from "./pages/immediateSupervisor/sendFeedback/sendFeedback"
 import ComplaintList from "./pages/immediateSupervisor/complaintList/complaintList";
 import MyAccount from "./pages/account/myAccount";
 import ChangePassword from "./pages/account/changePassword";
+import UploadImage from "./pages/account/uploadImage";
 
 function SupervisorRouter(){
     const [theme, colorMode] = useMode();
@@ -26,6 +27,7 @@ function SupervisorRouter(){
               <Route path="/bar" element={<Bar />} />
               <Route path="/changePassword" element={<ChangePassword/>}/>
               <Route path="/myAccount" element={<MyAccount/>}/>
+              <Route path="/uploadImage" element={<UploadImage/>}/>
               </Routes>
             </main>
           </div>

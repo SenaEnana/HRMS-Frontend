@@ -32,6 +32,7 @@ import CandidateList from "./pages/hrManager/postJob/candidateList";
 import CandidateDetail from "./pages/hrManager/postJob/candidateDetail";
 import ChangePassword from "./pages/account/changePassword";
 import MyAccount from "./pages/account/myAccount";
+import UploadImage from "./pages/account/uploadImage";
 
 function HrRouter() {
   const [theme, colorMode] = useMode();
@@ -73,6 +74,7 @@ function HrRouter() {
               <Route path="/candidateDetail/:id" element={<CandidateDetail/>}/>
               <Route path="/changePassword" element={<ChangePassword/>}/>
               <Route path="/myAccount" element={<MyAccount/>}/>
+              <Route path="/uploadImage" element={<UploadImage/>}/>
             </Routes>
           </main>
         </div>
