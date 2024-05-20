@@ -1,6 +1,4 @@
 import { Box, Typography, useTheme } from "@mui/material";
-import Button from "react-bootstrap/Button";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import Header from "../../../components/header";
 import StatBox from "../../../components/statBox";
@@ -83,13 +81,6 @@ const SupervisorDashboard = () => {
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="Supervisor Dashboard" subtitle="" />
-
-        <Box>
-          <Button className="btn btn-secondary ps-1 pt-2 fw-light">
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
-          </Button>
-        </Box>
       </Box>
 
       <Box

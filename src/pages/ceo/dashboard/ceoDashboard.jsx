@@ -1,6 +1,4 @@
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import Button from "react-bootstrap/Button";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import RecommendOutlinedIcon from "@mui/icons-material/RecommendOutlined";
 import Header from "../../../components/header";
 import LineChart from "../../../components/lineChart";
@@ -8,9 +6,9 @@ import BarChart from "../../../components/barChart";
 import StatBox from "../../../components/statBox";
 import { tokens } from "../../../theme";
 import React, { useState, useEffect } from "react";
-import ToggleOffOutlinedIcon from '@mui/icons-material/ToggleOffOutlined';
-import ToggleOnOutlinedIcon from '@mui/icons-material/ToggleOnOutlined';
-import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
+import ToggleOffOutlinedIcon from "@mui/icons-material/ToggleOffOutlined";
+import ToggleOnOutlinedIcon from "@mui/icons-material/ToggleOnOutlined";
+import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 
 const CeoDashboard = () => {
   const theme = useTheme();
@@ -133,13 +131,6 @@ const CeoDashboard = () => {
       {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="Ceo Dashboard" subtitle="" />
-
-        <Box>
-          <Button className="btn btn-secondary ps-1 pt-2 fw-light">
-            <DownloadOutlinedIcon sx={{ mr: "10px" }} />
-            Download Reports
-          </Button>
-        </Box>
       </Box>
 
       {/* GRID & CHARTS */}
@@ -185,13 +176,12 @@ const CeoDashboard = () => {
           display="flex"
           alignItems="center"
           justifyContent="center"
-        >        
-         
-            <StatBox
-              title={pendingResignationCount.toLocaleString()}
-              subtitle="Pending Resignation Requests"
-              icon={<PendingOutlinedIcon className="text-dark fs-3" />}
-            />
+        >
+          <StatBox
+            title={pendingResignationCount.toLocaleString()}
+            subtitle="Pending Resignation Requests"
+            icon={<PendingOutlinedIcon className="text-dark fs-3" />}
+          />
         </Box>
         <Box
           className="rounded"
