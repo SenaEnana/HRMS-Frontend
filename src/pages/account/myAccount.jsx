@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-
+import MockSearch from "../../components/mockSearch";
 //import Button from "../../components/button";
 
 function MyAccount() {
@@ -133,9 +133,11 @@ function MyAccount() {
                     </div>
                 </div>
             </div>
+            <MockSearch />
         </div>
     );
 
 }
 export default MyAccount;
 //<Button />
+//<MockSearch />
