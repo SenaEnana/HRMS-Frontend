@@ -11,8 +11,6 @@ function JobDetail() {
       .then((response) => response.json())
       .then((data) => setJob(data))
       .catch((error) => console.error("Error fetching job details:", error));
-
-    // Check if the user has already applied for this job
     const appliedJobs = JSON.parse(localStorage.getItem("appliedJobs")) || {};
     if (appliedJobs[id]) {
       setHasApplied(true);
@@ -46,8 +44,7 @@ function JobDetail() {
 
       if (result.ok) {
         alert("Applied successfully");
-        setHasApplied(true); // Disable the button after successful application
-        // Save the application state to local storage
+        setHasApplied(true);
         const appliedJobs = JSON.parse(localStorage.getItem("appliedJobs")) || {};
         appliedJobs[jobId] = true;
         localStorage.setItem("appliedJobs", JSON.stringify(appliedJobs));

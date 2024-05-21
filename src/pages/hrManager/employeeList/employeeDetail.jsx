@@ -5,25 +5,6 @@ const EmployeeDetail = () => {
   const { id } = useParams();
   const [employee, setEmployee] = useState(null);
   const navigate = useNavigate();
-  // const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   getData();
-  // }, []);
-
-  // async function deleteOperation(Id) {
-  //   let result = await fetch(
-  //     `https://localhost:7140/Employee/DeleteEmployee/${Id}`,
-  //     {
-  //       method: "DELETE",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-  //   getData();
-  // }
 
   useEffect(() => {
     fetch(`https://localhost:7140/Employee/${id}`)
@@ -53,7 +34,6 @@ const EmployeeDetail = () => {
       alert("Error deleting the employee.");
     }
   };
-
   if (!employee) {
     return <div>Loading...</div>;
   }

@@ -1,27 +1,26 @@
 // Button.js
-import { useState } from 'react';
+import { useState } from "react";
 
 function Button({ onLock, onUnlock }) {
-    const [isLocked, setIsLocked] = useState(true);
+  const [isLocked, setIsLocked] = useState(true);
 
-    const handleClick = () => {
-        if (isLocked) {
-            onUnlock();
-        } else {
-            onLock();
-        }
-        setIsLocked(!isLocked);
-    };
+  const handleClick = () => {
+    if (isLocked) {
+      onUnlock();
+    } else {
+      onLock();
+    }
+    setIsLocked(!isLocked);
+  };
 
-    return (
-        <button className="btn btn-primary" onClick={handleClick}>
-            {isLocked ? 'Lock' : 'Unlock'}
-        </button>
-    );
+  return (
+    <button className="btn btn-outline-secondary me-2" onClick={handleClick}>
+      {isLocked ? "Lock" : "Unlock"}
+    </button>
+  );
 }
 
 export default Button;
-
 
 // import { useState } from 'react';
 
