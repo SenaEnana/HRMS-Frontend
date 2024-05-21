@@ -4,60 +4,17 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 const CandidateList = () => {
   const [data, setData] = useState([]);
   const { jobId } = useParams();
-  const navigate = useNavigate();
 
   useEffect(() => {
     getData();
   }, []);
-  async function shortListCandidate(employeeId) {
-    let result = await fetch(
-      `https://localhost:52339/Promotion/ShortlistCandidate/${employeeId}`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    getData();
-    if (result.ok) {
-    alert("shortListed successfully");
-    }
-  }
   async function getData() {
-    let result = await fetch(`https://localhost:52339/Promotion/JobCandidates/${jobId}`);
+    let result = await fetch(
+      `https://localhost:7140/Promotion/JobCandidates/${jobId}`
+    );
     result = await result.json();
     setData(result);
   }
-
-    // const shortListCandidate = async (employeeId) => {
-  //   try {
-  //     const response = await fetch(
-  //       `https://localhost:7140/Promotion/ShortlistCandidate/${employeeId}`,
-  //       {
-  //         method: "POST",
-  //       }
-  //     );
-  //     if (response.ok) {
-  //       alert("Employee shortListed successfully.");
-  //       navigate("/candidateList");
-  //     } else {
-  //       alert("Failed to delete the employee.");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error shortListing employee:", error);
-  //     alert("Error shortListing the employee.");
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetch(`https://localhost:7140/Promotion/JobCandidates/${jobId}`)
-  //     .then((response) => response.json())
-  //     .then((data) => setData(data))
-  //     .catch((error) => console.error("Error fetching employee:", error));
-  // }, [jobId]);
-
   return (
     <>
       <div className="container mt-5">
@@ -86,17 +43,13 @@ const CandidateList = () => {
                 <td>{employee.employeeNo}</td>
                 <td>{employee.employeeEmail}</td>
                 <td>
-                  {<Link to={`/candidateDetail/${employee.id}`}>
-                    <button className="btn btn-outline-secondary btn-sm">
-                      Detail
-                    </button>
-                  </Link> }
-                  <button
-                    className="btn btn-outline-secondary btn-sm float-end"
-                    onClick={() => shortListCandidate(employee.id)}
-                  >
-                    ShortList
-                  </button>
+                  {
+                    <Link to={`/candidateDetail/${employee.id}`}>
+                      <button className="btn btn-outline-secondary btn-sm">
+                        Detail
+                      </button>
+                    </Link>
+                  }
                 </td>
               </tr>
             ))}
