@@ -7,6 +7,7 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { ColorModeContext, tokens } from "../../../theme";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
+import MockSearch from "../../../components/mockSearch";
 
 const EmployeeList = () => {
   const [data, setData] = useState([]);
@@ -111,6 +112,7 @@ const EmployeeList = () => {
           <DownloadOutlinedIcon sx={{ mr: "10px" }} />
           Download Reports
         </button>
+        <MockSearch/>
         <div className="d-flex justify-content-between text-dark mb-3">
           <h5 className="text-start">Employee List</h5>
           <NavLink

@@ -36,6 +36,8 @@ import UploadImage from "./pages/account/uploadImage";
 
 function HrRouter() {
   const [theme, colorMode] = useMode();
+const isAuth = true;
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>

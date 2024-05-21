@@ -9,7 +9,7 @@ function PostedJob() {
   }, []);
 
   async function getData() {
-    let result = await fetch("https://localhost:52339/Promotion/PostedJobs");
+    let result = await fetch("https://localhost:7140/Promotion/PostedJobs");
     result = await result.json();
     setData(result);
   }
@@ -31,7 +31,7 @@ function PostedJob() {
           {data.map((job) => (
             <tr key={job.id}>
               <td>{job.jobTitle}</td>
-              <td>{job.positionId}</td>
+              <td>{job.positionName}</td>
               <td>
                 <Link to={`/candidateList/${job.id}`}>
                   <button className="btn btn-outline-secondary btn-sm">

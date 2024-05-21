@@ -51,7 +51,7 @@ function MockSearch() {
                 <div className="col">
                     <input
                         type="text"
-                        placeholder="Search by ID..."
+                        placeholder="Emp-ID..."
                         value={searchTermId}
                         onChange={handleSearchIdChange}
                         className="form-control"
@@ -60,7 +60,7 @@ function MockSearch() {
                 <div className="col">
                     <input
                         type="text"
-                        placeholder="Search by Name..."
+                        placeholder="Name..."
                         value={searchTermName}
                         onChange={handleSearchNameChange}
                         className="form-control"
@@ -69,7 +69,7 @@ function MockSearch() {
                 <div className="col">
                     <input
                         type="text"
-                        placeholder="Search by Branch..."
+                        placeholder="Branch..."
                         value={searchTermBranch}
                         onChange={handleSearchBranchChange}
                         className="form-control"
@@ -78,7 +78,7 @@ function MockSearch() {
                 <div className="col">
                     <input
                         type="text"
-                        placeholder="Search by Department..."
+                        placeholder="Department..."
                         value={searchTermDepartment}
                         onChange={handleSearchDepartmentChange}
                         className="form-control"
@@ -87,7 +87,7 @@ function MockSearch() {
                 <div className="col">
                     <input
                         type="text"
-                        placeholder="Search by Position..."
+                        placeholder="Position..."
                         value={searchTermPosition}
                         onChange={handleSearchPositionChange}
                         className="form-control"
@@ -96,7 +96,7 @@ function MockSearch() {
                 <div className="col">
                     <input
                         type="text"
-                        placeholder="Search by Email..."
+                        placeholder="Email..."
                         value={searchTermEmail}
                         onChange={handleSearchEmailChange}
                         className="form-control"

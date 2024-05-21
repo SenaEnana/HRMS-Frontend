@@ -45,7 +45,7 @@ function MyAccount() {
       return;
     }
     const userId = getUserIdFromToken(token);
-    fetch(`https://localhost:52339/Account/profile?userId=${userId}`, {
+    fetch(`https://localhost:7140/Account/profile?userId=${userId}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -75,47 +75,36 @@ function MyAccount() {
     navigate("/");
   };
 
-  useEffect(() => {
-    fetch(`https://localhost:7140/Employee/${id}`)
-      .then((response) => response.json())
-      .then((data) => setEmployee(data))
-      .catch((error) =>
-        console.error("Error fetching employee details:", error)
-      );
-  }, [id]);
-  if (!employee) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <>
-      <div className="card" style="width: 18rem;">
-        <img
+      <div className="card w-50 ms-5 mt-5">
+        <h5>Image</h5>
+        {/* <img
           style={{ width: 100, borderRadius: 100 }}
-          src={"https://localhost:7140" + employee.pictureURL}
+          src={"https://localhost:7140" + user.pictureURL}
           alt=""
-        />
+        /> */}
         <div className="card-body">
           <h5 className="card-title">My profile</h5>
           <p>
-            <strong>Name</strong> {employee.name}
+            <strong>Name</strong> {user.name}
           </p>
           <p>
-            <strong>Role:</strong> {employee.roles}
+            <strong>Role:</strong> {user.roles}
           </p>
           <Link to="/changePassword">
-            <button className="btn btn-outline-secondary btn-sm mt-3 me-3">
+            <button className="btn btn-outline-secondary btn-sm mt-3 me-1">
               change password
             </button>
           </Link>
           <Link to="/change profile">
-            <button className="btn btn-outline-secondary btn-sm mt-3 me-3 ms-2">
+            <button className="btn btn-outline-secondary btn-sm mt-3 me-1">
               change profile
             </button>
           </Link>
           <Link to="/">
             <button
-              className="btn btn-danger btn-sm mt-3 me-3 ms-2"
+              className="btn btn-danger btn-sm mt-3 me-3"
               onClick={LogoutHandler}
             >
               log out

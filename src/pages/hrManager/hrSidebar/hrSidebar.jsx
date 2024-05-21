@@ -44,18 +44,6 @@ const HrSidebar = () => {
   const { id } = useParams();
   const [employee, setEmployee] = useState(null);
 
-  useEffect(() => {
-    fetch(`https://localhost:52339/Employee/${id}`)
-      .then((response) => response.json())
-      .then((data) => setEmployee(data))
-      .catch((error) =>
-        console.error("Error fetching employee details:", error)
-      );
-  }, [id]);
-
-  if (!employee) {
-    return <div>Loading...</div>;
-  }
   const items = [
     {
       label: "Add New Employee",

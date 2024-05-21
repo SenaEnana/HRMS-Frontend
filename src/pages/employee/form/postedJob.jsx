@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function PostedJob() {
   const [data, setData] = useState([]);
@@ -9,7 +9,7 @@ function PostedJob() {
   }, []);
 
   async function getData() {
-    let result = await fetch("https://localhost:52339/Promotion/PostedJobs");
+    let result = await fetch("https://localhost:7140/Promotion/PostedJobs");
     result = await result.json();
     setData(result);
   }
@@ -31,7 +31,7 @@ function PostedJob() {
           {data.map((job) => (
             <tr key={job.id}>
               <td>{job.jobTitle}</td>
-              <td>{job.position}</td>
+              <td>{job.positionName}</td>
               <td>{job.postingDate}</td>
               <td>
                 <Link to={`/jobDetail/${job.id}`}>

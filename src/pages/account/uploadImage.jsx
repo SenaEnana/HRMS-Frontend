@@ -40,12 +40,9 @@ function UploadImage() {
   return (
     <>
       <div className="row justify-content-center">
-        <Formik
-          initialValues={{ userId: "" }}
-          onSubmit={handleSetProfile}
-        >
+        <Formik onSubmit={handleSetProfile}>
           {({ setFieldValue }) => (
-            <Form className="form-group rounded border col-4 pe-3 mt-5 bg-light">
+            <Form className="form-group rounded border col-6 pe-3 mt-5 bg-light">
               <div className="mt-3">
                 <p className="fs-4 text-dark text-center">Upload Image</p>
               </div>
@@ -56,24 +53,16 @@ function UploadImage() {
                   accept="image/*"
                   onChange={(event) => {
                     handleProfilePictureChange(event);
-                    setFieldValue("profilePicture", event.currentTarget.files[0]);
+                    setFieldValue(
+                      "profilePicture",
+                      event.currentTarget.files[0]
+                    );
                   }}
                   className="form-control mt-3"
                 />
               </div>
               <div className="m-3">
-                <Field
-                  type="text"
-                  name="userId"
-                  placeholder="User ID"
-                  className="form-control"
-                />
-              </div>
-              <div className="m-3">
-                <button
-                  className="btn btn-success col-12"
-                  type="submit"
-                >
+                <button className="btn btn-success col-12" type="submit">
                   Submit
                 </button>
               </div>

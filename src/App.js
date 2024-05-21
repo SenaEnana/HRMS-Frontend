@@ -68,6 +68,12 @@ function App() {
          return <HrRouter /> ;
        case 'Employee':
          return <EmployeeRouter /> ;
+         case 'CEO':
+          return <CeoRouter /> ;
+        case 'ImmediateSupervisor':
+          return <SupervisorRouter /> ;
+        case 'Admin':
+          return <AdminRouter /> ;
          default:
            return <p>Not Allowed.</p>;
      }
