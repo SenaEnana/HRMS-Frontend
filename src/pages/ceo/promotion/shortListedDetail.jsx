@@ -4,6 +4,10 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 const ShortListedDetail = () => {
   const { id } = useParams();
   const [employee, setEmployee] = useState(null);
+  const [disabledButtons, setDisabledButtons] = useState({
+    promote: false,
+    reject: false,
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -13,7 +17,27 @@ const ShortListedDetail = () => {
       .catch((error) =>
         console.error("Error fetching employee details:", error)
       );
+
+    const storedDisabledButtons = JSON.parse(
+      localStorage.getItem(`disabledButtons-${id}`)
+    ) || {
+      promote: false,
+      reject: false,
+    };
+    setDisabledButtons(storedDisabledButtons);
   }, [id]);
+
+  const updateDisabledButtons = (action) => {
+    const updatedDisabledButtons = {
+      ...disabledButtons,
+      [action]: true,
+    };
+    setDisabledButtons(updatedDisabledButtons);
+    localStorage.setItem(
+      `disabledButtons-${id}`,
+      JSON.stringify(updatedDisabledButtons)
+    );
+  };
 
   const rejectEmployee = async (employeeId) => {
     try {
@@ -25,6 +49,7 @@ const ShortListedDetail = () => {
       );
       if (response.ok) {
         alert("Employee rejected successfully.");
+        updateDisabledButtons("reject");
         navigate("/shortListed");
       } else {
         alert("Failed to reject employee.");
@@ -44,13 +69,18 @@ const ShortListedDetail = () => {
       <p className="text-dark m-3 fs-5">ShortListed Candidate Detail</p>
       <div className="mt-1 me-3">
         <Link to={`/promoteEmployee/${employee.id}`}>
-          <button className="btn btn-secondary btn-sm me-2 float-end mb-3">
+          <button
+            className="btn btn-secondary btn-sm me-2 float-end mb-3"
+            onClick={() => updateDisabledButtons("promote")}
+            disabled={disabledButtons.promote}
+          >
             Promote
           </button>
         </Link>
         <button
           className="btn btn-danger btn-sm me-2 float-end mb-3"
           onClick={() => rejectEmployee(employee.id)}
+          disabled={disabledButtons.reject}
         >
           Reject
         </button>
@@ -65,48 +95,49 @@ const ShortListedDetail = () => {
           <div className="row">
             <div className="col-md-6">
               <p>
-                <strong>Employee Id:</strong> {employee.id}
+                <strong >Employee Id :  </strong>{" "}
+                {employee.id}
               </p>
               <p>
-                <strong>First Name:</strong> {employee.firstName}
+                <strong>First Name  :  </strong> {employee.firstName}
               </p>
               <p>
-                <strong>Last Name:</strong> {employee.lastName}
+                <strong>Last Name  :  </strong> {employee.lastName}
               </p>
               <p>
-                <strong>Gender:</strong> {employee.gender}
+                <strong>Gender  :  </strong> {employee.gender}
               </p>
               <p>
-                <strong>Mother Name:</strong> {employee.motherName}
+                <strong>Mother Name  :  </strong> {employee.motherName}
               </p>
               <p>
-                <strong>Phone Number:</strong> {employee.phoneNo}
+                <strong>Phone Number  : </strong> {employee.phoneNo}
               </p>
               <p>
-                <strong>Marital Status :</strong> {employee.maritalStatus}
+                <strong>Marital Status :  </strong> { employee.maritalStatus}
               </p>
             </div>
             <div className="col-md-6">
               <p>
-                <strong>Region:</strong> {employee.region}
+                <strong>Region  :  </strong> {employee.region}
               </p>
               <p>
-                <strong>Woreda:</strong> {employee.woreda}
+                <strong>Woreda  :  </strong> {employee.woreda}
               </p>
               <p>
-                <strong>Kebele:</strong> {employee.kebele}
+                <strong>Kebele  :  </strong> {employee.kebele}
               </p>
               <p>
                 <strong>House Number:</strong> {employee.houseNo}
               </p>
               <p>
-                <strong>Hire Date:</strong> {employee.hireDate}
+                <strong>Hire Date  :</strong> {employee.hireDate}
               </p>
               <p>
-                <strong>Salary:</strong> {employee.salary}
+                <strong>Salary  :</strong> {employee.salary}
               </p>
               <p>
-                <strong>Roles:</strong> {employee.roles}
+                <strong>Roles  :</strong> {employee.roles}
               </p>
             </div>
           </div>
@@ -114,14 +145,14 @@ const ShortListedDetail = () => {
       </div>
       <div className="card mt-5 me-3 ms-4 text-dark">
         <div className="card-header">
-          <h5>Experience</h5>
+          <h5>Experience  </h5>
         </div>
         <div className="card-body">
           <ul>
             {employee.experiences.map((exp, index) => (
               <li key={index}>
-                {exp.position} at {exp.companyName} from{" "}
-                {exp.experienceStartDate} to {exp.experienceEndDate}
+                {exp.position} At {exp.companyName} From{" "}
+                {exp.experienceStartDate} To {exp.experienceEndDate}
               </li>
             ))}
           </ul>
@@ -129,7 +160,7 @@ const ShortListedDetail = () => {
       </div>
       <div className="card mt-5 me-3 ms-4 text-dark">
         <div className="card-header">
-          <h5>Child Information</h5>
+          <h5>Child Information </h5>
         </div>
         <div className="card-body">
           <ul>
@@ -141,7 +172,6 @@ const ShortListedDetail = () => {
           </ul>
         </div>
       </div>
-
       <div className="card mt-5 me-3 ms-4 text-dark">
         <div className="card-header">
           <h5>Contact Person</h5>
@@ -151,25 +181,25 @@ const ShortListedDetail = () => {
             {employee.contactPersons.map((contact, index) => (
               <li key={index}>
                 <p>
-                  <strong>Name:</strong> {contact.name}
+                  <strong className="fs-5">Name:</strong> {contact.name}
                 </p>
                 <p>
-                  <strong>Relationship:</strong> {contact.relationship}
+                  <strong>Relationship  :</strong> {contact.relationship}
                 </p>
                 <p>
-                  <strong>Phone Number:</strong> {contact.contactPhoneNo}
+                  <strong>Phone Number  :</strong> {contact.contactPhoneNo}
                 </p>
                 <p>
-                  <strong>Region:</strong> {contact.contactRegion}
+                  <strong>Region  :</strong> {contact.contactRegion}
                 </p>
                 <p>
-                  <strong>Kebele:</strong> {contact.contactKebele}
+                  <strong>Kebele  :</strong> {contact.contactKebele}
                 </p>
                 <p>
-                  <strong>House No:</strong> {contact.contactHouseNo}
+                  <strong>House No  :</strong> {contact.contactHouseNo}
                 </p>
                 <p>
-                  <strong>Woreda:</strong> {contact.contactWoreda}
+                  <strong>Woreda  :</strong> {contact.contactWoreda}
                 </p>
               </li>
             ))}
@@ -184,7 +214,7 @@ const ShortListedDetail = () => {
           <ul>
             {employee.educations.map((edu, index) => (
               <li key={index}>
-                {edu.degree} - {edu.institute}
+                {edu.degree} In {edu.institute}
               </li>
             ))}
           </ul>

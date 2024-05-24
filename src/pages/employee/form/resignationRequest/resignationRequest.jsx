@@ -5,13 +5,9 @@ import { resignationValidation } from "./schema";
 import { FormikTextField } from "formik-material-fields";
 import TextInput from "../../../../components/textInput";
 import DropDown from "../../../../components/DropDown";
-import { Box, useTheme } from "@mui/material";
-import { tokens } from "../../../../theme";
 
 function ResignationRequest() {
   const navigate = useNavigate();
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
   const [DepartmentId, setDepartmentId] = useState([{ name: "", id: "" }]);
   const [error, setError] = useState(null);
@@ -136,7 +132,6 @@ function ResignationRequest() {
                 error={formikValues.errors.EmployeeHireDate}
                 onChange={formikValues.handleChange}
               />
-
               <TextInput
                 type="date"
                 name="SeparationDate"

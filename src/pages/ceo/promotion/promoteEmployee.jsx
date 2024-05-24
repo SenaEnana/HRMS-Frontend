@@ -1,12 +1,24 @@
-import { Formik } from "formik";
-import { useMediaQuery } from "@mui/material";
+import { Formik, Form, Field } from "formik";
 import { promotionValidation } from "./schema";
-import TextInput from "../../../components/textInput";
+import DropDown from "../../../components/DropDown";
 import { useState, useEffect } from "react";
+import TextInput from "../../../components/textInput";
+import { useNavigate } from "react-router";
 
 function PromoteEmployee() {
-  const isNonMobile = useMediaQuery("(min-width:600px)");
   const [error, setError] = useState(null);
+  const [NewGradeId, setNewGradeId] = useState([{ name: "", id: "" }]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("https://localhost:7140/Grade/GetGrades");
+      const newData = await response.json();
+      setNewGradeId(newData);
+    };
+    fetchData();
+  }, []);
+
   async function promoteEmployee(values) {
     try {
       const response = await fetch(
@@ -20,7 +32,8 @@ function PromoteEmployee() {
         }
       );
       if (response.ok) {
-        alert("promote employee successfully");
+        alert("Promote employee successfully");
+        navigate("/shortListed");
       } else {
         const errorMessage = await response.text();
         setError(errorMessage);
@@ -29,73 +42,78 @@ function PromoteEmployee() {
       setError("Error promoting employee");
     }
   }
+
   return (
     <>
       <div className="row justify-content-center">
         <Formik
           initialValues={{
-            Emp_Id: "",
+            EmpId: "",
             NewGradeId: "",
             Reason: "",
             NewSalary: "",
           }}
+          validationSchema={promotionValidation}
           onSubmit={(values) => {
             promoteEmployee(values);
-            console.log(values);
           }}
-          validationSchema={promotionValidation}
         >
-          {(formikValues) => (
-            <form className="form-group rounded border col-7 ms-5 ms-4 bg-light mt-5">
+          {({ errors, touched, handleSubmit, handleChange }) => (
+            <Form className="form-group rounded border col-7 ms-5 ms-4 bg-light mt-5">
               <div className="ms-3">
                 <p className="fs-4 text-dark text-center">Promote Employee</p>
               </div>
               <TextInput
                 type="text"
-                name="Emp_Id"
+                name="EmpId"
                 label="Employee Id"
-                placeholder="enter employee id"
-                value={formikValues.values.Emp_Id}
-                error={formikValues.errors.Emp_Id}
-                onChange={formikValues.handleChange}
+                placeholder="Enter employee id"
+                onChange={handleChange}
+                error={touched.EmpId && errors.EmpId}
               />
-              <TextInput
+              <DropDown
                 type="number"
+                label="New Grade"
                 name="NewGradeId"
-                label="New Grade Id"
-                placeholder="enter new grade id"
-                value={formikValues.values.NewGradeId}
-                error={formikValues.errors.NewGradeId}
-                onChange={formikValues.handleChange}
+                options={NewGradeId}
+                onChange={(selectedOption) => {
+                  const parsedValue = parseInt(selectedOption, 10);
+                  handleChange({
+                    target: { name: "NewGradeId", value: parsedValue },
+                  });
+                }}
+                error={touched.NewGradeId && errors.NewGradeId}
               />
-              <TextInput
-                type="text"
-                name="Reason"
-                label="Reason"
-                placeholder="enter promotion reason"
-                value={formikValues.values.Reason}
-                error={formikValues.errors.Reason}
-                onChange={formikValues.handleChange}
-              />
+              <p className="text-dark fs-5 m-0">Reason</p>
+              <div className="form-control text-dark float-start col-12 row p-1 m-1">
+                <Field
+                  component="textarea"
+                  name="Reason"
+                  placeholder="Enter reason"
+                  className="form-control text-dark"
+                />
+              </div>
+              {touched.Reason && errors.Reason && (
+                  <p className="text-danger">{errors.Reason}</p>
+                )}
               <TextInput
                 type="number"
                 name="NewSalary"
                 label="New Salary"
-                placeholder="enter new salary for employee"
-                value={formikValues.values.NewSalary}
-                error={formikValues.errors.NewSalary}
-                onChange={formikValues.handleChange}
+                placeholder="Enter new salary for employee"
+                onChange={handleChange}
+                error={touched.NewSalary && errors.NewSalary}
               />
               {error && <p className="text-danger">{error}</p>}
               <div className="m-3">
                 <input
                   className="btn btn-success col-10 m-2"
                   type="button"
-                  value="submit"
-                  onClick={formikValues.handleSubmit}
+                  value="Submit"
+                  onClick={handleSubmit}
                 />
               </div>
-            </form>
+            </Form>
           )}
         </Formik>
       </div>
