@@ -9,13 +9,16 @@ function PromoteEmployee() {
   const [error, setError] = useState(null);
   async function promoteEmployee(values) {
     try {
-      const response = await fetch("https://localhost:52339/Promotion/PromoteEmployee", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const response = await fetch(
+        "https://localhost:7140/Promotion/PromoteEmployee",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
       if (response.ok) {
         alert("promote employee successfully");
       } else {
@@ -23,7 +26,7 @@ function PromoteEmployee() {
         setError(errorMessage);
       }
     } catch (error) {
-      setError("Error promotting employee");
+      setError("Error promoting employee");
     }
   }
   return (
@@ -43,7 +46,7 @@ function PromoteEmployee() {
           validationSchema={promotionValidation}
         >
           {(formikValues) => (
-            <form className="form-group rounded border col-8 ms-5 ms-4 bg-light">
+            <form className="form-group rounded border col-7 ms-5 ms-4 bg-light mt-5">
               <div className="ms-3">
                 <p className="fs-4 text-dark text-center">Promote Employee</p>
               </div>

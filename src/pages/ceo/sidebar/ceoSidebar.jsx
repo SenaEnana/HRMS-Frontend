@@ -138,7 +138,7 @@ const CeoSidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Shortlisted Employee List"
+              title="Shortlisted Employee"
               to="/shortListed"
               icon={<ChecklistRtlOutlinedIcon />}
               selected={selected}

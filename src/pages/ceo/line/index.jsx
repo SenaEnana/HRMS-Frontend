@@ -22,7 +22,10 @@ const Line = () => {
   }, []);
   return (
     <Box m="20px">
-      <Header title="Line Chart for total employees hired per year" subtitle="Simple Line Chart" />
+      <Header
+        title="Line Chart for total employees hired per year"
+        subtitle="Simple Line Chart"
+      />
       <Box height="75vh">
         <LineChart data={employeeData} />
       </Box>

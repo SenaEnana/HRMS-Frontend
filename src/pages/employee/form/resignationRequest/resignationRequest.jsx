@@ -48,7 +48,7 @@ function ResignationRequest() {
       );
       if (response.ok) {
         alert("Resignation request submitted successfully");
-        navigate("/employeeDashboard");
+        navigate("/");
       } else {
         const errorMessage = await response.text();
         setError(errorMessage);
@@ -75,11 +75,11 @@ function ResignationRequest() {
             Recommendation: "",
             Comment: "",
           }}
-          onSubmit={handleSubmit} // Correct placement of onSubmit prop
+          onSubmit={handleSubmit}
           validationSchema={resignationValidation}
         >
           {(formikValues) => (
-            <form className="form-group rounded border col-5 pe-3 mt-5">
+            <form className="form-group rounded border col-8 pe-3 mt-5">
               <div className="mt-3">
                 <p className="fs-4 text-dark text-center">
                   Resignation Request Form
@@ -156,15 +156,6 @@ function ResignationRequest() {
                 onChange={formikValues.handleChange}
                 fullWidth
               />
-              {/* <TextInput
-                type="textfield"
-                name="reason"
-                label="Reason"
-                placeholder="enter reason of separation"
-                value={formikValues.values.reason}
-                error={formikValues.errors.reason}
-                onChange={formikValues.handleChange}
-              /> */}
               <TextInput
                 type="text"
                 name="Satisfaction"

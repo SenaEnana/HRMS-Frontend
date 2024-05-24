@@ -33,11 +33,10 @@ import CandidateDetail from "./pages/hrManager/postJob/candidateDetail";
 import ChangePassword from "./pages/account/changePassword";
 import MyAccount from "./pages/account/myAccount";
 import UploadImage from "./pages/account/uploadImage";
+import ShortListed from "./pages/ceo/promotion/shortListed";
 
 function HrRouter() {
   const [theme, colorMode] = useMode();
-const isAuth = true;
-
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
@@ -77,6 +76,7 @@ const isAuth = true;
               <Route path="/changePassword" element={<ChangePassword/>}/>
               <Route path="/myAccount" element={<MyAccount/>}/>
               <Route path="/uploadImage" element={<UploadImage/>}/>
+              <Route path="/shortListed" element={<ShortListed/>}/>
             </Routes>
           </main>
         </div>

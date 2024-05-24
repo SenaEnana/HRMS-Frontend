@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import CeoRouter from "./ceoRouter";
 
 function App() {
-
   const [isAuth, setIsAuth] = useState(false);
   const navigate = useNavigate();
   function isTokenValid(token) {
@@ -20,7 +19,6 @@ function App() {
       const decodedToken = JSON.parse(atob(token.split('.')[1]));
       const expirationTime = decodedToken.exp * 1000;
       const currentTime = Date.now();
-
       return currentTime < expirationTime;
     } catch (error) {
       console.error('Error decoding or validating token:', error);
@@ -44,17 +42,13 @@ function App() {
       console.error("Error:", error);
     }
   }, [navigate]);
-
-
   return (
     <div>
-
       {isAuth ? (
         renderDashboardBasedOnRole()
       ) : (
         <Auth />
       )}
-
     </div>
   );
    function renderDashboardBasedOnRole() {
@@ -65,9 +59,9 @@ function App() {
        case 'LeaveAdmin':
          return <LeaveAdminRouter /> ;
        case 'HRManager':
-         return <AdminRouter /> ;
+         return <HrRouter /> ;
        case 'Employee':
-         return <AdminRouter /> ;
+         return <EmployeeRouter /> ;
          case 'CEO':
           return <CeoRouter /> ;
         case 'ImmediateSupervisor':

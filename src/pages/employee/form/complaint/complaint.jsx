@@ -45,7 +45,7 @@ function Complaint() {
 
       if (response.ok) {
         alert("Complaint submitted successfully");
-        navigate("/employeeDashboard");
+        navigate("/");
       } else {
         const errorMessage = await response.text();
         setError(errorMessage);
@@ -54,7 +54,6 @@ function Complaint() {
       setError("Error submitting leave request");
     }
   }
-
   const handleAddField = () => {
     setInputFields([...inputFields, { value: "" }]);
   };
@@ -76,7 +75,7 @@ function Complaint() {
           validationSchema={complaintValidation}
         >
           {(formikValues) => (
-            <form className="form-group rounded border col-5 pe-3 mt-5 bg-light">
+            <form className="form-group rounded border col-8 pe-3 mt-5 bg-light">
               <div className="mt-3">
                 <p className="fs-4 text-dark text-center">Complaint Form</p>
               </div>
@@ -131,7 +130,6 @@ function Complaint() {
                 error={formikValues.errors.DateOfEvent}
                 onChange={formikValues.handleChange}
               />
-
               <FormikTextField
                 className="form-control text-dark float-start mt-1 p-1 fs-5"
                 name="Incident"
@@ -142,7 +140,6 @@ function Complaint() {
                 onChange={formikValues.handleChange}
                 fullWidth
               />
-
               <FormikTextField
                 className="form-control text-dark float-start mt-1 p-1 fs-5"
                 name="Remedy"

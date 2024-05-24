@@ -129,7 +129,6 @@ const CeoDashboard = () => {
   }, []);
   return (
     <Box m="20px">
-      {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="Ceo Dashboard" subtitle="" />
       </Box>

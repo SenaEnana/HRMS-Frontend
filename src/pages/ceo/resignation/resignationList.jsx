@@ -1,12 +1,27 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 function ResignationList() {
   const [data, setData] = useState([]);
+  const [disabledButtons, setDisabledButtons] = useState({});
 
   useEffect(() => {
     getData();
+    const storedDisabledButtons = JSON.parse(localStorage.getItem("disabledButtons")) || {};
+    setDisabledButtons(storedDisabledButtons);
   }, []);
-  //Below are not correct link for approved and rejected request and list
+
+  const updateDisabledButtons = (resignationId, action) => {
+    const updatedDisabledButtons = {
+      ...disabledButtons,
+      [resignationId]: {
+        ...(disabledButtons[resignationId] || {}),
+        [action]: true,
+      },
+    };
+    setDisabledButtons(updatedDisabledButtons);
+    localStorage.setItem("disabledButtons", JSON.stringify(updatedDisabledButtons));
+  };
+
   async function approveOperation(resignationId) {
     let result = await fetch(
       `https://localhost:7140/Resignation/ApproveResignation/${resignationId}`,
@@ -18,9 +33,13 @@ function ResignationList() {
         },
       }
     );
-    result = await result.json();
-    getData();
-    alert("approved successfully");
+    if (result.ok) {
+      alert("Approved successfully");
+      updateDisabledButtons(resignationId, "approve");
+      getData();
+    } else {
+      alert("Failed to approve");
+    }
   }
 
   async function rejectOperation(resignationId) {
@@ -34,9 +53,13 @@ function ResignationList() {
         },
       }
     );
-    result = await result.json();
-    getData();
-    alert("rejected successfully");
+    if (result.ok) {
+      alert("Rejected successfully");
+      updateDisabledButtons(resignationId, "reject");
+      getData();
+    } else {
+      alert("Failed to reject");
+    }
   }
 
   async function getData() {
@@ -44,9 +67,9 @@ function ResignationList() {
       "https://localhost:7140/Resignation/ListOfResignationRequests"
     );
     result = await result.json();
-    console.log(result);
     setData(result);
   }
+
   return (
     <>
       <div className="d-flex justify-content-between mt-5 text-dark">
@@ -55,47 +78,54 @@ function ResignationList() {
       <table className="table table-hover text-dark w-100 fs-6">
         <thead>
           <tr>
-            <th>Employee Id</th>
-            <th>Full Name</th>
+            <th>Id</th>
+            <th>Name</th>
             <th>Department</th>
             <th>Position</th>
-            <th>Employee Hire Date</th>
-            <th>Separation Date</th>
+            <th>Hire Date</th>
+            <th>Resign Date</th>
             <th>Reason</th>
             <th>Satisfaction</th>
-            <th>Employee Relationship</th>
+            <th>Relationship</th>
             <th>Recommendation</th>
             <th>Comment</th>
-            <th></th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {data.map((employee) => {
-            const employeeId = employee.id;
-            return (
-              <tr key={employeeId}>
-                {Object.values(employee).map((item, index) => (
-                  <td key={index}>{item}</td>
-                ))}
-                <td>
-                  <button
-                    onClick={() => approveOperation(employeeId)}
-                    className="btn btn-outline-secondary btn-sm"
-                    type="button"
-                  >
-                    Approve
-                  </button>
-                  <button
-                    onClick={() => rejectOperation(employeeId)}
-                    className="btn btn-outline-danger ms-1 btn-sm"
-                    type="button"
-                  >
-                    Reject
-                  </button>
-                </td>
-              </tr>
-            );
-          })}
+          {data.map((employee) => (
+            <tr key={employee.id}>
+              <td>{employee.employeeId}</td>
+              <td>{employee.fullName}</td>
+              <td>{employee.positionId}</td>
+              <td>{employee.departmentId}</td>
+              <td>{employee.employeeHireDate}</td>
+              <td>{employee.separationDate}</td>
+              <td>{employee.reason}</td>
+              <td>{employee.satisfaction}</td>
+              <td>{employee.employeeRelationship}</td>
+              <td>{employee.recommendation}</td>
+              <td>{employee.comment}</td>
+              <td>
+                <button
+                  onClick={() => approveOperation(employee.id)}
+                  className="btn btn-outline-secondary btn-sm float-end m-1 p-1"
+                  type="button"
+                  disabled={disabledButtons[employee.id]?.approve}
+                >
+                  Approve
+                </button>
+                <button
+                  onClick={() => rejectOperation(employee.id)}
+                  className="btn btn-outline-danger btn-sm float-end m-1 p-1"
+                  type="button"
+                  disabled={disabledButtons[employee.id]?.reject}
+                >
+                  Reject
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </>
