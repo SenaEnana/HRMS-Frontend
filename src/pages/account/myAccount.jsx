@@ -80,7 +80,7 @@ function MyAccount() {
   const LogoutHandler = () => {
     sessionStorage.removeItem("token");
     alert("Logout successfully");
-    navigate("/");
+    navigate("/login");
   };
 
   if (loading) {
