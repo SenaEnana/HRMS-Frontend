@@ -37,7 +37,6 @@ const SupervisorDashboard = () => {
         setLoading(false);
       }
     };
-
     fetchAddressedRequests();
   }, []);
   useEffect(() => {
@@ -78,18 +77,15 @@ const SupervisorDashboard = () => {
   }, []);
   return (
     <Box m="20px">
-      {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="Supervisor Dashboard" subtitle="" />
       </Box>
-
       <Box
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="140px"
         gap="20px"
       >
-        {/* ROW 1 */}
         <Box
           className="rounded"
           gridColumn="span 6"

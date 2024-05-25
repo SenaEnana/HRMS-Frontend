@@ -3,13 +3,19 @@ import React, { useState, useEffect } from "react";
 function ResignationList() {
   const [data, setData] = useState([]);
   const [disabledButtons, setDisabledButtons] = useState({});
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
 
   useEffect(() => {
     getData();
     const storedDisabledButtons = JSON.parse(localStorage.getItem("disabledButtons")) || {};
     setDisabledButtons(storedDisabledButtons);
   }, []);
-
   const updateDisabledButtons = (resignationId, action) => {
     const updatedDisabledButtons = {
       ...disabledButtons,
@@ -21,7 +27,6 @@ function ResignationList() {
     setDisabledButtons(updatedDisabledButtons);
     localStorage.setItem("disabledButtons", JSON.stringify(updatedDisabledButtons));
   };
-
   async function approveOperation(resignationId) {
     let result = await fetch(
       `https://localhost:7140/Resignation/ApproveResignation/${resignationId}`,
@@ -41,7 +46,6 @@ function ResignationList() {
       alert("Failed to approve");
     }
   }
-
   async function rejectOperation(resignationId) {
     let result = await fetch(
       `https://localhost:7140/Resignation/RejectResignation/${resignationId}`,
@@ -61,7 +65,6 @@ function ResignationList() {
       alert("Failed to reject");
     }
   }
-
   async function getData() {
     let result = await fetch(
       "https://localhost:7140/Resignation/ListOfResignationRequests"
@@ -99,8 +102,8 @@ function ResignationList() {
               <td>{employee.fullName}</td>
               <td>{employee.positionId}</td>
               <td>{employee.departmentId}</td>
-              <td>{employee.employeeHireDate}</td>
-              <td>{employee.separationDate}</td>
+              <td>{formatDate(employee.employeeHireDate)}</td>
+              <td>{formatDate(employee.separationDate)}</td>
               <td>{employee.reason}</td>
               <td>{employee.satisfaction}</td>
               <td>{employee.employeeRelationship}</td>

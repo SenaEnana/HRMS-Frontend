@@ -9,7 +9,7 @@ function ChangePassword() {
   const [error, setError] = useState(null);
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
-  
+
   async function changePassword(values) {
     try {
       const token = sessionStorage.getItem("token");
@@ -44,7 +44,7 @@ function ChangePassword() {
       console.error("Change password:", error);
       alert(`Change password error: ${error.message}`);
     }
-  };
+  }
   const getUserIdFromToken = (token) => {
     const decodedToken = JSON.parse(atob(token.split(".")[1]));
     return decodedToken[

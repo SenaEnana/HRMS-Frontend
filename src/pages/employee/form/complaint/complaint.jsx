@@ -10,7 +10,6 @@ function Complaint() {
   const navigate = useNavigate();
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
   const [BranchId, setBranchId] = useState([{ name: "", id: "" }]);
-  const [inputFields, setInputFields] = useState([{ value: "" }]);
   const [error, setError] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -30,7 +29,7 @@ function Complaint() {
     fetchData();
   }, []);
 
-  async function handleSubmit(values, formikBag) {
+  async function handleSubmit(values) {
     try {
       const response = await fetch(
         "https://localhost:7140/api/Complaint/SubmitCompliant",
@@ -54,10 +53,6 @@ function Complaint() {
       setError("Error submitting leave request");
     }
   }
-  const handleAddField = () => {
-    setInputFields([...inputFields, { value: "" }]);
-  };
-
   return (
     <>
       <div className="row justify-content-center">

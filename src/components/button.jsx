@@ -1,8 +1,15 @@
-// Button.js
-import { useState } from "react";
+//the following are the new code
+import { useState, useEffect } from "react";
 
-function Button({ onLock, onUnlock }) {
+function Button({ userId, onLock, onUnlock }) {
   const [isLocked, setIsLocked] = useState(true);
+
+  useEffect(() => {
+    const storedState = localStorage.getItem(`user-${userId}-lock-state`);
+    if (storedState !== null) {
+      setIsLocked(JSON.parse(storedState));
+    }
+  }, [userId]);
 
   const handleClick = () => {
     if (isLocked) {
@@ -10,17 +17,48 @@ function Button({ onLock, onUnlock }) {
     } else {
       onLock();
     }
-    setIsLocked(!isLocked);
+    const newLockState = !isLocked;
+    setIsLocked(newLockState);
+    localStorage.setItem(
+      `user-${userId}-lock-state`,
+      JSON.stringify(newLockState)
+    );
   };
 
   return (
-    <button className="btn btn-outline-secondary me-2" onClick={handleClick}>
+    <button className="btn btn-secondary me-2" onClick={handleClick}>
       {isLocked ? "Lock" : "Unlock"}
     </button>
   );
 }
 
 export default Button;
+
+
+//the following are the old code 
+ // Button.js
+// import { useState } from "react";
+
+// function Button({ onLock, onUnlock }) {
+//   const [isLocked, setIsLocked] = useState(true);
+
+//   const handleClick = () => {
+//     if (isLocked) {
+//       onUnlock();
+//     } else {
+//       onLock();
+//     }
+//     setIsLocked(!isLocked);
+//   };
+
+//   return (
+//     <button className="btn btn-outline-secondary me-2" onClick={handleClick}>
+//       {isLocked ? "Lock" : "Unlock"}
+//     </button>
+//   );
+// }
+
+// export default Button;
 
 // import { useState } from 'react';
 

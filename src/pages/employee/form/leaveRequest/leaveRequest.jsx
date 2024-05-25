@@ -20,7 +20,6 @@ function LeaveRequest() {
     };
     fetchData();
   }, []);
-
   const handleSubmit = async (values) => {
     try {
       const response = await fetch(
@@ -74,7 +73,6 @@ function LeaveRequest() {
                 error={formikValues.errors.Emp_Id}
                 onChange={formikValues.handleChange}
               />
-
               <DropDown
                 type="number"
                 label="Leave Type"

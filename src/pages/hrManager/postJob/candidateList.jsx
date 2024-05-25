@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const CandidateList = () => {
   const [data, setData] = useState([]);
@@ -8,6 +8,7 @@ const CandidateList = () => {
   useEffect(() => {
     getData();
   }, []);
+
   async function getData() {
     let result = await fetch(
       `https://localhost:7140/Promotion/JobCandidates/${jobId}`

@@ -1,14 +1,11 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-
 function MyAccount() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); 
-  const { id } = useParams();
-  const [employee, setEmployee] = useState(null);
 
   function getUserIdFromToken(token) {
     const decodedToken = JSON.parse(atob(token.split(".")[1]));
@@ -16,12 +13,10 @@ function MyAccount() {
       "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
     ];
   }
-
   function isTokenValid(token) {
     if (!token) {
       return false;
     }
-
     try {
       const decodedToken = JSON.parse(atob(token.split(".")[1]));
       const expirationTime = decodedToken.exp * 1000;
@@ -33,7 +28,6 @@ function MyAccount() {
       return false;
     }
   }
-
   useEffect(() => {
     const token = sessionStorage.getItem("token");
     if (!token) {
@@ -49,7 +43,7 @@ function MyAccount() {
     }
     const userId = getUserIdFromToken(token);
     console.log(userId);
-    fetch(`https://localhost:7100/Account/profile?userId=${userId}`, { 
+    fetch(`https://localhost:7140/Account/profile?userId=${userId}`, { 
       method: "GET",
       headers: {
         Accept: "application/json", 
@@ -80,22 +74,19 @@ function MyAccount() {
     alert("Logout successfully");
     navigate("/");
   };
-
   if (loading) {
     return <div>Loading...</div>; 
   }
-
   if (!user) {
     return <div>Error loading user data</div>; 
   }
-
   return (
     <div className="profile-wrapper">
       <div className="card profile-card">
         <div className="profile-header">
           <img
             className="profile-picture"
-            src={"https://localhost:7100" + user.pictureURL}
+            src={"https://localhost:7140" + user.pictureURL}
             alt="Profile"
           />
           <h2 className="profile-username">{user.name}</h2>
