@@ -24,7 +24,7 @@ function ChangePassword() {
       }
       const userId = getUserIdFromToken(token);
       const result = await fetch(
-        `https://localhost:7140/Account/ChangePassword?userId=${userId}`,
+        `https://localhost:7100/Account/ChangePassword?userId=${userId}`,
         {
           method: "POST",
           headers: {
