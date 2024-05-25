@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 
 function MyAccount() {
   const navigate = useNavigate();
-  const [profilePicture, setProfilePicture] = useState(null);
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const { id } = useParams();
@@ -38,7 +37,6 @@ function MyAccount() {
       console.error("Token not found in session storage");
       return;
     }
-
     const isValid = isTokenValid(token);
     if (!isValid) {
       console.error("Invalid token");
@@ -65,7 +63,6 @@ function MyAccount() {
       })
       .catch((error) => {
         console.error("Profile fetch error:", error);
-        // Handle error
       });
   }, []);
 
@@ -74,7 +71,6 @@ function MyAccount() {
     alert("Logout successfully");
     navigate("/");
   };
-
   return (
     <>
       <div className="card w-50 ms-5 mt-5">
@@ -86,20 +82,18 @@ function MyAccount() {
         /> */}
         <div className="card-body">
           <h5 className="card-title">My profile</h5>
-          <p>
-            <strong>Name</strong> {user.name}
-          </p>
-          <p>
+          <p>{/* <strong>Name</strong> {user.name} */}</p>
+          {/* <p>
             <strong>Role:</strong> {user.roles}
-          </p>
+          </p> */}
           <Link to="/changePassword">
             <button className="btn btn-outline-secondary btn-sm mt-3 me-1">
               change password
             </button>
           </Link>
-          <Link to="/change profile">
+          <Link to="/uploadImage">
             <button className="btn btn-outline-secondary btn-sm mt-3 me-1">
-              change profile
+              update profile
             </button>
           </Link>
           <Link to="/">

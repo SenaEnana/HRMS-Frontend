@@ -8,10 +8,22 @@ import { changePasswordValidation } from "./schema";
 function ChangePassword() {
   const [error, setError] = useState(null);
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  
   async function changePassword(values) {
     try {
-      const response = await fetch(
-        "https://localhost:7140/Account/ChangePassword",
+      const token = sessionStorage.getItem("token");
+      if (!token) {
+        console.error("Token not found in session storage");
+        return;
+      }
+      const isValid = isTokenValid(token);
+      if (!isValid) {
+        console.error("Invalid token");
+        return;
+      }
+      const userId = getUserIdFromToken(token);
+      const result = await fetch(
+        `https://localhost:7140/Account/ChangePassword?userId=${userId}`,
         {
           method: "POST",
           headers: {
@@ -20,18 +32,38 @@ function ChangePassword() {
           body: JSON.stringify(values),
         }
       );
-      console.log(response);
-      if (response.ok) {
-        alert("successful");
+      if (result.ok) {
+        alert("Password changed successfully");
+        navigate("/myAccount");
       } else {
-        const errorMessage = await response.text();
-        setError(errorMessage);
+        const errorText = await result.text();
+        throw new Error(`Failed to change password: ${errorText}`);
       }
     } catch (error) {
-      setError("Error changing password");
+      console.error("Change password:", error);
+      alert(`Change password error: ${error.message}`);
     }
-  }
-
+  };
+  const getUserIdFromToken = (token) => {
+    const decodedToken = JSON.parse(atob(token.split(".")[1]));
+    return decodedToken[
+      "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+    ];
+  };
+  const isTokenValid = (token) => {
+    if (!token) {
+      return false;
+    }
+    try {
+      const decodedToken = JSON.parse(atob(token.split(".")[1]));
+      const expirationTime = decodedToken.exp * 1000;
+      const currentTime = Date.now();
+      return currentTime < expirationTime;
+    } catch (error) {
+      console.error("Error decoding or validating token:", error);
+      return false;
+    }
+  };
   return (
     <>
       <NavLink

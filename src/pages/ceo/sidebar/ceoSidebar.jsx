@@ -109,7 +109,7 @@ const CeoSidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               className=""
-              title="My Account"
+              title="My Profile"
               to="/myAccount"
               icon={<AccountBoxIcon />}
               selected={selected}
