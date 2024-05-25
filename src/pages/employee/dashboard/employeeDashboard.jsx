@@ -94,7 +94,7 @@ const EmployeeDashboard = () => {
       if (!isValid) {
         console.error('Invalid token');
         navigate('/login');
-        return;
+        return; 
       }
 
       const userId = getUserIdFromToken(token);

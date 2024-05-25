@@ -58,8 +58,8 @@ function App() {
      switch (role) {
        case 'LeaveAdmin':
          return <LeaveAdminRouter /> ;
-       case 'HRManager':
-         return <HrRouter /> ;
+       case 'HR Manager':
+         return <AdminRouter /> ;
        case 'Employee':
          return <EmployeeRouter /> ;
          case 'CEO':

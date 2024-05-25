@@ -61,3 +61,65 @@ body,
 .card-body ul li {
   margin-bottom: 0.5rem;
 }
+
+/* MyAccount.css */
+.profile-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.profile-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 400px;
+  max-width: 100%;
+}
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.profile-picture {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.profile-username {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.profile-details {
+  padding: 20px;
+}
+
+.profile-details p {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  border-top: 1px solid #e9ecef;
+}
+
+.profile-actions button {
+  margin: 0 5px;
+}
+

@@ -68,7 +68,7 @@ const Team = () => {
 
   const getData = async () => {
     try {
-      const result = await fetch("https://localhost:7140/User");
+      const result = await fetch("https://localhost:7100/User");
       const data = await result.json();
       setData(data);
     } catch (error) {
@@ -125,7 +125,7 @@ const Team = () => {
               <td>
                 <img
                   style={{ width: 100, borderRadius: 100 }}
-                  src={"https://localhost:7140" + employee.pictureURL}
+                  src={"https://localhost:7100" + employee.pictureURL}
                   alt=""
                 />
               </td>
