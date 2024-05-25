@@ -9,7 +9,8 @@ import ComplaintList from "./pages/immediateSupervisor/complaintList/complaintLi
 import MyAccount from "./pages/account/myAccount";
 import ChangePassword from "./pages/account/changePassword";
 import UploadImage from "./pages/account/uploadImage";
-import ListEvaluation from "./pages/immediateSupervisor/sendFeedback/listEvaluation";
+import ListEvaluation from "./pages/immediateSupervisor/evaluation/listEvaluation";
+import EvaluationDetail from "./pages/immediateSupervisor/evaluation/evaluationDetail";
 
 function SupervisorRouter(){
     const [theme, colorMode] = useMode();
@@ -30,6 +31,7 @@ function SupervisorRouter(){
               <Route path="/changePassword" element={<ChangePassword/>}/>
               <Route path="/myAccount" element={<MyAccount/>}/>
               <Route path="/uploadImage" element={<UploadImage/>}/>
+              <Route path="/evaluationDetail:id" element={<EvaluationDetail/>}/>
               </Routes>
             </main>
           </div>

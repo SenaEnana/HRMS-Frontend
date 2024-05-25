@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from "react-router-dom";
 
 const ListEvaluation = () => {
     const [evaluations, setEvaluations] = useState([]);
@@ -20,7 +21,7 @@ const ListEvaluation = () => {
     }
 
     return (
-        <div>
+        <div className='text-dark'>
             <h1>Employee Evaluations</h1>
             <table>
                 <thead>
@@ -36,6 +37,13 @@ const ListEvaluation = () => {
                             <td>{evaluation.employeeName}</td>
                             <td>{evaluation.rating}</td>
                             <td>{evaluation.feedback}</td>
+                            <td>
+                            <Link to={`/evaluationDetail/${evaluation.id}`}>
+                    <button className="btn btn-outline-secondary btn-sm">
+                      Detail
+                    </button>
+                  </Link>
+              </td>
                         </tr>
                     ))}
                 </tbody>

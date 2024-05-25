@@ -172,6 +172,13 @@ const EmployeeSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
+                        <Item
+              title="Evaluation List"
+              to="/evaluationList"
+              icon={<PostAddOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Item
               title="Notifications"
               to="/notifications"

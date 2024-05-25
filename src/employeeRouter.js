@@ -13,6 +13,7 @@ import Notifications from "./pages/commonPages/Notification";
 import PostedJob from "./pages/employee/form/postedJob";
 import JobDetail from "./pages/employee/form/jobDetail";
 import UploadImage from "./pages/account/uploadImage";
+import EvaluationList from "./pages/employee/form/evaluationList";
 
 function EmployeeRouter() {
   const [theme, colorMode] = useMode();
@@ -38,6 +39,7 @@ function EmployeeRouter() {
               <Route path="/jobDetail/:id" element={<JobDetail />} />
               <Route path="/changePassword" element={<ChangePassword/>}/>
               <Route path="/uploadImage" element={<UploadImage/>}/>
+              <Route path="/evaluationList" element={<EvaluationList/>}/>
             </Routes>
           </main>
         </div>

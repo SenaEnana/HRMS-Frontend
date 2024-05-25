@@ -144,14 +144,14 @@ const SupervisorSidebar = () => {
              <Item
               title="Send Feedback"
               to="/sendFeedback"
-              // icon={<NotificationsNoneIcon />}
+              icon={<ChecklistRtlOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             /> 
               <Item
-              title="Evalution List"
+              title="Evaluation List"
               to="/listEvaluation"
-              // icon={<NotificationsNoneIcon />}
+              icon={<ChecklistRtlOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             /> 
