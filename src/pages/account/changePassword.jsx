@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Formik } from "formik";
 import { useMediaQuery } from "@mui/material";
 import TextInput from "../../components/textInput";
@@ -8,6 +8,7 @@ import { changePasswordValidation } from "./schema";
 function ChangePassword() {
   const [error, setError] = useState(null);
   const isNonMobile = useMediaQuery("(min-width:600px)");
+  const navigate = useNavigate();
   
   async function changePassword(values) {
     try {
