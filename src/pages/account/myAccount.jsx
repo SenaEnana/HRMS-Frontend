@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 
 function MyAccount() {
   const navigate = useNavigate();
-  const [profilePicture, setProfilePicture] = useState(null);
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); 
@@ -42,7 +41,6 @@ function MyAccount() {
       setLoading(false); 
       return;
     }
-
     const isValid = isTokenValid(token);
     if (!isValid) { 
       console.error("Invalid token");
@@ -112,7 +110,7 @@ function MyAccount() {
               Change Password
             </button>
           </Link>
-          <Link to="/change profile">
+          <Link to="/uploadImage">
             <button className="btn btn-outline-secondary btn-sm mt-3 me-1">
               Change Profile
             </button>
