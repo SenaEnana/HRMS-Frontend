@@ -1,11 +1,13 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+
 function MyAccount() {
   const navigate = useNavigate();
   const [profilePicture, setProfilePicture] = useState(null);
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true); 
   const { id } = useParams();
   const [employee, setEmployee] = useState(null);
 
@@ -15,6 +17,7 @@ function MyAccount() {
       "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
     ];
   }
+
   function isTokenValid(token) {
     if (!token) {
       return false;
@@ -36,19 +39,22 @@ function MyAccount() {
     const token = sessionStorage.getItem("token");
     if (!token) {
       console.error("Token not found in session storage");
+      setLoading(false); 
       return;
     }
 
     const isValid = isTokenValid(token);
-    if (!isValid) {
+    if (!isValid) { 
       console.error("Invalid token");
+      setLoading(false); 
       return;
     }
     const userId = getUserIdFromToken(token);
-    fetch(`https://localhost:7140/Account/profile?userId=${userId}`, {
+    console.log(userId);
+    fetch(`https://localhost:7100/Account/profile?userId=${userId}`, { 
       method: "GET",
       headers: {
-        Accept: "application/json",
+        Accept: "application/json", 
         "Content-Type": "application/json",
       },
     })
@@ -61,11 +67,13 @@ function MyAccount() {
       })
       .then((data) => {
         setUser(data);
-        setUsername(data.username);
+        setUsername(data.name);
+        setLoading(false); 
       })
       .catch((error) => {
         console.error("Profile fetch error:", error);
-        // Handle error
+        setLoading(false); 
+       
       });
   }, []);
 
@@ -75,31 +83,38 @@ function MyAccount() {
     navigate("/");
   };
 
+  if (loading) {
+    return <div>Loading...</div>; 
+  }
+
+  if (!user) {
+    return <div>Error loading user data</div>; 
+  }
+
   return (
-    <>
-      <div className="card w-50 ms-5 mt-5">
-        <h5>Image</h5>
-        {/* <img
-          style={{ width: 100, borderRadius: 100 }}
-          src={"https://localhost:7140" + user.pictureURL}
-          alt=""
-        /> */}
-        <div className="card-body">
-          <h5 className="card-title">My profile</h5>
-          <p>
-            <strong>Name</strong> {user.name}
-          </p>
-          <p>
-            <strong>Role:</strong> {user.roles}
-          </p>
+    <div className="profile-wrapper">
+      <div className="card profile-card">
+        <div className="profile-header">
+          <img
+            className="profile-picture"
+            src={"https://localhost:7100" + user.pictureURL}
+            alt="Profile"
+          />
+          <h2 className="profile-username">{user.name}</h2>
+        </div>
+        <div className="profile-details">
+          <p><strong>Name:</strong> {user.name}</p>
+          {/* <p><strong>Role:</strong> {user.roles}</p> */}
+        </div>
+        <div className="profile-actions">
           <Link to="/changePassword">
             <button className="btn btn-outline-secondary btn-sm mt-3 me-1">
-              change password
+              Change Password
             </button>
           </Link>
           <Link to="/change profile">
             <button className="btn btn-outline-secondary btn-sm mt-3 me-1">
-              change profile
+              Change Profile
             </button>
           </Link>
           <Link to="/">
@@ -107,12 +122,12 @@ function MyAccount() {
               className="btn btn-danger btn-sm mt-3 me-3"
               onClick={LogoutHandler}
             >
-              log out
+              Log Out
             </button>
           </Link>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

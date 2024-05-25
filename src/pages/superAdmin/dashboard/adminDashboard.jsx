@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 import ToggleOffOutlinedIcon from "@mui/icons-material/ToggleOffOutlined";
 import ToggleOnOutlinedIcon from "@mui/icons-material/ToggleOnOutlined";
 
-const AdminDashboard = () => {
+const AdminDashboard = () => { 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [approvedLeaveCount, setApprovedLeaveCount] = useState("Loading...");
@@ -28,7 +28,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchListOfUsers = async () => {
       try {
-        const response = await fetch("https://localhost:52339/User");
+        const response = await fetch("https://localhost:5100/User");
         const data = await response.json();
         setListOfUsers(data);
         setLoading(false);
@@ -44,7 +44,7 @@ const AdminDashboard = () => {
     const fetchInactiveEmployeeCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:52339/DashBoard/InactiveCount"
+          "https://localhost:5100/DashBoard/InactiveCount"
         );
         const data = await response.json();
         setInactiveEmployeeCount(data);
@@ -59,7 +59,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchEmployeeData = async () => {
       try {
-        const response = await fetch("https://localhost:52339/User/UsersCount");
+        const response = await fetch("https://localhost:5100/User/UsersCount");
         const data = await response.json();
         console.log(data);
         setEmployeeData(data);
@@ -74,7 +74,7 @@ const AdminDashboard = () => {
     const fetchActiveEmployeeCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:52339/DashBoard/ActiveCount"
+          "https://localhost:5100/DashBoard/ActiveCount"
         );
         const data = await response.json();
         setActiveEmployeeCount(data);

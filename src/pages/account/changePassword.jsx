@@ -11,7 +11,7 @@ function ChangePassword() {
   async function changePassword(values) {
     try {
       const response = await fetch(
-        "https://localhost:7140/Account/ChangePassword",
+        "https://localhost:5100/Account/ChangePassword",
         {
           method: "POST",
           headers: {

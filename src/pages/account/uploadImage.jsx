@@ -19,8 +19,8 @@ function UploadImage() {
     const formData = new FormData();
     formData.append("profilePicture", profilePicture);
 
-    fetch(`https://localhost:52339/Account/update?userId=${values.userId}`, {
-      method: "POST",
+    fetch(`https://localhost:7100/Account/update?userId=${values.userId}`, {
+      method: "PUT",
       body: formData,
     })
       .then((response) => {
