@@ -158,13 +158,13 @@ const EmployeeSidebar = () => {
             >
               Data
             </Typography>
-            {/* <Item
+            { <Item
               title="Supervisor Feedback"
               to="/supervisorFeedback"
-              icon={<FeedbackOutlinedIcon />}
+             // icon={<FeedbackOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> */}
+            /> }
             <Item
               title="Posted Jobs"
               to="/postedJob"

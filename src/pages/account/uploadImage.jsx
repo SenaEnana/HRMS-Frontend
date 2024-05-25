@@ -31,9 +31,6 @@ function UploadImage() {
         {
           method: "PUT",
           body: formData,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
         }
       );
       if (result.ok) {
