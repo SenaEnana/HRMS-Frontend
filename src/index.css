@@ -123,3 +123,109 @@ body,
   margin: 0 5px;
 }
 
+
+
+
+
+
+
+.evaluation-container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.select-employee {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-right: 10px;
+  color: #333;  /* Ensure labels are clearly visible */
+  font-size: 18px; /* Increase font size for better visibility */
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.evaluation-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.evaluation-table th, .evaluation-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+  color: #333; /* Ensure text color is visible */
+  background-color: #fff; /* Ensure background color is set */
+}
+
+.evaluation-table th {
+  background-color: #f2f2f2;
+  color: #333;
+  font-size: 18px; /* Increase font size for table headers */
+}
+
+.evaluation-table td {
+  font-size: 16px; /* Increase font size for table cells */
+}
+
+.evaluation-table td label {
+  margin-right: 10px;
+  color: #333; /* Ensure labels inside table cells are clearly visible */
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+
+
+.rating-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.rating-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.rating-number {
+  font-size: 20px;
+  margin-left: 5px;
+}
+
+

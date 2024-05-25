@@ -26,7 +26,7 @@ const Login = ({ setIsAuthenticated }) => {
         navigate("/");
       } else {
         const errorMessage = await response.text();
-        setError(errorMessage);
+         setError("Something went wrong");
       }
     } catch (error) {
       setError("Invalid username or password");
