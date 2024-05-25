@@ -8,23 +8,14 @@ import React, { useState, useEffect } from "react";
 import ToggleOffOutlinedIcon from "@mui/icons-material/ToggleOffOutlined";
 import ToggleOnOutlinedIcon from "@mui/icons-material/ToggleOnOutlined";
 
-const AdminDashboard = () => { 
+const AdminDashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [approvedLeaveCount, setApprovedLeaveCount] = useState("Loading...");
-  const [rejectedLeaveCount, setRejectedLeaveCount] = useState("Loading...");
   const [activeEmployeeCount, setActiveEmployeeCount] = useState("Loading...");
   const [employeeData, setEmployeeData] = useState([]);
   const [listOfUsers, setListOfUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [inactiveEmployeeCount, setInactiveEmployeeCount] = useState(0);
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-  };
   useEffect(() => {
     const fetchListOfUsers = async () => {
       try {
@@ -37,7 +28,6 @@ const AdminDashboard = () => {
         setLoading(false);
       }
     };
-
     fetchListOfUsers();
   }, []);
   useEffect(() => {
@@ -90,19 +80,15 @@ const AdminDashboard = () => {
   }, []);
   return (
     <Box m="20px">
-      {/* HEADER */}
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Header title="Admin Dashboard" subtitle="" />
       </Box>
-
-      {/* GRID & CHARTS */}
       <Box
         display="grid"
         gridTemplateColumns="repeat(12, 1fr)"
         gridAutoRows="140px"
         gap="20px"
       >
-        {/* ROW 1 */}
         <Box
           className="rounded"
           gridColumn="span 4"
@@ -201,8 +187,6 @@ const AdminDashboard = () => {
               ))}
           </Box>
         </Box>
-
-        {/* ROW 3 */}
         <Box
           gridColumn="span 12"
           gridRow="span 2"
@@ -233,28 +217,3 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
-/*<Box
-          gridColumn="span 4"
-          gridRow="span 2"
-          backgroundColor={colors.primary[400]}
-        >
-          <Typography
-            className="text-dark"
-            variant="h5"
-            fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
-          >
-            Employee Status
-          </Typography>
-          <Box height="250px" mt="-20px">
-          <BarChart 
-          
-          data={[
-            { status: "Active", count: activeEmployeeCount },
-            { status: "Inactive", count: inactiveEmployeeCount },
-          ]}
-          xAxisLabel="Leave request Status"
-          yAxisLabel="Number of requests" />
-          </Box>
-        </Box>
-        */

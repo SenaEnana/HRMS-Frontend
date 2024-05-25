@@ -19,7 +19,6 @@ function LeaveTypeList() {
     result = await result.json();
     getData();
   }
-
   async function getData() {
     let result = await fetch("https://localhost:7140/LeaveType/GetLeaveTypes");
     result = await result.json();

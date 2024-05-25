@@ -3,6 +3,13 @@ import { Link } from "react-router-dom";
 
 function PostedJob() {
   const [data, setData] = useState([]);
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
 
   useEffect(() => {
     getData();
@@ -32,7 +39,7 @@ function PostedJob() {
             <tr key={job.id}>
               <td>{job.jobTitle}</td>
               <td>{job.positionName}</td>
-              <td>{job.postingDate}</td>
+              <td>{formatDate(job.postingDate)}</td>
               <td>
                 <Link to={`/jobDetail/${job.id}`}>
                   <button className="btn btn-outline-secondary btn-sm">

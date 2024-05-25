@@ -1,12 +1,9 @@
-import { NavLink } from "react-router-dom";
 import { leaveTypeValidation } from "./schema";
 import TextInput from "../../../components/textInput";
 import { Formik } from "formik";
-import { Box, useMediaQuery } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 function AddLeaveType() {
-  const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
   async function addNewLeaveType(values) {
     try {
@@ -42,7 +39,6 @@ function AddLeaveType() {
           }}
           onSubmit={(values) => {
             addNewLeaveType(values);
-            console.log(values);
           }}
           validationSchema={leaveTypeValidation}
         >

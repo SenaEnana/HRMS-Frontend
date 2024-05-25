@@ -3,105 +3,105 @@
 // const Team = () => {
 //   const [data, setData] = useState([]);
 
-//   const getUserIdFromToken = (token) => {
+// const getUserIdFromToken = (token) => {
+//   const decodedToken = JSON.parse(atob(token.split(".")[1]));
+//   return decodedToken[
+//     "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+//   ];
+// };
+
+// const isTokenValid = (token) => {
+//   if (!token) {
+//     return false;
+//   }
+//   try {
 //     const decodedToken = JSON.parse(atob(token.split(".")[1]));
-//     return decodedToken[
-//       "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
-//     ];
-//   };
+//     const expirationTime = decodedToken.exp * 1000;
+//     const currentTime = Date.now();
+//     return currentTime < expirationTime;
+//   } catch (error) {
+//     console.error("Error decoding or validating token:", error);
+//     return false;
+//   }
+// };
 
-//   const isTokenValid = (token) => {
+// const handleLockToggle = async (userId, isLocked) => {
+//   try {
+//     const token = sessionStorage.getItem("token");
 //     if (!token) {
-//       return false;
+//       console.error("Token not found in session storage");
+//       return;
 //     }
-//     try {
-//       const decodedToken = JSON.parse(atob(token.split(".")[1]));
-//       const expirationTime = decodedToken.exp * 1000;
-//       const currentTime = Date.now();
-//       return currentTime < expirationTime;
-//     } catch (error) {
-//       console.error("Error decoding or validating token:", error);
-//       return false;
-//     }
-//   };
 
-//   const handleLockToggle = async (userId, isLocked) => {
-//     try {
-//       const token = sessionStorage.getItem("token");
-//       if (!token) {
-//         console.error("Token not found in session storage");
-//         return;
+//     const isValid = isTokenValid(token);
+//     if (!isValid) {
+//       console.error("Invalid token");
+//       return;
+//     }
+//     //the user id of the url will be the id from the rendered id not the id of the
+//     const loggedInUserId = getUserIdFromToken(token);
+//     const result = await fetch(
+//       `https://localhost:7140/User/LockOrUnlockUser/userId=${userId}?adminId=${loggedInUserId}`,
+//       {
+//         method: "POST",
+//         headers: {
+//           Accept: "application/json",
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${token}`,
+//         },
 //       }
+//     );
 
-//       const isValid = isTokenValid(token);
-//       if (!isValid) {
-//         console.error("Invalid token");
-//         return;
-//       }
-//       //the user id of the url will be the id from the rendered id not the id of the
-//       const userId = getUserIdFromToken(token);
-//       const result = await fetch(
-//         `https://localhost:7100/User/LockOrUnlockUser?userId=${userId}`,
-//         {
-//           method: "POST",
-//           headers: {
-//             Accept: "application/json",
-//             "Content-Type": "application/json",
-            
-//           },
-//         }
-//       );
-
-//       if (result.ok) {
-//         alert(`User ${isLocked ? "unlocked" : "locked"} successfully`);
-//         getData(); 
-//       } else {
-//         console.error(`Failed to ${isLocked ? "unlock" : "lock"} user`);
-//       }
-//     } catch (error) {
-//       console.error(
-//         `Error ${isLocked ? "unlocking" : "locking"} user:`,
-//         error.message
-//       );
+//     if (result.ok) {
+//       alert(`User ${isLocked ? "unlocked" : "locked"} successfully`);
+//       getData(); // Refresh the data to reflect changes
+//     } else {
+//       console.error(`Failed to ${isLocked ? "unlock" : "lock"} user`);
 //     }
-//   };
+//   } catch (error) {
+//     console.error(
+//       `Error ${isLocked ? "unlocking" : "locking"} user:`,
+//       error.message
+//     );
+//   }
+// };
 
-//   const getData = async () => {
-//     try {
-//       const result = await fetch("https://localhost:7100/User");
-//       const data = await result.json();
-//       setData(data);
-//     } catch (error) {
-//       console.error("Error fetching users:", error);
-//     }
-//   };
+// const getData = async () => {
+//   try {
+//     const result = await fetch("https://localhost:7100/User");
+//     const data = await result.json();
+//     setData(data);
+//   } catch (error) {
+//     console.error("Error fetching users:", error);
+//   }
+// };
 
-//   useEffect(() => {
-//     getData();
-//   }, []);
+// useEffect(() => {
+//   getData();
+// }, []);
 
-//   const handleDelete = async (userId) => {
-//     try {
-//       const result = await fetch(
-//         `https://localhost:7140/User/DeleteUser/${userId}`,
-//         {
-//           method: "DELETE",
-//           headers: {
-//             Accept: "application/json",
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       );
-//       if (result.ok) {
-//         alert("User deleted successfully");
-//         getData(); // Refresh the data to reflect changes
-//       } else {
-//         alert("Failed to delete user");
+// const handleDelete = async (userId) => {
+//   try {
+//     const result = await fetch(
+//       `https://localhost:7140/User/DeleteUser/${userId}`,
+//       {
+//         method: "DELETE",
+//         headers: {
+//           Accept: "application/json",
+//           "Content-Type": "application/json",
+//         },
 //       }
-//     } catch (error) {
-//       console.error("Error deleting user:", error);
+//     );
+//     if (result.ok) {
+//       alert("User deleted successfully");
+//       getData(); // Refresh the data to reflect changes
+//     } else {
+//       alert("Failed to delete user");
 //     }
-//   };
+//   } catch (error) {
+//     console.error("Error deleting user:", error);
+//   }
+// };
 
 //   return (
 //     <>
@@ -176,9 +176,9 @@ const Team = () => {
         console.error("Invalid token");
         return;
       }
-      const userId = getUserIdFromToken(token);
+      const loggedInUserId = getUserIdFromToken(token);
       const result = await fetch(
-        `https://localhost:7100/User/LockOrUnlockUser?userId=${userId}`,
+        `https://localhost:7140/User/LockOrUnlockUser/userId=${userId}?adminId=${loggedInUserId}`,
         {
           method: "POST",
           headers: {
@@ -189,7 +189,6 @@ const Team = () => {
       );
       if (result.ok) {
         alert("User locked successfully");
-        // Refresh the data to reflect changes
         getData();
       } else {
         console.error("Failed to lock user");
@@ -210,11 +209,11 @@ const Team = () => {
       const isValid = isTokenValid(token);
       if (!isValid) {
         console.error("Invalid token");
-        return; 
+        return;
       }
-      const userId = getUserIdFromToken(token);
+      const loggedInUserId = getUserIdFromToken(token);
       const result = await fetch(
-        `https://localhost:7100/User/LockOrUnlockUser?userId=${userId}`,
+        `https://localhost:7140/User/LockOrUnlockUser/userId=${userId}?adminId=${loggedInUserId}`,
         {
           method: "POST",
           headers: {
@@ -258,7 +257,7 @@ const Team = () => {
 
   const getData = async () => {
     try {
-      const result = await fetch("https://localhost:7100/User");
+      const result = await fetch("https://localhost:7140/User");
       const data = await result.json();
       setData(data);
     } catch (error) {
@@ -313,12 +312,13 @@ const Team = () => {
               <td>
                 <img
                   style={{ width: 100, borderRadius: 100 }}
-                  src={"https://localhost:7100" + employee.pictureURL}
+                  src={"https://localhost:7140" + employee.pictureURL}
                   alt=""
                 />
               </td>
               <td>
                 <Button
+                  userId={employee.id}
                   onLock={() => handleLock(employee.id)}
                   onUnlock={() => handleUnlock(employee.id)}
                 />

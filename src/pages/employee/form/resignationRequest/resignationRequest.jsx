@@ -21,7 +21,6 @@ function ResignationRequest() {
     };
     fetchData();
   }, []);
-
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("https://localhost:7140/Position");

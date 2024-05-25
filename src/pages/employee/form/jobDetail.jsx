@@ -5,7 +5,14 @@ function JobDetail() {
   const { id } = useParams();
   const [job, setJob] = useState(null);
   const [hasApplied, setHasApplied] = useState(false);
-
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  };
+  
   useEffect(() => {
     fetch(`https://localhost:7140/Promotion/${id}`)
       .then((response) => response.json())
@@ -16,7 +23,6 @@ function JobDetail() {
       setHasApplied(true);
     }
   }, [id]);
-
   const applyOperation = async (jobId) => {
     try {
       const token = sessionStorage.getItem("token");
@@ -24,7 +30,6 @@ function JobDetail() {
         console.error("Token not found in session storage");
         return;
       }
-
       const isValid = isTokenValid(token);
       if (!isValid) {
         console.error("Invalid token");
@@ -41,7 +46,6 @@ function JobDetail() {
           },
         }
       );
-
       if (result.ok) {
         alert("Applied successfully");
         setHasApplied(true);
@@ -106,7 +110,8 @@ function JobDetail() {
                     <strong>Requirement:</strong> {job.requirements}
                   </div>
                   <div>
-                    <strong>Posting Date:</strong> {job.postingDate}
+                    <strong>Posting Date:</strong> {formatDate(job.postingDate)}
+                    {/* <strong>Posting Date:</strong> {job.postingDate} */}
                   </div>
                 </div>
               </div>
