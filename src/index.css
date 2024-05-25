@@ -229,3 +229,42 @@ select {
 }
 
 
+
+.evaluation-container {
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 800px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.details-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.evaluation-details, .feedback-details {
+  width: 48%;
+}
+
+.evaluation-item, .feedback-item {
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.evaluation-item p, .feedback-item p {
+  margin: 5px 0;
+}
+
+.evaluation-item p strong, .feedback-item p strong {
+  font-weight: bold;
+}
+ 

@@ -20,7 +20,7 @@ function SupervisorRouter(){
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <div className="app">
-              <SupervisorSidebar />
+              <SupervisorSidebar /> 
             <main className="content">
               <Routes>
               <Route path="/" element={<SupervisorDashboard />} />
@@ -31,7 +31,7 @@ function SupervisorRouter(){
               <Route path="/changePassword" element={<ChangePassword/>}/>
               <Route path="/myAccount" element={<MyAccount/>}/>
               <Route path="/uploadImage" element={<UploadImage/>}/>
-              <Route path="/evaluationDetail:id" element={<EvaluationDetail/>}/>
+              <Route path="/evaluationDetail/:employeeId" element={<EvaluationDetail/>}/>
               </Routes>
             </main>
           </div>

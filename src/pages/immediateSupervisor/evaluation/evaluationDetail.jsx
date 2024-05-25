@@ -1,66 +1,109 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-function EvaluationDetail() {
-  const { id } = useParams();
-  const [evaluation, setEvaluation] = useState(null);
+const EvaluationDetail = () => {
+    const { employeeId } = useParams();
+    const [employeeEvaluation, setEmployeeEvaluation] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [showFeedbackForm, setShowFeedbackForm] = useState(false);
+    const [feedback, setFeedback] = useState('');
 
-  //the following are not the correct url for the evaluation detail
-  useEffect(() => {
-    fetch(`https://localhost:7140/Employee/${id}`)
-      .then((response) => response.json())
-      .then((data) => setEvaluation(data))
-      .catch((error) =>
-        console.error("Error fetching employee details:", error)
-      );
-  }, [id]);
-  if (!evaluation) {
-    return <div>Loading...</div>;
-  }
+    useEffect(() => {
+        // Fetch the employee evaluation details from the API
+        fetch(`https://localhost:7100/api/Evaluation/Detail/${employeeId}`)
+            .then(response => response.json())
+            .then(data => {
+                setEmployeeEvaluation(data);
+                setLoading(false);
+            })
+            .catch(error => {
+                console.error('Error fetching employee evaluation details:', error);
+                setLoading(false);
+            });
+    }, [employeeId]);
 
-  return (
-    <>
-      <div className="card mt-5 me-3 ms-4 text-dark">
-        <div className="card-header">
-          <h5>{evaluation.employeeName}</h5>
+    const handleFeedbackSubmit = (event) => {
+        event.preventDefault();
+
+        const feedbackData = {
+            employeeId: employeeId,
+            feedback: feedback
+        };
+
+        fetch('https://localhost:7100/api/Evaluation/PostEmployeeFeedback', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(feedbackData)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Feedback submitted successfully!');
+                setFeedback('');
+                setShowFeedbackForm(false);
+            } else {
+                alert('Feedback submitted successfully!');
+                setFeedback('');
+                setShowFeedbackForm(false);
+            }
+        })
+        .catch(error => console.error('Error submitting feedback:', error));
+    };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (!employeeEvaluation) {
+        return <div>No evaluation details found for the selected employee.</div>;
+    }
+
+    return (
+        <div className="container">
+            <h1>Evaluation Details for {employeeEvaluation.employeeName}</h1>
+            <button 
+                className="btn btn-primary" 
+                onClick={() => setShowFeedbackForm(!showFeedbackForm)}
+            >
+                {showFeedbackForm ? 'Hide Feedback Form' : 'Show Feedback Form'}
+            </button>
+
+            {showFeedbackForm && (
+                <form onSubmit={handleFeedbackSubmit}>
+                    <div className="form-group">
+                        <label>Feedback:</label>
+                        <textarea 
+                            className="form-control" 
+                            value={feedback}
+                            onChange={(e) => setFeedback(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button type="submit" className="btn btn-success">Submit Feedback</button>
+                </form>
+            )}
+
+            <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Evaluation Factor</th>
+                        <th>Rating</th>
+                        <th>Evaluation Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {employeeEvaluation.evaluations.map((evaluation, index) => (
+                        <tr key={index}>
+                            <td>{evaluation.factorName}</td>
+                            <td>{evaluation.rating}</td>
+                            <td>{new Date(evaluation.evaluationDate).toLocaleDateString()}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
-        <div className="card-body">
-          <div className="row">
-            <div className="col-md-6">
-              <p>
-                <strong>evaluation Id :</strong> {evaluation.id}
-              </p>
-              <p>
-                <strong>Employee Name :</strong> {evaluation.employeeName}
-              </p>
-              <p>
-                <strong>Rating :</strong> {evaluation.rating}
-              </p>
-              <p>
-                <strong>Feedback :</strong> {evaluation.feedback}
-              </p>
-              {/* the following needs modification for the page to list the detail*/}
-              <p>
-                <strong>Mother Name :</strong> {evaluation.motherName}
-              </p>
-              <p>
-                <strong>Phone Number :</strong> {evaluation.phoneNo}
-              </p>
-              <p>
-                <strong>Marital Status :</strong> {evaluation.maritalStatus}
-              </p>
-              <p>
-                <strong>Region :</strong> {evaluation.region}
-              </p>
-              <p>
-                <strong>Woreda :</strong> {evaluation.woreda}
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
+    );
+};
 
 export default EvaluationDetail;
