@@ -158,13 +158,6 @@ const EmployeeSidebar = () => {
             >
               Data
             </Typography>
-            { <Item
-              title="Supervisor Feedback"
-              to="/supervisorFeedback"
-             // icon={<FeedbackOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            /> }
             <Item
               title="Posted Jobs"
               to="/postedJob"
@@ -172,9 +165,9 @@ const EmployeeSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-                        <Item
-              title="Evaluation List"
-              to="/evaluationList"
+            <Item
+              title="Evaluation Result"
+              to="/evaluationResult"
               icon={<PostAddOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

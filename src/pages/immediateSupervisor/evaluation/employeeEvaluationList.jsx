@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const EvaluationList = () => {
+const EmployeeEvaluationList = () => {
   const [evaluations, setEvaluations] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,7 +23,7 @@ const EvaluationList = () => {
   }
 
   return (
-    <div>
+    <div className="text-dark">
       <h1>Employee Evaluations</h1>
       <table>
         <thead>
@@ -54,4 +54,4 @@ const EvaluationList = () => {
   );
 };
 
-export default EvaluationList;
+export default EmployeeEvaluationList;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
@@ -141,20 +141,27 @@ const SupervisorSidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-             <Item
-              title="Send Feedback"
-              to="/sendFeedback"
+            <Item
+              title="Evaluation Form"
+              to="/employeeEvaluationForm"
               icon={<ChecklistRtlOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> 
-              <Item
+            />
+            <Item
               title="Evaluation List"
-              to="/listEvaluation"
+              to="/employeeEvaluationList"
               icon={<ChecklistRtlOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            /> 
+            />
+            <Item
+              title="Evaluation Factor"
+              to="/evaluationFactorList"
+              icon={<ChecklistRtlOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
             <Typography
               variant="h6"
               className="text-dark fw-bold"
