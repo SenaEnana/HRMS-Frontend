@@ -1,88 +1,118 @@
 import { useEffect, useState } from "react";
+import Button from "../../../components/button";
 
 const Team = () => {
   const [data, setData] = useState([]);
 
-const getUserIdFromToken = (token) => {
-  const decodedToken = JSON.parse(atob(token.split(".")[1]));
-  return decodedToken[
-    "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
-  ];
-};
-
-const isTokenValid = (token) => {
-  if (!token) {
-    return false;
-  }
-  try {
-    const decodedToken = JSON.parse(atob(token.split(".")[1]));
-    const expirationTime = decodedToken.exp * 1000;
-    const currentTime = Date.now();
-    return currentTime < expirationTime;
-  } catch (error) {
-    console.error("Error decoding or validating token:", error);
-    return false;
-  }
-};
-
-const handleLockToggle = async (userId, isLocked) => {
-  try {
-    const token = sessionStorage.getItem("token");
-    if (!token) {
-      console.error("Token not found in session storage");
-      return;
-    }
-
-    const isValid = isTokenValid(token);
-    if (!isValid) {
-      console.error("Invalid token");
-      return;
-    }
-    //the user id of the url will be the id from the rendered id not the id of the
-    const loggedInUserId = getUserIdFromToken(token);
-    const result = await fetch(
-      `https://localhost:7140/User/LockOrUnlockUser/userId=${userId}?adminId=${loggedInUserId}`,
-      {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+  const handleLock = async (userId) => {
+    try {
+      const token = sessionStorage.getItem("token");
+      if (!token) {
+        console.error("Token not found in session storage");
+        return;
       }
-    );
 
-    if (result.ok) {
-      alert(`User ${isLocked ? "unlocked" : "locked"} successfully`);
-      getData(); // Refresh the data to reflect changes
-    } else {
-      console.error(`Failed to ${isLocked ? "unlock" : "lock"} user`);
+      const isValid = isTokenValid(token);
+      if (!isValid) {
+        console.error("Invalid token");
+        return;
+      }
+      const userId = getUserIdFromToken(token);
+      const result = await fetch(
+        `https://localhost:7100/User/LockOrUnlockUser?userId=${userId}`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (result.ok) {
+        alert("User unlocked successfully");
+        getData();
+      } else {
+        console.error("Failed to unlock user");
+      }
+    } catch (error) {
+      console.error("Error unlocking user:", error.message);
     }
-  } catch (error) {
-    console.error(
-      `Error ${isLocked ? "unlocking" : "locking"} user:`,
-      error.message
-    );
-  }
-};
+  };
 
-const getData = async () => {
-  try {
-    const result = await fetch("https://localhost:7100/User");
-    const data = await result.json();
-    setData(data);
-  } catch (error) {
-    console.error("Error fetching users:", error);
-  }
-};
+  const handleUnlock = async (userId) => {
+    try {
+      const token = sessionStorage.getItem("token");
+      if (!token) {
+        console.error("Token not found in session storage");
+        return;
+      }
 
-useEffect(() => {
-  getData();
-}, []);
+      const isValid = isTokenValid(token);
+      if (!isValid) {
+        console.error("Invalid token");
+        return;
+      }
+      const userId = getUserIdFromToken(token);
+      console.log(userId)
+      const result = await fetch(
+        `https://localhost:7100/User/LockOrUnlockUser?userId=${userId}`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (result.ok) {
+        alert("User locked successfully");
+        getData();
+      } else {
+        console.error("Failed to lock user");
+      }
+    } catch (error) {
+      console.error("Error locking user:", error.message);
+    }
+  };
 
-const handleDelete = async (userId) => {
-  try {
-    const result = await fetch(
+  const getUserIdFromToken = (token) => {
+    const decodedToken = JSON.parse(atob(token.split(".")[1]));
+    return decodedToken[
+      "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+    ];
+  };
+
+  const isTokenValid = (token) => {
+    if (!token) {
+      return false;
+    }
+    try {
+      const decodedToken = JSON.parse(atob(token.split(".")[1]));
+      const expirationTime = decodedToken.exp * 1000;
+      const currentTime = Date.now();
+      return currentTime < expirationTime;
+    } catch (error) {
+      console.error("Error decoding or validating token:", error);
+      return false;
+    }
+  };
+
+  const getData = async () => {
+    try {
+      const result = await fetch("https://localhost:7100/User");
+      const data = await result.json();
+      setData(data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  async function handleDelete(userId) {
+    let result = await fetch(
       `https://localhost:7140/User/DeleteUser/${userId}`,
       {
         method: "DELETE",
@@ -93,15 +123,14 @@ const handleDelete = async (userId) => {
       }
     );
     if (result.ok) {
-      alert("User deleted successfully");
-      getData(); // Refresh the data to reflect changes
+      console.log("operation is successful");
+      alert("user deleted successfully");
     } else {
-      alert("Failed to delete user");
+      console.log("operation failed");
+      alert("failed to delete");
     }
-  } catch (error) {
-    console.error("Error deleting user:", error);
+    getData();
   }
-};
 
   return (
     <>
@@ -130,18 +159,13 @@ const handleDelete = async (userId) => {
                 />
               </td>
               <td>
+                <Button
+                  userId={employee.id}
+                  onLock={() => handleLock(employee.id)}
+                  onUnlock={() => handleUnlock(employee.id)}
+                />
                 <button
-                  className={`btn btn-sm ${
-                    employee.isLocked ? "btn-success" : "btn-warning"
-                  }`}
-                  onClick={() =>
-                    handleLockToggle(employee.id, employee.isLocked)
-                  }
-                >
-                  {employee.isLocked ? "Unlock" : "Lock"}
-                </button>
-                <button
-                  className="btn btn-outline-danger btn-sm ms-2"
+                  className="btn btn-outline-danger btn-sm"
                   onClick={() => handleDelete(employee.id)}
                 >
                   Delete
@@ -156,185 +180,3 @@ const handleDelete = async (userId) => {
 };
 
 export default Team;
-
-// import { useEffect, useState } from "react";
-// import Button from "../../../components/button";
-
-// const Team = () => {
-//   const [data, setData] = useState([]);
-
-//   const handleLock = async (userId) => {
-//     try {
-//       const token = sessionStorage.getItem("token");
-//       if (!token) {
-//         console.error("Token not found in session storage");
-//         return;
-//       }
-
-//       const isValid = isTokenValid(token);
-//       if (!isValid) {
-//         console.error("Invalid token");
-//         return;
-//       }
-//       const loggedInUserId = getUserIdFromToken(token);
-//       const result = await fetch(
-//         `https://localhost:7140/User/LockOrUnlockUser/userId=${userId}?adminId=${loggedInUserId}`,
-//         {
-//           method: "POST",
-//           headers: {
-//             Accept: "application/json",
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       );
-//       if (result.ok) {
-//         alert("User locked successfully");
-//         getData();
-//       } else {
-//         console.error("Failed to lock user");
-//       }
-//     } catch (error) {
-//       console.error("Error locking user:", error.message);
-//     }
-//   };
-
-//   const handleUnlock = async (userId) => {
-//     try {
-//       const token = sessionStorage.getItem("token");
-//       if (!token) {
-//         console.error("Token not found in session storage");
-//         return;
-//       }
-
-//       const isValid = isTokenValid(token);
-//       if (!isValid) {
-//         console.error("Invalid token");
-//         return;
-//       }
-//       const loggedInUserId = getUserIdFromToken(token);
-//       const result = await fetch(
-//         `https://localhost:7140/User/LockOrUnlockUser/userId=${userId}?adminId=${loggedInUserId}`,
-//         {
-//           method: "POST",
-//           headers: {
-//             Accept: "application/json",
-//             "Content-Type": "application/json",
-//           },
-//         }
-//       );
-//       if (result.ok) {
-//         alert("User unlocked successfully");
-//         getData();
-//       } else {
-//         console.error("Failed to unlock user");
-//       }
-//     } catch (error) {
-//       console.error("Error unlocking user:", error.message);
-//     }
-//   };
-
-//   const getUserIdFromToken = (token) => {
-//     const decodedToken = JSON.parse(atob(token.split(".")[1]));
-//     return decodedToken[
-//       "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
-//     ];
-//   };
-
-//   const isTokenValid = (token) => {
-//     if (!token) {
-//       return false;
-//     }
-//     try {
-//       const decodedToken = JSON.parse(atob(token.split(".")[1]));
-//       const expirationTime = decodedToken.exp * 1000;
-//       const currentTime = Date.now();
-//       return currentTime < expirationTime;
-//     } catch (error) {
-//       console.error("Error decoding or validating token:", error);
-//       return false;
-//     }
-//   };
-
-//   const getData = async () => {
-//     try {
-//       const result = await fetch("https://localhost:7140/User");
-//       const data = await result.json();
-//       setData(data);
-//     } catch (error) {
-//       console.error("Error fetching users:", error);
-//     }
-//   };
-
-//   useEffect(() => {
-//     getData();
-//   }, []);
-
-//   async function handleDelete(userId) {
-//     let result = await fetch(
-//       `https://localhost:7140/User/DeleteUser/${userId}`,
-//       {
-//         method: "DELETE",
-//         headers: {
-//           Accept: "application/json",
-//           "Content-Type": "application/json",
-//         },
-//       }
-//     );
-//     if (result.ok) {
-//       console.log("operation is successful");
-//       alert("user deleted successfully");
-//     } else {
-//       console.log("operation failed");
-//       alert("failed to delete");
-//     }
-//     getData();
-//   }
-
-//   return (
-//     <>
-//       <div className="d-flex justify-content-between text-dark mb-3">
-//         <h5 className="text-start">User Account</h5>
-//       </div>
-//       <table className="table table-hover text-dark w-100 fs-6">
-//         <thead>
-//           <tr>
-//             <th>Employee Name</th>
-//             <th>Role</th>
-//             <th>User Photo</th>
-//             <th>Action</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {data.map((employee) => (
-//             <tr key={employee.id}>
-//               <td>{employee.name}</td>
-//               <td>{employee.roles}</td>
-//               <td>
-//                 <img
-//                   style={{ width: 100, borderRadius: 100 }}
-//                   src={"https://localhost:7140" + employee.pictureURL}
-//                   alt=""
-//                 />
-//               </td>
-//               <td>
-//                 <Button
-//                   userId={employee.id}
-//                   onLock={() => handleLock(employee.id)}
-//                   onUnlock={() => handleUnlock(employee.id)}
-//                 />
-//                 <button
-//                   className="btn btn-outline-danger btn-sm"
-//                   onClick={() => handleDelete(employee.id)}
-//                 >
-//                   Delete
-//                 </button>
-//               </td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </>
-//   );
-// };
-
-// export default Team;

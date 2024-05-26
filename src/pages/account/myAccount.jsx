@@ -43,7 +43,7 @@ function MyAccount() {
     }
     const userId = getUserIdFromToken(token);
     console.log(userId);
-    fetch(`https://localhost:7140/Account/profile?userId=${userId}`, { 
+    fetch(`https://localhost:7100/Account/profile?userId=${userId}`, { 
       method: "GET",
       headers: {
         Accept: "application/json", 
@@ -86,7 +86,7 @@ function MyAccount() {
         <div className="profile-header">
           <img
             className="profile-picture"
-            src={"https://localhost:7140" + user.pictureURL}
+            src={"https://localhost:7100" + user.pictureURL}
             alt="Profile"
           />
           <h2 className="profile-username">{user.name}</h2>
