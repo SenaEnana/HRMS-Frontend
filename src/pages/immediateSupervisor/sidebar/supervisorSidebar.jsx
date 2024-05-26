@@ -10,6 +10,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { tokens } from "../../../theme";
 import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -88,17 +89,16 @@ const SupervisorSidebar = () => {
               </Box>
             )}
           </MenuItem>
-
           {!isCollapsed && (
             <Box mb="25px">
               <Box textAlign="center">
                 <Typography
-                  variant="h2"
+                className="fst-italic"
+                  variant="h3"
                   color={colors.grey[100]}
-                  fontWeight="bold"
-                  sx={{ m: "10px 0 0 0" }}
+                  sx={{ m: "8px 0 0 0" }}
                 >
-                  User Name
+                  Welcome back!
                 </Typography>
               </Box>
             </Box>
@@ -144,7 +144,7 @@ const SupervisorSidebar = () => {
             <Item
               title="Evaluation Form"
               to="/employeeEvaluationForm"
-              icon={<ChecklistRtlOutlinedIcon />}
+              icon={<GradeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

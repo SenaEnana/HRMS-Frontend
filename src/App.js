@@ -3,10 +3,10 @@ import EmployeeRouter from "./employeeRouter";
 import HrRouter from "./hrRouter";
 import SupervisorRouter from "./supervisorRouter";
 import LeaveAdminRouter from "./leaveAdminRouter";
+import CeoRouter from "./ceoRouter";
 import Auth from "./pages/auth/auth";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import CeoRouter from "./ceoRouter";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
@@ -59,7 +59,7 @@ function App() {
        case 'LeaveAdmin':
          return <LeaveAdminRouter /> ;
        case 'HRManager':
-         return <AdminRouter /> ;
+         return <HrRouter /> ;
        case 'Employee':
          return <EmployeeRouter /> ;
          case 'CEO':

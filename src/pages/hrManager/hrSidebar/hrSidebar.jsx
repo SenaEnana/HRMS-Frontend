@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
@@ -40,9 +40,6 @@ const HrSidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
   const navigate = useNavigate();
-
-  const { id } = useParams();
-  const [employee, setEmployee] = useState(null);
 
   const items = [
     {
@@ -109,18 +106,16 @@ const HrSidebar = () => {
               </Box>
             )}
           </MenuItem>
-
           {!isCollapsed && (
             <Box mb="25px">
               <Box textAlign="center">
                 <Typography
-                  variant="h2"
+                  className="fst-italic"
+                  variant="h3"
                   color={colors.grey[100]}
-                  fontWeight="bold"
-                  sx={{ m: "10px 0 0 0" }}
+                  sx={{ m: "8px 0 0 0" }}
                 >
-                  welcome,
-                  {/* {employee.firstName} */}
+                  Welcome back!
                 </Typography>
               </Box>
             </Box>
