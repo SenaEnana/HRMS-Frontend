@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const EmployeeEvaluationList = () => {
@@ -6,16 +6,17 @@ const EmployeeEvaluationList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch employee evaluations from the API
-    fetch("https://localhost:7100/api/Evaluation")
+    // Fetch the employee evaluations from the API
+    fetch("https://localhost:7100/api/Evaluation/EmployeeEvaluations")
       .then((response) => response.json())
       .then((data) => {
         setEvaluations(data);
         setLoading(false);
       })
-      .catch((error) =>
-        console.error("Error fetching employee evaluations:", error)
-      );
+      .catch((error) => {
+        console.error("Error fetching employee evaluations:", error);
+        setLoading(false);
+      });
   }, []);
 
   if (loading) {
@@ -23,27 +24,33 @@ const EmployeeEvaluationList = () => {
   }
 
   return (
-    <div className="text-dark">
+    <div className="container">
       <h1>Employee Evaluations</h1>
-      <table>
+      <table className="table table-striped">
         <thead>
           <tr>
+            <th>Employee ID</th>
             <th>Employee Name</th>
-            <th>Rating</th>
-            <th>Feedback</th>
+            <th>Total Rating</th>
+            <th>Evaluation Date</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {evaluations.map((evaluation) => (
-            <tr key={evaluation.id}>
+          {evaluations.map((evaluation, index) => (
+            <tr key={index}>
+              <td>{evaluation.employeeId}</td>
               <td>{evaluation.employeeName}</td>
-              <td>{evaluation.rating}</td>
-              <td>{evaluation.feedback}</td>
+              <td>{evaluation.totalRating}</td>
               <td>
-                <Link to={`/evaluationDetail/${evaluation.id}`}>
-                  <button className="btn btn-outline-secondary btn-sm">
-                    Detail
-                  </button>
+                {new Date(evaluation.evaluationDate).toLocaleDateString()}
+              </td>
+              <td>
+                <Link
+                  to={`/evaluationDetail/${evaluation.employeeId}`}
+                  className="btn btn-primary"
+                >
+                  Detail
                 </Link>
               </td>
             </tr>
