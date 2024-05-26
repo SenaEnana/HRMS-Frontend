@@ -1,7 +1,5 @@
-// NewEmployeeList.js
 import { useState, useEffect, useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
-// import Topbar from "../../commonPages/topbar";
 import { Box, IconButton, useTheme } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
@@ -14,7 +12,6 @@ const EmployeeList = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
-  const [fetchedData, setFetchedData] = useState(null);
   const [searchQuery, setSearchQuery] = useState({
     empId: "",
     name: "",
@@ -33,34 +30,64 @@ const EmployeeList = () => {
 
   const fetchData = () => {
     const queryParams = new URLSearchParams(searchQuery).toString();
-    fetch(`https://localhost:7140/Employee/Filter?${queryParams}`)
+    fetch(`https://localhost:7100/Employee/Filter?${queryParams}`)
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
-        setFetchedData(json);
+        setData(json);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
   };
 
+  const downloadReport = () => {
+    const queryParams = new URLSearchParams(searchQuery).toString();
+    fetch(`https://localhost:7100/Employee/Download?${queryParams}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'text/csv',
+      },
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.blob();
+      } else {
+        throw new Error('Failed to download the file');
+      }
+    })
+    .then(blob => {
+      const url = window.URL.createObjectURL(new Blob([blob]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'employees.csv');
+      document.body.appendChild(link);
+      link.click();
+      link.parentNode.removeChild(link);
+    })
+    .catch(error => {
+      console.error('Error downloading the file:', error);
+    });
+  };
+
   useEffect(() => {
     getData();
   }, []);
 
-  async function getData() {
-    let result = await fetch("https://localhost:7140/Employee/ListEmployees");
-    result = await result.json();
-    setData(result);
-  }
+  const getData = async () => {
+    try {
+      const result = await fetch("https://localhost:7100/Employee/ListEmployees");
+      const data = await result.json();
+      setData(data);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+    }
+  };
 
   return (
     <>
       <Box display="flex" justifyContent="space-between" p={2}>
-        <Box
-          className="d-flex rounded m-1"
-          backgroundColor={colors.primary[400]}
-        >
+        <Box className="d-flex rounded m-1" backgroundColor={colors.primary[400]}>
           <InputBase
             className="ps-2 fs-6 m-1 text-dark"
             placeholder="Enter Employee ID"
@@ -69,7 +96,7 @@ const EmployeeList = () => {
           />
           <InputBase
             className="ps-2 fs-6 m-1 text-dark"
-            placeholder="Enter Name "
+            placeholder="Enter Name"
             value={searchQuery.name}
             onChange={(e) => handleChange("name", e.target.value)}
           />
@@ -102,17 +129,16 @@ const EmployeeList = () => {
             className="btn ms-1 text-dark"
             onClick={fetchData}
           >
-            search
+            Search
             <SearchIcon className="text-success" />
           </IconButton>
         </Box>
       </Box>
       <div className="container mt-5">
-        <button className="btn btn-secondary btn-sm float-end ms-1">
+        <button className="btn btn-secondary btn-sm float-end ms-1" onClick={downloadReport}>
           <DownloadOutlinedIcon sx={{ mr: "10px" }} />
           Download Reports
         </button>
-        <MockSearch/>
         <div className="d-flex justify-content-between text-dark mb-3">
           <h5 className="text-start">Employee List</h5>
           <NavLink

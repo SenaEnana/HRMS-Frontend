@@ -29,7 +29,7 @@ const EmployeeEvaluationList = () => {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th>Employee ID</th>
+            {/* <th>Employee ID</th> */}
             <th>Employee Name</th>
             <th>Total Rating</th>
             <th>Evaluation Date</th>
@@ -39,7 +39,7 @@ const EmployeeEvaluationList = () => {
         <tbody>
           {evaluations.map((evaluation, index) => (
             <tr key={index}>
-              <td>{evaluation.employeeId}</td>
+              {/* <td>{evaluation.employeeId}</td> */}
               <td>{evaluation.employeeName}</td>
               <td>{evaluation.totalRating}</td>
               <td>

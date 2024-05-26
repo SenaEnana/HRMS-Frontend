@@ -9,22 +9,39 @@ function EvaluationFactorList() {
   }, []);
 
   async function deleteOperation(Id) {
-    let result = await fetch(`https://localhost:7140/LeaveType/${Id}`, {
-      method: "DELETE",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-    });
-    result = await result.json();
-    getData();
+    try {
+      let result = await fetch(`https://localhost:7100/api/EvaluationFactor/${Id}`, {
+        method: "DELETE",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (result.ok) {
+        getData(); // Refresh data after deletion
+      } else {
+        console.error("Failed to delete the evaluation factor");
+      }
+    } catch (error) {
+      console.error("Error deleting evaluation factor:", error);
+    }
   }
+
   async function getData() {
-    let result = await fetch("https://localhost:7140/LeaveType/GetLeaveTypes");
-    result = await result.json();
-    console.log(result);
-    setData(result);
+    try {
+      let result = await fetch("https://localhost:7100/api/EvaluationFactor");
+      if (result.ok) {
+        let data = await result.json();
+        setData(data);
+      } else {
+        console.error("Failed to fetch evaluation factors");
+      }
+    } catch (error) {
+      console.error("Error fetching evaluation factors:", error);
+    }
   }
+
   return (
     <>
       <div className="d-flex justify-content-between mt-5 text-dark">
@@ -39,10 +56,9 @@ function EvaluationFactorList() {
       <table className="table table-hover text-dark w-100 fs-6">
         <thead>
           <tr>
-            <th>Leave Type Id</th>
-            <th>Name</th>
-            <th>Allowed Days</th>
-            <th></th>
+            {/* <th>Leave Type Id</th> */}
+            <th>Evaluation Factor</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -50,9 +66,8 @@ function EvaluationFactorList() {
             const evaluationFactorId = evaluationFactor.id;
             return (
               <tr key={evaluationFactorId}>
-                {Object.values(evaluationFactor).map((item, index) => (
-                  <td key={index}>{item}</td>
-                ))}
+                {/* <td>{evaluationFactorId}</td> */}
+                <td>{evaluationFactor.name}</td>
                 <td>
                   <button
                     onClick={() => deleteOperation(evaluationFactorId)}

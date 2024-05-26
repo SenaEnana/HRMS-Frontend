@@ -8,8 +8,8 @@ function AddEvaluationFactor() {
   async function addEvaluationFactor(values) {
     try {
       const response = await fetch(
-        "https://localhost:7140/LeaveType/AddLeaveTypes",
-        {
+        "https://localhost:7100/api/EvaluationFactor",
+        { 
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -35,12 +35,10 @@ function AddEvaluationFactor() {
         <Formik
           initialValues={{
             Name: "",
-            AllowedDays: "",
           }}
           onSubmit={(values) => {
             addEvaluationFactor(values);
           }}
-          validationSchema={leaveTypeValidation}
         >
           {(formikValues) => (
             <form className="form-group rounded border col-6 ms-5 ms-4 bg-light">
@@ -50,19 +48,10 @@ function AddEvaluationFactor() {
               <TextInput
                 type="text"
                 name="Name"
-                label="Leave Type Name"
+                label="Evaluation Factor Name"
                 placeholder="enter leave type name"
                 value={formikValues.values.Name}
                 error={formikValues.errors.Name}
-                onChange={formikValues.handleChange}
-              />
-              <TextInput
-                type="number"
-                name="AllowedDays"
-                label="Allowed Days"
-                placeholder="enter allowed days"
-                value={formikValues.values.AllowedDays}
-                error={formikValues.errors.AllowedDays}
                 onChange={formikValues.handleChange}
               />
               <div className="m-3">

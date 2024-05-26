@@ -11,6 +11,8 @@ import UploadImage from "./pages/account/uploadImage";
 import EvaluationDetail from "./pages/immediateSupervisor/evaluation/evaluationDetail";
 import EmployeeEvaluationList from "./pages/immediateSupervisor/evaluation/employeeEvaluationList";
 import EmployeeEvaluationForm from "./pages/immediateSupervisor/evaluation/employeeEvaluationForm";
+import EvaluationFactorList from "./pages/immediateSupervisor/evaluation/evaluationFactorList";
+import AddEvaluationFactor from "./pages/immediateSupervisor/evaluation/addEvaluationFactor";
 
 function SupervisorRouter(){
     const [theme, colorMode] = useMode();
@@ -26,6 +28,8 @@ function SupervisorRouter(){
               <Route path="/" element={<SupervisorDashboard />} />
               <Route path="/employeeEvaluationList" element={<EmployeeEvaluationList/>} />
               <Route path="/employeeEvaluationForm" element={<EmployeeEvaluationForm/>} />
+              <Route path="/evaluationFactorList" element={<EvaluationFactorList/>} />
+              <Route path="/addEvaluationFactor" element={<AddEvaluationFactor/>} />
               <Route path="/complaintList" element={<ComplaintList/>}/>
               <Route path="/bar" element={<Bar />} />
               <Route path="/changePassword" element={<ChangePassword/>}/>

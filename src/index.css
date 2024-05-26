@@ -231,12 +231,11 @@ select {
 
 
 .evaluation-container {
-  margin: 20px auto;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 80%;
-  max-width: 800px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #333; /* Ensure text is visible */
 }
 
 .header {
@@ -244,27 +243,47 @@ select {
   margin-bottom: 20px;
 }
 
+.header h1 {
+  font-size: 24px;
+  color: #007BFF;
+}
+
 .details-container {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 }
 
 .evaluation-details, .feedback-details {
-  width: 48%;
+  margin-bottom: 20px;
+}
+
+.evaluation-details h2, .feedback-details h2 {
+  font-size: 20px;
+  color: #007BFF;
+  border-bottom: 2px solid #007BFF;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .evaluation-item, .feedback-item {
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 15px;
   margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .evaluation-item p, .feedback-item p {
   margin: 5px 0;
 }
 
-.evaluation-item p strong, .feedback-item p strong {
+.strong {
   font-weight: bold;
 }
- 
+
+.loading, .no-data {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: #007BFF;
+}

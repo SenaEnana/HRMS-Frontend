@@ -13,7 +13,7 @@ const Login = ({ setIsAuthenticated }) => {
     try {
       const response = await fetch("https://localhost:7100/Account/Login", {
         method: "POST",
-        headers: {
+        headers: { 
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),

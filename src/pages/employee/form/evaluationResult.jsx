@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
+
 const EvaluationResult = () => {
     const [evaluationDetail, setEvaluationDetail] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -59,11 +60,11 @@ const EvaluationResult = () => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div className="loading">Loading...</div>;
     }
 
     if (!evaluationDetail) {
-        return <div>No data found for the current user.</div>;
+        return <div className="no-data">No data found for the current user.</div>;
     }
 
     return (
@@ -73,21 +74,21 @@ const EvaluationResult = () => {
             </div>
             <div className="details-container">
                 <div className="evaluation-details">
-                    <h2>Evaluations</h2>
+                    <h2>Evaluation result</h2>
                     {evaluationDetail.evaluations.map((evaluation, index) => (
                         <div key={index} className="evaluation-item">
                             <p><strong>Factor Name:</strong> {evaluation.factorName}</p>
                             <p><strong>Rating:</strong> {evaluation.rating}</p>
-                            <p><strong>Evaluation Date:</strong> {evaluation.evaluationDate}</p>
+                            <p><strong>Evaluation Date:</strong> {new Date(evaluation.evaluationDate).toLocaleDateString()}</p>
                         </div>
                     ))}
                 </div>
                 <div className="feedback-details">
-                    <h2>Feedback</h2>
+                    <h2>Feedback recieved</h2>
                     {evaluationDetail.feedbacks.map((item, index) => (
                         <div key={index} className="feedback-item">
                             <p><strong>Feedback:</strong> {item.feedback}</p>
-                            <p><strong>Feedback Date:</strong> {item.feedbackDate}</p>
+                            <p><strong>Feedback Date:</strong> {new Date(item.feedbackDate).toLocaleDateString()}</p>
                         </div>
                     ))}
                 </div>

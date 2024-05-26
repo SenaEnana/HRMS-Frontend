@@ -40,7 +40,7 @@ function EmployeeBasic() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7140/Branch/GetBranches");
+      const response = await fetch("https://localhost:7100/Branch/GetBranches");
       const newData = await response.json();
       setBranchId(newData);
     };
@@ -49,7 +49,7 @@ function EmployeeBasic() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7140/api/Degree");
+      const response = await fetch("https://localhost:7100/api/Degree");
       const newData = await response.json();
       setDegreeId(newData);
     };
@@ -59,7 +59,7 @@ function EmployeeBasic() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://localhost:7140/Department/GetDepartments"
+        "https://localhost:7100/Department/GetDepartments"
       );
       const newData = await response.json();
       setDepartmentId(newData);
@@ -69,7 +69,7 @@ function EmployeeBasic() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7140/Position");
+      const response = await fetch("https://localhost:7100/Position");
       const newData = await response.json();
       setPositionId(newData);
     };
@@ -78,7 +78,7 @@ function EmployeeBasic() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7140/Grade/GetGrades");
+      const response = await fetch("https://localhost:7100/Grade/GetGrades");
       const newData = await response.json();
       setGradeId(newData);
     };
@@ -88,7 +88,7 @@ function EmployeeBasic() {
   async function userRegistration(values) {
     try {
       const response = await fetch(
-        "https://localhost:7140/Employee/CorrectRegisterEmployee",
+        "https://localhost:7100/Employee/CorrectRegisterEmployee",
         {
           method: "POST",
           headers: {
@@ -616,7 +616,7 @@ function EmployeeBasic() {
             </button>
             <div>
               <p className="pr-64 mb-3 font-bold text-xl -mt-2 fs-4 text-dark text-center fw-bold">
-                Children information
+                Children information(If you have one)
               </p>
 
               {formikProps.values.ChildInformations.map((child, outerIndex) => (

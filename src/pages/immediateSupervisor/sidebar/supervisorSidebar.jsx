@@ -156,7 +156,7 @@ const SupervisorSidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Evaluation Factor"
+              title="Evaluation Factor" 
               to="/evaluationFactorList"
               icon={<ChecklistRtlOutlinedIcon />}
               selected={selected}
