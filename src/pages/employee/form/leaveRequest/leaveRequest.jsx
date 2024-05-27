@@ -8,6 +8,7 @@ import DropDown from "../../../../components/DropDown";
 function LeaveRequest() {
   const navigate = useNavigate();
   const [LeaveTypeId, setLeaveTypeId] = useState([{ name: "", id: "" }]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -17,6 +18,7 @@ function LeaveRequest() {
       );
       const newData = await response.json();
       setLeaveTypeId(newData);
+      setLoading(false);
     };
     fetchData();
   }, []);
@@ -45,6 +47,10 @@ function LeaveRequest() {
       setError("Error submitting leave request");
     }
   };
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="row justify-content-center">
@@ -56,8 +62,8 @@ function LeaveRequest() {
             EndDate: "",
             Reason: "",
           }}
-          onSubmit={handleSubmit}
           validationSchema={leaveValidation}
+          onSubmit={handleSubmit}
         >
           {(formikValues) => (
             <form className="form-group rounded border col-8 pe-3 mt-5 bg-light">

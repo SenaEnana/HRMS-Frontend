@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 function GradeList() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getData();
@@ -22,7 +23,12 @@ function GradeList() {
     let result = await fetch("https://localhost:7140/Grade/GetGrades");
     result = await result.json();
     setData(result);
+    setLoading(false);
   }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="d-flex justify-content-between mt-5 text-dark">

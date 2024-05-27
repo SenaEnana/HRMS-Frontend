@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 function BranchList() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getData();
@@ -17,12 +18,16 @@ function BranchList() {
     });
     getData();
   }
-
   async function getData() {
     let result = await fetch("https://localhost:7140/Branch/GetBranches");
     result = await result.json();
     setData(result);
+    setLoading(false);
   }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="d-flex justify-content-between mt-5 text-dark">

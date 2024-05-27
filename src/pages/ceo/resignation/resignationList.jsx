@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 function ResignationList() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [disabledButtons, setDisabledButtons] = useState({});
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -71,6 +72,10 @@ function ResignationList() {
     );
     result = await result.json();
     setData(result);
+    setLoading(false);
+  }
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
   return (

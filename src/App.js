@@ -61,7 +61,7 @@ function App() {
        case 'HR Manager':
          return <EmployeeRouter /> ;
        case 'Employee':
-         return <EmployeeRouter /> ;
+         return <HrRouter /> ;
          case 'CEO':
           return <CeoRouter /> ;
         case 'ImmediateSupervisor':

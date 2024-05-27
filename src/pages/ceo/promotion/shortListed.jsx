@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const ShortListed = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getData();
@@ -10,14 +11,20 @@ const ShortListed = () => {
 
   async function getData() {
     try {
-      let result = await fetch("https://localhost:7140/Promotion/ShortlistedCandidates");
+      let result = await fetch(
+        "https://localhost:7140/Promotion/ShortlistedCandidates"
+      );
       result = await result.json();
-      setData(result.map(item => item.employee));
+      setData(result.map((item) => item.employee));
+      setLoading(false);
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     }
   }
-  
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="container mt-5">

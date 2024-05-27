@@ -11,13 +11,13 @@ import RadioButton from "../../../../components/radioButton";
 function EmployeeBasic() {
   const navigate = useNavigate();
   const isNonMobile = useMediaQuery("(min-width:600px)");
-
   const [inputFields, setInputFields] = useState([{ value: "" }]);
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
   const [BranchId, setBranchId] = useState([{ name: "", id: "" }]);
   const [DepartmentId, setDepartmentId] = useState([{ name: "", id: "" }]);
   const [DegreeId, setDegreeId] = useState([{ name: "", id: "" }]);
   const [GradeId, setGradeId] = useState([{ name: "", id: "" }]);
+  const [loading, setLoading] = useState(true);
 
   const genderOptions = [
     { value: "female", label: "Female" },
@@ -33,25 +33,27 @@ function EmployeeBasic() {
     { value: "employee", label: "Employee" },
     { value: "admin", label: "Admin" },
     { value: "ceo", label: "CEO" },
-    { value: "hrManager", label: "HRManager" },
-    { value: "leaveAdmin", label: "LeaveAdmin" },
-    { value: "immediateSupervisor", label: "ImmediateSupervisor" },
+    { value: "hrManager", label: "HR Manager" },
+    { value: "leaveAdmin", label: "Leave Admin" },
+    { value: "immediateSupervisor", label: "Immediate Supervisor" },
   ];
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7100/Branch/GetBranches");
+      const response = await fetch("https://localhost:7140/Branch/GetBranches");
       const newData = await response.json();
       setBranchId(newData);
+      setLoading(false);
     };
     fetchData();
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7100/api/Degree");
+      const response = await fetch("https://localhost:7140/api/Degree");
       const newData = await response.json();
       setDegreeId(newData);
+      setLoading(false);
     };
     fetchData();
   }, []);
@@ -59,28 +61,31 @@ function EmployeeBasic() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://localhost:7100/Department/GetDepartments"
+        "https://localhost:7140/Department/GetDepartments"
       );
       const newData = await response.json();
       setDepartmentId(newData);
+      setLoading(false);
     };
     fetchData();
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7100/Position");
+      const response = await fetch("https://localhost:7140/Position");
       const newData = await response.json();
       setPositionId(newData);
+      setLoading(false);
     };
     fetchData();
   }, []);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7100/Grade/GetGrades");
+      const response = await fetch("https://localhost:7140/Grade/GetGrades");
       const newData = await response.json();
       setGradeId(newData);
+      setLoading(false);
     };
     fetchData();
   }, []);
@@ -88,7 +93,7 @@ function EmployeeBasic() {
   async function userRegistration(values) {
     try {
       const response = await fetch(
-        "https://localhost:7100/Employee/CorrectRegisterEmployee",
+        "https://localhost:7140/Employee/CorrectRegisterEmployee",
         {
           method: "POST",
           headers: {
@@ -108,9 +113,6 @@ function EmployeeBasic() {
     }
   }
 
-  const handleAddField = () => {
-    setInputFields([...inputFields, { value: "" }]);
-  };
   const handleInputChange = (id, event) => {
     const updatedFields = inputFields.map((field) => {
       if (field.id === id) {
@@ -121,118 +123,9 @@ function EmployeeBasic() {
     setInputFields(updatedFields);
   };
 
-  const handleInputChangeChild = (id, event) => {
-    const updatedChildInformations = inputFields.map((field) => {
-      if (field.id === id) {
-        return { ...field, value: event.target.value };
-      }
-      return field;
-    });
-    setInputFields(updatedChildInformations);
-  };
-
-  const handleAddContactPerson = (formikProps) => {
-    formikProps.setValues({
-      ...formikProps.values,
-      ContactPersons: [
-        ...formikProps.values.ContactPersons,
-        {
-          ContactPersonName: "",
-          Relationship: "",
-          ContactRegion: "",
-          ContactKebele: "",
-          ContactWoreda: "",
-          ContactPhoneNo: "",
-          ContactHouseNo: "",
-        },
-      ],
-    });
-
-    setInputFields([...inputFields, { value: "" }]);
-  };
-
-  const handleDeleteContactPerson = (formikProps, index) => {
-    const updatedContactPersons = [...formikProps.values.ContactPersons];
-    updatedContactPersons.splice(index, 1);
-    formikProps.setValues({
-      ...formikProps.values,
-      ContactPersons: updatedContactPersons,
-    });
-  };
-
-  const handleAddChildInformations = (formikProps) => {
-    formikProps.setValues({
-      ...formikProps.values,
-      ChildInformations: [
-        ...formikProps.values.ChildInformations,
-        {
-          ChildName: "",
-          DateOfBirth: "",
-        },
-      ],
-    });
-
-    setInputFields([...inputFields, { value: "" }]);
-  };
-
-  const handleDeleteChildInformations = (formikProps, index) => {
-    const updatedChildInformations = [...formikProps.values.ChildInformations];
-    updatedChildInformations.splice(index, 1);
-    formikProps.setValues({
-      ...formikProps.values,
-      ChildInformations: updatedChildInformations,
-    });
-  };
-
-  const handleAddEducations = (formikProps) => {
-    formikProps.setValues({
-      ...formikProps.values,
-      Educations: [
-        ...formikProps.values.Educations,
-        {
-          Degree: "",
-          Institute: "",
-        },
-      ],
-    });
-
-    setInputFields([...inputFields, { value: "" }]);
-  };
-
-  const handleDeleteEducations = (formikProps, index) => {
-    const updatedEducations = [...formikProps.values.Educations];
-    updatedEducations.splice(index, 1);
-    formikProps.setValues({
-      ...formikProps.values,
-      Educations: updatedEducations,
-    });
-  };
-
-  const handleAddExperiences = (formikProps) => {
-    formikProps.setValues({
-      ...formikProps.values,
-      Experiences: [
-        ...formikProps.values.Experiences,
-        {
-          CompanyName: "",
-          ExperiencePosition: "",
-          ExperienceStartDate: "",
-          ExperienceEndDate: "",
-        },
-      ],
-    });
-
-    setInputFields([...inputFields, { value: "" }]);
-  };
-
-  const handleDeleteExperiences = (formikProps, index) => {
-    const updatedExperiences = [...formikProps.values.Experiences];
-    updatedExperiences.splice(index, 1);
-    formikProps.setValues({
-      ...formikProps.values,
-      Experiences: updatedExperiences,
-    });
-  };
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="row justify-content-center m-5">
@@ -280,6 +173,7 @@ function EmployeeBasic() {
             },
           ],
         }}
+        validationSchema={employeeBasValidation}
         onSubmit={(values) => {
           values.ChildInformations = values.ChildInformations.filter(
             (child) => child.ChildName !== "" || child.DateOfBirth !== ""
@@ -303,10 +197,9 @@ function EmployeeBasic() {
           userRegistration(values);
           console.log(values);
         }}
-        // validationSchema={employeeBasValidation}
       >
         {(formikProps) => (
-          <form className="form-group rounded border col-10 ms-5 ms-4 bg-light">
+          <form className="form-group rounded border col-14 ms-5 ms-4 bg-light">
             <div className="ms-3">
               <p className="fs-4 text-dark text-center fw-bold">
                 Employee Basic Information
@@ -461,8 +354,6 @@ function EmployeeBasic() {
             <p className="fs-4 text-dark text-center fw-bold">
               Contact Person Information
             </p>
-            {/* {inputFields.map((field, index) => (
-              <div key={field.id}> */}
             {formikProps.values.ContactPersons.map(
               (contactPerson, outerIndex) => (
                 <div key={outerIndex}>
@@ -480,102 +371,72 @@ function EmployeeBasic() {
                       name={`ContactPersons[${outerIndex}].ContactPersonName`}
                       label="Contact Person Name"
                       placeholder="Enter contact person name"
-                      // value={`${formikProps.values.ContactPersons[outerIndex].ContactPersonName} ${field.value}`}
                       value={contactPerson.ContactPersonName}
                       error={
                         formikProps.errors.ContactPersons?.[outerIndex]
                           ?.ContactPersonName
                       }
                       onChange={formikProps.handleChange}
-                      // onChange={(event) => {
-                      //   formikProps.handleChange(event);
-                      //   handleInputChange(index, event);
-                      // }}
                     />
                     <TextInput
                       type="text"
                       name={`ContactPersons[${outerIndex}].Relationship`}
                       label="Relationship"
                       placeholder="Enter relationship"
-                      // value={`${formikProps.values.ContactPersons[outerIndex].Relationship} ${field.value}`}
                       value={contactPerson.Relationship}
                       error={
                         formikProps.errors.ContactPersons?.[outerIndex]
                           ?.Relationship
                       }
                       onChange={formikProps.handleChange}
-                      // onChange={(event) => {
-                      //   formikProps.handleChange(event);
-                      //   handleInputChange(index, event);
-                      // }}
                     />
                     <TextInput
                       type="text"
                       name={`ContactPersons[${outerIndex}].ContactRegion`}
                       label="Contact Person Region"
                       placeholder="Enter contact person region"
-                      // value={`${formikProps.values.ContactPersons[outerIndex].ContactRegion} ${field.value}`}
                       value={contactPerson.ContactRegion}
                       error={
                         formikProps.errors.ContactPersons?.[outerIndex]
                           ?.ContactRegion
                       }
                       onChange={formikProps.handleChange}
-                      // onChange={(event) => {
-                      //   formikProps.handleChange(event);
-                      //   handleInputChange(index, event);
-                      // }}
                     />
                     <TextInput
                       type="text"
                       name={`ContactPersons[${outerIndex}].ContactWoreda`}
                       label="Contact Person Woreda"
                       placeholder="Enter contact person woreda"
-                      // value={`${formikProps.values.ContactPersons[outerIndex].ContactWoreda} ${field.value}`}
                       value={contactPerson.ContactWoreda}
                       error={
                         formikProps.errors.ContactPersons?.[outerIndex]
                           ?.ContactWoreda
                       }
                       onChange={formikProps.handleChange}
-                      // onChange={(event) => {
-                      //   formikProps.handleChange(event);
-                      //   handleInputChange(index, event);
-                      // }}
                     />
                     <TextInput
                       type="number"
                       name={`ContactPersons[${outerIndex}].ContactKebele`}
                       label="Contact Person Kebele"
                       placeholder="Enter contact person kebele"
-                      // value={`${formikProps.values.ContactPersons[outerIndex].ContactKebele} ${field.value}`}
                       value={contactPerson.ContactKebele}
                       error={
                         formikProps.errors.ContactPersons?.[outerIndex]
                           ?.ContactKebele
                       }
                       onChange={formikProps.handleChange}
-                      // onChange={(event) => {
-                      //   formikProps.handleChange(event);
-                      //   handleInputChange(index, event);
-                      // }}
                     />
                     <TextInput
                       type="text"
                       name={`ContactPersons[${outerIndex}].ContactHouseNo`}
                       label="Contact Person House Number"
                       placeholder="Enter contact person house number"
-                      // value={`${formikProps.values.ContactPersons[outerIndex].ContactHouseNo} ${field.value}`}
                       value={contactPerson.ContactHouseNo}
                       error={
                         formikProps.errors.ContactPersons?.[outerIndex]
                           ?.ContactHouseNo
                       }
                       onChange={formikProps.handleChange}
-                      // onChange={(event) => {
-                      //   formikProps.handleChange(event);
-                      //   handleInputChange(index, event);
-                      // }}
                     />
                     <TextInput
                       type="text"
@@ -583,92 +444,47 @@ function EmployeeBasic() {
                       label="Contact Person Phone Number"
                       placeholder="Enter contact person phone number"
                       value={contactPerson.ContactPhoneNo}
-                      // value={`${formikProps.values.ContactPersons[outerIndex].ContactPhoneNo} ${field.value}`}
                       error={
                         formikProps.errors.ContactPersons?.[outerIndex]
                           ?.ContactPhoneNo
                       }
                       onChange={formikProps.handleChange}
-                      // onChange={(event) => {
-                      //   formikProps.handleChange(event);
-                      //   handleInputChange(index, event);
-                      // }}
                     />
                   </Box>
-                  <button
-                    onClick={() =>
-                      handleDeleteContactPerson(formikProps, outerIndex)
-                    }
-                    className="btn btn-outline-danger btn-small m-1 float-end p-1"
-                  >
-                    Delete contact Person
-                  </button>
-                  {/* </div>
-                  ))} */}
                 </div>
               )
             )}
-            <button
-              onClick={() => handleAddContactPerson(formikProps)}
-              className="btn btn-outline-secondary btn-small m-1 float-end p-1"
-            >
-              Add contact person
-            </button>
             <div>
-              <p className="pr-64 mb-3 font-bold text-xl -mt-2 fs-4 text-dark text-center fw-bold">
-                Children information(If you have one)
-              </p>
-
-              {formikProps.values.ChildInformations.map((child, outerIndex) => (
-                <div key={outerIndex}>
-                  <TextInput
-                    type="text"
-                    name={`ChildInformations[${outerIndex}].ChildName`}
-                    label="Child Name"
-                    placeholder="Enter child name"
-                    value={child.ChildName}
-                    error={
-                      formikProps.errors.ChildInformations?.[outerIndex]
-                        ?.ChildName
-                    }
-                    onChange={formikProps.handleChange}
-                  />
-                  <TextInput
-                    type="date"
-                    name={`ChildInformations[${outerIndex}].DateOfBirth`}
-                    label="Child Birth Date"
-                    placeholder="Enter child birth date"
-                    value={child.DateOfBirth}
-                    error={
-                      formikProps.errors.ChildInformations?.[outerIndex]
-                        ?.DateOfBirth
-                    }
-                    onChange={formikProps.handleChange}
-                  />
-                  <button
-                    onClick={() =>
-                      handleDeleteChildInformations(formikProps, outerIndex)
-                    }
-                    className="btn btn-outline-danger btn-small m-1 float-end p-1"
-                  >
-                    Delete child
-                  </button>
-                </div>
-              ))}
-              <button
-                onClick={() => handleAddChildInformations(formikProps)}
-                className="btn btn-outline-secondary btn-small m-1 float-end p-1"
-              >
-                Add child
-              </button>
-            </div>
-
+            <p className="mb-3 text-xl text-dark text-center fw-bold">
+              Children information <span className="text-muted">(Optional)</span>
+            </p>
+            {formikProps.values.ChildInformations.map((child, outerIndex) => (
+              <div key={outerIndex}>
+                <TextInput
+                  type="text"
+                  name={`ChildInformations[${outerIndex}].ChildName`}
+                  label="Child Name"
+                  optional={true}
+                  placeholder="Enter child name"
+                  value={child.ChildName}
+                  onChange={formikProps.handleChange}
+                />
+                <TextInput
+                  type="date"
+                  name={`ChildInformations[${outerIndex}].DateOfBirth`}
+                  label="Child Birth Date"
+                  optional={true}
+                  placeholder="Enter child birth date"
+                  value={child.DateOfBirth}
+                  onChange={formikProps.handleChange}
+                />
+              </div>
+            ))}
+          </div>
             <p className=" pr-64 mb-3 font-bold text-xl -mt-2 fs-4 text-dark text-center fw-bold">
               {" "}
               Educations:{" "}
             </p>
-            {/* {inputFields.map((field, index) => (
-              <div key={field.id}> */}
             {formikProps.values.Educations.map((education, index) => (
               <div key={index}>
                 <TextInput
@@ -676,7 +492,6 @@ function EmployeeBasic() {
                   name={`Educations[${index}].Degree`}
                   label="Degree"
                   placeholder="Enter degree name"
-                  // value={`${formikProps.values.Educations[index].Degree} ${field.value}`}
                   value={education.Degree}
                   error={formikProps.errors.Educations?.[index]?.Degree}
                   onChange={(event) => {
@@ -689,7 +504,6 @@ function EmployeeBasic() {
                   name={`Educations[${index}].Institute`}
                   label="Institute"
                   placeholder="Enter institute or company name"
-                  // value={`${formikProps.values.Educations[index].Institute} ${field.value}`}
                   value={education.Institute}
                   error={formikProps.errors.Educations?.[index]?.Institute}
                   onChange={(event) => {
@@ -697,27 +511,11 @@ function EmployeeBasic() {
                     handleInputChange(index, event);
                   }}
                 />
-                <button
-                  onClick={() => handleDeleteEducations(formikProps, index)}
-                  className="btn btn-outline-danger btn-small m-1 float-end p-1"
-                >
-                  Delete education
-                </button>
               </div>
             ))}
-            {/* </div>
-            ))} */}
-            <button
-              onClick={() => handleAddEducations(formikProps)}
-              className="btn btn-outline-secondary btn-small m-1 float-end p-1"
-            >
-              Add education
-            </button>
             <p className="fs-4 text-dark text-center fw-bold">
               Employee Experience Information
             </p>
-            {/* {inputFields.map((field, index) => (
-              <div key={field.id}> */}
             {formikProps.values.Experiences.map((experience, index) => (
               <div key={index}>
                 <TextInput
@@ -725,7 +523,6 @@ function EmployeeBasic() {
                   name={`Experiences[${index}].CompanyName`}
                   label="Company Name"
                   placeholder="Enter company name"
-                  // value={`${formikProps.values.Experiences[index].CompanyName} ${field.value}`}
                   value={experience.CompanyName}
                   error={formikProps.errors.Experiences?.[index]?.CompanyName}
                   onChange={(event) => {
@@ -738,7 +535,6 @@ function EmployeeBasic() {
                   name={`Experiences[${index}].ExperiencePosition`}
                   label="Position"
                   placeholder="Enter position"
-                  // value={`${formikProps.values.Experiences[index].ExperiencePosition} ${field.value}`}
                   value={experience.ExperiencePosition}
                   error={
                     formikProps.errors.Experiences?.[index]?.ExperiencePosition
@@ -753,7 +549,6 @@ function EmployeeBasic() {
                   name={`Experiences[${index}].ExperienceStartDate`}
                   label="Start Date"
                   placeholder="Enter start date"
-                  // value={`${formikProps.values.Experiences[index].ExperienceStartDate} ${field.value}`}
                   value={experience.ExperienceStartDate}
                   error={
                     formikProps.errors.Experiences?.[index]?.ExperienceStartDate
@@ -768,7 +563,6 @@ function EmployeeBasic() {
                   name={`Experiences[${index}].ExperienceEndDate`}
                   label="End Date"
                   placeholder="Enter end date"
-                  // value={`${formikProps.values.Experiences[index].ExperienceEndDate} ${field.value}`}
                   value={experience.ExperienceEndDate}
                   error={
                     formikProps.errors.Experiences?.[index]?.ExperienceEndDate
@@ -778,23 +572,8 @@ function EmployeeBasic() {
                     handleInputChange(index, event);
                   }}
                 />
-                <button
-                  onClick={() => handleDeleteExperiences(formikProps, index)}
-                  className="btn btn-outline-danger btn-small m-1 float-end p-1"
-                >
-                  Delete experience
-                </button>
               </div>
             ))}
-            {/* </div>
-            ))} */}
-            <button
-              onClick={() => handleAddExperiences(formikProps)}
-              className="btn btn-outline-secondary btn-small m-1 float-end p-1"
-            >
-              Add experience
-            </button>
-
             <p className="fs-4 text-dark text-center fw-bold">
               {" "}
               Employee Additional information{" "}

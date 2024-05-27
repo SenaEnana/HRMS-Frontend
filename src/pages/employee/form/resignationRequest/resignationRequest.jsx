@@ -10,6 +10,7 @@ function ResignationRequest() {
   const navigate = useNavigate();
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
   const [DepartmentId, setDepartmentId] = useState([{ name: "", id: "" }]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -18,6 +19,7 @@ function ResignationRequest() {
       );
       const newData = await response.json();
       setDepartmentId(newData);
+      setLoading(false);
     };
     fetchData();
   }, []);
@@ -26,6 +28,7 @@ function ResignationRequest() {
       const response = await fetch("https://localhost:7140/Position");
       const newData = await response.json();
       setPositionId(newData);
+      setLoading(false);
     };
     fetchData();
   }, []);
@@ -52,6 +55,9 @@ function ResignationRequest() {
       setError("Error submitting resignation request");
     }
   };
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -70,8 +76,8 @@ function ResignationRequest() {
             Recommendation: "",
             Comment: "",
           }}
-          onSubmit={handleSubmit}
           validationSchema={resignationValidation}
+          onSubmit={handleSubmit}
         >
           {(formikValues) => (
             <form className="form-group rounded border col-8 pe-3 mt-5">

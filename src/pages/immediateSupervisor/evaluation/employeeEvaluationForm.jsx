@@ -68,8 +68,8 @@ const EmployeeEvaluationForm = () => {
       <h1>Employee Evaluation</h1>
       <form onSubmit={handleSubmit}>
         <div className="select-employee">
-          <label>Select Employee: </label>
-          <select
+          <label className="employee-label">Select Employee: </label>
+          <select className="employee-select"
             value={selectedEmployeeId}
             onChange={(e) => setSelectedEmployeeId(e.target.value)}
             required

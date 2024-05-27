@@ -8,6 +8,7 @@ import { useNavigate } from "react-router";
 function PromoteEmployee() {
   const [error, setError] = useState(null);
   const [NewGradeId, setNewGradeId] = useState([{ name: "", id: "" }]);
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,6 +16,7 @@ function PromoteEmployee() {
       const response = await fetch("https://localhost:7140/Grade/GetGrades");
       const newData = await response.json();
       setNewGradeId(newData);
+      setLoading(false);
     };
     fetchData();
   }, []);
@@ -42,7 +44,9 @@ function PromoteEmployee() {
       setError("Error promoting employee");
     }
   }
-
+  if (loading) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
       <div className="row justify-content-center">

@@ -35,10 +35,10 @@ function AddPosition() {
             Description: "",
             Salary: "",
           }}
+          validationSchema={dropDownValidation}
           onSubmit={(values) => {
             addNewPosition(values);
           }}
-          validationSchema={dropDownValidation}
         >
           {(formikValues) => (
             <form className="form-group rounded border col-6 ms-5 ms-4 bg-light">

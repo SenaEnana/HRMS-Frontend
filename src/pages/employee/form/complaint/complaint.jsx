@@ -10,12 +10,14 @@ function Complaint() {
   const navigate = useNavigate();
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
   const [BranchId, setBranchId] = useState([{ name: "", id: "" }]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("https://localhost:7140/Position");
       const newData = await response.json();
       setPositionId(newData);
+      setLoading(false);
     };
     fetchData();
   }, []);
@@ -25,6 +27,7 @@ function Complaint() {
       const response = await fetch("https://localhost:7140/Branch/GetBranches");
       const newData = await response.json();
       setBranchId(newData);
+      setLoading(false);
     };
     fetchData();
   }, []);
@@ -53,6 +56,10 @@ function Complaint() {
       setError("Error submitting leave request");
     }
   }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="row justify-content-center">

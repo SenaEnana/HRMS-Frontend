@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 function PostedJob() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -19,7 +20,12 @@ function PostedJob() {
     let result = await fetch("https://localhost:7140/Promotion/PostedJobs");
     result = await result.json();
     setData(result);
+    setLoading(false);
   }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="d-flex justify-content-between mt-5 text-dark">
