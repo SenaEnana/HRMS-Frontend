@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 
 function ComplaintList() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -37,6 +38,10 @@ function ComplaintList() {
     );
     result = await result.json();
     setData(result);
+    setLoading(false);
+  }
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
   return (

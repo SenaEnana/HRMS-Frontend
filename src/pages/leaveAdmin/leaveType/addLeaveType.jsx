@@ -37,10 +37,10 @@ function AddLeaveType() {
             Name: "",
             AllowedDays: "",
           }}
+          validationSchema={leaveTypeValidation}
           onSubmit={(values) => {
             addNewLeaveType(values);
           }}
-          validationSchema={leaveTypeValidation}
         >
           {(formikValues) => (
             <form className="form-group rounded border col-6 ms-5 ms-4 bg-light">

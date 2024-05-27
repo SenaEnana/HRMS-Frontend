@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 const CandidateList = () => {
   const [data, setData] = useState([]);
   const { jobId } = useParams();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getData();
@@ -15,7 +16,12 @@ const CandidateList = () => {
     );
     result = await result.json();
     setData(result);
+    setLoading(false);
   }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  
   return (
     <>
       <div className="container mt-5">

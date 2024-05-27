@@ -11,16 +11,18 @@ function PromoteEmployee() {
   const isNonMobile = useMediaQuery("(min-width:600px)");
   const navigate = useNavigate();
   const [PositionId, setPositionId] = useState([{ name: "", id: "" }]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch("https://localhost:7100/Position");
       const newData = await response.json();
       setPositionId(newData);
+      setLoading(false);
     };
     fetchData();
   }, []);
-  
+
   async function postJob(values) {
     try {
       const response = await fetch("https://localhost:7100/Promotion/PostJob", {
@@ -41,6 +43,10 @@ function PromoteEmployee() {
       setError("Error posting job");
     }
   }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="row justify-content-center">
@@ -51,10 +57,10 @@ function PromoteEmployee() {
             Description: "",
             Requirements: "",
           }}
+          validationSchema={postJobValidation}
           onSubmit={(values) => {
             postJob(values);
           }}
-          validationSchema={postJobValidation}
         >
           {(formikValues) => (
             <form className="form-group rounded border col-6 mt-5 ms-4 bg-light">

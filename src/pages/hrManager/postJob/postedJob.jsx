@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 function PostedJob() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getData();
@@ -12,6 +13,10 @@ function PostedJob() {
     let result = await fetch("https://localhost:7140/Promotion/PostedJobs");
     result = await result.json();
     setData(result);
+    setLoading(false);
+  }
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
   return (

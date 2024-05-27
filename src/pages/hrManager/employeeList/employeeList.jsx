@@ -9,6 +9,7 @@ import MockSearch from "../../../components/mockSearch";
 
 const EmployeeList = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const colorMode = useContext(ColorModeContext);
@@ -79,10 +80,14 @@ const EmployeeList = () => {
       const result = await fetch("https://localhost:7100/Employee/ListEmployees");
       const data = await result.json();
       setData(data);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching users:", error);
     }
   };
+if (loading) {
+  return <div>Loading...</div>;
+}
 
   return (
     <>

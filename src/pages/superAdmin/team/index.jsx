@@ -3,6 +3,7 @@ import Button from "../../../components/button";
 
 const Team = () => {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const handleLock = async (userId) => {
     try {
@@ -53,7 +54,7 @@ const Team = () => {
         return;
       }
       const userId = getUserIdFromToken(token);
-      console.log(userId)
+      console.log(userId);
       const result = await fetch(
         `https://localhost:7100/User/LockOrUnlockUser?userId=${userId}`,
         {
@@ -96,12 +97,12 @@ const Team = () => {
       return false;
     }
   };
-
   const getData = async () => {
     try {
       const result = await fetch("https://localhost:7100/User");
       const data = await result.json();
       setData(data);
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching users:", error);
     }
@@ -130,6 +131,9 @@ const Team = () => {
       alert("failed to delete");
     }
     getData();
+  }
+  if (loading) {
+    return <div>Loading...</div>;
   }
 
   return (

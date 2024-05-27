@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 
 function LeaveTypeList() {
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getData();
@@ -24,7 +25,12 @@ function LeaveTypeList() {
     result = await result.json();
     console.log(result);
     setData(result);
+    setLoading(false);
   }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <div className="d-flex justify-content-between mt-5 text-dark">
