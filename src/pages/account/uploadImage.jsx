@@ -27,7 +27,7 @@ function UploadImage() {
       formData.append("PhotoData", PhotoData);
 
       const result = await fetch(
-        `https://localhost:7100/Account/update?userId=${userId}`,
+        `http://localhost:5100/Account/update?userId=${userId}`,
         {
           method: "PUT",
           body: formData,

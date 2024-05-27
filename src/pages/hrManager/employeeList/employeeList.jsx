@@ -30,7 +30,7 @@ const EmployeeList = () => {
 
   const fetchData = () => {
     const queryParams = new URLSearchParams(searchQuery).toString();
-    fetch(`https://localhost:7100/Employee/Filter?${queryParams}`)
+    fetch(`http://localhost:5100/Employee/Filter?${queryParams}`)
       .then((response) => response.json())
       .then((json) => {
         console.log(json);
@@ -43,7 +43,7 @@ const EmployeeList = () => {
 
   const downloadReport = () => {
     const queryParams = new URLSearchParams(searchQuery).toString();
-    fetch(`https://localhost:7100/Employee/Download?${queryParams}`, {
+    fetch(`http://localhost:5100/Employee/Download?${queryParams}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'text/csv',
@@ -76,7 +76,7 @@ const EmployeeList = () => {
 
   const getData = async () => {
     try {
-      const result = await fetch("https://localhost:7100/Employee/ListEmployees");
+      const result = await fetch("http://localhost:5100/Employee/ListEmployees");
       const data = await result.json();
       setData(data);
       setLoading(false);

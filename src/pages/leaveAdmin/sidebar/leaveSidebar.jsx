@@ -10,7 +10,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { tokens } from "../../../theme";
 import PendingOutlinedIcon from "@mui/icons-material/PendingOutlined";
 import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
+
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -140,13 +140,6 @@ const LeaveSidebar = () => {
               title="Leave Type List"
               to="/leaveTypeList"
               icon={<ChecklistRtlOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Notifications"
-              to="/notifications"
-              icon={<NotificationsNoneIcon />}
               selected={selected}
               setSelected={setSelected}
             />

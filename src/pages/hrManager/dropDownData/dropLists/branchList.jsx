@@ -9,7 +9,7 @@ function BranchList() {
   }, []);
 
   async function deleteOperation(Id) {
-    let result = await fetch(`https://localhost:7140/Branch/${Id}`, {
+    let result = await fetch(`http://localhost:5100/Branch/${Id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -19,7 +19,7 @@ function BranchList() {
     getData();
   }
   async function getData() {
-    let result = await fetch("https://localhost:7140/Branch/GetBranches");
+    let result = await fetch("http://localhost:5100/Branch/GetBranches");
     result = await result.json();
     setData(result);
     setLoading(false);

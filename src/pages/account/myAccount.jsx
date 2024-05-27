@@ -43,7 +43,7 @@ function MyAccount() {
     }
     const userId = getUserIdFromToken(token);
     console.log(userId);
-    fetch(`https://localhost:7100/Account/profile?userId=${userId}`, { 
+    fetch(`http://localhost:5100/Account/profile?userId=${userId}`, { 
       method: "GET",
       headers: {
         Accept: "application/json", 
@@ -86,14 +86,13 @@ function MyAccount() {
         <div className="profile-header">
           <img
             className="profile-picture"
-            src={"https://localhost:7100" + user.pictureURL}
+            src={"http://localhost:5100" + user.pictureURL}
             alt="Profile"
           />
           <h2 className="profile-username">{user.name}</h2>
         </div>
         <div className="profile-details">
           <p><strong>Name:</strong> {user.name}</p>
-          {/* <p><strong>Role:</strong> {user.roles}</p> */}
         </div>
         <div className="profile-actions">
           <Link to="/changePassword">

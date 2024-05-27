@@ -15,7 +15,7 @@ function PromoteEmployee() {
   const [error, setError] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7100/Position");
+      const response = await fetch("http://localhost:5100/Position");
       const newData = await response.json();
       setPositionId(newData);
       setLoading(false);
@@ -25,7 +25,7 @@ function PromoteEmployee() {
 
   async function postJob(values) {
     try {
-      const response = await fetch("https://localhost:7100/Promotion/PostJob", {
+      const response = await fetch("http://localhost:5100/Promotion/PostJob", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

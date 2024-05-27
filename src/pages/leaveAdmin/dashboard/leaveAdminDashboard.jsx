@@ -28,7 +28,7 @@ const LeaveAdminDashboard = () => {
     const fetchApprovedLeaveRequests = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/api/Leave/GetApprovedLeaveRequests"
+          "http://localhost:5100/api/Leave/GetApprovedLeaveRequests"
         );
         const data = await response.json();
         setApprovedLeaveRequests(data);
@@ -45,7 +45,7 @@ const LeaveAdminDashboard = () => {
     const fetchAllLeaveRequests = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/api/Leave/ListOfLeaveRequests"
+          "http://localhost:5100/api/Leave/ListOfLeaveRequests"
         );
         const data = await response.json();
         setAllLeaveRequests(data);
@@ -63,7 +63,7 @@ const LeaveAdminDashboard = () => {
     const fetchApprovedLeaveCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/CountApprovedLeaveRequests"
+          "http://localhost:5100/DashBoard/CountApprovedLeaveRequests"
         );
         const data = await response.json();
         setApprovedLeaveCount(data);
@@ -77,7 +77,7 @@ const LeaveAdminDashboard = () => {
     const fetchPendingLeaveCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/CountPendingLeaveRequests"
+          "http://localhost:5100/DashBoard/CountPendingLeaveRequests"
         );
         const data = await response.json();
         setPendingLeaveCount(data);
@@ -91,7 +91,7 @@ const LeaveAdminDashboard = () => {
     const fetchRejectedLeaveCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/CountRejectedLeaveRequests"
+          "http://localhost:5100/DashBoard/CountRejectedLeaveRequests"
         );
         const data = await response.json();
         setRejectedLeaveCount(data);

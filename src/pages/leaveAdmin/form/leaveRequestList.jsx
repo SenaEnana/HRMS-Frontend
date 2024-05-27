@@ -17,7 +17,7 @@ function LeaveRequestList() {
 
   async function approveOperation(leaveId) {
     let result = await fetch(
-      `https://localhost:7140/api/Leave/ApproveLeave/${leaveId}`,
+      `http://localhost:5100/api/Leave/ApproveLeave/${leaveId}`,
       {
         method: "POST",
         headers: {
@@ -35,7 +35,7 @@ function LeaveRequestList() {
   }
   async function rejectOperation(leaveId) {
     let result = await fetch(
-      `https://localhost:7140/api/Leave/RejectLeave/${leaveId}`,
+      `http://localhost:5100/api/Leave/RejectLeave/${leaveId}`,
       {
         method: "POST",
         headers: {
@@ -53,7 +53,7 @@ function LeaveRequestList() {
   }
   async function getData() {
     let result = await fetch(
-      "https://localhost:7140/api/Leave/GetPendingLeaveRequests"
+      "http://localhost:5100/api/Leave/GetPendingLeaveRequests"
     );
     result = await result.json();
     setData(result);

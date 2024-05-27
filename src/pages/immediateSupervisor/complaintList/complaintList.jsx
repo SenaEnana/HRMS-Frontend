@@ -17,7 +17,7 @@ function ComplaintList() {
 
   async function addressOperation(complaintId) {
     let result = await fetch(
-      `https://localhost:7140/api/Complaint/AddressCompliant/${complaintId}`,
+      `http://localhost:5100/api/Complaint/AddressCompliant/${complaintId}`,
       {
         method: "POST",
         headers: {
@@ -34,7 +34,7 @@ function ComplaintList() {
   }
   async function getData() {
     let result = await fetch(
-      "https://localhost:7140/api/Complaint/PendingComplaints"
+      "http://localhost:5100/api/Complaint/PendingComplaints"
     );
     result = await result.json();
     setData(result);

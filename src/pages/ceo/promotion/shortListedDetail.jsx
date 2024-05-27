@@ -18,7 +18,7 @@ const ShortListedDetail = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`https://localhost:7140/Employee/${id}`)
+    fetch(`http://localhost:5100/Employee/${id}`)
       .then((response) => response.json())
       .then((data) => setEmployee(data))
       .catch((error) =>
@@ -49,7 +49,7 @@ const ShortListedDetail = () => {
   const rejectEmployee = async (employeeId) => {
     try {
       const response = await fetch(
-        `https://localhost:7140/Promotion/RejectCandidate/${employeeId}`,
+        `http://localhost:5100/Promotion/RejectCandidate/${employeeId}`,
         {
           method: "POST",
         }

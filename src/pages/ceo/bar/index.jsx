@@ -11,7 +11,7 @@ const Bar = () => {
     const fetchInactiveEmployeeCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/InactiveCount"
+          "http://localhost:5100/DashBoard/InactiveCount"
         );
         const data = await response.json();
         setInactiveEmployeeCount(data);
@@ -26,7 +26,7 @@ const Bar = () => {
     const fetchActiveEmployeeCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/ActiveCount"
+          "http://localhost:5100/DashBoard/ActiveCount"
         );
         const data = await response.json();
         setActiveEmployeeCount(data);

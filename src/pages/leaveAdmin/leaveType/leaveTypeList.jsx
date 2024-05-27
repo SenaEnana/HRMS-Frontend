@@ -10,7 +10,7 @@ function LeaveTypeList() {
   }, []);
 
   async function deleteOperation(Id) {
-    let result = await fetch(`https://localhost:7140/LeaveType/${Id}`, {
+    let result = await fetch(`http://localhost:5100/LeaveType/${Id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -21,7 +21,7 @@ function LeaveTypeList() {
     getData();
   }
   async function getData() {
-    let result = await fetch("https://localhost:7140/LeaveType/GetLeaveTypes");
+    let result = await fetch("http://localhost:5100/LeaveType/GetLeaveTypes");
     result = await result.json();
     console.log(result);
     setData(result);

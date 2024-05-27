@@ -8,7 +8,7 @@ function AddBranch() {
   const navigate = useNavigate();
   async function addNewBranch(values) {
     try {
-      const response = await fetch("https://localhost:7140/Branch/AddBranch", {
+      const response = await fetch("http://localhost:5100/Branch/AddBranch", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

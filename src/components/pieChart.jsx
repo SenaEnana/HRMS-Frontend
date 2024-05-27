@@ -8,7 +8,7 @@ const PieChart = ({ employeeDataProp }) => {
     const fetchEmployeeData = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/TotalEmployeesPerBranch"
+          "http://localhost:5100/DashBoard/TotalEmployeesPerBranch"
         );
         const data = await response.json();
         console.log(data);

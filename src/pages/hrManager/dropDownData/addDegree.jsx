@@ -8,7 +8,7 @@ function AddDegree() {
   const navigate = useNavigate();
   async function addNewDegree(values) {
     try {
-      const response = await fetch("https://localhost:7140/api/Degree", {
+      const response = await fetch("http://localhost:5100/api/Degree", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

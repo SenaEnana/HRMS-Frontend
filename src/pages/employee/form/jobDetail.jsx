@@ -14,7 +14,7 @@ function JobDetail() {
   };
   
   useEffect(() => {
-    fetch(`https://localhost:7140/Promotion/${id}`)
+    fetch(`http://localhost:5100/Promotion/${id}`)
       .then((response) => response.json())
       .then((data) => setJob(data))
       .catch((error) => console.error("Error fetching job details:", error));
@@ -37,7 +37,7 @@ function JobDetail() {
       }
       const userId = getUserIdFromToken(token);
       const result = await fetch(
-        `https://localhost:7140/Promotion/ApplyForJob/${jobId}?userId=${userId}`,
+        `http://localhost:5100/Promotion/ApplyForJob/${jobId}?userId=${userId}`,
         {
           method: "POST",
           headers: {
@@ -111,7 +111,7 @@ function JobDetail() {
                   </div>
                   <div>
                     <strong>Posting Date:</strong> {formatDate(job.postingDate)}
-                    {/* <strong>Posting Date:</strong> {job.postingDate} */}
+                    
                   </div>
                 </div>
               </div>

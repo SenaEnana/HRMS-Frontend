@@ -9,7 +9,7 @@ function AddDepartment() {
   async function addNewDepartment(values) {
     try {
       const response = await fetch(
-        "https://localhost:7140/Department/AddDepartment",
+        "http://localhost:5100/Department/AddDepartment",
         {
           method: "POST",
           headers: {

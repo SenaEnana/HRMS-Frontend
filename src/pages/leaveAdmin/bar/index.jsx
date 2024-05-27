@@ -10,7 +10,7 @@ const Bar = () => {
   useEffect(() => {
     const fetchApprovedLeaveCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/CountApprovedLeaveRequests");
+        const response = await fetch("http://localhost:5100/DashBoard/CountApprovedLeaveRequests");
         const data = await response.json();
         setApprovedLeaveCount(data);
         console.log(data)
@@ -23,7 +23,7 @@ const Bar = () => {
   useEffect(() => {
     const fetchPendingLeaveCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/CountPendingLeaveRequests");
+        const response = await fetch("http://localhost:5100/DashBoard/CountPendingLeaveRequests");
         const data = await response.json();
         setPendingLeaveCount(data);
         console.log(data)
@@ -36,7 +36,7 @@ const Bar = () => {
   useEffect(() => {
     const fetchRejectedLeaveCount = async () => {
       try {
-        const response = await fetch("https://localhost:7140/DashBoard/CountRejectedLeaveRequests");
+        const response = await fetch("http://localhost:5100/DashBoard/CountRejectedLeaveRequests");
         const data = await response.json();
         setRejectedLeaveCount(data);
         console.log(data)

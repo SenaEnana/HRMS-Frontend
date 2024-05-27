@@ -6,8 +6,7 @@ const EmployeeEvaluationList = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch the employee evaluations from the API
-    fetch("https://localhost:7100/api/Evaluation/EmployeeEvaluations")
+    fetch("http://localhost:5100/api/Evaluation/EmployeeEvaluations")
       .then((response) => response.json())
       .then((data) => {
         setEvaluations(data);
@@ -29,7 +28,6 @@ const EmployeeEvaluationList = () => {
       <table className="table table-striped">
         <thead>
           <tr>
-            {/* <th>Employee ID</th> */}
             <th>Employee Name</th>
             <th>Total Rating</th>
             <th>Evaluation Date</th>
@@ -39,7 +37,6 @@ const EmployeeEvaluationList = () => {
         <tbody>
           {evaluations.map((evaluation, index) => (
             <tr key={index}>
-              {/* <td>{evaluation.employeeId}</td> */}
               <td>{evaluation.employeeName}</td>
               <td>{evaluation.totalRating}</td>
               <td>

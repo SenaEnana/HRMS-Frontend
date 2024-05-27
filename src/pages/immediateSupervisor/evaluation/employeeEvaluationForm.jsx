@@ -8,14 +8,12 @@ const EmployeeEvaluationForm = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Fetch the employees from the API
-    fetch("https://localhost:7100/Employee/ListEmployees")
+    fetch("http://localhost:5100/Employee/ListEmployees")
       .then((response) => response.json())
       .then((data) => setEmployees(data))
       .catch((error) => console.error("Error fetching employees:", error));
 
-    // Fetch the evaluation factors from the API
-    fetch("https://localhost:7100/api/EvaluationFactor")
+    fetch("http://localhost:5100/api/EvaluationFactor")
       .then((response) => response.json())
       .then((data) => {
         setEvaluationFactors(data);
@@ -41,8 +39,7 @@ const EmployeeEvaluationForm = () => {
       })),
     };
 
-    // Send the evaluation data to the API
-    fetch("https://localhost:7100/api/Evaluation", {
+    fetch("http://localhost:5100/api/Evaluation", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

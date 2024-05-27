@@ -42,11 +42,3 @@ function LeaveAdminRouter(){
 
 export default LeaveAdminRouter;
 
-
-// // import AdminSidebar from "./pages/superAdmin/scenes/global/adminSidebar";
-
-
-// function AdminRouter() {
-//           );
-//         }
-// export default AdminRouter;

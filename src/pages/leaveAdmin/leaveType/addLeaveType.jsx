@@ -8,7 +8,7 @@ function AddLeaveType() {
   async function addNewLeaveType(values) {
     try {
       const response = await fetch(
-        "https://localhost:7140/LeaveType/AddLeaveTypes",
+        "http://localhost:5100/LeaveType/AddLeaveTypes",
         {
           method: "POST",
           headers: {

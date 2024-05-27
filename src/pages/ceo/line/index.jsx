@@ -9,7 +9,7 @@ const Line = () => {
     const fetchEmployeeData = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/DashBoard/EmployeesHiredPerYear"
+          "http://localhost:5100/DashBoard/EmployeesHiredPerYear"
         );
         const data = await response.json();
         console.log(data);

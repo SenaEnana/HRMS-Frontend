@@ -20,7 +20,7 @@ const EvaluationResult = () => {
                 }
                 const userId = getUserIdFromToken(token);
 
-                const response = await fetch(`https://localhost:7100/api/Evaluation/Employees?userId=${userId}`);
+                const response = await fetch(`http://localhost:5100/api/Evaluation/Employees?userId=${userId}`);
                 if (!response.ok) {
                     console.error("Failed to fetch evaluation detail");
                     return;

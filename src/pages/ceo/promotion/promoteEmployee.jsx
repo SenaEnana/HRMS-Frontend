@@ -13,7 +13,7 @@ function PromoteEmployee() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7140/Grade/GetGrades");
+      const response = await fetch("http://localhost:5100/Grade/GetGrades");
       const newData = await response.json();
       setNewGradeId(newData);
       setLoading(false);
@@ -24,7 +24,7 @@ function PromoteEmployee() {
   async function promoteEmployee(values) {
     try {
       const response = await fetch(
-        "https://localhost:7140/Promotion/PromoteEmployee",
+        "http://localhost:5100/Promotion/PromoteEmployee",
         {
           method: "POST",
           headers: {

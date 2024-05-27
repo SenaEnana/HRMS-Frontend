@@ -164,20 +164,20 @@ h1 {
   border: 1px solid #ddd;
   padding: 12px;
   text-align: center;
-  color: #333; /* Ensure text color is visible */
-  background-color: #fff; /* Ensure background color is set */
+  color: #333; 
+  background-color: #fff; 
 }
 .evaluation-table th {
   background-color: #f2f2f2;
   color: #333;
-  font-size: 18px; /* Increase font size for table headers */
+  font-size: 18px; 
 }
 .evaluation-table td {
-  font-size: 16px; /* Increase font size for table cells */
+  font-size: 16px; 
 }
 .evaluation-table td label {
   margin-right: 10px;
-  color: #333; /* Ensure labels inside table cells are clearly visible */
+  color: #333; 
 }
 .submit-button {
   display: block;

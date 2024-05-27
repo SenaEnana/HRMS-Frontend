@@ -30,17 +30,17 @@ function EmployeeBasic() {
     { value: "widowed", label: "Widowed" },
   ];
   const roleOptions = [
-    { value: "employee", label: "Employee" },
-    { value: "admin", label: "Admin" },
-    { value: "ceo", label: "CEO" },
-    { value: "hrManager", label: "HR Manager" },
-    { value: "leaveAdmin", label: "Leave Admin" },
-    { value: "immediateSupervisor", label: "Immediate Supervisor" },
+    { value: "Employee", label: "Employee" },
+    { value: "Admin", label: "Admin" },
+    { value: "CEO", label: "CEO" },
+    { value: "HR Manager", label: "HR Manager" },
+    { value: "Leave Admin", label: "Leave Admin" },
+    { value: "Immediate Supervisor", label: "Immediate Supervisor" },
   ];
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7140/Branch/GetBranches");
+      const response = await fetch("http://localhost:5100/Branch/GetBranches");
       const newData = await response.json();
       setBranchId(newData);
       setLoading(false);
@@ -50,7 +50,7 @@ function EmployeeBasic() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7140/api/Degree");
+      const response = await fetch("http://localhost:5100/api/Degree");
       const newData = await response.json();
       setDegreeId(newData);
       setLoading(false);
@@ -61,7 +61,7 @@ function EmployeeBasic() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://localhost:7140/Department/GetDepartments"
+        "http://localhost:5100/Department/GetDepartments"
       );
       const newData = await response.json();
       setDepartmentId(newData);
@@ -72,7 +72,7 @@ function EmployeeBasic() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7140/Position");
+      const response = await fetch("http://localhost:5100/Position");
       const newData = await response.json();
       setPositionId(newData);
       setLoading(false);
@@ -82,7 +82,7 @@ function EmployeeBasic() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7140/Grade/GetGrades");
+      const response = await fetch("http://localhost:5100/Grade/GetGrades");
       const newData = await response.json();
       setGradeId(newData);
       setLoading(false);
@@ -93,7 +93,7 @@ function EmployeeBasic() {
   async function userRegistration(values) {
     try {
       const response = await fetch(
-        "https://localhost:7140/Employee/CorrectRegisterEmployee",
+        "http://localhost:5100/Employee/CorrectRegisterEmployee",
         {
           method: "POST",
           headers: {

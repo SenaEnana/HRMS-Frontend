@@ -9,7 +9,7 @@ function GradeList() {
   }, []);
 
   async function deleteOperation(Id) {
-    let result = await fetch(`https://localhost:7140/Grade/${Id}`, {
+    let result = await fetch(`http://localhost:5100/Grade/${Id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -20,7 +20,7 @@ function GradeList() {
   }
 
   async function getData() {
-    let result = await fetch("https://localhost:7140/Grade/GetGrades");
+    let result = await fetch("http://localhost:5100/Grade/GetGrades");
     result = await result.json();
     setData(result);
     setLoading(false);
