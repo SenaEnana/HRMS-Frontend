@@ -267,3 +267,6 @@ h1 {
   font-size: 18px;
   color: #007BFF;
 }
+.text-muted {
+  color: #6c757d;
+}

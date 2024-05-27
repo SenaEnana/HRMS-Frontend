@@ -172,21 +172,7 @@ const EmployeeDashboard = () => {
             />
           </Box>
         ))}
-        {/* <Box
-          className="rounded"
-          gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-        >
-          <StatBox
-            title="431"
-            subtitle="Performance Evaluation Result"
-            icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
-          />
-        </Box> */}
-        {/* ROW 2 */}
+
         <Box
           gridColumn="span 4"
           gridRow="span 2"

@@ -456,7 +456,7 @@ function EmployeeBasic() {
             )}
             <div>
             <p className="mb-3 text-xl text-dark text-center fw-bold">
-              Children information <span className="text-muted">(Optional)</span>
+              Children information <p className="text-muted">(Optional)</p>
             </p>
             {formikProps.values.ChildInformations.map((child, outerIndex) => (
               <div key={outerIndex}>
@@ -464,7 +464,6 @@ function EmployeeBasic() {
                   type="text"
                   name={`ChildInformations[${outerIndex}].ChildName`}
                   label="Child Name"
-                  optional={true}
                   placeholder="Enter child name"
                   value={child.ChildName}
                   onChange={formikProps.handleChange}
@@ -473,7 +472,6 @@ function EmployeeBasic() {
                   type="date"
                   name={`ChildInformations[${outerIndex}].DateOfBirth`}
                   label="Child Birth Date"
-                  optional={true}
                   placeholder="Enter child birth date"
                   value={child.DateOfBirth}
                   onChange={formikProps.handleChange}

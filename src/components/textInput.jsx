@@ -1,4 +1,4 @@
-function TextInput({ value, type, name, label, onChange, error, placeholder, optional }) {
+function TextInput({ value, type, name, label, onChange, error, placeholder}) {
   return (
     <div className="col-12 row">
       <div>
@@ -8,7 +8,6 @@ function TextInput({ value, type, name, label, onChange, error, placeholder, opt
         <input
           type={type}
           className="form-control text-dark fw-lighter fs-6 m-0"
-          optional={optional}
           placeholder={placeholder}
           name={name}
           value={value}

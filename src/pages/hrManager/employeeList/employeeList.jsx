@@ -5,7 +5,6 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { ColorModeContext, tokens } from "../../../theme";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
-import MockSearch from "../../../components/mockSearch";
 
 const EmployeeList = () => {
   const [data, setData] = useState([]);
