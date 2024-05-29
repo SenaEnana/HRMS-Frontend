@@ -161,7 +161,6 @@ if (loading) {
               <th>Gender</th>
               <th>Mother Name</th>
               <th>Phone Number</th>
-              <th>Role</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -174,7 +173,6 @@ if (loading) {
                 <td>{employee.gender}</td>
                 <td>{employee.motherName}</td>
                 <td>{employee.phoneNo}</td>
-                <td>{employee.role}</td>
                 <td>
                   <Link to={`/employeeDetail/${employee.id}`}>
                     <button className="btn btn-outline-secondary btn-sm">

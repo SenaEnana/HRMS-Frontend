@@ -152,7 +152,7 @@ const EmployeeDetail = () => {
             {employee.contactPersons.map((contact, index) => (
               <li key={index}>
                 <p>
-                  <strong>Name :</strong> {contact.name}
+                  <strong>Name :</strong> {contact.contactPersonName}
                 </p>
                 <p>
                   <strong>Relationship :</strong> {contact.relationship}

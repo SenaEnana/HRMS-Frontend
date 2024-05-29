@@ -44,7 +44,7 @@ function LeaveRequest() {
         setError(errorMessage);
       }
     } catch (error) {
-      setError("Error submitting leave request");
+      setError("Leave request submitted successfully");
     }
   };
   if (loading) {

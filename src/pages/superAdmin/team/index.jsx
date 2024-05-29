@@ -113,14 +113,11 @@ const Team = () => {
   }, []);
 
   async function handleDelete(userId) {
+    
     let result = await fetch(
-      `http://localhost:5100/User/DeleteUser/${userId}`,
+      `http://localhost:5100/User/DeleteUser?userId=${userId}`,
       {
-        method: "DELETE",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
+        method: "POST",
       }
     );
     if (result.ok) {
@@ -168,12 +165,12 @@ const Team = () => {
                   onLock={() => handleLock(employee.id)}
                   onUnlock={() => handleUnlock(employee.id)}
                 />
-                <button
+                {/* <button
                   className="btn btn-outline-danger btn-sm"
                   onClick={() => handleDelete(employee.id)}
                 >
                   Delete
-                </button>
+                </button> */}
               </td>
             </tr>
           ))}
