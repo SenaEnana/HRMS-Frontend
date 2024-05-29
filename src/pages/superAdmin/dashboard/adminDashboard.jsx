@@ -100,7 +100,7 @@ const AdminDashboard = () => {
           <StatBox
             title={activeEmployeeCount.toLocaleString()}
             subtitle="Active Employees"
-            icon={<ToggleOnOutlinedIcon className="text-dark fs-3" />}
+            icon={<ToggleOnOutlinedIcon className="text-success fs-3" />}
           />
         </Box>
         <Box
@@ -114,7 +114,7 @@ const AdminDashboard = () => {
           <StatBox
             title={inactiveEmployeeCount.toLocaleString()}
             subtitle="InActive Employees"
-            icon={<ToggleOffOutlinedIcon className="text-dark fs-3" />}
+            icon={<ToggleOffOutlinedIcon className="text-danger fs-3" />}
           />
         </Box>
         <Box
@@ -128,7 +128,7 @@ const AdminDashboard = () => {
           <StatBox
             title={employeeData.toLocaleString()}
             subtitle="Total users"
-            icon={<EventAvailableOutlinedIcon className="text-dark fs-3" />}
+            icon={<EventAvailableOutlinedIcon className="text-warning fs-3" />}
           />
         </Box>
         <Box

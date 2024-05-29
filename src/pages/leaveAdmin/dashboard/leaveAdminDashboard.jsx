@@ -149,7 +149,7 @@ const LeaveAdminDashboard = () => {
             <StatBox
               title={rejectedLeaveCount.toLocaleString()}
               subtitle="Rejected Leave Requests"
-              icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
+              icon={<SwipeLeftAltOutlinedIcon className="text-danger fs-3" />}
             />
           )}
         </Box>
@@ -167,7 +167,7 @@ const LeaveAdminDashboard = () => {
             <StatBox
               title={approvedLeaveCount.toLocaleString()}
               subtitle="Approved Leave Requests"
-              icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
+              icon={<RecommendOutlinedIcon className="text-success fs-3" />}
             />
           )}
         </Box>
@@ -273,8 +273,6 @@ const LeaveAdminDashboard = () => {
                   Leave Type:{leaveRequest.leaveTypeName}
                   <br />
                   Allowed Days: {leaveRequest.allowedDays}
-                  <br />
-                  Remaining Days: {leaveRequest.remainingLeaveBalance}
                   <br />
                 </Typography>
                 <Typography color={colors.grey[100]}>
