@@ -29,7 +29,7 @@ const HrDashboard = () => {
     const fetchPendingLeaveRequests = async () => {
       try {
         const response = await fetch(
-          "https://localhost:52339/api/Leave/GetPendingLeaveRequests"
+          "http://localhost:5100/api/Leave/GetPendingLeaveRequests"
         );
         const data = await response.json();
         setPendingLeaveRequests(data);
@@ -46,7 +46,7 @@ const HrDashboard = () => {
     const fetchInactiveEmployeeCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:52339/DashBoard/InactiveCount"
+          "http://localhost:5100/DashBoard/InactiveCount"
         );
         const data = await response.json();
         setInactiveEmployeeCount(data);
@@ -63,7 +63,7 @@ const HrDashboard = () => {
     const fetchApprovedLeaveCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:52339/DashBoard/CountApprovedLeaveRequests"
+          "http://localhost:5100/DashBoard/CountApprovedLeaveRequests"
         );
         const data = await response.json();
         setApprovedLeaveCount(data);
@@ -77,7 +77,7 @@ const HrDashboard = () => {
     const fetchRejectedLeaveCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:52339/DashBoard/CountRejectedLeaveRequests"
+          "http://localhost:5100/DashBoard/CountRejectedLeaveRequests"
         );
         const data = await response.json();
         setRejectedLeaveCount(data);
@@ -91,7 +91,7 @@ const HrDashboard = () => {
     const fetchActiveEmployeeCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:52339/DashBoard/ActiveCount"
+          "http://localhost:5100/DashBoard/ActiveCount"
         );
         const data = await response.json();
         setActiveEmployeeCount(data);

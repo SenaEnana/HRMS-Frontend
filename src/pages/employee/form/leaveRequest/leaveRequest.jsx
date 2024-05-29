@@ -14,7 +14,7 @@ function LeaveRequest() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://localhost:7140/LeaveType/GetLeaveTypes"
+        "http://localhost:5100/LeaveType/GetLeaveTypes"
       );
       const newData = await response.json();
       setLeaveTypeId(newData);
@@ -25,7 +25,7 @@ function LeaveRequest() {
   const handleSubmit = async (values) => {
     try {
       const response = await fetch(
-        "https://localhost:7140/api/Leave/RequestLeave",
+        "http://localhost:5100/api/Leave/RequestLeave",
         {
           method: "POST",
           headers: {

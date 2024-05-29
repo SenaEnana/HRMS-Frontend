@@ -9,7 +9,7 @@ function DepartmentList() {
   }, []);
 
   async function deleteOperation(Id) {
-    let result = await fetch(`https://localhost:7140/Department/${Id}`, {
+    let result = await fetch(`http://localhost:5100/Department/${Id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -21,7 +21,7 @@ function DepartmentList() {
 
   async function getData() {
     let result = await fetch(
-      "https://localhost:7140/Department/GetDepartments"
+      "http://localhost:5100/Department/GetDepartments"
     );
     result = await result.json();
     setData(result);

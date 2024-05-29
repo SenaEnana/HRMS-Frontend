@@ -14,7 +14,7 @@ const EmployeeDetail = () => {
   };
 
   useEffect(() => {
-    fetch(`https://localhost:7140/Employee/${id}`)
+    fetch(`http://localhost:5100/Employee/${id}`)
       .then((response) => response.json())
       .then((data) => setEmployee(data))
       .catch((error) =>
@@ -25,7 +25,7 @@ const EmployeeDetail = () => {
   const handleDelete = async () => {
     try {
       const response = await fetch(
-        `https://localhost:7140/Employee/DeleteEmployee/${id}`,
+        `http://localhost:5100/Employee/DeleteEmployee/${id}`,
         {
           method: "DELETE",
         }
@@ -98,18 +98,6 @@ const EmployeeDetail = () => {
               </p>
               <p>
                 <strong>House Number :</strong> {employee.houseNo}
-              </p>
-              <p>
-                <strong>Department :</strong> {employee.departmentId}
-              </p>
-              <p>
-                <strong>Grade :</strong> {employee.gradeId}
-              </p>
-              <p>
-                <strong>Branch :</strong> {employee.branchId}
-              </p>
-              <p>
-                <strong>Degree :</strong> {employee.degreeId}
               </p>
               <p>
                 <strong>Hire Date :</strong> {formatDate(employee.hireDate)}

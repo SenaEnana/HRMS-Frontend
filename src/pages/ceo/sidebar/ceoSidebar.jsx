@@ -12,7 +12,6 @@ import { tokens } from "../../../theme";
 import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -140,13 +139,6 @@ const CeoSidebar = () => {
               title="Shortlisted Employee"
               to="/shortListed"
               icon={<ChecklistRtlOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Notifications"
-              to="/notifications"
-              icon={<NotificationsNoneIcon />}
               selected={selected}
               setSelected={setSelected}
             />

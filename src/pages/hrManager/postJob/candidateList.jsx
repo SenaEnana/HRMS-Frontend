@@ -12,7 +12,7 @@ const CandidateList = () => {
 
   async function getData() {
     let result = await fetch(
-      `https://localhost:7140/Promotion/JobCandidates/${jobId}`
+      `http://localhost:5100/Promotion/JobCandidates/${jobId}`
     );
     result = await result.json();
     setData(result);

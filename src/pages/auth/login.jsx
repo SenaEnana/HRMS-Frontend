@@ -11,7 +11,7 @@ const Login = ({ setIsAuthenticated }) => {
 
   async function handleLogin(values) {
     try {
-      const response = await fetch("https://localhost:7140/Account/Login", {
+      const response = await fetch("http://localhost:5100/Account/Login", {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",

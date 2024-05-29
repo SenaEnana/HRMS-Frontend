@@ -30,7 +30,7 @@ function ResignationList() {
   };
   async function approveOperation(resignationId) {
     let result = await fetch(
-      `https://localhost:7140/Resignation/ApproveResignation/${resignationId}`,
+      `http://localhost:5100/Resignation/ApproveResignation/${resignationId}`,
       {
         method: "POST",
         headers: {
@@ -49,7 +49,7 @@ function ResignationList() {
   }
   async function rejectOperation(resignationId) {
     let result = await fetch(
-      `https://localhost:7140/Resignation/RejectResignation/${resignationId}`,
+      `http://localhost:5100/Resignation/RejectResignation/${resignationId}`,
       {
         method: "POST",
         headers: {
@@ -68,7 +68,7 @@ function ResignationList() {
   }
   async function getData() {
     let result = await fetch(
-      "https://localhost:7140/Resignation/ListOfResignationRequests"
+      "http://localhost:5100/Resignation/ListOfResignationRequests"
     );
     result = await result.json();
     setData(result);

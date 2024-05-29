@@ -10,7 +10,7 @@ function EvaluationFactorList() {
 
   async function deleteOperation(Id) {
     try {
-      let result = await fetch(`https://localhost:7100/api/EvaluationFactor/${Id}`, {
+      let result = await fetch(`http://localhost:5100/api/EvaluationFactor/${Id}`, {
         method: "DELETE",
         headers: {
           Accept: "application/json",
@@ -19,7 +19,7 @@ function EvaluationFactorList() {
       });
 
       if (result.ok) {
-        getData(); // Refresh data after deletion
+        getData(); 
       } else {
         console.error("Failed to delete the evaluation factor");
       }
@@ -30,7 +30,7 @@ function EvaluationFactorList() {
 
   async function getData() {
     try {
-      let result = await fetch("https://localhost:7100/api/EvaluationFactor");
+      let result = await fetch("http://localhost:5100/api/EvaluationFactor");
       if (result.ok) {
         let data = await result.json();
         setData(data);
@@ -56,7 +56,6 @@ function EvaluationFactorList() {
       <table className="table table-hover text-dark w-100 fs-6">
         <thead>
           <tr>
-            {/* <th>Leave Type Id</th> */}
             <th>Evaluation Factor</th>
             <th>Actions</th>
           </tr>
@@ -66,7 +65,6 @@ function EvaluationFactorList() {
             const evaluationFactorId = evaluationFactor.id;
             return (
               <tr key={evaluationFactorId}>
-                {/* <td>{evaluationFactorId}</td> */}
                 <td>{evaluationFactor.name}</td>
                 <td>
                   <button

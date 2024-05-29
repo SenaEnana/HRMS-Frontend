@@ -9,7 +9,6 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import DropdownMenu from "../../../components/dropdownMenu";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { tokens } from "../../../theme";
 import LocalPostOfficeOutlinedIcon from "@mui/icons-material/LocalPostOfficeOutlined";
@@ -204,13 +203,6 @@ const HrSidebar = () => {
               title="Degree List"
               to="/degreeList"
               icon={<ChecklistRtlOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Notifications"
-              to="/notifications"
-              icon={<NotificationsNoneIcon />}
               selected={selected}
               setSelected={setSelected}
             />

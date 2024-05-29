@@ -20,7 +20,7 @@ const BarChart = ({ data, xAxisLabel, yAxisLabel, isDashboard = false }) => {
       borderColor={{
         from: "color",
         modifiers: [["darker", "1.6"]],
-      }} // Removed unnecessary color modifier (optional)
+      }} 
       axisTop={null}
       axisRight={null}
       axisBottom={{
@@ -39,13 +39,13 @@ const BarChart = ({ data, xAxisLabel, yAxisLabel, isDashboard = false }) => {
         legendPosition: "middle",
         legendOffset: -40,
       }}
-      enableLabel={false} // Removed unnecessary label styles
+      enableLabel={false} 
       labelSkipWidth={12}
       labelSkipHeight={12}
       labelTextColor={{
         from: "color",
         modifiers: [["darker", 1.6]],
-      }} // Removed unnecessary color modifier (optional)
+      }} 
       legends={[
         {
           anchor: "bottom-right",
@@ -69,7 +69,7 @@ const BarChart = ({ data, xAxisLabel, yAxisLabel, isDashboard = false }) => {
           ],
         },
       ]}
-      enableHover={true} // Enable hover interactions
+      enableHover={true} 
       tooltip={({ index, value, color }) => (
         <div
           style={{
@@ -80,7 +80,7 @@ const BarChart = ({ data, xAxisLabel, yAxisLabel, isDashboard = false }) => {
         >
           <strong>{index}:</strong> {value}
         </div>
-      )} // Define custom tooltip content and style
+      )} 
       role="application"
       barAriaLabel={function (e) {
         return e.id + ": " + e.formattedValue + " in status: " + e.indexValue;

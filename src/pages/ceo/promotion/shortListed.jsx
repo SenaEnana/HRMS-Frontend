@@ -12,7 +12,7 @@ const ShortListed = () => {
   async function getData() {
     try {
       let result = await fetch(
-        "https://localhost:7140/Promotion/ShortlistedCandidates"
+        "http://localhost:5100/Promotion/ShortlistedCandidates"
       );
       result = await result.json();
       setData(result.map((item) => item.employee));

@@ -9,8 +9,7 @@ const EvaluationDetail = () => {
     const [feedback, setFeedback] = useState('');
 
     useEffect(() => {
-        // Fetch the employee evaluation details from the API
-        fetch(`https://localhost:7100/api/Evaluation/Detail/${employeeId}`)
+        fetch(`http://localhost:5100/api/Evaluation/Detail/${employeeId}`)
             .then(response => response.json())
             .then(data => {
                 setEmployeeEvaluation(data);
@@ -30,7 +29,7 @@ const EvaluationDetail = () => {
             feedback: feedback
         };
 
-        fetch('https://localhost:7100/api/Evaluation/PostEmployeeFeedback', {
+        fetch('http://localhost:5100/api/Evaluation/PostEmployeeFeedback', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

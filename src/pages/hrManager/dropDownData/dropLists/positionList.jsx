@@ -9,7 +9,7 @@ function PositionList() {
   }, []);
 
   async function deleteOperation(Id) {
-    let result = await fetch(`https://localhost:7140/Position/${Id}`, {
+    let result = await fetch(`http://localhost:5100/Position/${Id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -20,7 +20,7 @@ function PositionList() {
   }
 
   async function getData() {
-    let result = await fetch("https://localhost:7140/Position");
+    let result = await fetch("http://localhost:5100/Position");
     result = await result.json();
     setData(result);
     setLoading(false);
@@ -45,8 +45,6 @@ function PositionList() {
           <tr>
             <th>Id</th>
             <th>Name</th>
-            <th>Description</th>
-            <th>Salary</th>
             <th></th>
           </tr>
         </thead>

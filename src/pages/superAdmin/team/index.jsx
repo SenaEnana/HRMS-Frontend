@@ -20,7 +20,7 @@ const Team = () => {
       }
       const userId = getUserIdFromToken(token);
       const result = await fetch(
-        `https://localhost:7100/User/LockOrUnlockUser?userId=${userId}`,
+        `http://localhost:5100/User/LockOrUnlockUser?userId=${userId}`,
         {
           method: "POST",
           headers: {
@@ -56,7 +56,7 @@ const Team = () => {
       const userId = getUserIdFromToken(token);
       console.log(userId);
       const result = await fetch(
-        `https://localhost:7100/User/LockOrUnlockUser?userId=${userId}`,
+        `http://localhost:5100/User/LockOrUnlockUser?userId=${userId}`,
         {
           method: "POST",
           headers: {
@@ -99,7 +99,7 @@ const Team = () => {
   };
   const getData = async () => {
     try {
-      const result = await fetch("https://localhost:7100/User");
+      const result = await fetch("http://localhost:5100/User");
       const data = await result.json();
       setData(data);
       setLoading(false);
@@ -114,7 +114,7 @@ const Team = () => {
 
   async function handleDelete(userId) {
     let result = await fetch(
-      `https://localhost:7140/User/DeleteUser/${userId}`,
+      `http://localhost:5100/User/DeleteUser/${userId}`,
       {
         method: "DELETE",
         headers: {
@@ -158,7 +158,7 @@ const Team = () => {
               <td>
                 <img
                   style={{ width: 100, borderRadius: 100 }}
-                  src={"https://localhost:7100" + employee.pictureURL}
+                  src={"http://localhost:5100" + employee.pictureURL}
                   alt=""
                 />
               </td>

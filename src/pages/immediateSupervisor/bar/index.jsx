@@ -10,7 +10,7 @@ const Bar = () => {
     const fetchPendingCompliantCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/api/Complaint/PendingComplaintCount"
+          "http://localhost:5100/api/Complaint/PendingComplaintCount"
         );
         const data = await response.json();
         setPendingCompliantCount(data);
@@ -27,7 +27,7 @@ const Bar = () => {
     const fetchAddressedCompliantCount = async () => {
       try {
         const response = await fetch(
-          "https://localhost:7140/api/Complaint/AddressedComplaintCount"
+          "http://localhost:5100/api/Complaint/AddressedComplaintCount"
         );
         const data = await response.json();
         setAddressedCompliantCount(data);

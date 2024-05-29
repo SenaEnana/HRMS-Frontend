@@ -9,7 +9,7 @@ function AddPosition() {
   const navigate = useNavigate();
   async function addNewPosition(values) {
     try {
-      const response = await fetch("https://localhost:7140/Position", {
+      const response = await fetch("http://localhost:5100/Position", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -32,8 +32,6 @@ function AddPosition() {
         <Formik
           initialValues={{
             Name: "",
-            Description: "",
-            Salary: "",
           }}
           validationSchema={dropDownValidation}
           onSubmit={(values) => {
@@ -52,24 +50,6 @@ function AddPosition() {
                 placeholder="enter position name"
                 value={formikValues.values.Name}
                 error={formikValues.errors.Name}
-                onChange={formikValues.handleChange}
-              />
-              <TextInput
-                type="text"
-                name="Description"
-                label="Position Description"
-                placeholder="enter position description"
-                value={formikValues.values.Description}
-                error={formikValues.errors.Description}
-                onChange={formikValues.handleChange}
-              />
-              <TextInput
-                type="number"
-                name="Salary"
-                label="Position Salary"
-                placeholder="enter position salary"
-                value={formikValues.values.Salary}
-                error={formikValues.errors.Salary}
                 onChange={formikValues.handleChange}
               />
               <div className="m-3">

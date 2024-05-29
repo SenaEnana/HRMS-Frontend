@@ -51,26 +51,26 @@ function App() {
       )}
     </div>
   );
-   function renderDashboardBasedOnRole() {
-     const token = sessionStorage.getItem('token');
-     const role = getUserRoleFromToken(token);
-     console.log(role)
-     switch (role) {
-       case 'LeaveAdmin':
-         return <LeaveAdminRouter /> ;
-       case 'HR Manager':
-         return <HrRouter /> ;
-       case 'Employee':
-         return <EmployeeRouter /> ;
-         case 'CEO':
-          return <CeoRouter /> ;
-        case 'ImmediateSupervisor':
-          return <SupervisorRouter /> ;
-        case 'Admin':
-          return <AdminRouter /> ;
-         default:
-           return <p>Not Allowed.</p>;
-     }
-   }
+  function renderDashboardBasedOnRole() {
+    const token = sessionStorage.getItem('token');
+    const role = getUserRoleFromToken(token);
+    console.log(role)
+    switch (role) {
+      case 'Leave Admin':
+        return <LeaveAdminRouter />;
+      case 'HR Manager':
+        return <HrRouter />;
+      case 'Employee':
+        return <EmployeeRouter />;
+      case 'CEO':
+        return <CeoRouter />;
+      case 'Immediate Supervisor':
+        return <SupervisorRouter />;
+      case 'Admin':
+        return <AdminRouter />;
+      default:
+        return <p>Not Allowed.</p>;
+    }
+  }
 }
 export default App; 

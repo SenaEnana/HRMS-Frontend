@@ -8,7 +8,7 @@ function AddEvaluationFactor() {
   async function addEvaluationFactor(values) {
     try {
       const response = await fetch(
-        "https://localhost:7100/api/EvaluationFactor",
+        "http://localhost:5100/api/EvaluationFactor",
         { 
           method: "POST",
           headers: {

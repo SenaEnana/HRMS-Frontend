@@ -19,7 +19,7 @@ const Notifications = () => {
           return;
         }
         const userId = getUserIdFromToken(token);
-      const response = await fetch(`https://localhost:7140/Notification/GetUnreadNotificationsList?userId=${userId}`);
+      const response = await fetch(`http://localhost:5100/Notification/GetUnreadNotificationsList?userId=${userId}`);
       const data = await response.json();
       console.log(data);
       setNotifications(data);
@@ -51,7 +51,7 @@ const Notifications = () => {
   }
 
   const markAsRead = async (id) => {
-    const response = await fetch(`https://localhost:7140/Notification/MarkAsRead/${id}`, {
+    const response = await fetch(`http://localhost:5100/Notification/MarkAsRead/${id}`, {
       method: 'PATCH',
       body: JSON.stringify({ isRead: true }),
     });
@@ -63,7 +63,7 @@ const Notifications = () => {
         )
       );
     } else {
-      // Handle error (e.g., display an error message)
+      
       console.error('Error marking notification as read:', response.statusText);
     }
   };

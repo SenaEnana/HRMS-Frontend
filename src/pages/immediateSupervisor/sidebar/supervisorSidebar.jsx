@@ -9,7 +9,6 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { tokens } from "../../../theme";
 import ChecklistRtlOutlinedIcon from "@mui/icons-material/ChecklistRtlOutlined";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import GradeOutlinedIcon from '@mui/icons-material/GradeOutlined';
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -131,13 +130,6 @@ const SupervisorSidebar = () => {
               title="Complaint List"
               to="/complaintList"
               icon={<ChecklistRtlOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Notifications"
-              to="/notifications"
-              icon={<NotificationsNoneIcon />}
               selected={selected}
               setSelected={setSelected}
             />

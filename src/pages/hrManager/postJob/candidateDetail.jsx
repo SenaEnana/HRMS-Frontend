@@ -15,7 +15,7 @@ const CandidateDetail = () => {
   };
 
   useEffect(() => {
-    fetch(`https://localhost:7140/Employee/${id}`)
+    fetch(`http://localhost:5100/Employee/${id}`)
       .then((response) => response.json())
       .then((data) => setEmployee(data))
       .catch((error) =>
@@ -31,7 +31,7 @@ const CandidateDetail = () => {
   const shortListCandidate = async (employeeId) => {
     try {
       const response = await fetch(
-        `https://localhost:7140/Promotion/ShortlistCandidate/${employeeId}`,
+        `http://localhost:5100/Promotion/ShortlistCandidate/${employeeId}`,
         {
           method: "POST",
         }
@@ -121,18 +121,6 @@ const CandidateDetail = () => {
               </p>
               <p>
                 <strong>House Number  :</strong> {employee.houseNo}
-              </p>
-              <p>
-                <strong>Department  :</strong> {employee.departmentId}
-              </p>
-              <p>
-                <strong>Grade  :</strong> {employee.gradeId}
-              </p>
-              <p>
-                <strong>Branch  :</strong> {employee.branchId}
-              </p>
-              <p>
-                <strong>Degree  :</strong> {employee.degreeId}
               </p>
               <p>
                 <strong>Hire Date  :</strong> {formatDate(employee.hireDate)}

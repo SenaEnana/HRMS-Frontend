@@ -15,7 +15,7 @@ function ResignationRequest() {
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        "https://localhost:7140/Department/GetDepartments"
+        "http://localhost:5100/Department/GetDepartments"
       );
       const newData = await response.json();
       setDepartmentId(newData);
@@ -25,7 +25,7 @@ function ResignationRequest() {
   }, []);
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7140/Position");
+      const response = await fetch("http://localhost:5100/Position");
       const newData = await response.json();
       setPositionId(newData);
       setLoading(false);
@@ -35,7 +35,7 @@ function ResignationRequest() {
   const handleSubmit = async (values) => {
     try {
       const response = await fetch(
-        "https://localhost:7140/Resignation/RequestResignation",
+        "http://localhost:5100/Resignation/RequestResignation",
         {
           method: "POST",
           headers: {

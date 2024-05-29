@@ -9,7 +9,7 @@ function DegreeList() {
   }, []);
 
   async function deleteOperation(Id) {
-    let result = await fetch(`https://localhost:7140/api/Degree/${Id}`, {
+    let result = await fetch(`http://localhost:5100/api/Degree/${Id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
@@ -20,7 +20,7 @@ function DegreeList() {
   }
 
   async function getData() {
-    let result = await fetch("https://localhost:7140/api/Degree");
+    let result = await fetch("http://localhost:5100/api/Degree");
     result = await result.json();
     setData(result);
     setLoading(false);

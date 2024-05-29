@@ -14,7 +14,7 @@ function Complaint() {
   const [error, setError] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7140/Position");
+      const response = await fetch("http://localhost:5100/Position");
       const newData = await response.json();
       setPositionId(newData);
       setLoading(false);
@@ -24,7 +24,7 @@ function Complaint() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://localhost:7140/Branch/GetBranches");
+      const response = await fetch("http://localhost:5100/Branch/GetBranches");
       const newData = await response.json();
       setBranchId(newData);
       setLoading(false);
@@ -35,7 +35,7 @@ function Complaint() {
   async function handleSubmit(values) {
     try {
       const response = await fetch(
-        "https://localhost:7140/api/Complaint/SubmitCompliant",
+        "http://localhost:5100/api/Complaint/SubmitCompliant",
         {
           method: "POST",
           headers: {
