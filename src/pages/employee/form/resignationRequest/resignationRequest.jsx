@@ -106,7 +106,7 @@ function ResignationRequest() {
               />
               <DropDown
                 type="number"
-                label="PositionId"
+                label="Position"
                 name="PositionId"
                 options={PositionId}
                 value={formikValues.values.PositionId}
@@ -118,7 +118,7 @@ function ResignationRequest() {
               />
               <DropDown
                 type="number"
-                label="DepartmentId"
+                label="Department"
                 name="DepartmentId"
                 options={DepartmentId}
                 value={formikValues.values.DepartmentId}

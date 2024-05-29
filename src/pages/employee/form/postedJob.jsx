@@ -35,7 +35,6 @@ function PostedJob() {
         <thead>
           <tr>
             <th>Job Title</th>
-            <th>Position</th>
             <th>Posting Date</th>
             <th>Action</th>
           </tr>
@@ -44,7 +43,6 @@ function PostedJob() {
           {data.map((job) => (
             <tr key={job.id}>
               <td>{job.jobTitle}</td>
-              <td>{job.positionName}</td>
               <td>{formatDate(job.postingDate)}</td>
               <td>
                 <Link to={`/jobDetail/${job.id}`}>

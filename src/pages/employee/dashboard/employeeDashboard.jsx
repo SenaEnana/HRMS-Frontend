@@ -167,8 +167,8 @@ const EmployeeDashboard = () => {
                 Allowed Days: {balance.allowedDays}
               </>}
 
-              subtitle={`${balance.remainingLeaveBalance} days remaining`}
-              icon={<EventAvailableOutlinedIcon className="text-success fs-3" />}
+              // subtitle={`${balance.remainingLeaveBalance} days remaining`}
+              // icon={<EventAvailableOutlinedIcon className="text-success fs-3" />}
             />
           </Box>
         ))}

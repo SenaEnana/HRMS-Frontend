@@ -30,12 +30,12 @@ function EmployeeBasic() {
     { value: "widowed", label: "Widowed" },
   ];
   const roleOptions = [
-    { value: "Employee", label: "Employee" },
-    { value: "Admin", label: "Admin" },
-    { value: "CEO", label: "CEO" },
-    { value: "HR Manager", label: "HR Manager" },
-    { value: "Leave Admin", label: "Leave Admin" },
-    { value: "Immediate Supervisor", label: "Immediate Supervisor" },
+    { value: "employee", label: "Employee" },
+    { value: "admin", label: "Admin" },
+    { value: "ceo", label: "CEO" },
+    { value: "hrManager", label: "HR Manager" },
+    { value: "leaveAdmin", label: "Leave Admin" },
+    { value: "immediateSupervisor", label: "Immediate Supervisor" },
   ];
 
   useEffect(() => {
@@ -135,14 +135,14 @@ function EmployeeBasic() {
           FirstName: "",
           LastName: "",
           Email: "",
-          Gender: "female",
-          Roles: "employee",
+          Gender: "Female",
+          Roles: "Employee",
           MotherName: "",
           Region: "",
           Kebele: "",
           Woreda: "",
           PhoneNo: "",
-          MaritalStatus: "single",
+          MaritalStatus: "Single",
           HouseNo: "",
           ChildInformations: [{ ChildName: "", DateOfBirth: "" }],
           HireDate: "",

@@ -71,7 +71,6 @@ function LeaveRequestList() {
       <table className="table table-hover text-dark w-100 fs-6">
         <thead>
           <tr>
-            <th>Employee Id</th>
             <th>Start Date</th>
             <th>End Date</th>
             <th>Reason</th>
@@ -82,7 +81,6 @@ function LeaveRequestList() {
         <tbody>
           {data.map((employee) => (
             <tr key={employee.id}>
-              <td>{employee.employeeId}</td>
               <td>{formatDate(employee.startDate)}</td>
               <td>{formatDate(employee.endDate)}</td>
               <td>{employee.reason}</td>
