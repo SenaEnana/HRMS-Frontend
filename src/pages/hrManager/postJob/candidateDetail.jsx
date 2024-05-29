@@ -72,7 +72,7 @@ const CandidateDetail = () => {
         >
           {shortListed ? "Shortlisted" : "ShortList"}
         </button>
-        <Link to={`/candidateList`}>
+        <Link to={`/postedJob`}>
           <button className="btn btn-outline-danger btn-sm float-end me-2">
             Back
           </button>

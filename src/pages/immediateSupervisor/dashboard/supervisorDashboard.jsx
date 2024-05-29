@@ -100,7 +100,7 @@ const SupervisorDashboard = () => {
             <StatBox
               title={addressedCompliantCount.toLocaleString()}
               subtitle="Addressed Compliant"
-              icon={<GpsFixedOutlinedIcon className="text-dark fs-3" />}
+              icon={<GpsFixedOutlinedIcon className="text-success fs-3" />}
             />
           )}
         </Box>

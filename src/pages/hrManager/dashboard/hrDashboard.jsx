@@ -126,7 +126,7 @@ const HrDashboard = () => {
           <StatBox
             title={activeEmployeeCount.toLocaleString()}
             subtitle="Active Employees"
-            icon={<ToggleOnOutlinedIcon className="text-dark fs-3" />}
+            icon={<ToggleOnOutlinedIcon className="text-success fs-3" />}
           />
         </Box>
         <Box
@@ -140,7 +140,7 @@ const HrDashboard = () => {
           <StatBox
             title={inactiveEmployeeCount.toLocaleString()}
             subtitle="InActive Employees"
-            icon={<ToggleOffOutlinedIcon className="text-dark fs-3" />}
+            icon={<ToggleOffOutlinedIcon className="text-danger fs-3" />}
           />
         </Box>
         <Box
@@ -154,7 +154,7 @@ const HrDashboard = () => {
           <StatBox
             title={approvedLeaveCount.toLocaleString()}
             subtitle="Approved Leave Requests"
-            icon={<RecommendOutlinedIcon className="text-dark fs-3" />}
+            icon={<RecommendOutlinedIcon className="text-success fs-3" />}
           />
         </Box>
         <Box
@@ -168,7 +168,7 @@ const HrDashboard = () => {
           <StatBox
             title={rejectedLeaveCount.toLocaleString()}
             subtitle="Rejected Leave Request"
-            icon={<SwipeLeftAltOutlinedIcon className="text-dark fs-3" />}
+            icon={<SwipeLeftAltOutlinedIcon className="text-danger fs-3" />}
           />
         </Box>
         <Box
